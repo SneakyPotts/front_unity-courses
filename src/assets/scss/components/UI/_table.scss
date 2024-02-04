@@ -1,0 +1,488 @@
+.table {
+  position: relative;
+  border-spacing: 0;
+  width: 100%;
+  background-color: var(--white);
+
+  &__wrapper {
+    margin-bottom: rem(30);
+    border: rem(1) solid var(--grey-5);
+    border-radius: rem(10);
+  }
+
+  &__btn {
+    padding: rem(14) rem(16);
+
+    // width: 50%;
+    background-color: #ffa349;
+  }
+
+  &__total-create {
+    display: flex;
+    justify-content: space-between;
+    border: rem(1) solid #c8d9fd;
+    background-color: #eef4ff;
+  }
+
+  &__select {
+    display: flex;
+    align-items: center;
+    gap: rem(12);
+    padding-left: rem(16);
+  }
+
+  &__select-svg {
+    width: rem(24);
+    height: rem(24);
+    fill: #828282;
+  }
+
+  &__item {
+    @include flex-v-center;
+
+    gap: rem(5);
+  }
+
+  &__list {
+    @include flex-v-center;
+
+    column-gap: rem(40);
+    flex-wrap: wrap;
+    row-gap: rem(10);
+  }
+
+  &__tip {
+    font-weight: 400;
+    font-style: normal;
+    font-size: rem(14);
+    line-height: 1.2;
+    color: var(--grey-3);
+  }
+
+  &__legend {
+    @include flex-v-center;
+
+    border: rem(1) solid var(--grey-5);
+    border-radius: rem(10);
+    padding: rem(12) rem(20);
+    gap: rem(10);
+
+    &-text {
+      font-weight: 500;
+      font-style: normal;
+      font-size: rem(14);
+      line-height: 1.2;
+      color: var(--grey-4);
+    }
+
+    .table__total {
+      border: rem(1) solid var(--blue-200);
+
+      &--forecast {
+        border: rem(1) solid var(--grey-5);
+      }
+    }
+
+    .table__mark,
+    .table__total {
+      width: rem(35);
+      height: rem(35);
+      cursor: auto;
+      pointer-events: none;
+    }
+  }
+
+  &__head {
+    margin: 0;
+    border-bottom: rem(1) solid var(--grey-5);
+    padding: 0;
+    width: 100%;
+    height: rem(45);
+
+    .table__row {
+      height: 100%;
+    }
+  }
+
+  &__th {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: rem(14);
+    line-height: 1.2;
+    text-align: left;
+    color: var(--grey-4);
+
+    &--semester {
+      align-items: center;
+      justify-content: center;
+      width: rem(125);
+      text-align: center;
+    }
+
+    &--marks {
+      padding-left: rem(20);
+    }
+
+    &--subjects {
+      padding-left: rem(20);
+      width: rem(270);
+    }
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: rem(270) 1fr rem(125);
+    min-width: 0;
+
+    &:not(:last-child) {
+      .table__subject,
+      .table__marks {
+        border-bottom: rem(1) solid rgba(var(--blue-200--rgb), 0.5);
+      }
+
+      .table__total {
+        border-bottom: rem(1) solid rgba(var(--blue-200--rgb), 0.5);
+      }
+    }
+
+    &:last-child {
+      .table__subject {
+        border-bottom-left-radius: rem(10);
+      }
+
+      .table__total {
+        border-bottom-right-radius: rem(10);
+      }
+    }
+  }
+
+  &__td {
+    width: 100%;
+  }
+
+  &__marks {
+    @include hide-scroll;
+
+    display: flex;
+    overflow: auto hidden;
+    height: rem(45);
+  }
+
+  &__mark {
+    @include flex-all-center;
+
+    flex-shrink: 0;
+    width: rem(45);
+    height: rem(45);
+    transition: background-color 0.15s ease;
+    cursor: pointer;
+
+    &--control-work {
+      font-weight: 700;
+      font-style: normal;
+      font-size: rem(16);
+      line-height: 1.3;
+      color: var(--orange-500);
+    }
+
+    &--thematic {
+      font-weight: 700;
+      font-style: normal;
+      font-size: rem(16);
+      line-height: 1.3;
+      color: var(--orange-500);
+      background-color: var(--orange-200);
+    }
+
+    @include hover {
+      background-color: var(--blue-50);
+    }
+  }
+
+  &__text {
+    display: none;
+  }
+
+  &__subject {
+    @include flex-v-center;
+
+    overflow: hidden;
+    padding-left: rem(20);
+    height: rem(45);
+    min-width: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: rem(14);
+    line-height: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    color: var(--grey-2);
+    background-color: var(--bg);
+
+    img {
+      overflow: hidden;
+      border: 1px solid var(--blue-200);
+      border-radius: 50%;
+      width: rem(30);
+      height: rem(30);
+    }
+  }
+
+  &__info {
+    display: none;
+  }
+
+  &__total {
+    @include flex-all-center;
+
+    border-left: rem(1) solid rgba(var(--blue-200--rgb), 0.5);
+    height: rem(45);
+    font-weight: 700;
+    font-style: normal;
+    font-size: rem(16);
+    line-height: 1.3;
+    color: var(--blue-400);
+    background-color: var(--blue-100);
+
+    &--forecast {
+      border-color: var(--grey-5);
+      color: var(--grey-4);
+      background-color: var(--grey-6);
+    }
+  }
+
+  &__semester {
+    @include flex-all-center;
+
+    border-right: rem(1) solid var(--grey-5);
+    width: rem(135);
+    font-weight: 700;
+    font-style: normal;
+    font-size: rem(16);
+  }
+
+  &--timesheet {
+    .table__total {
+      border-left: rem(1) solid var(--orange-200);
+      background-color: var(--orange-100);
+    }
+
+    .table__row {
+      &:not(:last-child) .table__total {
+        border-bottom: rem(1) solid var(--orange-200);
+      }
+    }
+
+    .table__head {
+      .table__row {
+        grid-template-columns: rem(270) rem(135) rem(135) 1fr;
+        min-width: 0;
+      }
+
+      .table__th--semester {
+        margin-right: 0;
+        margin-left: auto;
+      }
+
+      .table__th--marks {
+        justify-content: center;
+        padding: 0;
+      }
+    }
+  }
+}
+
+@include mq('lg') {
+  .table {
+    margin-right: rem(-15);
+    margin-left: rem(-15);
+    border: none;
+    border-radius: 0;
+    width: unset;
+
+    &__wrapper {
+      border: none;
+      border-bottom: rem(1) solid var(--grey-5);
+      border-radius: 0;
+    }
+
+    &__item {
+      gap: rem(5);
+    }
+
+    &__legend {
+      margin: 0 rem(15);
+      padding: rem(12) rem(16);
+      gap: rem(12);
+
+      .table__mark,
+      .table__total {
+        width: rem(30);
+        height: rem(30);
+      }
+    }
+
+    &__list {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__head {
+      display: none;
+    }
+
+    &__row {
+      grid-template-columns: 1fr rem(43);
+
+      &:not(:last-child) {
+        .table__subject,
+        .table__marks {
+          border-bottom: none;
+        }
+
+        .table__total {
+          border: rem(1) solid rgba(var(--blue-200--rgb), 0.5);
+
+          &--forecast {
+            border: rem(1) solid rgba(var(--blue-200--rgb), 0.5);
+          }
+        }
+      }
+
+      &:last-child {
+        .table__subject {
+          border-bottom-left-radius: 0;
+        }
+
+        .table__total {
+          border-bottom-right-radius: 0;
+        }
+      }
+    }
+
+    &__marks {
+      height: rem(50);
+    }
+
+    &__mark {
+      width: rem(43);
+      height: rem(50);
+    }
+
+    &__body {
+      .table__row {
+        &:not(:last-child) {
+          border-bottom: none;
+        }
+      }
+    }
+
+    &__text {
+      display: block;
+      font-weight: 500;
+      font-style: normal;
+      font-size: rem(14);
+      line-height: 1.2;
+      color: var(--grey-4);
+    }
+
+    &__total {
+      height: rem(50);
+
+      .table__info {
+        border-bottom: rem(1) solid var(--grey-5);
+      }
+
+      .table__num {
+        border-bottom: rem(1) solid var(--grey-5);
+      }
+    }
+
+    &__subject {
+      align-items: center;
+      justify-content: space-between;
+      grid-column: 2 span;
+      padding: rem(12) rem(15);
+      height: unset;
+    }
+
+    &__info {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      border-top: rem(1) solid var(--grey-5);
+      border-left: rem(1) solid var(--grey-5);
+      padding-left: rem(30);
+      height: 100%;
+      font-weight: 400;
+      font-style: normal;
+      font-size: rem(16);
+      line-height: 1.3;
+      color: var(--black);
+    }
+
+    &__num {
+      @include flex-all-center;
+
+      border-top: rem(1) solid var(--grey-5);
+      border-right: rem(1) solid var(--grey-5);
+      width: rem(48);
+      height: rem(40);
+
+      &--accent {
+        border: rem(1) solid var(--blue-200);
+        color: var(--blue-400);
+        background-color: var(--blue-100);
+      }
+    }
+
+    &--timesheet {
+      .table__row {
+        grid-template-columns: 1fr;
+      }
+
+      .table__wrapper {
+        border: none;
+      }
+
+      .table__subject {
+        grid-column: 1 span;
+      }
+
+      .table__semester {
+        flex-shrink: 0;
+        justify-content: space-between;
+        border-right: 0;
+        width: 100%;
+        height: rem(40);
+        font-weight: 400;
+        font-style: normal;
+        font-size: rem(16);
+        line-height: 1.3;
+      }
+
+      .table__marks {
+        flex-direction: column;
+        grid-column: 1 span;
+        height: unset;
+      }
+
+      .table__row:not(:last-child) .table__total {
+        border: none;
+      }
+
+      .table__total {
+        justify-content: space-between;
+        border: 0;
+        height: rem(40);
+        background-color: unset;
+      }
+    }
+  }
+}

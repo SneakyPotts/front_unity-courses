@@ -1,0 +1,70 @@
+/**
+ * Main content containers
+ * 1. Make the container full-width with a maximum width
+ * 2. Center it in the viewport
+ * 3. Leave some space on the edges, especially valuable on small screens
+ */
+
+.auth-container {
+  margin: 0 auto;
+  padding: 0 rem(15);
+  width: 100%;
+  max-width: rem(940);
+
+  @include mq('lg') {
+    max-width: 100%;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 30px;
+  width: 100%;
+
+  @include mq('xl') {
+    padding: 0 rem(15);
+  }
+}
+
+/**
+ * Hide text while making it readable for screen readers
+ * 1. Needed in WebKit-based browsers because of an implementation bug;
+ *    See: https://code.google.com/p/chromium/issues/detail?id=457146
+ */
+.hide-text {
+  overflow: hidden;
+  padding: 0; /* 1 */
+  white-space: nowrap;
+  text-indent: 101%;
+}
+
+/**
+ * Hide element while making it readable for screen readers
+ * Shamelessly borrowed from HTML5Boilerplate:
+ * https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css#L119-L133
+ */
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+}
+
+.text-center {
+  @include flex-all-center();
+}
+
+.error {
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: rem(20);
+  color: var(--red);
+}
+
+.w-full {
+  width: 100%;
+}

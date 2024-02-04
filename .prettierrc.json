@@ -1,0 +1,22 @@
+{
+	"trailingComma": "all",
+	"printWidth": 175,
+	"semi": false,
+	"singleQuote": true,
+	"tabWidth": 2,
+	"importOrder": [
+		"<THIRD_PARTY_MODULES>",
+		"^react/(.*)$",
+		"^next/(.*)$",
+		"^@assets/(.*)$",
+		"^@components/(.*)$",
+		"^@common/(.*)$",
+		"^@UI/(.*)$",
+		"^@hooks/(.*)$",
+		"^[@/]",
+		"^[./]"
+	],
+	"importOrderSeparation": true,
+	"importOrderSortSpecifiers": true,
+	"singleAttributePerLine": true
+}

@@ -1,0 +1,34 @@
+.recommended {
+  &__inner {
+  }
+
+  &__top {
+    @include flex-all-sb;
+
+    margin-bottom: rem(32);
+    gap: rem(20);
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: rem(24);
+  }
+
+  &__link {
+  }
+
+  &__bottom {
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: rem(30);
+  }
+}
+
+@include mq('lg') {
+  .recommended {
+    display: none;
+  }
+}

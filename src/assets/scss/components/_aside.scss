@@ -1,0 +1,260 @@
+.aside {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  width: rem(235);
+  background-color: var(--bg);
+  transition: 0.2s ease;
+
+  &__wrapper {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    overflow: hidden;
+    padding: rem(30) rem(30) 0;
+    transition: 0.2s ease;
+  }
+
+  &__navigation {
+    @include hide-scroll;
+
+    flex: 1 1 auto;
+    overflow: hidden auto;
+    padding-bottom: rem(30);
+  }
+
+  &__top {
+    margin-bottom: rem(16);
+
+    &-svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__btn {
+    @include flex-all-center;
+
+    position: absolute;
+    right: rem(-15);
+    top: rem(20);
+    border: rem(1) solid var(--blue-200);
+    border-radius: 50%;
+    width: rem(30);
+    height: rem(30);
+    background-color: var(--white);
+    transition: background-color 0.1s var(--ease-out);
+
+    &-svg {
+      width: rem(16);
+      height: rem(16);
+      fill: var(--blue-400);
+    }
+
+    @include hover {
+      background-color: var(--blue-200);
+
+      .aside__btn {
+        &-svg {
+          fill: var(--blue-500);
+        }
+      }
+    }
+  }
+
+  &__logo {
+    display: flex;
+  }
+
+  &--static {
+    flex-shrink: 0;
+    width: rem(60);
+    transition: none;
+
+    .aside {
+      &__top {
+        margin-bottom: rem(0);
+      }
+
+      &__logo {
+        margin: 0 auto;
+        width: rem(18);
+      }
+
+      &__wrapper {
+        padding: rem(30) rem(15);
+        transition: none;
+      }
+    }
+  }
+
+  &--main {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    .aside {
+      &__logo {
+        svg {
+          width: rem(92); //добавил
+        }
+      }
+    }
+  }
+
+  &--hide {
+    width: rem(60);
+
+    .aside {
+      &__wrapper {
+        padding: rem(30) rem(15) 0;
+      }
+
+      &__top {
+        // border-bottom: rem(1) solid #e0e0e0;
+        //padding-bottom: rem(20);
+      }
+
+      &__logo {
+        overflow: hidden;
+        margin-left: rem(5);
+        width: rem(18);
+
+        svg {
+          width: rem(38);
+        }
+      }
+
+      &__top-path--hide {
+        opacity: 0;
+      }
+
+      &__btn {
+        &-svg {
+          transform: scale(-1, 1);
+        }
+      }
+    }
+
+    .nav {
+      &__list {
+      }
+
+      &__item {
+        width: rem(30);
+        transition: 0.2s ease;
+      }
+
+      &__link {
+        padding-left: rem(5);
+      }
+
+      &__sublist {
+        display: none;
+      }
+    }
+
+    .tip {
+      display: none;
+    }
+  }
+
+  &__top-path,
+  &__top-path--hide {
+    transition: 0.3s ease;
+  }
+}
+
+@include mq('lg') {
+  .aside {
+    position: unset;
+    width: 100%;
+    transition: none;
+
+    &__btn {
+      display: none;
+    }
+
+    &--static {
+      .aside {
+        &__wrapper {
+          padding: rem(16) rem(15);
+          transition: none;
+        }
+
+        &__top {
+          margin: 0;
+          border: none;
+          padding: 0;
+          width: fit-content;
+        }
+      }
+    }
+
+    &--main {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: unset;
+      bottom: 0;
+      z-index: var(--ui-index-5);
+      background-color: transparent;
+
+      .aside {
+        &__top {
+          display: none;
+        }
+
+        &__navigation {
+          overflow: unset;
+        }
+
+        &__wrapper {
+          overflow: unset;
+          padding: 0;
+          transition: none;
+        }
+      }
+    }
+
+    &--hide {
+      // padding: rem(16) rem(15);
+
+      .aside {
+        &__top {
+          margin: 0;
+          border: none;
+          padding: 0;
+        }
+
+        &__logo {
+          overflow: hidden;
+          margin: 0;
+          width: rem(18);
+        }
+
+        &__top-path--hide {
+          opacity: 0;
+        }
+      }
+
+      .nav__item {
+        width: rem(65);
+        height: rem(65);
+      }
+
+      .nav__link {
+        padding: 0;
+        width: rem(45);
+        height: rem(45);
+      }
+    }
+  }
+}
+
+//style teacher-aside
+.nav__down-btn {
+  width: 175px;
+  display: flex;
+  justify-content: center;
+}

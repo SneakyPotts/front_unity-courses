@@ -1,0 +1,36 @@
+.auth-header {
+  margin-bottom: rem(20);
+
+  &__container {
+  }
+
+  &__inner {
+    @include flex-v-center;
+
+    border-bottom: rem(1) solid var(--grey-5);
+    padding: rem(30) 0;
+    gap: rem(20);
+  }
+
+  &__inner-svg {
+    width: rem(30);
+    height: rem(30);
+    fill: var(--grey-4);
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: rem(24);
+    line-height: 1.2;
+  }
+}
+
+@include mq('lg') {
+  .auth-header {
+    margin-bottom: rem(32);
+
+    &__inner {
+      padding-bottom: rem(12);
+    }
+  }
+}

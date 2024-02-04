@@ -1,0 +1,86 @@
+.field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  &__label {
+    display: block;
+    margin-bottom: rem(8);
+    font-weight: 500;
+    font-size: rem(16);
+    color: var(--grey-4);
+  }
+
+  &__wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  &__tip {
+    margin-top: rem(10);
+    font-size: rem(13);
+    color: var(--grey-3);
+  }
+
+  &__error {
+    display: block;
+    margin-top: rem(4);
+    font-size: rem(13);
+    color: var(--red);
+  }
+
+  &__icon {
+    position: absolute;
+    right: rem(16);
+    top: 50%;
+    display: none;
+    width: rem(20);
+    height: rem(20);
+    fill: var(--red);
+    transform: translateY(-50%);
+  }
+
+  &__selects {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: rem(25);
+  }
+
+  &__select {
+    flex: 1;
+  }
+
+  &__radios {
+    display: flex;
+    width: 100%;
+    gap: rem(30);
+  }
+
+  &__radio {
+    flex: 1;
+  }
+
+  &__checkbox {
+    margin-top: rem(5);
+  }
+
+  &--long {
+    grid-column: 2 span;
+    width: calc(50% - rem(15));
+  }
+}
+
+@include mq('md') {
+  .field {
+    &__selects {
+      gap: rem(10);
+    }
+
+    &--long {
+      grid-column: 1 span;
+      width: 100%;
+    }
+  }
+}

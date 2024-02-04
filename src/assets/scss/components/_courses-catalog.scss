@@ -1,0 +1,473 @@
+.courses-catalog {
+  &__wrapper {
+    display: grid;
+    grid-template-columns: rem(307) 1fr;
+    gap: 30px;
+  }
+
+  &__filter {
+    padding: rem(20);
+    height: max-content;
+    border-radius: rem(5);
+    background-color: #fff8ed;
+  }
+
+  &__inner {
+    padding: 0;
+  }
+
+  &__palen {
+    @include flex-v-center;
+    gap: rem(12);
+  }
+
+  &__search {
+    position: relative;
+    &-input {
+      width: rem(306);
+    }
+
+    &-svg {
+      position: absolute;
+      right: rem(16);
+      top: rem(12);
+    }
+  }
+
+  &__toggle {
+    &-svg {
+      width: rem(30);
+      height: rem(30);
+      fill: transparent;
+      stroke: #828282;
+    }
+  }
+
+  &__title {
+    margin-bottom: rem(24);
+    font-family: Roboto, sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 120%;
+    color: #828282;
+  }
+
+  &__mobile {
+    margin-bottom: rem(20);
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-size: rem(24);
+    font-weight: 600;
+    line-height: 120%;
+    color: #1c1c1c;
+  }
+
+  &__subtitle {
+    margin-bottom: rem(16);
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 120%;
+    color: #1c1c1c;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
+    margin-bottom: rem(24);
+  }
+
+  &__class {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: rem(12) rem(12);
+  }
+
+  &__menu {
+    @include flex-all-sb;
+
+    margin-bottom: rem(30);
+    border-bottom: rem(2) solid #e0e0e0;
+  }
+
+  &__svg {
+    width: rem(20);
+    height: rem(20);
+    fill: #fff;
+
+    &-rocket {
+      width: rem(16);
+      height: rem(16);
+      fill: transparent;
+      stroke: #ffffff;
+      stroke-width: 4;
+    }
+
+    &-stroke {
+      stroke: #828282;
+      fill: transparent;
+    }
+  }
+
+  &__element {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__tabs {
+    display: flex;
+    gap: rem(30);
+  }
+
+  &__tab {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 120%;
+    color: #828282;
+
+    &--active {
+      color: #7d98f6;
+    }
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: rem(30);
+    padding-bottom: rem(30);
+    border-bottom: rem(2) solid #e0e0e0;
+  }
+
+  &__box {
+    position: relative;
+  }
+
+  &__tag {
+    position: absolute;
+    top: rem(12);
+    left: rem(16);
+    padding: rem(7) rem(5);
+    font-family: "Roboto", sans-serif;
+    font-size: rem(14);
+    font-weight: 500;
+    border-radius: rem(2);
+    color: #fff;
+    background: #6fcf97;
+  }
+
+  &__decor {
+    @include flex-v-center;
+
+    gap: rem(8);
+    padding: rem(4) rem(5);
+    border-radius: rem(2);
+    background: rgba(242, 242, 242, 0.2);
+    backdrop-filter: blur(0.5px);
+    font-family: "Roboto", sans-serif;
+    font-size: rem(13);
+    font-weight: 400;
+    line-height: 120%;
+    color: #fff;
+  }
+
+  &__lesson {
+    position: absolute;
+    bottom: rem(16);
+    left: rem(12);
+  }
+
+  &__review {
+    position: absolute;
+    right: rem(12);
+    bottom: rem(16);
+  }
+
+  &__photo {
+    object-fit: cover;
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: rem(5) rem(5) 0px 0px;
+    }
+  }
+
+  &__info {
+    @include flex;
+    flex-direction: column;
+
+    padding: rem(12) rem(16);
+    border-radius: 0px 0px rem(5) rem(5);
+    background: #f4f4fd;
+
+    &-title {
+      max-width: rem(275);
+      text-overflow: ellipsis;
+      font-family: "Roboto", sans-serif;
+      font-size: rem(18);
+      font-weight: 700;
+      line-height: 120%;
+      color: #1c1c1c;
+    }
+  }
+
+  &__teachers {
+    @include flex-v-center;
+    gap: rem(12);
+    flex-wrap: wrap;
+    margin: rem(12) 0 rem(12);
+  }
+  &__teacher {
+    display: flex;
+    align-items: flex-end;
+    gap: rem(5);
+
+    &-img {
+      max-width: 1.25rem;
+      height: 1.25rem;
+      width: 1.25rem;
+      border: rem(1) solid #c8d9fd;
+      border-radius: 50%;
+
+      img {
+        border-radius: rem(20);
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    }
+
+    button {
+      font-family: "Roboto", sans-serif;
+      font-size: rem(14);
+      font-weight: 400;
+      line-height: 120%;
+      color: #1c1c1c;
+    }
+  }
+
+  &__conditions {
+    @include flex-all-sb;
+  }
+
+  &__data,
+  &__persons {
+    @include flex-v-center;
+
+    gap: rem(8);
+
+    p,
+    span {
+      font-family: "Roboto", sans-serif;
+      font-size: rem(13);
+      font-weight: 400;
+      line-height: 120%;
+      color: #828282;
+    }
+  }
+
+  &__price {
+    @include flex-all-sb;
+    margin-top: rem(12);
+    padding-top: rem(12);
+
+    border-top: rem(1) solid #c8d9fd;
+
+    p {
+      font-family: "Roboto", sans-serif;
+      font-size: rem(20);
+      font-weight: 500;
+      line-height: 120%;
+      color: #333;
+    }
+  }
+
+  &__paginations {
+    margin-top: rem(30);
+
+    &-list {
+      @include flex-v-center;
+      gap: rem(12);
+    }
+
+    &-item {
+      font-family: "Roboto", sans-serif;
+      font-size: rem(14);
+      font-weight: 500;
+      line-height: 120%;
+      color: #bdbdbd;
+    }
+    &--active {
+      padding: rem(11) rem(16);
+      border-radius: rem(8);
+      color: #1c1c1c;
+      background: #eef4ff;
+    }
+  }
+}
+
+@include mq("xxl") {
+  .courses-catalog {
+    &__cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@include mq("xl") {
+  .courses-catalog {
+    &__menu {
+      flex-direction: column;
+      align-items: baseline;
+      border: none;
+    }
+
+    &__navigation {
+      width: 100%;
+      padding: rem(12) rem(16);
+      margin-bottom: rem(8);
+      border-radius: rem(10);
+      background: #f2f2f2;
+    }
+
+    &__cards {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@include mq("lg") {
+  .courses-catalog {
+    &__catalog {
+      min-width: 0;
+    }
+
+    &__wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    &__btn {
+      &.btn--accent {
+        width: fit-content;
+      }
+    }
+
+    &__menu {
+      @include hide-scroll;
+      overflow: scroll;
+    }
+
+    &__navigation {
+      @include hide-scroll;
+
+      overflow-y: scroll;
+    }
+
+    &__body {
+    }
+
+    &__filter {
+      display: none;
+      background: rgba(0, 0, 0, 0.6);
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      position: fixed;
+      border-radius: 0;
+      z-index: 12;
+      height: 100%;
+      bottom: 0;
+
+      &-body {
+        @include hide-scroll;
+        position: fixed;
+        margin-top: rem(70);
+        padding: rem(20) rem(15);
+        overflow-y: scroll;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #fff;
+        border-radius: rem(10) rem(10) 0 0;
+        box-shadow: 0 rem(8) rem(24) 0 rgba(0, 0, 0, 0.13);
+      }
+    }
+
+    &__inner {
+      padding: rem(20);
+      background: #fff8ed;
+      height: rem(800);
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar {
+        width: rem(3);
+        height: rem(80);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: rem(10);
+        height: rem(50);
+        background-color: #a6c0fb;
+      }
+    }
+
+    &__title {
+      display: none;
+    }
+
+    &__mobile {
+      display: block;
+    }
+
+    &__toggle {
+      display: block;
+    }
+
+    &__buttons {
+      display: flex;
+      flex-direction: column;
+      gap: rem(10);
+      margin-top: rem(20);
+
+      &-btn {
+        width: 100% !important;
+      }
+    }
+  }
+}
+
+@include mq("sm") {
+  .courses-catalog {
+    &__navigation {
+      overflow: auto hidden;
+    }
+
+    &__palen {
+      width: 100%;
+    }
+    &__search {
+      width: 100%;
+      &-input {
+        max-width: none;
+        width: 100%;
+      }
+    }
+  }
+}
+
+// класс для открытия
+.visible {
+  display: block;
+}
+
+.checkbox__input:checked + .checkbox__block ~ .checkbox__value {
+  font-weight: 500;
+  text-overflow: ellipsis;
+  color: #4f4f4f;
+}

@@ -1,0 +1,141 @@
+@use "sass:math";
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+}
+
+input,
+button,
+textarea {
+  font-family: "Roboto", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  // min-width: 375px; // даёт боковой скролл при адаптиве
+  scroll-behavior: smooth;
+
+  // scrollbar-gutter: stable;
+}
+
+svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+::selection {
+  color: var(--white);
+  background: var(--blue-400);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: rem(14);
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: var(--black);
+
+  // Фикс для слайдеров
+  > * {
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .simplebar-placeholder {
+    width: 100% !important;
+  }
+
+  .simplebar-track.simplebar-vertical {
+    overflow: unset;
+    width: rem(3);
+  }
+
+  .simplebar-scrollbar {
+    width: rem(3);
+  }
+
+  .simplebar-scrollbar::before {
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: rem(3);
+    background-color: var(--blue-300);
+    opacity: 1 !important;
+  }
+
+  .simplebar-height-auto-observer,
+  .simplebar-track {
+    pointer-events: unset;
+    display: none;
+  }
+}
+
+@include mq("lg") {
+  .body-mob-fixed {
+    overflow: hidden;
+  }
+}
+
+/* common */
+
+.lessons-list {
+  counter-reset: section;
+}
+
+.iframe-wrapper {
+  --border-radius: 10px;
+
+  position: relative;
+  border-radius: var(--border-radius);
+  width: 100%;
+  max-height: rem(554);
+  background-color: rgba(0, 0, 0, 30%);
+  aspect-ratio: 16 / 9;
+
+  iframe,
+  video {
+    position: absolute;
+    left: 0;
+    top: 0;
+    clip-path: inset(0% 0% 0% 0% round var(--border-radius));
+    width: 100%;
+    height: 100%;
+  }
+}
+
+input.hidden {
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  border: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.detail-popup {
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.13);
+  padding: 8px;
+  color: var(--grey-3);
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+// класс для скрытия
+.close {
+  display: none;
+}
+

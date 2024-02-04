@@ -1,0 +1,20 @@
+.teacher {
+  @include flex-v-center;
+
+  line-height: 1;
+  transition: color 0.1s ease;
+  gap: rem(5);
+
+  &__img {
+    flex-shrink: 0;
+    overflow: hidden;
+    border: rem(1) solid var(--blue-200);
+    border-radius: 50%;
+    width: rem(20);
+    height: rem(20);
+
+    img {
+      @include fill-image(cover);
+    }
+  }
+}

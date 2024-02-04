@@ -1,0 +1,88 @@
+.marks-table {
+  &__inner {
+  }
+
+  &__top {
+    margin-bottom: rem(30);
+  }
+
+  &__left {
+    @include flex-v-center;
+
+    gap: rem(20);
+  }
+
+  &__title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: rem(24);
+    line-height: normal;
+  }
+
+  &__bottom {
+    position: relative;
+    margin-bottom: rem(150);
+  }
+
+  &__lesson {
+    position: absolute;
+    z-index: 10;
+    transition: all 0.2s ease;
+  }
+
+  &__table.table {
+    border: none;
+  }
+}
+
+@include mq('lg') {
+  .marks-table {
+    &__overlay {
+      position: fixed;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-end;
+      height: var(--app-height);
+      background-color: transparent;
+      opacity: 0;
+      transition:
+        background-color 0.2s ease,
+        opacity 0.2s ease;
+      pointer-events: none;
+      inset: 0;
+
+      &--active {
+        background-color: rgba(var(--black--rgb), 0.5);
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+
+    &__lesson {
+      &--show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+    }
+
+    &__bottom {
+      margin-bottom: rem(0);
+    }
+
+    &__title {
+      display: none;
+    }
+  }
+}
+
+@include mq('lg') {
+  .marks-table {
+    &__bottom {
+      margin-bottom: rem(0);
+    }
+  }
+}

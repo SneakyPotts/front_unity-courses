@@ -1,0 +1,64 @@
+$colors: (
+  green: #e0fff0,
+  red: #ffe0e0,
+  blue: #e0ebff,
+  purple: #e8e0ff,
+  orange: #ffefe0,
+);
+
+.lesson-label {
+  @include flex-all-sb;
+
+  border-radius: rem(2);
+  padding: rem(3) rem(5);
+  width: fit-content;
+  min-width: 0;
+  max-width: 100%;
+  gap: rem(10);
+
+  span {
+    display: inline;
+    overflow: hidden;
+    min-width: 0;
+    max-width: 100%;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+  }
+
+  &__time {
+    @include flex-all-center;
+
+    flex-shrink: 0;
+    border-radius: rem(2);
+    width: rem(40);
+    height: rem(15);
+    font-weight: 400;
+    font-style: normal;
+    font-size: rem(13);
+    line-height: 1;
+    color: var(--grey-2);
+    background-color: var(--white);
+  }
+
+  @each $colorName, $color in $colors {
+    &--#{'' + $colorName} {
+      background-color: $color;
+    }
+  }
+}
+
+@include mq('lg') {
+  .lesson-label {
+    &__time {
+      display: none;
+    }
+
+    span {
+      text-overflow: unset;
+    }
+  }
+}

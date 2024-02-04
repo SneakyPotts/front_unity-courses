@@ -1,0 +1,29 @@
+.course-detail {
+  &__block {
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+  }
+
+  &__content {
+    &--element {
+      margin-top: rem(40);
+    }
+  }
+
+  &__ridth {
+    &--element {
+      grid-row: 1/-1;
+      grid-column: 2/3;
+    }
+  }
+}
+
+@include mq("lg") {
+  .course-detail {
+    &__ridth {
+      grid-row: 1/-1;
+      grid-column: 2/3;
+    }
+  }
+}

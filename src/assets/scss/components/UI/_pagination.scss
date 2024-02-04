@@ -1,0 +1,62 @@
+.pagination {
+  &__btn {
+    @include flex-all-center;
+
+    flex-shrink: 0;
+    width: rem(24);
+    height: rem(24);
+
+    &-svg {
+      width: rem(24);
+      height: rem(24);
+      fill: var(--blue-400);
+    }
+
+    &--prev {
+      .pagination__btn-svg {
+        transform: scale(-1, 1);
+      }
+    }
+  }
+
+  &__list {
+    @include flex-v-center;
+  }
+
+  &__item {
+    list-style: none;
+  }
+
+  &__link {
+    @include flex-all-center;
+
+    border-radius: rem(8);
+    width: rem(40);
+    height: rem(40);
+    font-weight: 500;
+    font-size: rem(14);
+    line-height: 1.2;
+    color: var(--grey-4);
+    background-color: transparent;
+
+    &--active {
+      color: var(--black);
+      background-color: var(--blue-50);
+    }
+  }
+
+  &--new {
+    @include flex-v-center;
+
+    gap: rem(32);
+  }
+}
+
+@include mq('md') {
+  .pagination {
+    &--new {
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,94 @@
+.teacher-card {
+  border: rem(1) solid var(--grey-5);
+  border-radius: rem(10);
+  padding: rem(16) rem(12);
+  min-height: 0;
+  background-color: var(--white);
+
+  &--main {
+    border: rem(1) solid var(--orange-200);
+    background-color: var(--orange-50);
+  }
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: rem(8);
+    gap: rem(8);
+    position: relative;
+  }
+
+  &__image {
+    flex-shrink: 0;
+    overflow: hidden;
+    border: rem(1) solid var(--blue-200);
+    border-radius: 50%;
+    width: rem(64);
+    height: rem(64);
+
+    img {
+      @include fill-image(cover);
+    }
+  }
+
+  &__status {
+    margin-bottom: rem(12);
+    font-weight: 400;
+    font-style: normal;
+    font-size: rem(12);
+    line-height: 1.2;
+    color: var(--grey-3);
+  }
+
+  &__question {
+    @include flex-v-center;
+
+    font-weight: 500;
+    font-size: rem(16);
+    color: var(--grey-4);
+    gap: rem(8);
+
+    &-svg {
+      width: rem(20);
+      height: rem(20);
+      fill: var(--grey-4);
+      gap: rem(8);
+    }
+  }
+
+  &__name {
+    margin-bottom: rem(8);
+
+    font-size: rem(14);
+    font-weight: 500;
+    line-height: 120%;
+  }
+
+  &--big {
+    .teacher-card {
+      &__top {
+        flex-direction: row;
+        margin-bottom: rem(12);
+      }
+    }
+  }
+}
+
+@include mq('lg') {
+  .teacher-card {
+    &__top {
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: rem(12);
+    }
+
+    &__status {
+      margin: 0;
+      font-size: rem(13);
+    }
+
+    &--big {
+      padding: rem(16);
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.test_knowledge_block {
+  &__inner {
+    display: flex;
+    gap: rem(30);
+  }
+
+  &__left {
+    flex: 1 1 auto;
+    gap: rem(30);
+  }
+
+  &__right {
+    flex: 0 0 rem(200);
+  }
+
+  &__item {
+    @include mb(rem(12));
+  }
+}

@@ -1,0 +1,54 @@
+.material-card {
+  border-radius: rem(10);
+  padding: rem(16) rem(12);
+  background-color: var(--bg);
+
+  &__title {
+    margin-bottom: rem(16);
+    font-weight: 500;
+    font-style: normal;
+    font-size: rem(16);
+    line-height: 1.2;
+  }
+
+  &__list {
+  }
+
+  &__item {
+    @include mb(rem(16));
+  }
+
+  &__link {
+    @include flex-v-center;
+
+    min-width: 0;
+    gap: rem(10);
+
+    span {
+      overflow: hidden;
+      font-size: rem(13);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &-svg {
+      width: rem(20);
+      height: rem(20);
+      fill: none;
+      stroke: var(--grey-4);
+      stroke-width: 0.08125rem;
+
+      &--fill {
+        fill: var(--grey-4);
+        stroke: none;
+        stroke-width: 0;
+      }
+    }
+  }
+}
+
+@include mq('lg') {
+  .material-card {
+    padding: rem(16);
+  }
+}

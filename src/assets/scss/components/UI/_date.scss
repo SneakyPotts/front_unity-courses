@@ -1,0 +1,23 @@
+.date {
+  display: inline-block;
+  border-radius: rem(2);
+  padding: rem(5);
+  font-weight: 500;
+  font-size: rem(14);
+  line-height: 0.8;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: var(--white);
+
+  &--blue {
+    background-color: var(--blue-400);
+  }
+
+  &--orange {
+    background-color: var(--orange-400);
+  }
+
+  &--grey {
+    background-color: var(--grey-4);
+  }
+}

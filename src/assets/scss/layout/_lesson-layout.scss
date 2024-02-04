@@ -1,0 +1,69 @@
+.lesson-layout {
+  display: flex;
+  overflow: hidden;
+  min-height: 100%;
+
+  .main {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: rem(60);
+    transition: padding-left 0.2s ease;
+    min-height: 100dvh;
+
+    .header,
+    .content {
+      margin-right: 0;
+      margin-left: auto;
+      width: 100%;
+      max-width: 90%;
+    }
+
+    &--active {
+      padding-left: rem(235);
+    }
+  }
+}
+
+.container-teacher {
+  max-width: 100%;
+}
+
+@include mq('xxl') {
+  .lesson-layout {
+    .main {
+      .header,
+      .content {
+        max-width: unset;
+      }
+    }
+  }
+}
+
+@include mq('lg') {
+  .lesson-layout {
+    display: block;
+
+    .main {
+      padding-left: 0;
+      height: var(--app-height);
+
+      .header,
+      .content {
+        margin: 0;
+        max-width: unset;
+      }
+
+      &--active {
+        padding-left: 0;
+        height: calc(var(--app-height));
+      }
+    }
+
+    .footer,
+    .aside {
+      display: none;
+    }
+  }
+}

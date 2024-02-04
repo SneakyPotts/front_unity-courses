@@ -1,0 +1,105 @@
+.checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: rem(10);
+
+  &__value {
+    color: var(--grey-3);
+  }
+
+  &__input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    cursor: pointer;
+
+    &:checked {
+      ~ .checkbox__block {
+        .checkbox__checkmark--active {
+          opacity: 1;
+        }
+
+        .checkbox__checkmark--default {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  &__block {
+    position: relative;
+    flex-shrink: 0;
+    width: rem(20);
+    height: rem(20);
+    transition: 0.2s ease;
+  }
+
+  &__todo {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    line-height: 1;
+    gap: rem(5);
+  }
+
+  &__calendar {
+    margin-top: rem(8);
+    margin-right: rem(14);
+    width: rem(20);
+    height: rem(20);
+
+    &-svg {
+      width: rem(20);
+      height: rem(20);
+      fill: var(--blue-300);
+    }
+  }
+
+  &__field {
+    flex: 1;
+    align-self: center;
+    outline: none;
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    resize: none;
+  }
+
+  &__checkmark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: block;
+    flex-shrink: 0;
+    width: rem(20);
+    height: rem(20);
+    transform: translate(-50%, -50%);
+    transition: 0.2s ease;
+
+    svg {
+      width: rem(20);
+      height: rem(20);
+    }
+
+    &--active {
+      opacity: 0;
+
+      svg {
+        fill: var(--blue-400);
+      }
+    }
+
+    &--default {
+      opacity: 1;
+
+      svg {
+        fill: var(--grey-4);
+      }
+    }
+  }
+}

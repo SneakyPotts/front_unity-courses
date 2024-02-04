@@ -1,0 +1,30 @@
+.statistics-block__info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.statistics-block__courses__subtitle {
+  margin-bottom: 15px;
+  max-width: 257px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 120%;
+  color: #1c1c1c;
+}
+
+.statistics-block__courses__btn {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ffa349;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #1c1c1c;
+  gap: 8px;
+}

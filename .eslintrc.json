@@ -1,0 +1,101 @@
+{
+	"extends": [
+		"next/core-web-vitals",
+		"prettier"
+	],
+	"env": {
+		"browser": true,
+		"es6": true,
+		"node": true
+	},
+	"rules": {
+		"linebreak-style": "off",
+		"max-len": [
+			"error",
+			175,
+			{
+				"ignoreUrls": true
+			}
+		],
+		"quotes": [
+			"error",
+			"single",
+			{
+				"avoidEscape": true,
+				"allowTemplateLiterals": true
+			}
+		],
+		"jsx-quotes": [
+			"error",
+			"prefer-double"
+		],
+		"indent": [
+			"error",
+			2,
+			{
+				"SwitchCase": 1
+				//				"offsetTernaryExpressions": false
+			}
+		],
+		"semi": [
+			"error",
+			"never"
+		],
+		"object-curly-spacing": [
+			"error",
+			"always"
+		],
+		"eol-last": [
+			"error",
+			"always"
+		],
+		"no-unused-vars": [
+			"warn",
+			{
+				"vars": "all",
+				"args": "none",
+				"ignoreRestSiblings": false
+			}
+		],
+		//		"import/extensions": [
+		//			"error",
+		//			"ignorePackages",
+		//			{
+		//				"js": "never",
+		//				"jsx": "never",
+		//				"ts": "never",
+		//				"tsx": "never"
+		//			}
+		//		],
+		"arrow-body-style": [
+			"error",
+			"as-needed"
+		],
+		"react/jsx-max-props-per-line": [
+			2,
+			{
+				"maximum": 1
+			}
+		],
+		"react/jsx-indent-props": [
+			2,
+			2
+		],
+		"react/jsx-first-prop-new-line": [
+			2,
+			"multiline"
+		]
+	},
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [
+					".js",
+					".jsx",
+					".ts",
+					".tsx"
+				]
+			}
+		}
+	}
+}

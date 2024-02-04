@@ -1,0 +1,96 @@
+.input {
+  outline: none;
+  border: rem(1) solid transparent;
+  border-radius: rem(5);
+  padding: rem(11) rem(15);
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-size: rem(14);
+  line-height: 120%;
+  color: var(--grey-3);
+  background-color: var(--blue-50);
+  transition:
+    background-color 0.1s var(--ease-out),
+    border 0.1s var(--ease-out),
+    color 0.1s var(--ease-out);
+  resize: none;
+
+  &:not(:disabled) {
+    &:not(.input--error) {
+      &:not(:focus) {
+        @include hover {
+          background-color: var(--blue-200);
+        }
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--blue-400);
+        color: var(--black);
+      }
+    }
+  }
+
+  &:disabled {
+    border: rem(1) dashed var(--blue-200);
+    color: var(--black);
+    background-color: transparent;
+    opacity: 1;
+  }
+
+  &--textarea {
+    height: fit-content;
+    min-height: rem(146);
+    background-image: url('/assets/img/static/message.svg'); //react
+    //background-image: url('../img/static/message.svg'); //layout
+    background-position: rem(15) rem(8);
+    background-repeat: no-repeat;
+    background-color: var(--blue-50);
+
+    &:not(:disabled) {
+      &:not(:focus) {
+        @include hover {
+          background-color: var(--blue-200);
+        }
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--blue-400);
+        color: var(--black);
+        background-image: none;
+
+        @include input-placeholder {
+          opacity: 0;
+        }
+      }
+      &:not(:placeholder-shown) {
+        background-image: none;
+      }
+    }
+
+    @include input-placeholder {
+      padding-left: rem(25);
+    }
+  }
+
+  &--active {
+    color: var(--black);
+    background-image: none;
+    background-color: var(--blue-50);
+  }
+
+  &--error {
+    border-color: var(--red);
+    padding-right: rem(40);
+    background-color: rgb(235 87 87 / 20%);
+
+    + svg {
+      display: block;
+    }
+  }
+
+  @include input-placeholder {
+    color: var(--grey-3);
+  }
+}

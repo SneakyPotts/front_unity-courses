@@ -1,0 +1,31 @@
+.lesson-card {
+  max-width: 173px;
+  border: 1px solid #eef4ff;
+  border-radius: rem(5);
+  padding: rem(5) rem(10);
+  height: rem(120);
+  background-color: var(--white);
+
+  &__name {
+    margin-bottom: rem(5);
+  }
+
+  &__teacher {
+    margin-bottom: rem(8);
+    border-bottom: rem(1) solid var(--grey-5);
+    padding-bottom: rem(8);
+  }
+
+  &__descr {
+    @include truncate-limit(3);
+
+    font-weight: 400;
+    font-style: normal;
+    font-size: rem(13);
+    line-height: 1.2;
+    color: var(--grey-3);
+  }
+}
+
+@include mq('md') {
+}

@@ -1,0 +1,32 @@
+.schedule-tabs {
+  @include flex-v-center;
+
+  gap: rem(10);
+
+  &__button {
+    border: rem(1) solid var(--grey-4);
+    border-radius: rem(5);
+    padding: rem(8) rem(12);
+    font-weight: 500;
+    font-style: normal;
+    font-size: rem(16);
+    line-height: 1.2;
+    color: var(--grey-4);
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease;
+
+    &:not(.schedule-tabs__button--active) {
+      @include hover {
+        border-color: var(--blue-300);
+        color: var(--blue-300);
+      }
+    }
+
+    &--active {
+      border-color: var(--blue-400);
+      color: var(--blue-400);
+      pointer-events: none;
+    }
+  }
+}

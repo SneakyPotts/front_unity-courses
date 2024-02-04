@@ -1,0 +1,68 @@
+.stepper {
+  @include flex-v-center;
+
+  gap: rem(10);
+
+  &__value {
+    font-weight: 500;
+    font-style: normal;
+    font-size: rem(14);
+    line-height: 1.2;
+
+    &.month {
+      text-transform: capitalize;
+    }
+  }
+
+  &__button {
+    @include flex-all-center;
+
+    flex-shrink: 0;
+    border-radius: 50%;
+    width: rem(26);
+    height: rem(26);
+    box-shadow: 0 rem(2) rem(8) 0 rgba(101, 122, 239, 10%);
+    background: var(--blue-100);
+
+    &-svg {
+      width: rem(16);
+      height: rem(16);
+      fill: none;
+      stroke: #4f4f4f;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: rem(2);
+    }
+  }
+
+  &__icon {
+    display: none;
+  }
+}
+
+@include mq('lg') {
+  .stepper {
+    align-items: center;
+    border: rem(1) solid var(--blue-400);
+    border-radius: rem(5);
+    padding: rem(9) rem(12);
+
+    &__value {
+      font-weight: 500;
+      font-style: normal;
+      font-size: rem(16);
+      line-height: 1.2;
+    }
+
+    &__icon {
+      display: block;
+      width: rem(20);
+      height: rem(20);
+      fill: var(--grey-3);
+    }
+
+    &__button {
+      display: none;
+    }
+  }
+}

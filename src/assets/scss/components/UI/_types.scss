@@ -1,0 +1,70 @@
+.types {
+  @include flex-v-center;
+
+  gap: rem(16);
+
+  &__list {
+    @include flex-v-center;
+
+    gap: rem(12);
+  }
+
+  &__icon {
+    display: block;
+    flex-shrink: 0;
+    width: rem(16);
+    height: rem(16);
+
+    &:not(.types__icon--active) {
+      @include hover {
+        .lesson__icon-svg {
+          fill: var(--blue-600);
+        }
+      }
+    }
+
+    &-svg {
+      width: rem(16);
+      height: rem(16);
+      fill: var(--grey-4);
+      transition: fill 0.15s ease;
+    }
+
+    &--active {
+      .types__icon-svg {
+        fill: var(--blue-400);
+      }
+    }
+  }
+
+  &__unit {
+    cursor: pointer;
+  }
+
+  &__final {
+    @include flex-all-center;
+
+    border-radius: 50%;
+    width: rem(20);
+    height: rem(20);
+    background-color: var(--orange-300);
+
+    .types__icon-svg {
+      width: rem(14);
+      height: rem(14);
+      fill: var(--white);
+    }
+  }
+}
+
+@include mq('xl') {
+  .types {
+    &__list {
+      gap: rem(8);
+    }
+
+    &__right {
+      gap: rem(8);
+    }
+  }
+}

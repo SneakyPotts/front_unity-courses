@@ -1,0 +1,77 @@
+$colors: (
+  'white': #fff,
+  'black': #1c1c1c,
+  'bg': #f4f4fd,
+  'red': #eb5757,
+
+  //gray
+  'grey-6': #f2f2f2,
+  'grey-5': #e0e0e0,
+  'grey-4': #bdbdbd,
+  'grey-3': #828282,
+  'grey-2': #4f4f4f,
+  'grey-1': #333,
+
+  // primary
+  'primary-orange': #fe7c11,
+  'primary-blue': #657aef,
+
+  // orange
+  'orange-50': #fff8ed,
+  'orange-100': #ffefd4,
+  'orange-200': #ffdba8,
+  'orange-300': #ffc071,
+  'orange-400': #ffa349,
+  'orange-500': #fe7c11,
+  'orange-600': #ef6107,
+  'orange-700': #c64708,
+  'orange-800': #9d390f,
+  'orange-900': #7e3110,
+
+  // blue
+  'blue-50': #eef4ff,
+  'blue-100': #e0ebff,
+  'blue-200': #c8d9fd,
+  'blue-300': #a6c0fb,
+  'blue-400': #7d98f6,
+  'blue-500': #657aef,
+  'blue-600': #4853e3,
+  'blue-700': #3a42c8,
+  'blue-800': #323ba1,
+  'blue-900': #2f3780,
+  'blue-950': #1c1f4a,
+);
+
+:root {
+  /* ease */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in: cubic-bezier(0.12, 0, 0.39, 0);
+  --ease-in-out: cubic-bezier(0.86, 0, 0.07, 1);
+  --ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* main */
+  --app-height: 100vh;
+
+  /* ui */
+  --ui-index-1: 1; //Для наползающих элементов в общем потоке
+  --ui-index-2: 2; //Для наползающих элементов в общем потоке
+  --ui-index-3: 3; //Для масок
+  --ui-index-4: 4; //Для сайдбаров
+  --ui-index-5: 5; //Для модалок
+  --ui-index-6: 6; //Для элементов перекрывающих все
+
+  /* colors */
+  @if $colors {
+    @each $key, $value in $colors {
+      --#{$key}: #{$value};
+      --#{$key}--rgb: #{HexToRGB($value)};
+    }
+  }
+}
+
+// for adaptive value
+$minWidth: 375;
+$maxWidth: 1440;
+$maxWidthContainer: 0;
+$containerPadding: 0;
+$containerWidth: $maxWidthContainer + $containerPadding;

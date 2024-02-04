@@ -1,0 +1,9 @@
+.tippy-content {
+  border-radius: rem(2);
+  padding: rem(8);
+  box-shadow: 0 rem(4) rem(24) 0 rgba(#000, 0.13);
+  font-size: rem(13);
+  white-space: nowrap;
+  color: var(--grey-3);
+  background-color: var(--white);
+}

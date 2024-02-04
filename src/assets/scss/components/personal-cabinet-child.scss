@@ -1,0 +1,10 @@
+.persoal {
+  &-cabinet__avatar {
+    display: flex;
+    align-items: center;
+  }
+  &__cabinet-heed {
+    padding: 12px 12px;
+    background-color: #fff8ed;
+  }
+}

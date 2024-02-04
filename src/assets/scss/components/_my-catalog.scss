@@ -1,0 +1,268 @@
+.my-catalog {
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: rem(30);
+  }
+
+  &__active {
+    margin-bottom: rem(40);
+  }
+
+  &__active,
+  &__element {
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
+  }
+
+  &__title {
+    margin-bottom: rem(20);
+    padding-bottom: rem(8);
+    border-bottom: rem(2) solid #e0e0e0;
+    font-family: "Roboto", sans-serif;
+    font-size: rem(20);
+    font-weight: 500;
+    line-height: 120%;
+    color: #1c1c1c;
+  }
+
+  &__block {
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    padding: rem(20);
+    border-radius: rem(20);
+  }
+
+  &__left {
+
+    &-title {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      max-width: rem(700);
+      margin-bottom: rem(16);
+      font-family: "Roboto", sans-serif;
+      font-size: rem(26);
+      font-weight: 600;
+      line-height: 1;
+      color: #1c1c1c;
+    }
+
+    &-text {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      max-width: rem(738);
+      margin-bottom: rem(16);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: "Roboto", sans-serif;
+      font-size: rem(14);
+      font-weight: 400;
+      line-height: 120%;
+      color: #828282;
+    }
+  }
+
+  &__callback {
+    margin-top: rem(16);
+    &-subject {
+      margin-bottom: rem(8);
+    }
+  }
+
+  &__duration {
+    display: flex;
+    align-items: baseline;
+    gap: rem(20);
+
+    &-item {
+      display: flex;
+      align-items: center;
+      gap: rem(8);
+    }
+  }
+
+  &__condition {
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+    padding: rem(6) rem(5);
+    margin-bottom: rem(16);
+
+    p {
+      font-family: "Roboto", sans-serif;
+      font-size: rem(13);
+      font-weight: 400;
+      line-height: 120%;
+      color: #1c1c1c;
+    }
+
+    &--violet {
+      width: max-content;
+      border-radius: rem(2);
+      background-color: #d1c2fc;
+    }
+  }
+
+  &__box {
+    display: flex;
+    align-items: flex-start;
+    gap: rem(22);
+    margin-top: auto;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+
+    &-img {
+    }
+
+    &-name {
+      font-family: "Roboto", sans-serif;
+      font-size: rem(14);
+      font-weight: 400;
+      line-height: 120%;
+      color: #1c1c1c;
+    }
+  }
+
+  &__ridth {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: rem(16);
+
+    &-time {
+      display: flex;
+      align-items: center;
+      gap: rem(8);
+
+      p {
+        font-family: "Roboto", sans-serif;
+        font-size: rem(13);
+        font-weight: 400;
+        line-height: 120%;
+        color: #828282;
+      }
+    }
+
+    &-photo {
+      max-width: rem(100);
+      height: rem(100);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: rem(5);
+      }
+    }
+  }
+
+ 
+
+  &__banner {
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+  }
+}
+
+@include mq('xxl') {
+  .my-catalog {
+    &__left {
+
+      &-title {
+        max-width: rem(650);
+      }
+    }
+  }
+}
+
+@include mq("xl") {
+  .my-catalog {
+    &__block {
+      grid-template-columns: 1fr;
+    }
+
+    &__ridth {
+      order: 1;
+      align-items: baseline;
+      margin-bottom: rem(16);
+
+      &-photo {
+        display: none;
+      }
+    }
+
+    &__left {
+      order: 2;
+
+      &-title {
+        font-size: rem(20);
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+@include mq("lg") {
+  .my-catalog {
+    &__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@include mq("md") {
+  .my-catalog {
+    &__teacher {
+      display: none;
+    }
+
+    &__box {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
+
+    &__contact {
+      display: block;
+      text-align: center;
+      margin-top: rem(16);
+      border-top: rem(1) solid #bdbdbd;
+
+      &-btn {
+        margin-top: rem(16);
+      }
+
+      &-svg {
+        width: rem(16);
+        height: rem(16);
+        fill: #bdbdbd;
+      }
+    }
+  }
+}
+
+@include mq("sm") {
+  .my-catalog {
+    &__duration {
+      flex-wrap: wrap;
+    }
+
+    &__box {
+      margin-top: rem(16);
+    }
+
+    &__condition {
+      margin-bottom: 0;
+    }
+  }
+}

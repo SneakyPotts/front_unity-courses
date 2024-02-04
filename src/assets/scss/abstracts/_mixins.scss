@@ -1,0 +1,251 @@
+// -----------------------------------------------------------------------------
+// breakpoints
+
+@use 'sass:math';
+
+$breakpoints: (
+  xs: 375,
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+  xxl: 1400,
+);
+
+@mixin mq($width, $type: max) {
+  @if map_has_key($breakpoints, $width) {
+    $width: em(map_get($breakpoints, $width) - 0.2);
+
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+
+// flex
+
+@mixin flex {
+  display: flex;
+}
+
+@mixin flex-v-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-h-center {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-all-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-all-sb {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// -----------------------------------------------------------------------------
+// fonts
+
+/* stylelint-disable */
+@mixin font-face($font-family, $url, $weight, $style: normal) {
+  @font-face {
+    font-family: '#{$font-family}';
+
+    src:
+            //url('../font/#{$url}.woff') format('woff'),
+            //url('../font/#{$url}.woff2') format('woff2'),
+      url('../../font/#{$url}.ttf') format('truetype');
+    font-weight: #{$weight};
+    font-display: swap;
+    font-style: $style;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// hover
+
+@mixin hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// images
+
+@mixin fill-image($type) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: $type;
+}
+
+// -----------------------------------------------------------------------------
+// last element indents
+
+@mixin mr($value) {
+  &:not(:last-child) {
+    margin-right: $value;
+  }
+}
+
+@mixin ml($value) {
+  &:not(:last-child) {
+    margin-left: $value;
+  }
+}
+
+@mixin mb($value) {
+  &:not(:last-child) {
+    margin-bottom: $value;
+  }
+}
+
+@mixin mt($value) {
+  &:not(:last-child) {
+    margin-top: $value;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// hide scroll
+@mixin hide-scroll {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// input placeholder
+
+@mixin input-placeholder {
+  &::placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// theme
+
+@mixin theme($theme) {
+  @if $theme == 'dark' {
+    html[data-theme='dark'] {
+      @content;
+    }
+  }
+
+  @if $theme == 'light' {
+    html[data-theme='light'] {
+      @content;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// truncate
+
+@mixin truncate($truncation-boundary) {
+  overflow: hidden;
+  max-width: $truncation-boundary;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin truncate-limit($lines) {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+}
+
+// -----------------------------------------------------------------------------
+// adaptive value
+
+/* prettier-ignore */
+/* eslint-disable */
+
+// Адаптивное свойство (clamp)
+@mixin adaptive-value($property, $startSize, $minSize, $widthFrom: $containerWidth, $widthTo: $minWidth, $keepSize: 0) {
+  @if ($startSize==0) {
+    $startSize: 0.000001;
+  }
+  @if ($minSize==0) {
+    $minSize: 0.000001;
+  }
+
+  // Для calc();
+  $addSize: math.div($startSize - $minSize, 16);
+
+  @if ($widthFrom == $containerWidth and $maxWidthContainer == 0) {
+    $widthFrom: $maxWidth;
+  }
+
+  // Брейк-поинты в EM
+  $widthFromMedia: em($widthFrom);
+  $widthToMedia: em($widthTo);
+
+  // Формула плавающего значения
+  // Источник: https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/
+  $slope: math.div(($startSize - $minSize), ($widthFrom - $widthTo));
+  $yIntersection: -$widthTo * $slope + $minSize;
+  @if ($yIntersection==0) {
+    $yIntersection: 0.000001;
+  }
+  $flyValue: #{rem($yIntersection)}' + ' #{$slope * 100}vw;
+
+  // Получение значения свойства
+  $propertyValue: #{'clamp(' rem($minSize) ',' $flyValue ',' rem($startSize) ')'};
+  // Если отрицательные значения
+  @if ($minSize > $startSize) {
+    $propertyValue: #{'clamp(' rem($startSize) ',' $flyValue ',' rem($minSize) ')'};
+  }
+
+  // Если поддерживается clamp();
+  @supports (#{$property}: $propertyValue) {
+    #{$property}: $propertyValue;
+  }
+  // Если не поддерживается clamp();
+  @supports not (#{$property}: $propertyValue) {
+    #{$property}: calc(#{rem($minSize)} + #{$addSize} * (100vw - #{rem($widthTo)}) / #{math.div($widthFrom, 16) - math.div($widthTo, 16)});
+  }
+
+  // Устанавливаем значения по умолчанию
+  @if $widthFrom != $containerWidth and $widthFrom != $maxWidth and $keepSize != 1 and $keepSize != 2 {
+    @media (min-width: $widthFromMedia) {
+      #{$property}: inherit;
+    }
+  }
+  @if $widthTo != $minWidth and $keepSize != 1 and $keepSize != 3 {
+    @media (max-width: $widthToMedia) {
+      #{$property}: inherit;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------

@@ -1,0 +1,28 @@
+.link {
+  @include flex-v-center;
+
+  font-weight: 500;
+  font-style: normal;
+  font-size: rem(14);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--grey-4);
+  transition: 0.15s ease;
+  gap: rem(5);
+
+  svg {
+    flex-shrink: 0;
+    width: rem(12);
+    height: rem(12);
+    fill: var(--grey-4);
+    transition: 0.15s ease;
+  }
+
+  @include hover {
+    color: var(--blue-500);
+
+    svg {
+      fill: var(--blue-500);
+    }
+  }
+}

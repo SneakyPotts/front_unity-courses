@@ -1,0 +1,256 @@
+.select {
+  position: relative;
+  width: 100%;
+
+  &__bottom {
+    position: absolute;
+    left: 0;
+    top: calc(100% + rem(5));
+    z-index: var(--ui-index-1);
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(rem(-20));
+    transition: 0.2s ease;
+  }
+
+  &__wrapper {
+    border: rem(1) solid var(--grey-6);
+    border-radius: rem(5);
+    padding: rem(12) 0;
+    background-color: var(--white);
+    min-width: rem(160);
+  }
+
+  &__list {
+    padding: 0 rem(4);
+    max-height: rem(183);
+  }
+
+  &__item {
+    padding: rem(4) rem(12);
+    font-weight: 400;
+    font-style: normal;
+    font-size: rem(14);
+    line-height: 1.2;
+    color: var(--grey-3);
+    transition: background-color 0.1s ease;
+    cursor: pointer;
+
+    &--chosen {
+      color: var(--blue-400);
+    }
+
+    @include hover {
+      background-color: var(--blue-50);
+    }
+  }
+
+  &__times {
+    text-align: center;
+  }
+
+  &__time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: rem(4);
+    font-weight: 400;
+    font-size: rem(14);
+    line-height: 1;
+    color: var(--grey-3);
+
+    @include hover {
+      background-color: var(--blue-50);
+      cursor: pointer;
+    }
+  }
+
+  &:not(.select--active) {
+    .select__top {
+      @include hover {
+        background-color: var(--blue-200);
+      }
+    }
+  }
+
+  &__top {
+    @include flex-all-sb;
+
+    border: rem(1) solid transparent;
+    border-radius: rem(5);
+    padding: rem(7) rem(15);
+    background-color: var(--blue-50);
+    transition: 0.1s var(--ease-out);
+    cursor: pointer;
+
+    &-svg {
+      width: rem(24);
+      height: rem(24);
+      fill: var(--grey-3);
+      transition: 0.2s ease;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__button {
+    &-svg {
+      display: block;
+      width: rem(24);
+      height: rem(24);
+      fill: var(--grey-3);
+    }
+
+    &--plus {
+      transform: scale(1, -1);
+    }
+  }
+
+  &__num {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: rem(20);
+    line-height: normal;
+  }
+
+  &__value {
+    color: var(--grey-3);
+  }
+
+  &__counter {
+    @include flex-all-sb;
+
+    border: rem(1) solid var(--grey-4);
+    padding: rem(7) rem(15);
+    width: 100%;
+    background-color: var(--white);
+    gap: rem(10);
+  }
+
+  &--children {
+    .select {
+      &__top {
+        gap: rem(8);
+      }
+
+      &__item {
+        display: flex;
+        align-items: center;
+        gap: rem(8);
+
+        .select__value {
+          flex: 1 1 auto;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+
+      &__value {
+        font-weight: 500;
+        font-style: normal;
+        font-size: rem(16);
+        line-height: 1.2;
+        color: var(--black);
+      }
+
+      &__image {
+        @include fill-image(cover);
+
+        flex-shrink: 0;
+        border-radius: 50%;
+        width: rem(24);
+        height: rem(24);
+      }
+    }
+  }
+
+  &--border {
+    .select {
+      &__top {
+        border: rem(1) solid var(--blue-400);
+        font-weight: 500;
+        font-size: rem(16);
+        background-color: transparent;
+        gap: rem(9);
+      }
+
+      &__value {
+        color: var(--blue-400);
+      }
+
+      &__wrapper {
+        border: none;
+        box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 13%);
+      }
+    }
+  }
+
+  &--small {
+    padding: 0;
+    width: fit-content;
+
+    &:not(.select--active) {
+      .select__top {
+        @include hover {
+          background-color: transparent;
+        }
+      }
+    }
+
+    .select {
+      &__top {
+        padding: 0;
+        background-color: transparent;
+        gap: rem(5);
+
+        &-svg {
+          width: rem(16);
+          height: rem(16);
+          transform: scale(1, -1);
+        }
+      }
+
+      &__value {
+        font-weight: 500;
+        font-style: normal;
+        font-size: rem(16);
+        line-height: 1.2;
+        color: var(--blue-400);
+      }
+    }
+
+    &.select--active {
+      .select__top {
+        border-color: transparent;
+      }
+
+      .select__top-svg {
+        transform: scale(1, 1);
+      }
+    }
+  }
+
+  &--active {
+    .select {
+      &__top {
+        border-color: var(--blue-400);
+
+        &-svg {
+          transform: scale(1, -1);
+        }
+      }
+
+      &__bottom {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(0);
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+.graph {
+  overflow: hidden;
+  margin-bottom: rem(60);
+  border: rem(1) solid var(--grey-5);
+  border-radius: rem(10);
+
+  &__top {
+    padding: rem(20) rem(15) rem(30);
+  }
+
+  &__left {
+    @include flex-v-center;
+
+    gap: rem(20);
+  }
+
+  &__bottom {
+    // max-height: rem(430);
+
+    #graph {
+      width: 100% !important;
+    }
+  }
+
+  &__title {
+    font-weight: 500;
+    font-style: normal;
+    font-size: rem(20);
+    line-height: 1.2;
+  }
+
+  &__box {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    margin-left: 17px;
+  }
+
+  &__box-text {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 120%;
+    color: #bdbdbd;
+  }
+
+  &__box-num {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 120%;
+    color: var(--Gray-3, #828282);
+  }
+}

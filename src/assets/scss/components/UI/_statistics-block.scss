@@ -1,0 +1,165 @@
+.statistics-block {
+  flex: 1 1;
+  border-radius: rem(10);
+  padding: rem(20);
+  min-width: 0;
+  background-color: var(--blue-50);
+
+  &__empty {
+    @include flex-all-center;
+
+    flex: 1;
+    margin: auto;
+    margin-top: rem(32);
+    gap: rem(12);
+
+    h3 {
+      margin-bottom: rem(15);
+      font-size: rem(18);
+    }
+
+    .statistics-block__link {
+      width: fit-content;
+    }
+
+    .statistics-block__image {
+      width: rem(200);
+      aspect-ratio: 204 / 132;
+    }
+
+    .statistics-block__show-all {
+      & > svg {
+        width: rem(15);
+        height: rem(15);
+        fill: var(--grey-3);
+      }
+    }
+
+    @include mq('xl') {
+      flex-direction: column;
+    }
+  }
+
+  &__image {
+    flex-shrink: 0;
+    width: rem(137);
+    height: rem(132);
+
+    img {
+      // @include fill-image(cover);
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__top {
+    @include flex-all-sb;
+
+    flex-wrap: wrap;
+    margin-bottom: rem(20);
+    gap: rem(20);
+  }
+
+  &__left {
+    @include flex-v-center;
+
+    gap: rem(20);
+  }
+
+  &__title {
+    font-weight: 500;
+    font-style: normal;
+    font-size: rem(20);
+    line-height: 1.2;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: rem(20);
+  }
+
+  &__wrapper {
+    max-height: rem(179);
+
+    .simplebar-track {
+      right: rem(-17);
+    }
+  }
+
+  &__courses {
+    display: block;
+  }
+
+  &__course {
+    @include mb(rem(8));
+
+    &:last-child {
+      margin-bottom: rem(20);
+    }
+  }
+
+  &__item {
+    &:nth-child(n + 3) {
+      display: none;
+    }
+  }
+
+  //&[data-tab-content='Прогрес курсів'] {
+  //  padding-bottom: 0;
+  //}
+}
+
+@include mq('xl') {
+  .statistics-block {
+    &__list {
+      grid-template-columns: 1fr;
+      gap: rem(8);
+    }
+
+    &__wrapper {
+      max-height: rem(348);
+    }
+  }
+}
+
+@include mq('lg') {
+  .statistics-block {
+    padding: rem(16);
+
+    &__wrapper {
+      max-height: unset;
+    }
+
+    &__course {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &__list {
+      grid-template-columns: repeat(auto-fill, minmax(rem(250), 1fr));
+      gap: rem(20);
+    }
+
+    &__item {
+      &:nth-child(n + 3) {
+        display: flex;
+      }
+    }
+
+    &__link {
+      display: none;
+    }
+
+    &__left {
+      display: flex;
+      flex-direction: column;
+      align-items: baseline;
+    }
+
+    &[data-tab-content='Прогрес курсів'] {
+      padding-bottom: rem(16);
+    }
+  }
+}

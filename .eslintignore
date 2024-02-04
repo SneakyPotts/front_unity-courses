@@ -1,0 +1,11 @@
+/.idea
+/.vscode
+/node_modules
+/.next
+
+/package-lock.json
+/yarn.lock
+/yarn-error.log
+
+/storybook-static
+/src/stories

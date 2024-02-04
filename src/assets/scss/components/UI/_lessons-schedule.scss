@@ -1,0 +1,239 @@
+.lessons-schedule {
+  @include flex-v-center;
+
+  position: relative;
+  flex-direction: column;
+  padding: rem(8) rem(10);
+  height: rem(165);
+  min-width: 0;
+  cursor: pointer;
+  gap: rem(5);
+
+  &__date {
+    @include flex-all-center;
+
+    flex-shrink: 0;
+    width: rem(28);
+    height: rem(28);
+    font-weight: 500;
+    font-style: normal;
+    font-size: rem(14);
+    line-height: 1.2;
+    color: var(--black);
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: rem(2);
+  }
+
+  &__more {
+    @include flex-all-center;
+
+    margin-top: auto;
+    margin-bottom: 0;
+    border: rem(1) solid #eef4ff;
+    border-radius: rem(2);
+    padding: rem(2);
+    width: 100%;
+    font-weight: 500;
+    font-size: rem(13);
+    color: var(--black);
+  }
+
+  &__label {
+    width: 100%;
+
+    span {
+      font-weight: 400;
+    }
+  }
+
+  &__modal {
+    position: absolute;
+    left: 90%;
+    top: rem(68);
+    z-index: var(--ui-index-5);
+    border: rem(1) solid #eef4ff;
+    border-radius: rem(5);
+    padding: rem(8);
+    width: rem(176);
+    box-shadow: 0 2px 8px 0 rgba(101, 122, 239, 10%);
+    background-color: var(--white);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.9);
+    transition: 0.2s ease;
+  }
+
+  &__time {
+    display: block;
+    margin-bottom: rem(8);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: rem(14);
+    line-height: normal;
+    text-align: center;
+  }
+
+  &__title {
+    display: none;
+  }
+
+  &__block {
+    &:not(:last-child) {
+      margin-bottom: rem(5);
+      border-bottom: rem(1) solid var(--grey-4);
+      padding-bottom: rem(5);
+    }
+
+    &:last-child {
+      margin-bottom: rem(8);
+    }
+  }
+
+  &__sublist {
+    display: none;
+  }
+
+  @include hover {
+    .lessons-schedule__modal {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+  }
+}
+
+@include mq('lg') {
+  .lessons-schedule {
+    padding: rem(2);
+    height: rem(120);
+    gap: rem(2);
+
+    &__date {
+      width: rem(18);
+      height: rem(21);
+    }
+
+    &__more {
+      margin: 0;
+      font-size: rem(10);
+      white-space: nowrap;
+    }
+
+    &__label {
+      font-size: rem(10);
+    }
+
+    &__overlay {
+      position: fixed;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden auto;
+      padding-top: rem(50);
+      height: var(--app-height);
+      background-color: rgba(#000, 0.4);
+      inset: 0;
+    }
+
+    &__modal {
+      position: static;
+      margin-top: auto;
+      margin-bottom: 0;
+      padding: rem(20) rem(15) rem(40);
+      width: 100%;
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+
+    &__time {
+      display: none;
+    }
+
+    &__title {
+      display: block;
+      margin-bottom: rem(20);
+      font-weight: 500;
+      font-style: normal;
+      font-size: rem(20);
+      line-height: 1.2;
+    }
+
+    &__block {
+      .lessons-schedule__list {
+        display: none;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: rem(20);
+        border: none;
+        padding: 0;
+      }
+    }
+  }
+
+  .schedule-table__item {
+    &:not(:first-child) {
+      display: none;
+    }
+  }
+
+  .schedule-table__lessons-list {
+    &:not(:first-child) {
+      display: none;
+    }
+  }
+}
+
+@include mq('lg') {
+  .lessons-schedule {
+    &__subitem {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      border-radius: rem(5);
+      padding: rem(8) rem(12);
+      min-width: 0;
+      background-color: var(--bg);
+      gap: rem(10) rem(20);
+    }
+
+    &__data {
+      font-weight: 500;
+      font-style: normal;
+      font-size: rem(13);
+      line-height: 1.2;
+      color: var(--grey-3);
+    }
+
+    &__sublist {
+      display: flex;
+      flex-direction: column;
+      gap: rem(12);
+    }
+
+    &__name {
+      overflow: hidden;
+      font-weight: 500;
+      font-style: normal;
+      font-size: rem(14);
+      line-height: normal;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+    }
+
+    &__teacher {
+      grid-column: 2 span;
+    }
+  }
+}
+
+.lessons-schedule__list {
+  max-width: 176px;
+}

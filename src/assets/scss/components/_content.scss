@@ -1,0 +1,42 @@
+.content {
+  flex: 1 1 auto;
+  margin-bottom: rem(80);
+
+  section {
+    @include mb(rem(80));
+  }
+
+  &--offset {
+    margin-bottom: 0;
+  }
+
+ 
+}
+
+
+
+@include mq('xl') {
+  .content {
+    section {
+      @include mb(rem(50));
+    }
+
+    &--offset {
+      // padding-right: rem(15);
+    }
+  }
+}
+
+@include mq('lg') {
+  .content {
+    overflow: hidden auto;
+    margin: 0;
+    padding-bottom: rem(40);
+
+    // height: calc(var(--app-height) - rem(207.19));
+
+    section {
+      @include mb(rem(0));
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@import '../abstracts/mixins';
+
+/* Roboto */
+@include font-face(Roboto, Roboto/Roboto-Regular, 400);
+@include font-face(Roboto, Roboto/Roboto-Medium, 500);
+@include font-face(Roboto, Roboto/Roboto-Bold, 700);
+
+/* Inter */
+@include font-face(Inter, Inter/Inter-Regular, 400);
+@include font-face(Inter, Inter/Inter-Medium, 500);
+@include font-face(Inter, Inter/Inter-SemiBold, 600);

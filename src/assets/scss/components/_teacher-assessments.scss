@@ -1,0 +1,11 @@
+.table__subject {
+  display: flex;
+  align-items: center;
+  gap: rem(12);
+}
+
+@include mq('xl') {
+  .marks-table__inner--mob {
+    display: block;
+  }
+}

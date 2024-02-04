@@ -1,0 +1,30 @@
+.subjects {
+  &__inner {
+    display: flex;
+    gap: rem(30);
+  }
+
+  &__left {
+    flex: 1 1 auto;
+  }
+
+  &__right {
+    flex: 0 0 rem(200);
+  }
+
+  &__item {
+    @include mb(rem(12));
+  }
+}
+
+@include mq('lg') {
+  .subjects {
+    &__inner {
+      display: block;
+    }
+
+    &__left {
+      margin-bottom: rem(40);
+    }
+  }
+}

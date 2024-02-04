@@ -1,0 +1,224 @@
+.lesson {
+  display: grid;
+  grid-template-columns: rem(104) 1fr auto;
+  grid-template-rows: auto 1fr;
+  border-top: rem(1) solid var(--grey-5);
+  padding: rem(15) 0 rem(14);
+  width: 100%;
+  min-height: rem(135);
+  background-color: var(--white);
+  gap: rem(12) rem(16);
+
+  &__image {
+    position: relative;
+    grid-row: 1/3;
+    overflow: hidden;
+    border-radius: rem(5);
+
+    img {
+      @include fill-image(contain);
+
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__subject {
+    @include flex-v-center;
+
+    gap: rem(10);
+  }
+
+  &__mark {
+    position: absolute;
+    left: 0;
+    bottom: rem(4);
+    z-index: var(--ui-index-1);
+    border-radius: 0 rem(2) rem(2) 0;
+    padding: rem(2) rem(8);
+    width: fit-content;
+    font-weight: 500;
+    font-size: rem(14);
+    color: var(--white);
+    background-color: var(--orange-400);
+  }
+
+  &__button {
+    margin-top: auto;
+  }
+
+  &__top {
+    display: grid;
+    align-items: center;
+    grid-column: 2/4;
+    grid-row: 1/2;
+    grid-template-columns: auto rem(4) 1fr auto;
+    border-radius: rem(5);
+    padding: rem(8);
+    background-color: var(--bg);
+    gap: rem(10);
+  }
+
+  &__top.isTeacher {
+    grid-column: 2 span;
+    grid-template-columns: 1fr auto;
+  }
+
+  &__counter {
+    @include flex-all-center;
+
+    flex-shrink: 0;
+    border-radius: rem(2);
+    width: rem(20);
+    height: rem(20);
+    font-weight: 500;
+    font-size: rem(14);
+    line-height: 1;
+    color: var(--blue-400);
+    background-color: var(--blue-200);
+
+    &::before {
+      counter-increment: section;
+      content: counter(section);
+    }
+  }
+
+  &__name {
+    overflow: hidden;
+    max-width: rem(233);
+    font-weight: 500;
+    font-style: normal;
+    font-size: rem(14);
+    line-height: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    transition: color 0.1s ease;
+
+    @include hover {
+      color: var(--blue-400);
+    }
+  }
+
+  &__point {
+    flex-shrink: 0;
+    border-radius: 50%;
+    width: rem(4);
+    height: rem(4);
+    background-color: var(--grey-3);
+  }
+
+  &__text {
+    grid-column: 2/3;
+
+    a {
+      font-weight: 500;
+      color: var(--grey-3);
+      transition: color 0.1s ease;
+
+      @include hover {
+        color: var(--blue-400);
+      }
+    }
+  }
+
+  &__functional {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: rem(8);
+  }
+
+  &__teacher {
+    cursor: pointer;
+
+    @include hover {
+      color: var(--blue-400);
+    }
+  }
+
+  &__time {
+    font-weight: 500;
+    font-size: rem(13);
+    color: var(--grey-3);
+  }
+
+  &:last-child {
+    border-bottom: rem(1) solid var(--grey-5);
+  }
+
+  &__class {
+    display: flex;
+    background-color: rgba(125, 152, 246, 0.1);
+    font-weight: 600;
+    color: #1c1c1c;
+    border-radius: 50%;
+  }
+
+  &__presence {
+    display: flex;
+    margin-left: auto;
+    font-size: rem(14);
+    color: var(--grey-3);
+  }
+}
+
+@include mq('xl') {
+  .lesson {
+    column-gap: rem(12);
+    grid-template-columns: rem(50) 1fr;
+    padding: rem(12) 0;
+    row-gap: 0;
+
+    &__top {
+      grid-column: 2 span;
+
+      // align-items: flex-start;
+      grid-template-columns: 1fr auto;
+      margin-bottom: rem(12);
+      padding: rem(8) rem(12);
+    }
+
+    &__name {
+      max-width: 100%;
+    }
+
+    &__button {
+      &.btn.btn--grey,
+      &.btn.btn--accent {
+        width: fit-content;
+      }
+    }
+
+    &__point {
+      display: none;
+    }
+
+    &__teacher {
+      grid-column: 1/3;
+      grid-row: 2/3;
+    }
+
+    &__image {
+      grid-row: unset;
+      height: rem(50);
+    }
+
+    &__mark {
+      font-size: rem(13);
+    }
+
+    &__functional {
+      @include flex-all-sb;
+
+      flex-direction: row;
+      grid-column: 2 span;
+      margin-top: rem(12);
+      border-top: rem(1) solid var(--grey-6);
+      padding-top: rem(12);
+      min-height: rem(40);
+    }
+  }
+}

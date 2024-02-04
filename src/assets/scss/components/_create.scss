@@ -1,0 +1,248 @@
+.create {
+  &__top {
+    margin-bottom: rem(24);
+    border-bottom: rem(1) solid var(--grey-5);
+    padding-bottom: rem(24);
+  }
+
+  &__main {
+    margin-bottom: rem(24);
+    border-bottom: rem(1) solid var(--grey-5);
+    padding-bottom: rem(24);
+
+    .color-calendar.glass {
+      overflow: unset;
+      width: 100%;
+      box-shadow: none;
+
+      .calendar__monthyear {
+        padding: 0;
+      }
+
+      .calendar__body {
+        padding: 0;
+      }
+
+      .calendar__weekdays {
+        margin-bottom: rem(8);
+
+        .calendar__weekday {
+          height: fit-content;
+          font-family: 'Inter', sans-serif;
+          font-weight: 500;
+          font-style: normal;
+          font-size: rem(16);
+          line-height: normal;
+          color: var(--grey-4);
+          opacity: 1;
+        }
+      }
+
+      .calendar__day {
+        font-weight: 400;
+        font-style: normal;
+        font-size: rem(18);
+        line-height: 1;
+
+        &:nth-child(6),
+        &:nth-child(7),
+        &:nth-child(13),
+        &:nth-child(14),
+        &:nth-child(20),
+        &:nth-child(21),
+        &:nth-child(27),
+        &:nth-child(28),
+        &:nth-child(34),
+        &:nth-child(35),
+        &:nth-child(41),
+        &:nth-child(42) {
+          border-radius: rem(5);
+          color: var(--grey-3);
+          background-color: var(--blue-50);
+          opacity: 1;
+          pointer-events: none;
+        }
+      }
+
+      .calendar__days,
+      .calendar__weekdays {
+        grid-template-columns: repeat(7, 1fr);
+        gap: rem(25) rem(12);
+      }
+
+      .calendar__days .calendar__day-box {
+        border: rem(2) solid transparent;
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        box-shadow: none;
+        background-color: var(--blue-400);
+      }
+
+      .calendar__days .calendar__day-today {
+        .calendar__day-text {
+          color: var(--blue-400);
+        }
+
+        .calendar__day-box {
+          border-color: var(--blue-200);
+          background-color: transparent;
+          // opacity: 1;
+        }
+      }
+
+      .calendar__day-text {
+        font-weight: 400;
+        font-size: rem(18);
+        line-height: 1;
+      }
+
+      .calendar__header {
+        @include flex-v-center;
+
+        padding: 0;
+        padding-bottom: rem(24);
+        background-color: var(--white);
+        gap: rem(12);
+      }
+
+      .calendar__body {
+        border-radius: 0;
+      }
+
+      .calendar__month,
+      .calendar__year {
+        font-weight: 500;
+        font-size: rem(20);
+        color: var(--black);
+      }
+
+      .calendar__arrow-prev {
+        margin-left: auto;
+      }
+
+      .calendar__arrow {
+        flex-shrink: 0;
+        width: rem(32);
+        height: rem(32);
+      }
+
+      .calendar__arrow-inner {
+        width: rem(32);
+        height: rem(32);
+      }
+
+      .calendar__arrow-inner::before {
+        color: var(--grey-2);
+      }
+
+      .calendar__arrow-inner::after {
+        width: rem(32);
+        height: rem(32);
+        box-shadow: 0 2px 8px 0 rgba(190, 190, 190, 15%);
+        background-color: var(--bg);
+        opacity: 1;
+      }
+    }
+  }
+
+  &__add-time {
+    margin-bottom: rem(24);
+    font-weight: 500;
+    font-size: rem(16);
+    color: var(--grey-4);
+  }
+
+  &__head {
+    font-weight: 500;
+    font-size: rem(20);
+  }
+
+  &__time {
+    @include flex-all-sb;
+
+    margin-bottom: rem(24);
+  }
+
+  &__select {
+    width: rem(100);
+
+    .select {
+      &__value {
+        display: flex;
+        align-items: center;
+        font-size: rem(18);
+        line-height: 1px;
+        gap: rem(10);
+
+        span {
+          line-height: 1;
+          color: var(--black);
+        }
+      }
+
+      &__counter {
+        border-radius: rem(5);
+        padding: rem(8) rem(6);
+        max-height: rem(141);
+      }
+
+      &__top {
+        justify-content: center;
+      }
+    }
+  }
+
+  &__buttons {
+    @include flex-v-center;
+
+    gap: rem(24);
+  }
+
+  &__button {
+    flex: 1;
+  }
+
+  &__types {
+    @include flex-v-center;
+  }
+
+  &__type {
+    flex: 1;
+    font-weight: 500;
+    font-size: rem(14);
+    text-align: center;
+    color: var(--grey-3);
+
+    &--active {
+      color: var(--blue-400);
+
+      .create__icon-svg {
+        fill: var(--blue-400);
+      }
+    }
+  }
+
+  &__icon {
+    position: relative;
+    margin: 0 auto rem(8) auto;
+    width: rem(24);
+    height: rem(24);
+
+    &-svg {
+      width: 100%;
+      height: 100%;
+      fill: var(--grey-4);
+    }
+
+    &-num {
+      position: absolute;
+      left: 50%;
+      top: 55%;
+      font-size: rem(10);
+      line-height: 1;
+      color: var(--grey-4);
+      transform: translate(-50%, -50%);
+    }
+  }
+}

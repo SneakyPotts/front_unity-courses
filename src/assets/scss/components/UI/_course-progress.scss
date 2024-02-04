@@ -1,0 +1,53 @@
+.course-progress {
+  @include flex-v-center;
+
+  align-items: stretch;
+  border: rem(1) solid var(--blue-200);
+  border-radius: rem(5);
+  padding: rem(15);
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  background-color: var(--white);
+  gap: rem(8);
+
+  &__image {
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: rem(5);
+    width: rem(44);
+    height: rem(44);
+
+    img {
+      @include fill-image(cover);
+    }
+  }
+
+  &__progress {
+    font-size: rem(14);
+  }
+
+  &__title {
+    @include truncate(65%);
+
+    font-weight: 500;
+    font-size: rem(16);
+    line-height: 1.2;
+  }
+
+  &__info {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+  }
+}
+
+@include mq('lg') {
+  .course-progress {
+    &__title {
+      max-width: 80%;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+.todo-item {
+  @include mb(rem(10));
+
+  display: flex;
+  border: rem(1) solid var(--blue-200);
+  border-radius: rem(5);
+  background-color: var(--white);
+  transition: 0.15s ease;
+
+  .checkbox {
+    align-items: flex-start;
+    padding: rem(9) rem(14);
+    width: 100%;
+
+    &__value {
+      padding-top: rem(2);
+      line-height: 1.2;
+      color: var(--black);
+    }
+  }
+
+  &--create {
+    .todo-item__checkbox {
+      align-items: center;
+    }
+  }
+
+  @include hover {
+    border-color: var(--blue-400);
+  }
+}
+
+@include mq('lg') {
+  .todo-item {
+    .checkbox {
+      padding: rem(12) rem(15);
+    }
+  }
+}

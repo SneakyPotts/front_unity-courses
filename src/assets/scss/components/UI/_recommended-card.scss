@@ -1,0 +1,52 @@
+.recommended-card {
+  display: flex;
+  flex-direction: column;
+  border-top: rem(1) solid var(--blue-200);
+  border-bottom: rem(1) solid var(--blue-200);
+  padding: rem(20) 0;
+  height: 100%;
+  background-color: var(--white);
+
+  &__image {
+    display: flex;
+    overflow: hidden;
+    margin-bottom: rem(20);
+    border-radius: rem(5);
+    width: 100%;
+    height: rem(216);
+
+    img {
+      @include fill-image(cover);
+
+      transition: 0.3s var(--ease-in-out);
+    }
+
+    @include hover {
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  &__title {
+    flex: 1;
+    margin-bottom: rem(10);
+    font-weight: 700;
+    font-size: rem(18);
+    transition: 0.15s ease;
+
+    @include hover {
+      color: var(--blue-400);
+    }
+  }
+
+  &__teacher {
+    height: fit-content;
+  }
+}

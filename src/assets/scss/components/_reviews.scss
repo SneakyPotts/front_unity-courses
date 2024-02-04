@@ -1,0 +1,300 @@
+.reviews {
+  &__head {
+    @include flex;
+
+    justify-content: space-between;
+    margin-bottom: rem(32);
+    padding: rem(20);
+    border-radius: rem(10);
+
+    &-blackout {
+      mix-blend-mode: luminosity;
+    }
+  }
+
+  &__user {
+    display: grid;
+    grid-template-columns: rem(40) 1fr;
+    align-items: center;
+    gap: rem(8);
+  }
+
+  &__ratings {
+    &--user {
+      grid-column: 2 span;
+    }
+    &--degree {
+      padding: rem(8) 0 rem(8);
+    }
+  }
+
+  &__data {
+    grid-column: 2 span;
+  }
+
+  &__top {
+    display: flex;
+    align-items: last baseline;
+    justify-content: space-between;
+
+    margin-bottom: rem(20);
+
+    &-text {
+      font-family: "Roboto", sans-serif;
+      font-size: rem(16);
+      font-weight: 400;
+      line-height: 130%;
+      color: #828282;
+    }
+  }
+
+  &__block {
+    @include flex;
+    flex-direction: column;
+    gap: rem(12);
+  }
+
+  &__arrow {
+    &-svg {
+      width: rem(9);
+      height: rem(19);
+      fill: #f4f4fd;
+    }
+
+    &--active {
+      fill: #7d98f6;
+    }
+  }
+
+  &__paginations {
+    @include flex-v-center;
+
+    gap: rem(32);
+    margin-top: rem(8);
+  }
+
+  &__box {
+    display: grid;
+    grid-template-columns: rem(230) 1fr;
+    gap: rem(30);
+    align-items: flex-start;
+    padding: rem(16);
+    border-radius: rem(10);
+  }
+
+  &__person {
+    gap: rem(5);
+  }
+
+  &__name {
+    font-family: "Roboto", sans-serif;
+    font-size: rem(16);
+    font-weight: 500;
+    line-height: 120%;
+    color: #1c1c1c;
+  }
+
+  &__data {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: "Roboto", sans-serif;
+    font-size: rem(13);
+    font-weight: 400;
+    line-height: 120%;
+    color: #828282;
+  }
+
+  &__rating,
+  &__ratings {
+    @include flex-v-center;
+    gap: rem(8);
+  }
+
+  &__ratings {
+    &-svg {
+      width: rem(20);
+      height: rem(20);
+      fill: transparent;
+      stroke: #f2c94c;
+    }
+
+    &-text {
+      font-family: "Roboto", sans-serif;
+      font-size: rem(14);
+      font-weight: 400;
+      line-height: 120%;
+      color: #828282;
+    }
+  }
+
+  &__info {
+    max-width: rem(690);
+    margin-bottom: rem(12);
+
+    &-text,
+    &-texts {
+      max-width: rem(690);
+      font-family: "Roboto", sans-serif;
+      font-size: rem(13);
+      font-weight: 400;
+      line-height: 120%;
+      color: #1c1c1c;
+    }
+
+    &--large {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 7;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: rem(710);
+    }
+
+    &-full {
+      display: block;
+      margin-left: auto;
+      margin-right: 0;
+      margin-top: rem(4);
+    }
+  }
+
+  &__comments {
+    @include flex-v-center;
+
+    gap: rem(10);
+    &-btn {
+      text-decoration-line: underline;
+      font-family: "Roboto", sans-serif;
+      font-size: rem(13);
+      font-weight: 400;
+      line-height: 120%;
+      color: #7d98f6;
+    }
+
+    &--open {
+      margin: rem(12) 0 rem(16);
+    }
+  }
+
+  &__item {
+    &-user {
+      @include flex-all-sb;
+      margin-left: rem(20);
+    }
+    &-text {
+      margin: rem(10) 0 0 rem(45);
+    }
+    &-name {
+      @include flex-v-center;
+
+      gap: rem(5);
+    }
+  }
+
+  &__shop {
+    @include flex-all-sb;
+    margin-top: rem(28);
+
+    &-title {
+      font-family: "Roboto", sans-serif;
+      font-size: rem(24);
+      font-weight: 600;
+      line-height: 120%;
+      color: #1c1c1c;
+    }
+
+    &-link {
+      display: flex;
+    }
+  }
+}
+
+@include mq("xl") {
+  .reviews {
+    &__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@include mq("lg") {
+  .reviews {
+    &__head {
+      flex-direction: column-reverse;
+    }
+
+    &__info {
+      &-text {
+        margin-top: rem(30);
+      }
+    }
+
+    &__ratings {
+      margin-bottom: rem(8);
+    }
+
+    &__box {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    &__user {
+      grid-template-columns: rem(40) 1fr auto;
+      grid-template-rows: auto auto;
+      align-items: unset;
+
+      &--photo {
+        grid-row: 2 span;
+      }
+    }
+
+    &__ratings {
+      &--user {
+        grid-column: unset;
+        grid-row: 2 span;
+      }
+    }
+
+    &__data {
+      grid-column: 2;
+
+    }
+
+    &__paginations {
+      margin: 0 auto;
+    }
+
+    &__content {
+
+      &--btn {
+        max-width: rem(192);
+      }
+    }    
+  }
+}
+
+@include mq("sm") {
+  .reviews {
+    &__shop {
+      align-items: baseline;
+      &-title {
+        max-width: rem(200);
+        font-size: rem(20);
+        font-weight: 500;
+        line-height: 120%;
+      }
+    }
+
+    &__content {
+      &--btn {
+        max-width: none;
+      }
+    }  
+    
+    &__head {
+      &-blackout {
+        grid-template-columns: 1fr auto;
+      }
+    }
+  }
+}
