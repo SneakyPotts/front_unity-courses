@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Tabs } from '@UI/Tabs'
 
 const tabs = ['Конспект', 'Самостійна робота', 'Тест']
 
@@ -55,7 +56,7 @@ export default function CourseLesson() {
                     </span>
                     <div className={'teacher-card__image'}>
                       <img
-                        src="/img/static/teacher__photo.jpg"
+                        src="https://loremflickr.com/640/360"
                         alt="фотография профиля"
                       />
                     </div>
@@ -75,7 +76,7 @@ export default function CourseLesson() {
                   <div className={'teacher-card__top'}>
                     <div className={'teacher-card__image'}>
                       <img
-                        src="/img/static/teacher__photo.jpg"
+                        src="https://loremflickr.com/640/360"
                         alt="фотография профиля"
                       />
                     </div>
@@ -107,13 +108,13 @@ function ContentTabs() {
 
   return (
     <>
-      {/*<Tabs*/}
-      {/*  className={'add-here-some-className-Artem'}*/}
-      {/*  list={tabs}*/}
-      {/*  activeTab={activeTab}*/}
-      {/*  setActiveTab={setActiveTab}*/}
-      {/*  isSmall*/}
-      {/*/>*/}
+      <Tabs
+        className={'add-here-some-className-Artem'}
+        list={tabs}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isSmall
+      />
       {activeTab === 1 && <ConspectTab />}
       {activeTab === 2 && <ControlWorkTab />}
       {activeTab === 3 && <IndividualWorkTab />}
