@@ -81,6 +81,9 @@ export default function CoursesCatalog() {
         <section className={'courses-catalog'}>
           <div className={'courses-catalog__wrapper'}>
             <div className={'courses-catalog__body'}>
+              <div className="">
+                1
+              </div>
               <div className={classNames('courses-catalog__filter', { visible: isBodyVisible })}>
                 <div className={'courses-catalog__filter-body'}>
                   <h2 className={'courses-catalog__title'}>Фільтрувати</h2>
@@ -131,16 +134,55 @@ export default function CoursesCatalog() {
                   <div className="courses-catalog__searchs">
                     <div className="courses-catalog__searchs-head">
                       <p className={'courses-catalog__searchs-text'}>Фільтр</p>
-                      <button className={'courses-catalog__searchs-btn'}>
-                      скинути
-                      </button>
+                      <button className={'courses-catalog__searchs-btn'}>скинути</button>
                     </div>
-                    <div className="courses-catalog__searchs-input">
-                      <input
-                        type="text"
-                        className={'input'}
-                        placeholder={'Почніть вводити текст'}
-                      />
+                    <div className={'courses-catalog__area'}>
+                      {/* строка поиска */}
+                      <div className={'courses-catalog__area-input'}>
+                        <input
+                        className={''}
+                          type="text"
+                          placeholder={'Почніть вводити текст'}
+                        />
+                        <svg className="courses-catalog__area-search">
+                          <use href="/img/sprite.svg#search"></use>
+                        </svg>
+                      </div>
+                      {/* область куда попадают выбранные курсы */}
+                      <ul className={'courses-catalog__area-favorites'}>
+                        <li className={'courses-catalog__area-item'}>
+                          Підготовка до ЗНО
+                          <button>
+                            <svg className="courses-catalog__area-svg">
+                              <use href="/img/sprite.svg#close"></use>
+                            </svg>
+                          </button>
+                        </li>
+                        <li className={'courses-catalog__area-item'}>
+                          IT
+                          <button>
+                            <svg className="courses-catalog__area-svg">
+                              <use href="/img/sprite.svg#close"></use>
+                            </svg>
+                          </button>
+                        </li>
+                        <li className={'courses-catalog__area-item'}>
+                          Право
+                          <button>
+                            <svg className="courses-catalog__area-svg">
+                              <use href="/img/sprite.svg#close"></use>
+                            </svg>
+                          </button>
+                        </li>
+                        <li className={'courses-catalog__area-item'}>
+                          Суспільні науки
+                          <button>
+                            <svg className="courses-catalog__area-svg">
+                              <use href="/img/sprite.svg#close"></use>
+                            </svg>
+                          </button>
+                        </li>
+                      </ul>
                     </div>
                     <ul className={'courses-catalog__searchs-list'}>
                       <li className={'courses-catalog__searchs-item'}>
