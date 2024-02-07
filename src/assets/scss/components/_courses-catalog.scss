@@ -32,6 +32,115 @@
       right: rem(16);
       top: rem(12);
     }
+
+    &-list {
+    }
+
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      font-family: "Roboto", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 17px;
+      letter-spacing: 0em;
+      text-align: left;
+    }
+  }
+
+  &__searchs {
+    padding: rem(15);
+    border-radius: rem(10);
+    width: rem(300);
+    background: #fff;
+
+    &-text {
+      font-family: "Roboto", sans-serif;
+      font-size: rem(13);
+      font-weight: 500;
+      line-height: rem(16);
+      letter-spacing: 0em;
+      color: #828282;
+    }
+
+    &-input {
+      margin-bottom: rem(16);
+    }
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      gap: rem(12);
+    }
+
+    &-head {
+      @include flex-all-sb;
+      margin-bottom: rem(12);
+    }
+
+    &-btn {
+      color: #bdbdbd;
+      // text-transform: uppercase;
+      font-family: "Roboto", sans-serif;
+      font-size: rem(16);
+      font-weight: 500;
+      line-height: rem(16);
+      letter-spacing: 0em;
+    }
+
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: rem(4) rem(18) rem(4) rem(12);
+      &:hover {
+        background: #eef4ff;
+        transition: all 0.5s ease;
+      }
+    }
+  }
+
+  &__unit {
+    position: absolute;
+    top: rem(41);
+    left: 0;
+    z-index: var(--ui-index-1);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: rem(4);
+  }
+
+  &__crisper {
+    width: rem(300);
+    padding: rem(16);
+    background: #fff;
+    border-radius: rem(10);
+
+    &-text {
+      color: #828282;
+      margin-bottom: rem(12);
+      font-family: "Roboto", sans-serif;
+      font-size: rem(13);
+      font-weight: 500;
+      line-height: rem(16);
+      letter-spacing: 0em;
+    }
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      gap: rem(16);
+      overflow-y: scroll;
+      height: rem(230);
+    }
+  }
+
+  &__search__item {
+    &-svg {
+      width: rem(8);
+      height: rem(16);
+      fill: #333;
+    }
   }
 
   &__toggle {
@@ -86,9 +195,15 @@
 
   &__menu {
     @include flex-all-sb;
-
     margin-bottom: rem(30);
-    border-bottom: rem(2) solid #e0e0e0;
+    position: relative;
+
+    &-svg {
+      width: rem(16);
+      height: rem(16);
+      fill: #1c1c1c;
+      stroke: #1c1c1c;
+    }
   }
 
   &__svg {
@@ -283,6 +398,30 @@
       font-weight: 500;
       line-height: 120%;
       color: #333;
+    }
+  }
+
+  &__prices {
+    @include flex-all-sb;
+  }
+
+  &__cost {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 120%;
+    color: #eb5757;
+
+    &-discount {
+      font-family: "Roboto", sans-serif;
+      font-size: rem(13);
+      font-weight: 500;
+      line-height: rem(15.6);
+      letter-spacing: 0em;
+      color: #828282;
+      s {
+        text-decoration: line-through;
+      }
     }
   }
 

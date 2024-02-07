@@ -118,7 +118,149 @@ export default function CoursesCatalog() {
 
             <div className={'courses-catalog__catalog'}>
               <div className="courses-catalog__menu">
-                <nav className="courses-catalog__navigation">
+                <Button
+                  className={'some_button courses-catalog__menu-btn'}
+                  variant={'border'}
+                >
+                  <svg className="courses-catalog__menu-svg">
+                    <use href="img/sprite.svg#filter-course"></use>
+                  </svg>
+                  фільтр
+                </Button>
+                <div className="courses-catalog__unit">
+                  <div className="courses-catalog__searchs">
+                    <div className="courses-catalog__searchs-head">
+                      <p className={'courses-catalog__searchs-text'}>Фільтр</p>
+                      <button className={'courses-catalog__searchs-btn'}>
+                      скинути
+                      </button>
+                    </div>
+                    <div className="courses-catalog__searchs-input">
+                      <input
+                        type="text"
+                        className={'input'}
+                        placeholder={'Почніть вводити текст'}
+                      />
+                    </div>
+                    <ul className={'courses-catalog__searchs-list'}>
+                      <li className={'courses-catalog__searchs-item'}>
+                        Рейтинг
+                        <svg className="courses-catalog__search__item-svg">
+                          <use href="/img/sprite.svg#arrow-right"></use>
+                        </svg>
+                      </li>
+                      <li className={'courses-catalog__searchs-item'}>
+                        Рейтинг
+                        <svg className="courses-catalog__search__item-svg">
+                          <use href="/img/sprite.svg#arrow-right"></use>
+                        </svg>
+                      </li>
+                      <li className={'courses-catalog__searchs-item'}>
+                        Рейтинг
+                        <svg className="courses-catalog__search__item-svg">
+                          <use href="/img/sprite.svg#arrow-right"></use>
+                        </svg>
+                      </li>
+                      <li className={'courses-catalog__searchs-item'}>
+                        Рейтинг
+                        <svg className="courses-catalog__search__item-svg">
+                          <use href="/img/sprite.svg#arrow-right"></use>
+                        </svg>
+                      </li>
+                      <li className={'courses-catalog__searchs-item'}>
+                        Рейтинг
+                        <svg className="courses-catalog__search__item-svg">
+                          <use href="/img/sprite.svg#arrow-right"></use>
+                        </svg>
+                      </li>
+                      <li className={'courses-catalog__searchs-item'}>
+                        Рейтинг
+                        <svg className="courses-catalog__search__item-svg">
+                          <use href="/img/sprite.svg#arrow-right"></use>
+                        </svg>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="courses-catalog__crisper">
+                    <p className={'courses-catalog__crisper-text'}>Теми</p>
+                    <ul className="courses-catalog__crisper-list">
+                      <li className={'courses-catalog__crisper-item'}>
+                        <Checkbox
+                          classWrapper={'some-wrapper-class'}
+                          label={'Some label checkbox'}
+                        />
+                      </li>
+                      <li className={'courses-catalog__crisper-item'}>
+                        <Checkbox
+                          classWrapper={'some-wrapper-class'}
+                          label={'Some label checkbox'}
+                        />
+                      </li>
+                      <li className={'courses-catalog__crisper-item'}>
+                        <Checkbox
+                          classWrapper={'some-wrapper-class'}
+                          label={'Some label checkbox'}
+                        />
+                      </li>
+                      <li className={'courses-catalog__crisper-item'}>
+                        <Checkbox
+                          classWrapper={'some-wrapper-class'}
+                          label={'Some label checkbox'}
+                        />
+                      </li>
+                      <li className={'courses-catalog__crisper-item'}>
+                        <Checkbox
+                          classWrapper={'some-wrapper-class'}
+                          label={'Some label checkbox'}
+                        />
+                      </li>
+                      <li className={'courses-catalog__crisper-item'}>
+                        <Checkbox
+                          classWrapper={'some-wrapper-class'}
+                          label={'Some label checkbox'}
+                        />
+                      </li>
+                      <li className={'courses-catalog__crisper-item'}>
+                        <Checkbox
+                          classWrapper={'some-wrapper-class'}
+                          label={'Some label checkbox'}
+                        />
+                      </li>
+
+                      <li className={'courses-catalog__crisper-item'}>
+                        <Checkbox
+                          classWrapper={'some-wrapper-class'}
+                          label={'Some label checkbox'}
+                        />
+                      </li>
+                      <li className={'courses-catalog__crisper-item'}>
+                        <Checkbox
+                          classWrapper={'some-wrapper-class'}
+                          label={'Some label checkbox'}
+                        />
+                      </li>
+                      <li className={'courses-catalog__crisper-item'}>
+                        <Checkbox
+                          classWrapper={'some-wrapper-class'}
+                          label={'Some label checkbox'}
+                        />
+                      </li>
+                      <li className={'courses-catalog__crisper-item'}>
+                        <Checkbox
+                          classWrapper={'some-wrapper-class'}
+                          label={'Some label checkbox'}
+                        />
+                      </li>
+                      <li className={'courses-catalog__crisper-item'}>
+                        <Checkbox
+                          classWrapper={'some-wrapper-class'}
+                          label={'Some label checkbox'}
+                        />
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                {/* <nav className="courses-catalog__navigation">
                   <ul className={'courses-catalog__tabs'}>
                     {tabs.map((tab, index) => (
                       <li key={`${index}${tab.title}`}>
@@ -131,19 +273,9 @@ export default function CoursesCatalog() {
                       </li>
                     ))}
                   </ul>
-                </nav>
+                </nav> */}
                 <div className="courses-catalog__palen">
-                  <div className={'courses-catalog__search'}>
-                    <input
-                      className={'input courses-catalog__search-input'}
-                      placeholder={'Почніть вводити текст'}
-                      type=""
-                    />
-                    <svg className="nav__link-svg courses-catalog__search-svg">
-                      <use href="/img/sprite.svg#search"></use>
-                    </svg>
-                  </div>
-
+                  <SearchString />
                   <button
                     onClick={toggleBodyVisibility}
                     className={'courses-catalog__toggle close'}
@@ -158,13 +290,13 @@ export default function CoursesCatalog() {
               <div className="courses-catalog__cards">
                 <CourseCardPaid />
                 <CourseCardFree />
-                <CourseCardPaid />
+                <CourseCardPaidPromotion />
                 <CourseCardFree />
                 <CourseCardPaid />
-                <CourseCardFree />
+                <CourseCardPaidPromotion />
                 <CourseCardPaid />
                 <CourseCardFree />
-                <CourseCardPaid />
+                <CourseCardPaidPromotion />
               </div>
               <div className={'courses-catalog__paginations'}>
                 <ul className={'courses-catalog__paginations-list'}>
@@ -258,6 +390,100 @@ function CourseCardPaid() {
       </div>
       <div className={'courses-catalog__price'}>
         <p>5 300 грн.</p>
+        <Button
+          className={'some_button courses-catalog__btn'}
+          onClick={() => setShowModal(true)}
+        >
+          <svg className="courses-catalog__svg courses-catalog__svg-rocket ">
+            <use href="/img/sprite.svg#rocket"></use>
+          </svg>
+          Хочу на курс
+        </Button>
+      </div>
+      {showModal && <CourseInviteModal onClose={() => setShowModal(false)} />}
+    </div>
+  )
+}
+
+function CourseCardPaidPromotion() {
+  const [showModal, setShowModal] = useState(false)
+
+  return (
+    <div className={'courses-catalog__element'}>
+      <div className="courses-catalog__box">
+        <span className={'courses-catalog__tag'}>Програми</span>
+        <span className={'courses-catalog__lesson courses-catalog__decor '}>
+          <svg className="courses-catalog__svg">
+            <use href="/img/sprite.svg#material"></use>{' '}
+          </svg>
+          25 занять
+        </span>
+        <span className={'courses-catalog__review courses-catalog__decor '}>
+          <svg className={'courses-catalog__svg '}>
+            <use href="/img/sprite.svg#star"></use>{' '}
+          </svg>
+          4.5
+        </span>
+        <div className={'courses-catalog__photo'}>
+          <a href="#">
+            <img
+              src="https://loremflickr.com/640/360"
+              alt=""
+            />
+          </a>
+        </div>
+      </div>
+      <div className={'courses-catalog__info'}>
+        <a
+          className={'courses-catalog__info-title'}
+          href="#"
+        >
+          Вступ до мови програмування Python
+        </a>
+        <div className={'courses-catalog__teachers'}>
+          <div className={'courses-catalog__teacher'}>
+            <div className={'courses-catalog__teacher-img'}>
+              <img
+                src="https://loremflickr.com/640/360"
+                alt=""
+              />
+            </div>
+            <button>Бондар О. М.</button>
+          </div>
+          <div className={'courses-catalog__teacher'}>
+            <div className={'courses-catalog__teacher-img'}>
+              <img
+                src="https://loremflickr.com/640/360"
+                alt=""
+              />
+            </div>
+            <button>Бондар О. М.</button>
+          </div>
+        </div>
+        <div className={'courses-catalog__conditions'}>
+          <div className={'courses-catalog__data'}>
+            <svg className={'nav__link-svg'}>
+              <use href="/img/sprite.svg#clock"></use>{' '}
+            </svg>
+            <p>
+              старт - <span>10.12.2023</span>
+            </p>
+          </div>
+          <div className={'courses-catalog__persons'}>
+            <svg className={'courses-catalog__svg courses-catalog__svg-stroke'}>
+              <use href="/img/sprite.svg#person"></use>{' '}
+            </svg>
+            <p>
+              вільних: <span>8 з 18</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className={'courses-catalog__prices'}>
+        <div className={'courses-catalog__cost'}>
+          <s className={'courses-catalog__cost-discount'}>6800</s>
+          <p>5 300 грн.</p>
+        </div>
         <Button
           className={'some_button courses-catalog__btn'}
           onClick={() => setShowModal(true)}
@@ -384,3 +610,63 @@ function CourseInviteModal({ onClose }: CourseInviteModalProps) {
     </Modal>
   )
 }
+
+function SearchString() {
+  return (
+    <div className={'courses-catalog__search'}>
+      <input
+        className={'input courses-catalog__search-input'}
+        placeholder={'Почніть вводити текст'}
+        type=""
+      />
+      <svg className="nav__link-svg courses-catalog__search-svg">
+        <use href="/img/sprite.svg#search"></use>
+      </svg>
+    </div>
+  )
+}
+
+// <div className={'devLayoutPage'}>
+//   <div>DevLayoutPage</div>
+//   <Checkbox
+//     classWrapper={'some-wrapper-class'}
+//     label={'Some label checkbox'}
+//   />
+//   <Button className={'some_button'}>1
+//     <svg className="courses-catalog__svg">
+//       <use href="/img/sprite.svg#notifications"></use>
+//     </svg>
+//     Some text
+//   </Button>
+//   <Button
+//     className={'some_button'}
+//     disabled
+//   >
+//     <svg className="courses-catalog__svg">
+//       <use href="/img/sprite.svg#notifications"></use>
+//     </svg>
+//     Some text
+//   </Button>
+//   <Button
+//     className={'some_button'}
+//     variant={'gray'}
+//   >
+//     <svg className="courses-catalog__svg">
+//       <use href="/img/sprite.svg#notifications"></use>
+//     </svg>
+//     Some text
+//   </Button>
+//   <Button
+//     className={'some_button'}
+//     variant={'border'}
+//   >
+//     <svg className="courses-catalog__svg">
+//       <use href="/img/sprite.svg#notifications"></use>
+//     </svg>
+//     Some text
+//   </Button>
+//   <CourseCard />
+//   <CourseCard />
+//   <CourseCard />
+//   <CourseCard />
+// </div>
