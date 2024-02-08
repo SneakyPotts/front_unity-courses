@@ -1,20 +1,16 @@
 'use client'
 
 import classNames from 'classnames'
-import { Fragment, useState } from 'react'
+import { Fragment, useContext, useState } from 'react'
 import { Checkbox } from '@UI/Checkbox'
 import { Button } from '@UI/Button'
 import { Modal } from '@UI/Modal'
+import { appContext } from '@components/Context/context'
 
 const filtersList = [
   {
     title: 'Рейтинг',
-    filters: [
-      '1',
-      '2',
-      '2',
-      '4'
-    ]
+    filters: ['1', '2', '2', '4'],
   },
   {
     title: 'Теми',
@@ -77,54 +73,55 @@ const tabs = [
 ]
 
 export default function CoursesCatalog() {
-  const [isBodyVisible, setIsBodyVisible] = useState(false)
+  const { asideIsOpen } = useContext(appContext)
+
+  const [isBodyVisible, setIsBodyVisible] = useState<boolean>(false)
   const [activeTab, setActiveTab] = useState(1)
 
-  const toggleBodyVisibility = () => {
-    setIsBodyVisible(!isBodyVisible)
-  }
+  const toggleBodyVisibility = () => setIsBodyVisible((prevState) => !prevState)
 
   return (
     <div className="content">
       <div className="content__container container">
         <section className={'courses-catalog'}>
           <div className={'courses-catalog__wrapper'}>
-            <div className={'courses-catalog__body'}>
-              
-              <div className={classNames('courses-catalog__filter', { visible: isBodyVisible })}>
-                <div className={'courses-catalog__filter-body'}>
-                  <h2 className={'courses-catalog__title'}>Фільтрувати</h2>
-                  <h2 className={'courses-catalog__mobile close'}>Фільтр</h2>
-                  <div className={'courses-catalog__inner'}>
-                    {filtersList.map((filterBlock, index) => (
-                      <Fragment key={`${index}${filterBlock.title}`}>
-                        <p className={'courses-catalog__subtitle'}>{filterBlock.title}</p>
-                        <ul className={classNames('courses-catalog__list', filterBlock.extraClass)}>
-                          {filterBlock.filters.map((filterItem, jIndex) => (
-                            <li key={`${jIndex}${filterItem}`}>
-                              <Checkbox
-                                classWrapper={'some-wrapper-class courses-catalog__item'}
-                                label={filterItem}
-                              />
-                            </li>
-                          ))}
-                        </ul>
-                      </Fragment>
-                    ))}
-                  </div>
-                  <div className="courses-catalog__buttons close">
-                    <Button className={'some_button'}>застосувати</Button>
+            {!asideIsOpen && (
+              <div className={'courses-catalog__body'}>
+                <div className={classNames('courses-catalog__filter', { visible: isBodyVisible })}>
+                  <div className={'courses-catalog__filter-body'}>
+                    <h2 className={'courses-catalog__title'}>Фільтрувати</h2>
+                    <h2 className={'courses-catalog__mobile close'}>Фільтр</h2>
+                    <div className={'courses-catalog__inner'}>
+                      {filtersList.map((filterBlock, index) => (
+                        <Fragment key={`${index}${filterBlock.title}`}>
+                          <p className={'courses-catalog__subtitle'}>{filterBlock.title}</p>
+                          <ul className={classNames('courses-catalog__list', filterBlock.extraClass)}>
+                            {filterBlock.filters.map((filterItem, jIndex) => (
+                              <li key={`${jIndex}${filterItem}`}>
+                                <Checkbox
+                                  classWrapper={'some-wrapper-class courses-catalog__item'}
+                                  label={filterItem}
+                                />
+                              </li>
+                            ))}
+                          </ul>
+                        </Fragment>
+                      ))}
+                    </div>
+                    <div className="courses-catalog__buttons close">
+                      <Button className={'some_button'}>застосувати</Button>
 
-                    <Button
-                      className={'some_button courses-catalog__buttons-btn'}
-                      variant={'border'}
-                    >
-                      скинути фільтри
-                    </Button>
+                      <Button
+                        className={'some_button courses-catalog__buttons-btn'}
+                        variant={'border'}
+                      >
+                        скинути фільтри
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
 
             <div className={'courses-catalog__catalog'}>
               <div className="courses-catalog__menu">

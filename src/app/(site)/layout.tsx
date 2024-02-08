@@ -1,14 +1,19 @@
-// 'use client' //if use useState
+'use client'
 
-import type { PropsWithChildren } from 'react'
+import { type PropsWithChildren, useContext } from 'react'
+import { Aside } from '@components/Aside'
+import { appContext } from '@components/Context/context'
+import classNames from 'classnames'
 
 export default function BaseLayout({ children }: PropsWithChildren) {
+  const { asideIsOpen } = useContext(appContext)
+
   return (
     <>
       <div className={'layout'}>
-        <aside className={'aside'}></aside>
+        <Aside />
 
-        <main className={'main inner-layout'}>
+        <main className={classNames('main inner-layout', { 'main--active': asideIsOpen })}>
           <header className={'header'}>
             <div className={'header__container container'}>
               <h1 className={'header__title'}>Каталог курсів</h1>

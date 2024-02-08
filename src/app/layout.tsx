@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import '@assets/scss/main.scss'
 import type { ReactNode } from 'react'
 import classNames from 'classnames'
+import { AppProvider } from '@components/Context/context'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,9 +20,8 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body className={classNames(inter.className, 'body-mob-fixed')}>
-      
-        {children}</body>
-      
+        <AppProvider>{children}</AppProvider>
+      </body>
     </html>
   )
 }
