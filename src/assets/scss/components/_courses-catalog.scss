@@ -2,11 +2,12 @@
   padding: rem(40) 0 rem(75);
   &__wrapper {
     display: grid;
-    grid-template-columns: rem(307) 1fr;
+    grid-template-columns: auto 1fr ;
     gap: 30px;
   }
 
   &__filter {
+    margin-left: rem(60);
     padding: rem(20);
     height: max-content;
     border-radius: rem(5);

@@ -725,9 +725,12 @@
 // }
 
 .header {
+  padding: rem(32) 0 rem(40);
+
   &__container {
     display: grid;
     grid-template-columns: 1fr auto;
+    align-items: center;
   }
 
   &__title {
@@ -746,8 +749,6 @@
 
   &__item {
     // position: relative;
-
-
     &-btn {
       svg {
         width: rem(20);
@@ -757,4 +758,95 @@
       }
     }
   }
+
+  &__title {
+    font-family: "Roboto", sans-serif;
+    font-size: rem(24);
+    font-weight: 600;
+    line-height: rem(29);
+    letter-spacing: 0em;
+  }
+
+  &__account {
+    border-radius: 50%;
+    border: rem(1) solid var(--blue-200);
+    position: relative;
+  }
+
+  &__submenu {
+    position: absolute;
+    top: rem(70);
+    right: rem(30);
+
+    width: rem(236);
+    padding: rem(24);
+
+    background: #fff;
+    z-index: var(--ui-index-1);
+    border-radius: rem(10);
+    box-shadow: rem(0) rem(8) rem(24) rem(0) #00000021;
+
+    &-name {
+      font-family: "Roboto", sans-serif;
+      font-size: rem(14);
+      font-weight: 500;
+      line-height: rem(17);
+      margin-bottom: rem(16);
+    }
+  }
+
+  &__buttons {
+    margin-top: rem(16);
+
+    &-btn {
+      font-family: "Roboto", sans-serif;
+      font-size: rem(14);
+      font-weight: 500;
+      line-height: rem(16);
+      color: var(--grey-5);
+      padding: rem(11) rem(16);
+
+      &:first-child {
+        border-radius: rem(5) 0 0 rem(5);
+        border: rem(1) solid var(--grey-4);
+      }
+
+      &:last-child {
+        border-radius: 0 rem(5) rem(5) 0;
+        border: rem(1) solid var(--grey-4);
+      }
+    }
+  }
+
+  &__block {
+    border-top: rem(1) solid var(--grey-5);
+    padding: rem(16) 0;
+    border-bottom: rem(1) solid var(--grey-5);
+    display: flex;
+    flex-direction: column;
+    gap: rem(15);
+
+    &-link {
+      @include flex-v-center;
+
+      color: var(--black);
+      font-family: "Roboto", sans-serif;
+      font-size: rem(14);
+      font-weight: 400;
+      line-height: rem(17);
+      gap: rem(11);
+    }
+
+    &-svg {
+      width: rem(20);
+      height: rem(20);
+    }
+  }
+}
+
+// active class for button lang
+.header--active {
+  background: var(--orange-400);
+  color: var(--white);
+  border: none;
 }

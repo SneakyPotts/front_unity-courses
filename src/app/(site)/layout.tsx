@@ -4,7 +4,7 @@ import { type PropsWithChildren, useContext } from 'react'
 import { Aside } from '@components/Aside'
 import { appContext } from '@components/Context/context'
 import classNames from 'classnames'
-
+import Image from 'next/image'
 export default function BaseLayout({ children }: PropsWithChildren) {
   const { asideIsOpen } = useContext(appContext)
 
@@ -41,17 +41,116 @@ export default function BaseLayout({ children }: PropsWithChildren) {
                       </svg>
                     </button>
                   </li>
-                  <li className={'header__item'}>профиль пользователя</li>
+                  <li className={'header__item'}>
+                    <button className={'header__account'}>
+                      <Image
+                        src=""
+                        width={34}
+                        height={34}
+                        objectFit="cover"
+                      />
+                    </button>
+                    <div className={'header__submenu'}>
+                      <p className={'header__submenu-name'}>Лисенко Олександра</p>
+                      <ul className={'header__block'}>
+                        <li className={'header__block-item'}>
+                          <a
+                            href="#"
+                            className={'header__block-link'}
+                          >
+                            <svg className="header__block-svg">
+                              <use href="/img/sprite.svg#account"></use>
+                            </svg>
+                            Особистий профіль
+                          </a>
+                        </li>
+                        <li className={'header__block-item'}>
+                          <a
+                            href="#"
+                            className={'header__block-link'}
+                          >
+                            <svg className="header__block-svg">
+                              <use href="/img/sprite.svg#logo"></use>
+                            </svg>
+                            Про Unity
+                          </a>
+                        </li>
+                        <li className={'header__block-item'}>
+                          <a
+                            href="#"
+                            className={'header__block-link'}
+                          >
+                            <svg className="header__block-svg">
+                              <use href="/img/sprite.svg#logout"></use>
+                            </svg>
+                            Вийти
+                          </a>
+                        </li>
+                      </ul>
+                      <div className="header__buttons">
+                        <button className={'header__buttons-btn header--active'}>Укр</button>
+                        <button className={'header__buttons-btn'}>Рус</button>
+                      </div>
+                    </div>
+                  </li>
                 </ul>
               </nav>
             </div>
           </header>
 
           {children}
+          <footer className="footer">
+            <div className="footer__container container">
+              <ul className={'footer__list'}>
+                <li>
+                  <a
+                    href="#"
+                    className={'footer__list-link'}
+                  >
+                    <svg className={'footer__link-svg'}>
+                      <use href="/img/sprite.svg#logo"></use>
+                    </svg>
+                    Про Unity
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className={'footer__list-link'}
+                  >
+                    <svg className={'footer__link-svg'}>
+                      <use href="/img/sprite.svg#ask"></use>
+                    </svg>
+                    Питання-відповіді
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className={'footer__list-link'}
+                  >
+                    <svg className={'footer__link-svg'}>
+                      <use href="/img/sprite.svg#messanger"></use>
+                    </svg>
+                    Написати в месенджер
+                  </a>
+                </li>
+                <li className={'footer__list--last'}>
+                  <a
+                    href="#"
+                    className={'footer__list-link'}
+                  >
+                    <svg className={'footer__link-svg'}>
+                      <use href="/img/sprite.svg#notification-courses"></use>
+                    </svg>
+                    +38 068 255 25 22
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </footer>
         </main>
       </div>
-
-      <footer>2</footer>
     </>
   )
 }
