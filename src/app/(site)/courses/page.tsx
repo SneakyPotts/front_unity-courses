@@ -8,6 +8,15 @@ import { Modal } from '@UI/Modal'
 
 const filtersList = [
   {
+    title: 'Рейтинг',
+    filters: [
+      '1',
+      '2',
+      '2',
+      '4'
+    ]
+  },
+  {
     title: 'Теми',
     filters: [
       'ІТ',
@@ -81,9 +90,7 @@ export default function CoursesCatalog() {
         <section className={'courses-catalog'}>
           <div className={'courses-catalog__wrapper'}>
             <div className={'courses-catalog__body'}>
-              <div className="">
-                1
-              </div>
+              
               <div className={classNames('courses-catalog__filter', { visible: isBodyVisible })}>
                 <div className={'courses-catalog__filter-body'}>
                   <h2 className={'courses-catalog__title'}>Фільтрувати</h2>
@@ -140,7 +147,7 @@ export default function CoursesCatalog() {
                       {/* строка поиска */}
                       <div className={'courses-catalog__area-input'}>
                         <input
-                        className={''}
+                          className={''}
                           type="text"
                           placeholder={'Почніть вводити текст'}
                         />

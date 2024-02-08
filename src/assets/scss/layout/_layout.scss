@@ -1,0 +1,41 @@
+.layout {
+  display: flex;
+  overflow: hidden;
+  min-height: 100vh;
+
+  .main {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: rem(30);
+    min-width: 0;
+    transition: padding-left 0.2s ease;
+
+    &--active {
+      padding-left: rem(235);
+    }
+  }
+}
+
+
+@include mq('lg') {
+  .base-layout {
+    display: block;
+
+    .main {
+      padding-left: 0;
+      height: calc(var(--app-height) - rem(73));
+      justify-content: unset;
+
+      &--active {
+        // 73 - aside
+        padding-left: 0;
+      }
+    }
+
+    .footer {
+      display: none;
+    }
+  }
+}

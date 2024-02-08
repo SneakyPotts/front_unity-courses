@@ -18,7 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk">
-      <body className={classNames(inter.className, 'body-mob-fixed')}>{children}</body>
+      <body className={classNames(inter.className, 'body-mob-fixed')}>
+      
+        {children}</body>
+      
     </html>
   )
 }

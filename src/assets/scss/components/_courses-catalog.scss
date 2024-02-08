@@ -1,4 +1,5 @@
 .courses-catalog {
+  padding: rem(40) 0 rem(75);
   &__wrapper {
     display: grid;
     grid-template-columns: rem(307) 1fr;
@@ -460,6 +461,8 @@
 
   &__prices {
     @include flex-all-sb;
+    border-top: rem(1) solid #c8d9fd;
+    margin-top: rem(12);
   }
 
   &__cost {

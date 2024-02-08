@@ -78,6 +78,11 @@ body {
   }
 }
 
+
+.body-mob-fixed {
+  
+}
+
 @include mq("lg") {
   .body-mob-fixed {
     overflow: hidden;
