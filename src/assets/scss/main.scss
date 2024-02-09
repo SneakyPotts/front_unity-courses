@@ -1,13 +1,13 @@
 @charset "UTF-8";
 
 // 1. Configuration and helpers
-@import 'abstracts/functions', 'abstracts/mixins', 'abstracts/variables';
+@import 'abstracts/functions', 'abstracts/mixins', 'abstracts/variables', 'util/keyframes';
 
 // 2. Vendors
 @import 'vendors/index';
 
 // 3. Base stuff
-@import 'base/base',  'base/helpers'; //'base/fonts',
+@import 'base/base', 'base/helpers'; //'base/fonts',
 
 // 4. Layout-related sections
 @import 'layout/auth-layout';
@@ -110,4 +110,3 @@
 @import 'components/reviews';
 @import 'components/courses-lesson.scss';
 @import 'components/course-detail.scss';
-

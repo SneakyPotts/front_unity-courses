@@ -1,13 +1,14 @@
 .courses-catalog {
-  padding: rem(40) 0 rem(75);
+  padding: 0 0 rem(75);
+
   &__wrapper {
     display: grid;
-    grid-template-columns: auto 1fr ;
+    grid-template-columns: auto 1fr;
     gap: 30px;
   }
 
   &__filter {
-    margin-left: rem(60);
+    //margin-left: rem(60);
     padding: rem(20);
     height: max-content;
     border-radius: rem(5);
@@ -41,11 +42,11 @@
     &-item {
       display: flex;
       justify-content: space-between;
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: 14px;
       font-weight: 500;
       line-height: 17px;
-      letter-spacing: 0em;
+      letter-spacing: 0;
       text-align: left;
     }
   }
@@ -84,11 +85,11 @@
       border: rem(1) solid #e0e0e0;
       border-radius: rem(2);
       color: #828282;
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(17);
       font-weight: 400;
       line-height: rem(17);
-      letter-spacing: 0em;
+      letter-spacing: 0;
       gap: rem(8);
     }
 
@@ -109,7 +110,7 @@
   }
 
   &__searchs {
-    box-shadow: 2px 2px 8px 0px #0000001a;
+    box-shadow: 2px 2px 8px 0 #0000001a;
 
     padding: rem(15);
     border-radius: rem(10);
@@ -117,11 +118,11 @@
     background: #fff;
 
     &-text {
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(13);
       font-weight: 500;
       line-height: rem(16);
-      letter-spacing: 0em;
+      letter-spacing: 0;
       color: #828282;
     }
 
@@ -139,11 +140,11 @@
     &-btn {
       color: #bdbdbd;
       // text-transform: uppercase;
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(16);
       font-weight: 500;
       line-height: rem(16);
-      letter-spacing: 0em;
+      letter-spacing: 0;
     }
 
     &-item {
@@ -166,10 +167,19 @@
     display: grid;
     grid-template-columns: 1fr auto;
     gap: rem(4);
+
+    &.--animate {
+      &-show {
+        animation: fadeIn 0.2s ease;
+      }
+      &-hide {
+        animation: fadeOut 0.2s ease;
+      }
+    }
   }
 
   &__crisper {
-    box-shadow: 2px 2px 8px 0px #0000001a;
+    box-shadow: 2px 2px 8px 0 #0000001a;
     width: rem(300);
     padding: rem(16);
     background: #fff;
@@ -178,11 +188,11 @@
     &-text {
       color: #828282;
       margin-bottom: rem(12);
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(13);
       font-weight: 500;
       line-height: rem(16);
-      letter-spacing: 0em;
+      letter-spacing: 0;
     }
 
     &-list {
@@ -223,7 +233,7 @@
   &__mobile {
     margin-bottom: rem(20);
     text-align: center;
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: rem(24);
     font-weight: 600;
     line-height: 120%;
@@ -232,7 +242,7 @@
 
   &__subtitle {
     margin-bottom: rem(16);
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: 500;
     line-height: 120%;
@@ -296,7 +306,7 @@
   }
 
   &__tab {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 120%;
@@ -324,7 +334,7 @@
     top: rem(12);
     left: rem(16);
     padding: rem(7) rem(5);
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: rem(14);
     font-weight: 500;
     border-radius: rem(2);
@@ -340,7 +350,7 @@
     border-radius: rem(2);
     background: rgba(242, 242, 242, 0.2);
     backdrop-filter: blur(0.5px);
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: rem(13);
     font-weight: 400;
     line-height: 120%;
@@ -365,7 +375,7 @@
       width: 100%;
       height: 100%;
       display: block;
-      border-radius: rem(5) rem(5) 0px 0px;
+      border-radius: rem(5) rem(5) 0 0;
     }
   }
 
@@ -374,13 +384,13 @@
     flex-direction: column;
 
     padding: rem(12) rem(16);
-    border-radius: 0px 0px rem(5) rem(5);
+    border-radius: 0 0 rem(5) rem(5);
     background: #f4f4fd;
 
     &-title {
       max-width: rem(275);
       text-overflow: ellipsis;
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(18);
       font-weight: 700;
       line-height: 120%;
@@ -416,7 +426,7 @@
     }
 
     button {
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(14);
       font-weight: 400;
       line-height: 120%;
@@ -436,7 +446,7 @@
 
     p,
     span {
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(13);
       font-weight: 400;
       line-height: 120%;
@@ -452,7 +462,7 @@
     border-top: rem(1) solid #c8d9fd;
 
     p {
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(20);
       font-weight: 500;
       line-height: 120%;
@@ -467,18 +477,18 @@
   }
 
   &__cost {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.25rem;
     font-weight: 500;
     line-height: 120%;
     color: #eb5757;
 
     &-discount {
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(13);
       font-weight: 500;
       line-height: rem(15.6);
-      letter-spacing: 0em;
+      letter-spacing: 0;
       color: #828282;
       s {
         text-decoration: line-through;
@@ -495,7 +505,7 @@
     }
 
     &-item {
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(14);
       font-weight: 500;
       line-height: 120%;
@@ -510,7 +520,7 @@
   }
 }
 
-@include mq("xxl") {
+@include mq('xxl') {
   .courses-catalog {
     &__cards {
       grid-template-columns: repeat(2, 1fr);
@@ -518,7 +528,7 @@
   }
 }
 
-@include mq("xl") {
+@include mq('xl') {
   .courses-catalog {
     &__menu {
       flex-direction: column;
@@ -540,7 +550,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .courses-catalog {
     &__catalog {
       min-width: 0;
@@ -581,7 +591,6 @@
       border-radius: 0;
       z-index: 12;
       height: 100%;
-      bottom: 0;
 
       &-body {
         @include hide-scroll;
@@ -642,7 +651,7 @@
   }
 }
 
-@include mq("sm") {
+@include mq('sm') {
   .courses-catalog {
     &__navigation {
       overflow: auto hidden;

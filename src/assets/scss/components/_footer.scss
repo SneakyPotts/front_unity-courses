@@ -1,5 +1,5 @@
 .footer {
-  padding: rem(30) rem(20);
+  padding-block: rem(20);
   background: var(--orange-100);
 
   &__list {
@@ -13,7 +13,7 @@
 
       gap: rem(12);
 
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(14);
       font-weight: 500;
       line-height: rem(17);

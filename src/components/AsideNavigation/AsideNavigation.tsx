@@ -2,16 +2,18 @@
 
 import classNames from 'classnames'
 import React, { useEffect, useRef, useState } from 'react'
+import { useToggle } from 'usehooks-ts'
 
-import useToggle from '@hooks/useToggle'
+import Link from 'next/link'
+
+import { Button } from '@UI/Button'
 
 import { extraClass, navListChildren } from './AsideNavigation.data'
 import type { AsideNavigationProps, NavAccordionProps } from './AsideNavigation.props'
-import Link from 'next/link'
-import { Button } from '../UI/Button'
+
 // import { useRouter } from 'next/router'
 
-export function AsideNavigation({ ...props }: AsideNavigationProps) {
+export function AsideNavigation({}: AsideNavigationProps) {
   // const router = useRouter()
 
   const [navList, setNavList] = useState<NavAccordionProps[]>(navListChildren)
@@ -41,8 +43,19 @@ export function AsideNavigation({ ...props }: AsideNavigationProps) {
           </li>
         ))}
       </ul>
+      <Button
+        variant="border"
+        className="aside__button-link"
+        fulFill
+        href="https://front-unity.vercel.app/"
+        target="_blank"
+      >
+        <svg className="archive__data-svg">
+          <use href="/img/sprite.svg#home"></use>
+        </svg>
+        <span>Школа</span>
+      </Button>
     </nav>
-    
   )
 }
 
@@ -105,4 +118,3 @@ function NavAccordion({ ...props }: NavAccordionProps) {
     </div>
   )
 }
-

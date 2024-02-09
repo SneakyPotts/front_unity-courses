@@ -1,13 +1,13 @@
 'use client'
 
-import React, { createContext, useState, type PropsWithChildren } from 'react'
+import React, { type PropsWithChildren, createContext, useState } from 'react'
 
 import type { IContext } from '@components/Context/types'
 
 const appContext = createContext<IContext>({})
 
 function AppProvider({ children }: PropsWithChildren) {
-  const [asideIsOpen, setAsideIsOpen] = useState(false)
+  const [asideIsOpen, setAsideIsOpen] = useState(true)
 
   const handleSetAsideIsOpen = () => setAsideIsOpen((p) => !p)
 

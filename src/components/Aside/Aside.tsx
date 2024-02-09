@@ -3,20 +3,19 @@
 import classNames from 'classnames'
 import React, { useContext } from 'react'
 
-import { AsideNavigation } from '@components/AsideNavigation'
-
-// import AsideLogo from '@assets/img/static/aside-logo.svg'
-
-import type { AsideProps } from './Aside.props'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+
+import { AsideNavigation } from '@components/AsideNavigation'
 import { appContext } from '@components/Context/context'
 
-export function Aside({ variant = 'main' }: AsideProps) {
+import type { AsideProps } from './Aside.props'
+
+export function Aside({ variant = 'main', className }: AsideProps) {
   const { asideIsOpen, handleSetAsideIsOpen } = useContext(appContext)
 
   return (
-    <aside className={classNames('aside', { 'aside--main': variant === 'main', 'aside--static': variant === 'static' }, { 'aside--hide': !asideIsOpen })}>
+    <aside className={classNames('aside', className, { 'aside--main': variant === 'main', 'aside--static': variant === 'static' }, { 'aside--hide': !asideIsOpen })}>
       <div className="aside__wrapper">
         {variant === 'main' && (
           <button
@@ -35,10 +34,10 @@ export function Aside({ variant = 'main' }: AsideProps) {
             href="/"
             className="aside__logo"
           >
-            {/*<AsideLogo />*/}
             <Image
               src="/img/aside-logo.svg"
-              fill
+              width={92}
+              height={22}
               alt="alt"
             />
           </Link>

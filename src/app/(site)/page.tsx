@@ -2,7 +2,7 @@ import { Button } from '@UI/Button'
 
 export default function Home() {
   return (
-    <main>
+    <>
       <br />
       <h1>HELLO, WORLD!</h1>
       <br />
@@ -15,6 +15,6 @@ export default function Home() {
       <Button href="courses/my">COURSES my</Button>
       <br />
       <Button href="courses/archive">COURSES archive</Button>
-    </main>
+    </>
   )
 }

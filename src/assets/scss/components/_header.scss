@@ -703,7 +703,7 @@
 // }
 
 .header {
-  padding: rem(32) 0 rem(40);
+  padding: rem(30) 0 rem(40);
 
   &__container {
     display: grid;
@@ -723,11 +723,11 @@
   }
 
   &__title {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: rem(24);
     font-weight: 600;
     line-height: rem(29);
-    letter-spacing: 0em;
+    letter-spacing: 0;
   }
 
   &__time {
@@ -763,22 +763,27 @@
   &__hours,
   &__minutes {
     &::after {
-      content: ":";
+      content: ':';
     }
   }
 
   &__title {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: rem(24);
     font-weight: 600;
     line-height: rem(29);
-    letter-spacing: 0em;
+    letter-spacing: 0;
   }
 
   &__account {
+    position: relative;
+    overflow: hidden;
+
+    width: rem(34);
+    height: rem(34);
+
     border-radius: 50%;
     border: rem(1) solid var(--blue-200);
-    position: relative;
   }
 
   &__submenu {
@@ -795,7 +800,7 @@
     box-shadow: rem(0) rem(8) rem(24) rem(0) #00000021;
 
     &-name {
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(14);
       font-weight: 500;
       line-height: rem(17);
@@ -807,7 +812,7 @@
     margin-top: rem(16);
 
     &-btn {
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(14);
       font-weight: 500;
       line-height: rem(16);
@@ -817,11 +822,20 @@
       &:first-child {
         border-radius: rem(5) 0 0 rem(5);
         border: rem(1) solid var(--grey-4);
+        border-right: none;
       }
 
       &:last-child {
         border-radius: 0 rem(5) rem(5) 0;
         border: rem(1) solid var(--grey-4);
+        border-left: none;
+      }
+
+      // active class for button lang
+      &.header__buttuns-btn--active {
+        background: var(--orange-400);
+        color: var(--white);
+        border-color: var(--orange-400);
       }
     }
   }
@@ -838,7 +852,7 @@
       @include flex-v-center;
 
       color: var(--black);
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(14);
       font-weight: 400;
       line-height: rem(17);
@@ -852,7 +866,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .header {
     &__submenu {
       width: 45%;
@@ -886,7 +900,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .header {
     &__time {
       display: none;
@@ -899,11 +913,4 @@
       }
     }
   }
-}
-
-// active class for button lang
-.header__buttuns-btn--active {
-  background: var(--orange-400);
-  color: var(--white);
-  border: none;
 }

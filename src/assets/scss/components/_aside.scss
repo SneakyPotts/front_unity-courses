@@ -63,11 +63,16 @@
 
   &__logo {
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
 
-    position: relative;
+    transition: width 0.2s;
 
-    width: rem(92);
-    height: rem(22);
+    img {
+      transition:
+        height 0.2s,
+        width 0.2s;
+    }
   }
 
   &--static {
@@ -125,8 +130,9 @@
         margin-left: rem(5);
         width: rem(18);
 
-        svg {
+        img {
           width: rem(38);
+          height: rem(10);
         }
       }
 
@@ -137,6 +143,17 @@
       &__btn {
         &-svg {
           transform: scale(-1, 1);
+        }
+      }
+
+      &__button-link {
+        @include flex-all-center;
+        gap: 0;
+        padding: 0;
+
+        span {
+          width: 0;
+          overflow: hidden;
         }
       }
     }
@@ -167,6 +184,12 @@
   &__top-path,
   &__top-path--hide {
     transition: 0.3s ease;
+  }
+
+  &__button-link {
+    margin-block: rem(18);
+
+    font-weight: 500;
   }
 }
 

@@ -2,10 +2,13 @@
 
 import classNames from 'classnames'
 import { Fragment, useContext, useState } from 'react'
-import { Checkbox } from '@UI/Checkbox'
-import { Button } from '@UI/Button'
-import { Modal } from '@UI/Modal'
+
+import { CatalogFilterPopup } from '@components/CatalogFilterPopup'
 import { appContext } from '@components/Context/context'
+
+import { Button } from '@UI/Button'
+import { Checkbox } from '@UI/Checkbox'
+import { Modal } from '@UI/Modal'
 
 const filtersList = [
   {
@@ -82,7 +85,7 @@ export default function CoursesCatalog() {
 
   return (
     <div className="content">
-      <div className="content__container container">
+      <div className="content__container">
         <section className={'courses-catalog'}>
           <div className={'courses-catalog__wrapper'}>
             {!asideIsOpen && (
@@ -124,225 +127,12 @@ export default function CoursesCatalog() {
             )}
 
             <div className={'courses-catalog__catalog'}>
-              <div className="courses-catalog__menu">
-                <Button
-                  className={'some_button courses-catalog__menu-btn'}
-                  variant={'border'}
-                >
-                  <svg className="courses-catalog__menu-svg">
-                    <use href="img/sprite.svg#filter-course"></use>
-                  </svg>
-                  фільтр
-                </Button>
-                <div className="courses-catalog__unit">
-                  <div className="courses-catalog__searchs">
-                    <div className="courses-catalog__searchs-head">
-                      <p className={'courses-catalog__searchs-text'}>Фільтр</p>
-                      <button className={'courses-catalog__searchs-btn'}>скинути</button>
-                    </div>
-                    <div className={'courses-catalog__area'}>
-                      {/* строка поиска */}
-                      <div className={'courses-catalog__area-input'}>
-                        <input
-                          className={''}
-                          type="text"
-                          placeholder={'Почніть вводити текст'}
-                        />
-                        <svg className="courses-catalog__area-search">
-                          <use href="/img/sprite.svg#search"></use>
-                        </svg>
-                      </div>
-                      {/* область куда попадают выбранные курсы */}
-                      <ul className={'courses-catalog__area-favorites'}>
-                        <li className={'courses-catalog__area-item'}>
-                          Підготовка до ЗНО
-                          <button>
-                            <svg className="courses-catalog__area-svg">
-                              <use href="/img/sprite.svg#close"></use>
-                            </svg>
-                          </button>
-                        </li>
-                        <li className={'courses-catalog__area-item'}>
-                          IT
-                          <button>
-                            <svg className="courses-catalog__area-svg">
-                              <use href="/img/sprite.svg#close"></use>
-                            </svg>
-                          </button>
-                        </li>
-                        <li className={'courses-catalog__area-item'}>
-                          Право
-                          <button>
-                            <svg className="courses-catalog__area-svg">
-                              <use href="/img/sprite.svg#close"></use>
-                            </svg>
-                          </button>
-                        </li>
-                        <li className={'courses-catalog__area-item'}>
-                          Суспільні науки
-                          <button>
-                            <svg className="courses-catalog__area-svg">
-                              <use href="/img/sprite.svg#close"></use>
-                            </svg>
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
-                    <ul className={'courses-catalog__searchs-list'}>
-                      <li className={'courses-catalog__searchs-item'}>
-                        Рейтинг
-                        <svg className="courses-catalog__search__item-svg">
-                          <use href="/img/sprite.svg#arrow-right"></use>
-                        </svg>
-                      </li>
-                      <li className={'courses-catalog__searchs-item'}>
-                        Рейтинг
-                        <svg className="courses-catalog__search__item-svg">
-                          <use href="/img/sprite.svg#arrow-right"></use>
-                        </svg>
-                      </li>
-                      <li className={'courses-catalog__searchs-item'}>
-                        Рейтинг
-                        <svg className="courses-catalog__search__item-svg">
-                          <use href="/img/sprite.svg#arrow-right"></use>
-                        </svg>
-                      </li>
-                      <li className={'courses-catalog__searchs-item'}>
-                        Рейтинг
-                        <svg className="courses-catalog__search__item-svg">
-                          <use href="/img/sprite.svg#arrow-right"></use>
-                        </svg>
-                      </li>
-                      <li className={'courses-catalog__searchs-item'}>
-                        Рейтинг
-                        <svg className="courses-catalog__search__item-svg">
-                          <use href="/img/sprite.svg#arrow-right"></use>
-                        </svg>
-                      </li>
-                      <li className={'courses-catalog__searchs-item'}>
-                        Рейтинг
-                        <svg className="courses-catalog__search__item-svg">
-                          <use href="/img/sprite.svg#arrow-right"></use>
-                        </svg>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="courses-catalog__crisper">
-                    <p className={'courses-catalog__crisper-text'}>Теми</p>
-                    <ul className="courses-catalog__crisper-list">
-                      <li className={'courses-catalog__crisper-item'}>
-                        <Checkbox
-                          classWrapper={'some-wrapper-class'}
-                          label={'Some label checkbox'}
-                        />
-                      </li>
-                      <li className={'courses-catalog__crisper-item'}>
-                        <Checkbox
-                          classWrapper={'some-wrapper-class'}
-                          label={'Some label checkbox'}
-                        />
-                      </li>
-                      <li className={'courses-catalog__crisper-item'}>
-                        <Checkbox
-                          classWrapper={'some-wrapper-class'}
-                          label={'Some label checkbox'}
-                        />
-                      </li>
-                      <li className={'courses-catalog__crisper-item'}>
-                        <Checkbox
-                          classWrapper={'some-wrapper-class'}
-                          label={'Some label checkbox'}
-                        />
-                      </li>
-                      <li className={'courses-catalog__crisper-item'}>
-                        <Checkbox
-                          classWrapper={'some-wrapper-class'}
-                          label={'Some label checkbox'}
-                        />
-                      </li>
-                      <li className={'courses-catalog__crisper-item'}>
-                        <Checkbox
-                          classWrapper={'some-wrapper-class'}
-                          label={'Some label checkbox'}
-                        />
-                      </li>
-                      <li className={'courses-catalog__crisper-item'}>
-                        <Checkbox
-                          classWrapper={'some-wrapper-class'}
-                          label={'Some label checkbox'}
-                        />
-                      </li>
-
-                      <li className={'courses-catalog__crisper-item'}>
-                        <Checkbox
-                          classWrapper={'some-wrapper-class'}
-                          label={'Some label checkbox'}
-                        />
-                      </li>
-                      <li className={'courses-catalog__crisper-item'}>
-                        <Checkbox
-                          classWrapper={'some-wrapper-class'}
-                          label={'Some label checkbox'}
-                        />
-                      </li>
-                      <li className={'courses-catalog__crisper-item'}>
-                        <Checkbox
-                          classWrapper={'some-wrapper-class'}
-                          label={'Some label checkbox'}
-                        />
-                      </li>
-                      <li className={'courses-catalog__crisper-item'}>
-                        <Checkbox
-                          classWrapper={'some-wrapper-class'}
-                          label={'Some label checkbox'}
-                        />
-                      </li>
-                      <li className={'courses-catalog__crisper-item'}>
-                        <Checkbox
-                          classWrapper={'some-wrapper-class'}
-                          label={'Some label checkbox'}
-                        />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                {/* <nav className="courses-catalog__navigation">
-                  <ul className={'courses-catalog__tabs'}>
-                    {tabs.map((tab, index) => (
-                      <li key={`${index}${tab.title}`}>
-                        <button
-                          className={classNames('courses-catalog__tab', { 'courses-catalog__tab--active': activeTab === index + 1 })}
-                          onClick={() => setActiveTab(index + 1)}
-                        >
-                          {tab.title}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </nav> */}
-                <div className="courses-catalog__palen">
-                  <SearchString />
-                  <button
-                    onClick={toggleBodyVisibility}
-                    className={'courses-catalog__toggle close'}
-                  >
-                    <svg className="courses-catalog__toggle-svg">
-                      <use href="/img/sprite.svg#filter"></use>
-                    </svg>
-                  </button>
-                </div>
-              </div>
+              <CatalogFilterPopup handleVisibility={toggleBodyVisibility} />
 
               <div className="courses-catalog__cards">
-                <CourseCardPaid />
-                <CourseCardFree />
-                <CourseCardPaidPromotion />
-                <CourseCardFree />
-                <CourseCardPaid />
-                <CourseCardPaidPromotion />
-                <CourseCardPaid />
-                <CourseCardFree />
-                <CourseCardPaidPromotion />
+                {Array.from({ length: 9 }, (_, i) =>
+                  i % 3 === 0 ? <CourseCardPaidPromotion key={i} /> : i % 2 === 0 ? <CourseCardFree key={i} /> : <CourseCardPaid key={i} />,
+                )}
               </div>
               <div className={'courses-catalog__paginations'}>
                 <ul className={'courses-catalog__paginations-list'}>
@@ -654,21 +444,6 @@ function CourseInviteModal({ onClose }: CourseInviteModalProps) {
         <Button className={'some_button modal__main-button'}>підтвердити</Button>
       </div>
     </Modal>
-  )
-}
-
-function SearchString() {
-  return (
-    <div className={'courses-catalog__search'}>
-      <input
-        className={'input courses-catalog__search-input'}
-        placeholder={'Почніть вводити текст'}
-        type=""
-      />
-      <svg className="nav__link-svg courses-catalog__search-svg">
-        <use href="/img/sprite.svg#search"></use>
-      </svg>
-    </div>
   )
 }
 
