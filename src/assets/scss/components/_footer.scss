@@ -13,14 +13,22 @@
 
       gap: rem(12);
 
-      font-family: 'Roboto', sans-serif;
+      font-family: "Roboto", sans-serif;
       font-size: rem(14);
       font-weight: 500;
       line-height: rem(17);
 
+      &--svg {
+        svg {
+          fill: transparent;
+          stroke: var(--primary-orange);
+        }
+      }
+
       svg {
         width: rem(22);
         height: rem(22);
+        fill: var(--primary-orange);
       }
     }
 

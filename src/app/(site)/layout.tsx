@@ -1,10 +1,11 @@
 'use client'
 
-import { type PropsWithChildren, useContext } from 'react'
+import { type PropsWithChildren, useContext, useState, useEffect } from 'react'
 import { Aside } from '@components/Aside'
 import { appContext } from '@components/Context/context'
 import classNames from 'classnames'
 import Image from 'next/image'
+import moment from 'moment'
 export default function BaseLayout({ children }: PropsWithChildren) {
   const { asideIsOpen } = useContext(appContext)
 
@@ -19,7 +20,9 @@ export default function BaseLayout({ children }: PropsWithChildren) {
               <h1 className={'header__title'}>Каталог курсів</h1>
               <nav className={'header__nav'}>
                 <ul className={'header__list'}>
-                  <li className={'header__item'}>время</li>
+                  <li className={'header__item'}>
+                    <Clock />
+                  </li>
                   <li className={'header__item'}>
                     <button className={'header__item-btn'}>
                       <svg className="">
@@ -107,7 +110,7 @@ export default function BaseLayout({ children }: PropsWithChildren) {
                     href="#"
                     className={'footer__list-link'}
                   >
-                    <svg className={'footer__link-svg'}>
+                    <svg className={'footer__link-svg footer__link--svg'}>
                       <use href="/img/sprite.svg#logo"></use>
                     </svg>
                     Про Unity
@@ -141,7 +144,7 @@ export default function BaseLayout({ children }: PropsWithChildren) {
                     className={'footer__list-link'}
                   >
                     <svg className={'footer__link-svg'}>
-                      <use href="/img/sprite.svg#notification-courses"></use>
+                      <use href="/img/sprite.svg#tel-courses"></use>
                     </svg>
                     +38 068 255 25 22
                   </a>
@@ -152,5 +155,32 @@ export default function BaseLayout({ children }: PropsWithChildren) {
         </main>
       </div>
     </>
+  )
+}
+
+function Clock() {
+  const [time, setTime] = useState({
+    hours: moment().format('HH'),
+    minutes: moment().format('mm'),
+    seconds: moment().format('ss'),
+  })
+
+  useEffect(() => {
+    const timerID = setInterval(() => {
+      setTime({
+        hours: moment().format('HH'),
+        minutes: moment().format('mm'),
+        seconds: moment().format('ss'),
+      })
+    }, 1000)
+    return () => clearInterval(timerID)
+  }, [])
+
+  return (
+    <div className="header__time">
+      <span className="header__hours">{time.hours}</span>
+      <span className="header__minutes">{time.minutes}</span>
+      <span className="header__seconds">{time.seconds}</span>
+    </div>
   )
 }

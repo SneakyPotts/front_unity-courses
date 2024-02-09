@@ -59,26 +59,40 @@ export const navListChildren = [
     list: [],
   },
   {
-    id: 1,
-    name: 'Розклад',
-    imgId: 'calendar',
+    id: 2,
+    name: 'Каталог курсів',
+    imgId: 'cours',
     link: '/schedule',
     list: [],
   },
   {
-    id: 4,
-    imgId: 'chat',
-    name: 'Чати',
+    id: 3,
+    imgId: 'list',
+    name: 'Мої курси',
     link: '/any',
     list: [],
   },
   {
+    id: 4,
+    imgId: 'calendar',
+    name: 'Розклад',
+    link: '/statistics',
+    list: [],
+  },
+  {
     id: 5,
+    imgId: 'chat',
+    name: 'Чати',
+    link: '/statistics',
+    list: [],
+  },
+  {
+    id: 6,
     imgId: 'statistics',
     name: 'Статистика',
     link: '/statistics',
     list: [],
-  },
+  }
 ]
 
 export const navListTeacher = [
