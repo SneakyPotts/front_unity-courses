@@ -711,6 +711,17 @@
     align-items: center;
   }
 
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: rem(12);
+
+    &-close,
+    &-img {
+      display: none;
+    }
+  }
+
   &__title {
     font-family: "Roboto", sans-serif;
     font-size: rem(24);
@@ -850,11 +861,48 @@
       height: 100%;
       z-index: var(--ui-index-5);
     }
+
+    &__buttons {
+      display: flex;
+    }
+
+    &__submenu {
+      width: 90%;
+
+      &-name {
+        font-size: rem(20);
+      }
+
+      &-link {
+        font-size: rem(18);
+      }
+    }
+
+    &__buttons {
+      &-btn {
+        border-color: var(--orange-400);
+      }
+    }
+  }
+}
+
+@include mq("md") {
+  .header {
+    &__time {
+      display: none;
+    }
+
+    &__buttons {
+      display: flex;
+      &-btn {
+        width: 100%;
+      }
+    }
   }
 }
 
 // active class for button lang
-.header--active {
+.header__buttuns-btn--active {
   background: var(--orange-400);
   color: var(--white);
   border: none;

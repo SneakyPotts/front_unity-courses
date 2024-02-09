@@ -14,13 +14,13 @@ export default function BaseLayout({ children }: PropsWithChildren) {
       <div className={'layout'}>
         <Aside />
 
-        <main className={classNames('main inner-layout', { 'main--active': asideIsOpen })}>
+        <div className={classNames('main inner-layout', { 'main--active': asideIsOpen })}>
           <header className={'header'}>
             <div className={'header__container container'}>
               <h1 className={'header__title'}>Каталог курсів</h1>
               <nav className={'header__nav'}>
                 <ul className={'header__list'}>
-                  <li className={'header__item'}>
+                  <li className={'header__item header__item--clock'}>
                     <Clock />
                   </li>
                   <li className={'header__item'}>
@@ -54,7 +54,24 @@ export default function BaseLayout({ children }: PropsWithChildren) {
                       />
                     </button>
                     <div className={'header__submenu'}>
-                      <p className={'header__submenu-name'}>Лисенко Олександра</p>
+                      <div className="header__head">
+                        <button className={'header__head-close'}>
+                          <svg className="header__head-svg">
+                            <use href="/img/sprite.svg#arrow-right"></use>
+                          </svg>
+                        </button>
+                        <div className="header__head-img">
+                          <Image
+                            src=""
+                            width={50}
+                            height={50}
+                            objectFit="cover"
+                          />
+                        </div>
+                        <div className={'header__submenu-name'}>
+                          <p>Лисенко Олександра</p>
+                        </div>
+                      </div>
                       <ul className={'header__block'}>
                         <li className={'header__block-item'}>
                           <a
@@ -91,7 +108,7 @@ export default function BaseLayout({ children }: PropsWithChildren) {
                         </li>
                       </ul>
                       <div className="header__buttons">
-                        <button className={'header__buttons-btn header--active'}>Укр</button>
+                        <button className={'header__buttons-btn header__buttuns-btn--active'}>Укр</button>
                         <button className={'header__buttons-btn'}>Рус</button>
                       </div>
                     </div>
@@ -152,7 +169,7 @@ export default function BaseLayout({ children }: PropsWithChildren) {
               </ul>
             </div>
           </footer>
-        </main>
+        </div>
       </div>
     </>
   )
