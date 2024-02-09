@@ -87,14 +87,14 @@ function ProfilePopup({ onClose }: ProfilePopupProps) {
               <use href="/img/sprite.svg#arrow-right"></use>
             </svg>
           </button>
-          <div className="header__head-img">
-            <Image
-              src="https://loremflickr.com/640/360"
-              width={50}
-              height={50}
-              alt="alt"
-            />
-          </div>
+          <Image
+            src="https://loremflickr.com/640/360"
+            width={50}
+            height={50}
+            alt="alt"
+            className="header__head-img"
+            objectFit="cover"
+          />
           <div className="header__submenu-name">
             <p>Лисенко Олександра</p>
           </div>
@@ -131,7 +131,9 @@ function ProfilePopup({ onClose }: ProfilePopupProps) {
             </button>
           </li>
         </ul>
-
+        <div className={'header__school'}>
+          
+        </div>
         <div className="header__buttons">
           <button
             className={classNames('header__buttons-btn', { 'header__buttuns-btn--active': lang === 'uk' })}

@@ -716,6 +716,20 @@
     align-items: center;
     gap: rem(12);
 
+    &-close {
+      svg {
+        transform: rotate(183deg);
+        width: rem(10);
+        height: rem(20);
+      }
+    }
+
+    &-img {
+      border-radius: 50%;
+      border: rem(1) solid var(--blue-200);
+
+    }
+
     &-close,
     &-img {
       display: none;
@@ -723,7 +737,7 @@
   }
 
   &__title {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: rem(24);
     font-weight: 600;
     line-height: rem(29);
@@ -763,12 +777,12 @@
   &__hours,
   &__minutes {
     &::after {
-      content: ':';
+      content: ":";
     }
   }
 
   &__title {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: rem(24);
     font-weight: 600;
     line-height: rem(29);
@@ -800,7 +814,7 @@
     box-shadow: rem(0) rem(8) rem(24) rem(0) #00000021;
 
     &-name {
-      font-family: 'Roboto', sans-serif;
+      font-family: "Roboto", sans-serif;
       font-size: rem(14);
       font-weight: 500;
       line-height: rem(17);
@@ -812,7 +826,7 @@
     margin-top: rem(16);
 
     &-btn {
-      font-family: 'Roboto', sans-serif;
+      font-family: "Roboto", sans-serif;
       font-size: rem(14);
       font-weight: 500;
       line-height: rem(16);
@@ -852,7 +866,7 @@
       @include flex-v-center;
 
       color: var(--black);
-      font-family: 'Roboto', sans-serif;
+      font-family: "Roboto", sans-serif;
       font-size: rem(14);
       font-weight: 400;
       line-height: rem(17);
@@ -866,7 +880,7 @@
   }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .header {
     &__submenu {
       width: 45%;
@@ -878,6 +892,14 @@
 
     &__buttons {
       display: flex;
+    }
+
+    &__head {
+      margin-bottom: rem(28);
+      &-close,
+      &-img {
+        display: block;
+      }
     }
 
     &__submenu {
@@ -900,7 +922,7 @@
   }
 }
 
-@include mq('md') {
+@include mq("md") {
   .header {
     &__time {
       display: none;

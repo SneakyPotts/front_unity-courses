@@ -251,15 +251,6 @@ export function CatalogFilterPopup({ handleVisibility }: CatalogFilterPopupProps
                 </nav> */}
       <div className="courses-catalog__palen">
         <SearchField />
-
-        <button
-          onClick={handleVisibility}
-          className={'courses-catalog__toggle close'}
-        >
-          <svg className="courses-catalog__toggle-svg">
-            <use href="/img/sprite.svg#filter"></use>
-          </svg>
-        </button>
       </div>
     </div>
   )
