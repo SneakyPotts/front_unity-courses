@@ -51,7 +51,7 @@ export function CatalogFilterPopup({ handleVisibility }: CatalogFilterPopupProps
         <svg className="courses-catalog__menu-svg">
           <use href="img/sprite.svg#filter-course"></use>
         </svg>
-        фільтр
+        <span> фільтр</span>
       </Button>
 
       {isOpen && (

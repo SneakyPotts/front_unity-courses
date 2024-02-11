@@ -19,7 +19,7 @@ export function Header({ className }: HeaderProps) {
   return (
     <header className={classNames('header', className)}>
       <div className="header__container container">
-        <h1 className="header__title">Каталог курсів</h1>
+        <h1 className="header__title">Каталог <span>курсів</span></h1>
         <nav className="header__nav">
           <ul className="header__list">
             <li className="header__item header__item--clock">
@@ -27,21 +27,21 @@ export function Header({ className }: HeaderProps) {
             </li>
             <li className="header__item">
               <button className="header__item-btn">
-                <svg className="">
+                <svg className="header__item-svg header__item--basket">
                   <use href="/img/sprite.svg#basket-course"></use>
                 </svg>
               </button>
             </li>
             <li className="header__item">
               <button className="header__item-btn">
-                <svg className="">
+                <svg className="header__item-svg">
                   <use href="/img/sprite.svg#like-courses"></use>
                 </svg>
               </button>
             </li>
             <li className="header__item">
               <button className="header__item-btn">
-                <svg className="">
+                <svg className="header__item-svg">
                   <use href="/img/sprite.svg#notification-courses"></use>
                 </svg>
               </button>
@@ -132,7 +132,12 @@ function ProfilePopup({ onClose }: ProfilePopupProps) {
           </li>
         </ul>
         <div className={'header__school'}>
-          
+          <button className={'header__school-menu'}>
+            <svg className="header__school-svg">
+              <use href="/img/sprite.svg#home"></use>
+            </svg>
+            школа
+          </button>
         </div>
         <div className="header__buttons">
           <button

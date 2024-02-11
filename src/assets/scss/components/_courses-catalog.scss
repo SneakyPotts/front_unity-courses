@@ -184,6 +184,7 @@
     padding: rem(16);
     background: #fff;
     border-radius: rem(10);
+    
 
     &-text {
       color: #828282;
@@ -200,7 +201,7 @@
       flex-direction: column;
       gap: rem(16);
       overflow-y: scroll;
-      height: rem(230);
+      height: rem(358);
     }
   }
 
@@ -222,13 +223,25 @@
   }
 
   &__mobile {
+    display: none;
     margin-bottom: rem(20);
-    text-align: center;
-    font-family: "Roboto", sans-serif;
-    font-size: rem(24);
-    font-weight: 600;
-    line-height: 120%;
-    color: #1c1c1c;
+    padding-bottom: rem(8);
+    border-bottom: rem(1) solid var(--grey-5);
+    &-title {
+      text-align: center;
+      font-family: "Roboto", sans-serif;
+      font-size: rem(24);
+      font-weight: 600;
+      line-height: 120%;
+      color: var(--black);
+    }
+    &-btn {
+      svg {
+        width: rem(15);
+        height: rem(15);
+        fill: var(--grey-3);
+      }
+    }
   }
 
   &__subtitle {
@@ -554,8 +567,7 @@
     &__menu {
       flex-direction: row-reverse;
     }
-    
-    
+
     &__btn {
       &.btn--accent {
         width: fit-content;
@@ -571,9 +583,6 @@
       @include hide-scroll;
 
       overflow-y: scroll;
-    }
-
-    &__body {
     }
 
     &__filter {
@@ -627,7 +636,7 @@
     }
 
     &__mobile {
-      display: block;
+      @include flex-all-sb;
     }
 
     &__toggle {
@@ -649,27 +658,39 @@
 
 @include mq("md") {
   .courses-catalog {
-  }
-}
-
-@include mq("sm") {
-  .courses-catalog {
+    &__cards {
+      grid-template-columns: 1fr;
+    }
     &__navigation {
       overflow: auto hidden;
     }
 
-    &__palen {
-      width: 100%;
+    &__menu {
+      gap: rem(15);
+      &-btn {
+        span {
+          display: none;
+        }
+      }
     }
+
     &__search {
       width: 100%;
       &-input {
         max-width: none;
-        width: 100%;
       }
     }
   }
 }
+
+// @include mq("sm") {
+//   .courses-catalog {
+
+//     &__palen {
+//       width: 100%;
+//     }
+
+// }
 
 // класс для открытия
 .visible {

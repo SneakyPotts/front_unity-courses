@@ -38,3 +38,9 @@
     }
   }
 }
+
+@include mq('lg') {
+  .footer {
+    display: none;
+  }
+}

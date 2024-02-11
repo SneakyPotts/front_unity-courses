@@ -10,13 +10,18 @@ import { Button } from '@UI/Button'
 import { Checkbox } from '@UI/Checkbox'
 import { Modal } from '@UI/Modal'
 
+// библиотека для рейтинга
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
+
 const filtersList = [
   {
-    title: 'Рейтинг',
-    filters: ['1', '2', '2', '4'],
+    title: '',
+    filters: [StarRating, StarRating, StarRating, StarRating, StarRating],
   },
   {
     title: 'Теми',
+    button: '1',
     filters: [
       'ІТ',
       'Англійська мова',
@@ -57,23 +62,6 @@ const filtersList = [
   },
 ]
 
-const tabs = [
-  {
-    title: 'Всі',
-  },
-  {
-    title: 'Фінанси',
-  },
-  {
-    title: 'Англійська',
-  },
-  {
-    title: 'Програми',
-  },
-  {
-    title: 'Підготовка',
-  },
-]
 
 export default function CoursesCatalog() {
   const { asideIsOpen } = useContext(appContext)
@@ -93,7 +81,14 @@ export default function CoursesCatalog() {
                 <div className={classNames('courses-catalog__filter', { visible: isBodyVisible })}>
                   <div className={'courses-catalog__filter-body'}>
                     <h2 className={'courses-catalog__title'}>Фільтрувати</h2>
-                    <h2 className={'courses-catalog__mobile close'}>Фільтр</h2>
+                    <div className={'courses-catalog__mobile'}>
+                      <h2 className={'courses-catalog__mobile-title'}>Фільтр</h2>
+                      <button className={'courses-catalog__mobile-btn'}>
+                        <svg>
+                          <use href="/img/sprite.svg#close"></use>
+                        </svg>
+                      </button>
+                    </div>
                     <div className={'courses-catalog__inner'}>
                       {filtersList.map((filterBlock, index) => (
                         <Fragment key={`${index}${filterBlock.title}`}>
@@ -444,6 +439,17 @@ function CourseInviteModal({ onClose }: CourseInviteModalProps) {
         <Button className={'some_button modal__main-button'}>підтвердити</Button>
       </div>
     </Modal>
+  )
+}
+
+function StarRating() {
+  const [rating, setRating] = useState(0)
+
+  return (
+    <Rating
+      value={rating}
+      onChange={setRating}
+    />
   )
 }
 

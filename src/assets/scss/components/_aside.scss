@@ -193,7 +193,7 @@
   }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .aside {
     position: unset;
     width: 100%;
@@ -275,6 +275,11 @@
         padding: 0;
         width: rem(45);
         height: rem(45);
+      }
+    }
+    &__button {
+      &-link {
+        display: none;
       }
     }
   }
