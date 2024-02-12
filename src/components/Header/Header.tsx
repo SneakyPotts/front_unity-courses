@@ -13,13 +13,18 @@ import { HeaderClock } from '@UI/HeaderClock'
 
 import type { HeaderProps, ProfilePopupProps } from './Header.props'
 
+// для кнопки в увидомлении
+import { Button } from '@UI/Button'
+
 export function Header({ className }: HeaderProps) {
   const [isShowProfilePopup, setIsShowProfilePopup] = useState(false)
 
   return (
     <header className={classNames('header', className)}>
       <div className="header__container container">
-        <h1 className="header__title">Каталог <span>курсів</span></h1>
+        <h1 className="header__title">
+          Каталог <span>курсів</span>
+        </h1>
         <nav className="header__nav">
           <ul className="header__list">
             <li className="header__item header__item--clock">
@@ -62,6 +67,62 @@ export function Header({ className }: HeaderProps) {
               {isShowProfilePopup && <ProfilePopup onClose={() => setIsShowProfilePopup(false)} />}
             </li>
           </ul>
+          <div className="notification">
+            <div className="notification__head">
+              <p className={'notification__head-text'}>Кошик</p>
+              <button className={'notification__head-close'}>
+                <svg>
+                  <use href="/img/sprite.svg#close"></use>
+                </svg>
+              </button>
+            </div>
+            <div className={'notification__content'}>
+              <ul className={'notification__list'}>
+                <li className={'notification__list-img'}>
+                  <Image
+                    src="https://loremflickr.com/60/60"
+                    style={{ objectFit: 'cover' }}
+                    alt="alt"
+                    width={60}
+                    height={60}
+                  />
+                </li>
+                <li className={'notification__list-name'}>Medium рівень програмування на JavaScript Medium рівень програмування на JavaScript</li>
+                <li className={'notification__list-price'}>
+                  <div className="notification__list-sale">5 300 грн.</div>
+                </li>
+              </ul>
+              <ul className={'notification__list'}>
+                <li className={'notification__list-img'}>
+                  <Image
+                    src="https://loremflickr.com/60/60"
+                    style={{ objectFit: 'cover' }}
+                    alt="alt"
+                    width={60}
+                    height={60}
+                  />
+                </li>
+                <li className={'notification__list-name'}>Medium рівень програмування на JavaScript Medium рівень програмування на JavaScript</li>
+                <li className={'notification__list-price'}>
+                  <div className="notification__list-sale">
+                    <s>6 800 грн.</s>5 300 грн.
+                  </div>
+                </li>
+              </ul>
+              
+            </div>
+            <div className={'notification__result'}>
+              <div className={'notification__result-text'}>
+                <p>Всього:</p>
+                10 600 грн.
+              </div>
+              <Button
+                className={'some_button'}
+              >
+                оформити замовленя
+              </Button>
+            </div>
+          </div>
         </nav>
       </div>
     </header>
