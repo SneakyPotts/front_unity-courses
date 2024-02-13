@@ -62,7 +62,6 @@ const filtersList = [
   },
 ]
 
-
 export default function CoursesCatalog() {
   const { asideIsOpen } = useContext(appContext)
 
@@ -441,6 +440,8 @@ function CourseInviteModal({ onClose }: CourseInviteModalProps) {
     </Modal>
   )
 }
+
+
 
 function StarRating() {
   const [rating, setRating] = useState(0)

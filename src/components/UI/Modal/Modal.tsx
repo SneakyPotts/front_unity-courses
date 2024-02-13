@@ -21,7 +21,7 @@ const typesMatch = {
   teacherCard: 'teacher-card-student',
   studentCard: 'student-card',
   courseInvite: 'course-invite',
-  empty: '',
+  empty: 'basket-model',
 }
 
 export function Modal({ variant, title, tip, onClose, onBack, children }: PropsWithChildren<ModalProps>) {
