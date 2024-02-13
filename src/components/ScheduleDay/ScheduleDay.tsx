@@ -26,7 +26,7 @@ export function ScheduleDay({ title = 'Розклад уроків', schedule: {
             />
           ))
         ) : (
-          <li>"{title}" is coming soon...</li>
+          <li>&quot;{title}&quot; is coming soon...</li>
         )}
       </ul>
     </div>

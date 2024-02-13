@@ -1,14 +1,13 @@
 import classNames from 'classnames'
-import moment from 'moment'
+import { differenceInMinutes, format, isPast } from 'date-fns'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+
+import Link from 'next/link'
 
 import { ProfileInfoModal } from '@components/ProfileInfoModal'
 import { TypesList } from '@components/TypesList'
 
 import { Button } from '@UI/Button'
-
-import { useVisitLessonByStudentMutation } from '@store/student/student.api'
 
 import type { TeacherProps } from './LessonItem.props'
 
@@ -52,19 +51,17 @@ export function LessonItem({
   isTeacher,
   isStudent,
 }: any) {
-  const [visitLesson] = useVisitLessonByStudentMutation()
-
   const [teacherInfoShow, setTeacherInfoShow] = useState(false)
 
   const lessonMark = marks?.length && marks.map((item: any) => item.mark).join(', ')
   const teacherName = teacher && `${teacher.last_name} ${teacher.first_name} ${teacher.patronymic}`
 
-  const isFinished = moment(end_time).diff(moment()) < 0
-  const isWaiting = moment.duration(moment(start_time).diff(moment())).asMinutes() > 5
+  const isFinished = isPast(new Date(end_time))
+  const isWaiting = differenceInMinutes(new Date(start_time), new Date()) > 5
 
   const handleLessonLink = () => {
     if (isStudent) {
-      visitLesson(id)
+      // visitLesson(id)
     }
     window.open(online_lesson_link, '_blank')?.focus()
   }
@@ -91,7 +88,7 @@ export function LessonItem({
           <span className="lesson__counter"></span>
           {isStudent || isTeacher ? (
             <Link
-              to={`/${isStudent ? 'student' : 'teacher'}/subject/${subject_id}`}
+              href={`/${isStudent ? 'student' : 'teacher'}/subject/${subject_id}`}
               className="lesson__name"
             >
               {subject ?? subject_title}
@@ -123,11 +120,11 @@ export function LessonItem({
         {!isTeacher && <TypesList className={'lesson__right'} />}
       </div>
       <div className="lesson__text">
-        {isTeacher || isStudent ? <Link to={`/${isStudent ? 'student' : 'teacher'}/lesson?subjectId=${subject_id}&lessonId=${id}`}>{title}</Link> : <span>{title}</span>}
+        {isTeacher || isStudent ? <Link href={`/${isStudent ? 'student' : 'teacher'}/lesson?subjectId=${subject_id}&lessonId=${id}`}>{title}</Link> : <span>{title}</span>}
       </div>
       <div className="lesson__functional">
         <div className="lesson__times">
-          <time className="lesson__time">{moment(start_time).format('HH-mm')}</time>-<time className="lesson__time">{moment(end_time).format('HH-mm')}</time>
+          <time className="lesson__time">{format(new Date(start_time), 'HH-mm')}</time>-<time className="lesson__time">{format(new Date(start_time), 'HH-mm')}</time>
         </div>
 
         {isFinished && (isTeacher || isStudent) && (
