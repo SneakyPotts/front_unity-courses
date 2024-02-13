@@ -1,26 +1,21 @@
-import classNames from 'classnames'
 import React, { useContext, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
 import { useOnClickOutside } from 'usehooks-ts'
 
 import { appContext } from '@components/Context/context'
-import { Portal } from '@components/Portal'
 import { SearchField } from '@components/SearchField'
 
 import { Button } from '@UI/Button'
 import { Checkbox } from '@UI/Checkbox'
 
-import { useAnimate } from '@hooks/useAnimate'
-
 import type { CatalogFilterPopupProps } from './CatalogFilterPopup.props'
 
-export function CatalogFilterPopup({ handleVisibility }: CatalogFilterPopupProps) {
+export function CatalogFilterPopup({}: CatalogFilterPopupProps) {
   const { asideIsOpen } = useContext(appContext)
 
   const container = useRef<HTMLDivElement | null>(null)
 
   const [isOpen, setIsOpen] = useState(false)
-  const [isAnimate, handleClose] = useAnimate(() => setIsOpen(false))
 
   const [referenceElement, setReferenceElement] = useState<any>(null)
   const [popperElement, setPopperElement] = useState<any>(null)
@@ -30,42 +25,37 @@ export function CatalogFilterPopup({ handleVisibility }: CatalogFilterPopupProps
     modifiers: [{ name: 'offset', options: { offset: [0, -1] } }],
   })
 
-  useOnClickOutside(container, handleClose)
-
-  console.log('isAnimate', isAnimate)
+  useOnClickOutside(container, () => setIsOpen(false))
 
   return (
     <div
-      ref={(ref) => {
-        container.current = ref
-        setReferenceElement(ref)
-      }}
-      className={classNames('courses-catalog__menu', { '--animate-showQ': !isAnimate, '--animate-hideQ': isAnimate })}
+      ref={setReferenceElement}
+      className="courses-catalog__menu"
     >
-      <Button
-        className={'some_button courses-catalog__menu-btn'}
-        variant={'border'}
-        disabled={!asideIsOpen}
-        onClick={() => setIsOpen((p) => !p)}
-      >
-        <svg className="courses-catalog__menu-svg">
-          <use href="img/sprite.svg#filter-course"></use>
-        </svg>
-        <span> фільтр</span>
-      </Button>
+      <div ref={container}>
+        <Button
+          className={'some_button courses-catalog__menu-btn'}
+          variant="border"
+          disabled={!asideIsOpen}
+          onClick={() => setIsOpen((p) => !p)}
+        >
+          <svg className="courses-catalog__menu-svg">
+            <use href="img/sprite.svg#filter-course"></use>
+          </svg>
+          <span> фільтр</span>
+        </Button>
 
-      {isOpen && (
-        <Portal>
+        {isOpen && (
           <div
             ref={setPopperElement}
-            className={classNames('courses-catalog__unit', { '--animate-show': !isAnimate, '--animate-hide': isAnimate })}
+            className="courses-catalog__unit"
             {...attributes.popper}
             style={styles.popper}
           >
             <div className="courses-catalog__searchs">
               <div className="courses-catalog__searchs-head">
-                <p className={'courses-catalog__searchs-text'}>Фільтр</p>
-                <button className={'courses-catalog__searchs-btn'}>скинути</button>
+                <p className="courses-catalog__searchs-text">Фільтр</p>
+                <button className="courses-catalog__searchs-btn">скинути</button>
               </div>
               <div className={'courses-catalog__area'}>
                 {/* строка поиска */}
@@ -233,8 +223,8 @@ export function CatalogFilterPopup({ handleVisibility }: CatalogFilterPopupProps
               </ul>
             </div>
           </div>
-        </Portal>
-      )}
+        )}
+      </div>
       {/* <nav className="courses-catalog__navigation">
                   <ul className={'courses-catalog__tabs'}>
                     {tabs.map((tab, index) => (

@@ -736,7 +736,7 @@
   }
 
   &__title {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: rem(24);
     font-weight: 600;
     line-height: rem(29);
@@ -758,7 +758,7 @@
 
     &-btn {
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: 0;
@@ -792,7 +792,7 @@
       border: rem(1) solid var(--orange-400);
       padding: rem(8) rem(16);
       border-radius: rem(5);
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(14);
       font-weight: 500;
       line-height: rem(16);
@@ -816,12 +816,12 @@
   &__hours,
   &__minutes {
     &::after {
-      content: ":";
+      content: ':';
     }
   }
 
   &__title {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: rem(24);
     font-weight: 600;
     line-height: rem(29);
@@ -853,7 +853,7 @@
     box-shadow: rem(0) rem(8) rem(24) rem(0) #00000021;
 
     &-name {
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(14);
       font-weight: 500;
       line-height: rem(17);
@@ -865,7 +865,7 @@
     margin-top: rem(16);
 
     &-btn {
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(14);
       font-weight: 500;
       line-height: rem(16);
@@ -905,7 +905,7 @@
       @include flex-v-center;
 
       color: var(--black);
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(14);
       font-weight: 400;
       line-height: rem(17);
@@ -919,7 +919,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .header {
     &__submenu {
       width: 45%;
@@ -965,7 +965,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .header {
     &__time {
       display: none;

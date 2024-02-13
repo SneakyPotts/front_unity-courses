@@ -21,6 +21,7 @@ const typesMatch = {
   teacherCard: 'teacher-card-student',
   studentCard: 'student-card',
   courseInvite: 'course-invite',
+  signInCourses: 'signIn-courses',
   empty: '',
 }
 

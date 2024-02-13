@@ -1,7 +1,5 @@
 import { format } from 'date-fns'
 import React, { useEffect, useState } from 'react'
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 
 import type { HeaderClockProps } from './HeaderClock.props'
 
@@ -24,19 +22,12 @@ export function HeaderClock({}: HeaderClockProps) {
     return () => clearInterval(timerID)
   }, [])
 
-  if (!time)
+  if (time)
     return (
-      <Skeleton
-        width={95}
-        height={28}
-      />
+      <div className="header__time">
+        <span className="header__hours">{time.hours}</span>
+        <span className="header__minutes">{time.minutes}</span>
+        <span className="header__seconds">{time.seconds}</span>
+      </div>
     )
-
-  return (
-    <div className="header__time">
-      <span className="header__hours">{time.hours}</span>
-      <span className="header__minutes">{time.minutes}</span>
-      <span className="header__seconds">{time.seconds}</span>
-    </div>
-  )
 }

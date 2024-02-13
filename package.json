@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx . --color",
@@ -12,14 +12,19 @@
     "create": "generate-react component"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@smastrom/react-rating": "^1.5.0",
+    "axios": "^1.6.7",
     "date-fns": "^3.3.1",
+    "libphonenumber-js": "^1.10.55",
     "next": "^14.1.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.50.1",
     "react-loading-skeleton": "^3.4.0",
     "react-popper": "^2.3.0",
-    "usehooks-ts": "^2.13.0"
+    "usehooks-ts": "^2.13.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",

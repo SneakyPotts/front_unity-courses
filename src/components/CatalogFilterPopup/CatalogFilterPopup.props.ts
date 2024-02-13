@@ -1,3 +1,1 @@
-export interface CatalogFilterPopupProps {
-  handleVisibility: () => void
-}
+export interface CatalogFilterPopupProps {}

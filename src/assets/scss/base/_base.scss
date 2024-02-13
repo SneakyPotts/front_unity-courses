@@ -76,6 +76,11 @@ body {
     pointer-events: unset;
     display: none;
   }
+
+  .react-loading-skeleton {
+    --base-color: var(--orange-50);
+    --highlight-color: var(--orange-100);
+  }
 }
 
 .body-mob-fixed {

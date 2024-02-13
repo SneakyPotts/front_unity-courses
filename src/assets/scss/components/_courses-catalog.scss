@@ -167,15 +167,6 @@
     display: grid;
     grid-template-columns: 1fr auto;
     gap: rem(4);
-
-    &.--animate {
-      &-show {
-        animation: fadeIn 0.2s ease;
-      }
-      &-hide {
-        animation: fadeOut 0.2s ease;
-      }
-    }
   }
 
   &__crisper {
@@ -184,7 +175,7 @@
     padding: rem(16);
     background: #fff;
     border-radius: rem(10);
-    
+
 
     &-text {
       color: #828282;

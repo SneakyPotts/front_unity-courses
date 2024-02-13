@@ -15,7 +15,7 @@
 
   &__bottom {
     &-data {
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: (13);
       font-weight: 400;
       line-height: 120%;
@@ -53,7 +53,7 @@
 
   &__mark {
     @include flex-v-center;
-    align-items: end;
+    align-items: flex-end;
     font-weight: 400;
     font-size: rem(14);
     line-height: 1.2;
@@ -204,12 +204,12 @@
   }
 
   &--gray {
-    background:  #f2f2f2;
+    background: #f2f2f2;
     mix-blend-mode: darken;
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .subject-card {
     padding: rem(16);
 

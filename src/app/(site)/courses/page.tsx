@@ -9,15 +9,29 @@ import { appContext } from '@components/Context/context'
 import { Button } from '@UI/Button'
 import { Checkbox } from '@UI/Checkbox'
 import { Modal } from '@UI/Modal'
+import { PageWrapper } from '@UI/PageWrapper'
 
-// библиотека для рейтинга
+import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
+
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
 
 const filtersList = [
   {
     title: '',
-    filters: [StarRating, StarRating, StarRating, StarRating, StarRating],
+    filters: Array.from({ length: 5 }, (_, i) => (
+      <div
+        key={i}
+        style={{ display: 'flex', alignItems: 'flex-end', gap: 4 }}
+      >
+        <Rating
+          style={{ maxWidth: 100 }}
+          value={5 - 0.5 * (i + 1)}
+          readOnly
+        />
+        <span>{5 - 0.5 * (i + 1)} і вище</span>
+      </div>
+    )),
   },
   {
     title: 'Теми',
@@ -62,86 +76,80 @@ const filtersList = [
   },
 ]
 
-
 export default function CoursesCatalog() {
   const { asideIsOpen } = useContext(appContext)
 
-  const [isBodyVisible, setIsBodyVisible] = useState<boolean>(false)
-  const [activeTab, setActiveTab] = useState(1)
-
-  const toggleBodyVisibility = () => setIsBodyVisible((prevState) => !prevState)
+  useSetHeaderParams({ title: 'Каталог курсів' })
 
   return (
-    <div className="content">
-      <div className="content__container">
-        <section className={'courses-catalog'}>
-          <div className={'courses-catalog__wrapper'}>
-            {!asideIsOpen && (
-              <div className={'courses-catalog__body'}>
-                <div className={classNames('courses-catalog__filter', { visible: isBodyVisible })}>
-                  <div className={'courses-catalog__filter-body'}>
-                    <h2 className={'courses-catalog__title'}>Фільтрувати</h2>
-                    <div className={'courses-catalog__mobile'}>
-                      <h2 className={'courses-catalog__mobile-title'}>Фільтр</h2>
-                      <button className={'courses-catalog__mobile-btn'}>
-                        <svg>
-                          <use href="/img/sprite.svg#close"></use>
-                        </svg>
-                      </button>
-                    </div>
-                    <div className={'courses-catalog__inner'}>
-                      {filtersList.map((filterBlock, index) => (
-                        <Fragment key={`${index}${filterBlock.title}`}>
-                          <p className={'courses-catalog__subtitle'}>{filterBlock.title}</p>
-                          <ul className={classNames('courses-catalog__list', filterBlock.extraClass)}>
-                            {filterBlock.filters.map((filterItem, jIndex) => (
-                              <li key={`${jIndex}${filterItem}`}>
-                                <Checkbox
-                                  classWrapper={'some-wrapper-class courses-catalog__item'}
-                                  label={filterItem}
-                                />
-                              </li>
-                            ))}
-                          </ul>
-                        </Fragment>
-                      ))}
-                    </div>
-                    <div className="courses-catalog__buttons close">
-                      <Button className={'some_button'}>застосувати</Button>
+    <PageWrapper>
+      <section className={'courses-catalog'}>
+        <div className={'courses-catalog__wrapper'}>
+          {!asideIsOpen && (
+            <div className={'courses-catalog__body'}>
+              <div className={'courses-catalog__filter visible'}>
+                <div className={'courses-catalog__filter-body'}>
+                  <h2 className={'courses-catalog__title'}>Фільтрувати</h2>
+                  <div className={'courses-catalog__mobile'}>
+                    <h2 className={'courses-catalog__mobile-title'}>Фільтр</h2>
+                    <button className={'courses-catalog__mobile-btn'}>
+                      <svg>
+                        <use href="/img/sprite.svg#close"></use>
+                      </svg>
+                    </button>
+                  </div>
+                  <div className={'courses-catalog__inner'}>
+                    {filtersList.map((filterBlock, index) => (
+                      <Fragment key={`${index}${filterBlock.title}`}>
+                        <p className={'courses-catalog__subtitle'}>{filterBlock.title}</p>
+                        <ul className={classNames('courses-catalog__list', filterBlock.extraClass)}>
+                          {filterBlock.filters.map((filterItem, jIndex) => (
+                            <li key={`${jIndex}${filterItem}`}>
+                              <Checkbox
+                                classWrapper={'some-wrapper-class courses-catalog__item'}
+                                label={filterItem as string}
+                              />
+                            </li>
+                          ))}
+                        </ul>
+                      </Fragment>
+                    ))}
+                  </div>
+                  <div className="courses-catalog__buttons close">
+                    <Button className={'some_button'}>застосувати</Button>
 
-                      <Button
-                        className={'some_button courses-catalog__buttons-btn'}
-                        variant={'border'}
-                      >
-                        скинути фільтри
-                      </Button>
-                    </div>
+                    <Button
+                      className={'some_button courses-catalog__buttons-btn'}
+                      variant={'border'}
+                    >
+                      скинути фільтри
+                    </Button>
                   </div>
                 </div>
               </div>
-            )}
+            </div>
+          )}
 
-            <div className={'courses-catalog__catalog'}>
-              <CatalogFilterPopup handleVisibility={toggleBodyVisibility} />
+          <div className={'courses-catalog__catalog'}>
+            <CatalogFilterPopup />
 
-              <div className="courses-catalog__cards">
-                {Array.from({ length: 9 }, (_, i) =>
-                  i % 3 === 0 ? <CourseCardPaidPromotion key={i} /> : i % 2 === 0 ? <CourseCardFree key={i} /> : <CourseCardPaid key={i} />,
-                )}
-              </div>
-              <div className={'courses-catalog__paginations'}>
-                <ul className={'courses-catalog__paginations-list'}>
-                  <li className={'courses-catalog__paginations-item courses-catalog__paginations--active'}>1</li>
-                  <li className={'courses-catalog__paginations-item'}>2</li>
-                  <li className={'courses-catalog__paginations-item'}>3</li>
-                  <li className={'courses-catalog__paginations-item'}>4</li>
-                </ul>
-              </div>
+            <div className="courses-catalog__cards">
+              {Array.from({ length: 9 }, (_, i) =>
+                i % 3 === 0 ? <CourseCardPaidPromotion key={i} /> : i % 2 === 0 ? <CourseCardFree key={i} /> : <CourseCardPaid key={i} />,
+              )}
+            </div>
+            <div className={'courses-catalog__paginations'}>
+              <ul className={'courses-catalog__paginations-list'}>
+                <li className={'courses-catalog__paginations-item courses-catalog__paginations--active'}>1</li>
+                <li className={'courses-catalog__paginations-item'}>2</li>
+                <li className={'courses-catalog__paginations-item'}>3</li>
+                <li className={'courses-catalog__paginations-item'}>4</li>
+              </ul>
             </div>
           </div>
-        </section>
-      </div>
-    </div>
+        </div>
+      </section>
+    </PageWrapper>
   )
 }
 
@@ -439,17 +447,6 @@ function CourseInviteModal({ onClose }: CourseInviteModalProps) {
         <Button className={'some_button modal__main-button'}>підтвердити</Button>
       </div>
     </Modal>
-  )
-}
-
-function StarRating() {
-  const [rating, setRating] = useState(0)
-
-  return (
-    <Rating
-      value={rating}
-      onChange={setRating}
-    />
   )
 }
 

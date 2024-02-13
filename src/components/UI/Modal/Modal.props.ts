@@ -13,6 +13,7 @@ export interface ModalProps {
     | 'teacherCard'
     | 'studentCard'
     | 'courseInvite'
+    | 'signInCourses'
     | 'empty'
   title: string
   tip?: string
