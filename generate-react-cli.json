@@ -9,7 +9,7 @@
         "component": "templates/default/TemplateName.tsx",
         "index": "templates/default/index.ts",
         "style": "templates/default/TemplateName.module.scss",
-        "props": "templates/default/TemplateName.props.ts",
+        "props": "templates/default/TemplateName.props.ts"
       },
       "path": "src/components",
       "withLazy": false,

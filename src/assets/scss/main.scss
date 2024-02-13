@@ -7,13 +7,14 @@
 @import 'vendors/index';
 
 // 3. Base stuff
-@import 'base/base',  'base/helpers'; //'base/fonts',
+@import 'base/base', 'base/helpers'; //'base/fonts',
 
 // 4. Layout-related sections
 @import 'layout/auth-layout';
 @import 'layout/base-layout';
 @import 'layout/lesson-layout';
 @import 'layout/emplty-layout';
+@import 'layout/layout';
 
 // 5. Components ui
 @import 'components/UI/btn';
@@ -109,4 +110,3 @@
 @import 'components/reviews';
 @import 'components/courses-lesson.scss';
 @import 'components/course-detail.scss';
-

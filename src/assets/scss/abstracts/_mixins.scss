@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 // breakpoints
 
-@use 'sass:math';
+@use "sass:math";
 
 $breakpoints: (
   xs: 375,
@@ -9,7 +9,7 @@ $breakpoints: (
   md: 768,
   lg: 992,
   xl: 1200,
-  xxl: 1400,
+  xxl: 1400
 );
 
 @mixin mq($width, $type: max) {
@@ -58,12 +58,13 @@ $breakpoints: (
 /* stylelint-disable */
 @mixin font-face($font-family, $url, $weight, $style: normal) {
   @font-face {
-    font-family: '#{$font-family}';
+    font-family: "#{$font-family}";
 
     src:
             //url('../font/#{$url}.woff') format('woff'),
             //url('../font/#{$url}.woff2') format('woff2'),
-      url('../../font/#{$url}.ttf') format('truetype');
+      url(" /../../font/#{$url}.ttf") format("truetype");
+      
     font-weight: #{$weight};
     font-display: swap;
     font-style: $style;
@@ -153,14 +154,14 @@ $breakpoints: (
 // theme
 
 @mixin theme($theme) {
-  @if $theme == 'dark' {
-    html[data-theme='dark'] {
+  @if $theme == "dark" {
+    html[data-theme="dark"] {
       @content;
     }
   }
 
-  @if $theme == 'light' {
-    html[data-theme='light'] {
+  @if $theme == "light" {
+    html[data-theme="light"] {
       @content;
     }
   }
@@ -217,13 +218,13 @@ $breakpoints: (
   @if ($yIntersection==0) {
     $yIntersection: 0.000001;
   }
-  $flyValue: #{rem($yIntersection)}' + ' #{$slope * 100}vw;
+  $flyValue: #{rem($yIntersection)}" + " #{$slope * 100}vw;
 
   // Получение значения свойства
-  $propertyValue: #{'clamp(' rem($minSize) ',' $flyValue ',' rem($startSize) ')'};
+  $propertyValue: #{"clamp(" rem($minSize) "," $flyValue "," rem($startSize) ")"};
   // Если отрицательные значения
   @if ($minSize > $startSize) {
-    $propertyValue: #{'clamp(' rem($startSize) ',' $flyValue ',' rem($minSize) ')'};
+    $propertyValue: #{"clamp(" rem($startSize) "," $flyValue "," rem($minSize) ")"};
   }
 
   // Если поддерживается clamp();
@@ -232,7 +233,9 @@ $breakpoints: (
   }
   // Если не поддерживается clamp();
   @supports not (#{$property}: $propertyValue) {
-    #{$property}: calc(#{rem($minSize)} + #{$addSize} * (100vw - #{rem($widthTo)}) / #{math.div($widthFrom, 16) - math.div($widthTo, 16)});
+    #{$property}: calc(
+      #{rem($minSize)} + #{$addSize} * (100vw - #{rem($widthTo)}) / #{math.div($widthFrom, 16) - math.div($widthTo, 16)}
+    );
   }
 
   // Устанавливаем значения по умолчанию

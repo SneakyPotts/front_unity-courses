@@ -8,6 +8,7 @@ export function useAnimate(onClose?: () => void): [boolean, () => void] {
       setIsAnimate(true)
       setTimeout(() => {
         onClose()
+        setIsAnimate(false)
       }, 300)
     }
   }
