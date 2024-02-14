@@ -1,7 +1,7 @@
 .content-tabs__edit__btn {
   display: flex;
   align-items: center;
-  font-family: 'Roboto', sans-serif;
+
   font-weight: 500;
   font-size: 14px;
   text-transform: uppercase;
@@ -26,7 +26,7 @@
 .lesson__section__info-line {
   display: flex;
   align-items: center;
-  font-family: 'Roboto', sans-serif;
+
   font-weight: 400;
   font-size: 13px;
   line-height: 120%;
@@ -75,7 +75,6 @@
 }
 
 .lesson__section__info-name {
-  font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 120%;
@@ -94,7 +93,7 @@
   border: none;
   border-radius: rem(5) 0 0 rem(5);
   padding: rem(8) rem(16);
-  font-family: 'Roboto', sans-serif;
+
   font-weight: 500;
   font-size: rem(16);
   line-height: 120%;
@@ -141,7 +140,7 @@
   border-radius: 3px;
   padding: 8px;
   width: 80px;
-  font-family: 'Roboto', sans-serif;
+
   font-weight: 400;
   font-size: 14px;
   line-height: 120%;
@@ -163,7 +162,7 @@
 
 .lesson__section__info-title {
   margin-bottom: rem(32);
-  font-family: 'Roboto', sans-serif;
+
   font-weight: 600;
   font-size: 24px;
   line-height: 120%;
@@ -266,7 +265,6 @@
 }
 
 .content-tabs__link {
-  font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 14px;
   text-transform: uppercase;

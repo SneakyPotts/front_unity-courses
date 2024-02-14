@@ -66,7 +66,7 @@
       all: initial;
       border: none;
       width: rem(476);
-      font-family: "Roboto", sans-serif;
+
       font-weight: 400;
       font-size: rem(14);
       line-height: 120%;
@@ -144,7 +144,6 @@
     background: #fff;
 
     &__top-text {
-      font-family: "Roboto", sans-serif;
       font-weight: 500;
       font-size: rem(13);
       line-height: 120%;
@@ -178,7 +177,6 @@
       margin-bottom: rem(14);
 
       p {
-        font-family: "Roboto", sans-serif;
         font-weight: 500;
         font-size: rem(14);
         text-transform: uppercase;
@@ -194,7 +192,7 @@
       p {
         overflow: hidden;
         max-width: rem(259);
-        font-family: "Roboto", sans-serif;
+
         font-weight: 400;
         font-size: rem(14);
         line-height: 120%;
@@ -213,7 +211,6 @@
       }
 
       p {
-        font-family: "Roboto", sans-serif;
         font-weight: 400;
         font-size: rem(14);
         line-height: 120%;
@@ -283,7 +280,6 @@
       }
 
       p {
-        font-family: "Roboto", sans-serif;
         font-weight: 500;
         font-size: rem(14);
         line-height: 120%;
@@ -294,7 +290,7 @@
       span {
         border-radius: rem(2);
         padding: rem(5);
-        font-family: "Roboto", sans-serif;
+
         font-weight: 500;
         font-size: rem(14);
         text-transform: uppercase;
@@ -323,7 +319,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 32px;
-    font-family: "Roboto", sans-serif;
+
     font-weight: 500;
     font-size: 14px;
     text-transform: uppercase;
@@ -335,7 +331,7 @@
     border: rem(1) solid #e0ebff;
     border-radius: rem(5);
     padding: rem(4) rem(8);
-    font-family: "Roboto", sans-serif;
+
     font-weight: 500;
     font-size: rem(14);
     line-height: 120%;
@@ -524,7 +520,7 @@
     border: 1px solid #ffa349;
     border-radius: 5px;
     padding: 8px 16px;
-    font-family: "Roboto", sans-serif;
+
     font-weight: 500;
     font-size: 14px;
     text-transform: uppercase;
@@ -534,7 +530,7 @@
 
   &__materials-title {
     margin-bottom: 20px;
-    font-family: "Roboto", sans-serif;
+
     font-weight: 700;
     font-size: 16px;
     line-height: 130%;
@@ -564,7 +560,7 @@
     border-radius: rem(5);
     padding: rem(8) rem(16);
     width: 195px;
-    font-family: "Roboto", sans-serif;
+
     font-weight: 500;
     font-size: 14px;
     text-transform: uppercase;
@@ -609,7 +605,7 @@
     align-items: center;
     grid-template-columns: 8fr 6fr 8fr;
     margin-bottom: rem(16);
-    font-family: "Roboto", sans-serif;
+
     font-weight: 400;
     font-size: rem(13);
     line-height: 120%;
@@ -655,7 +651,7 @@
     align-items: center;
     grid-template-columns: 9fr 8fr 2%;
     margin-bottom: rem(16);
-    font-family: "Roboto", sans-serif;
+
     font-weight: 400;
     font-size: rem(13);
     line-height: 120%;
@@ -673,7 +669,6 @@
   }
 
   &__item-person-name {
-    font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-size: rem(14);
     line-height: 120%;
@@ -682,7 +677,7 @@
 
   &__item__person__text {
     display: none;
-    font-family: "Roboto", sans-serif;
+
     font-weight: 400;
     font-size: rem(13);
     line-height: 120%;
@@ -747,7 +742,6 @@
   }
 
   &__container__list-item {
-    font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-size: rem(14);
     line-height: 120%;
@@ -803,7 +797,6 @@
   }
 
   &__notification &__notification__center-title {
-    font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-size: rem(14);
     text-transform: uppercase;
@@ -817,7 +810,6 @@
   }
 
   &__notification &__notification-title {
-    font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-size: rem(13);
     line-height: 120%;
@@ -929,7 +921,7 @@
 
     .definition {
       padding: rem(20);
-      font-family: "Inter", sans-serif;
+      font-family: 'Inter', sans-serif;
       font-style: normal;
       font-size: rem(18);
       line-height: normal;
@@ -1026,13 +1018,13 @@
   background: #bdbdbd;
 }
 
-@include mq("xxxl") {
+@include mq('xxxl') {
   .lesson-section__content-nav {
     grid-template-columns: 15fr 4% 11%;
   }
 }
 
-@include mq("xl") {
+@include mq('xl') {
   .content-tabs__edit__btn {
     position: absolute;
     right: rem(25);
@@ -1040,7 +1032,7 @@
   }
 }
 
-@include mq("xm") {
+@include mq('xm') {
   .lesson-section__content-adap {
     display: flex;
     flex-direction: column;
@@ -1054,7 +1046,7 @@
   }
 }
 
-@include mq("xz") {
+@include mq('xz') {
   .lesson-section__content__nav-list-item {
     display: grid;
     grid-template-columns: 9fr 11fr;
@@ -1067,7 +1059,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .lesson-section {
     &__edit {
       width: 100%;
@@ -1194,7 +1186,7 @@
       z-index: var(--ui-index-1);
 
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         left: rem(15);
         right: rem(15);
@@ -1266,7 +1258,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .lesson-section {
     &__next.btn.btn--trans {
       width: 100%;
@@ -1360,7 +1352,7 @@
   }
 }
 
-@include mq("sm") {
+@include mq('sm') {
   .lesson-section__text__box-tab {
     display: flex;
     flex-direction: column;
@@ -1430,7 +1422,7 @@
 .content-tabs__edit__btn {
   display: flex;
   align-items: center;
-  font-family: "Roboto", sans-serif;
+
   font-weight: 500;
   font-size: 14px;
   text-transform: uppercase;
@@ -1460,7 +1452,7 @@
 .lesson__section__info-line {
   display: flex;
   align-items: center;
-  font-family: "Roboto", sans-serif;
+
   font-weight: 400;
   font-size: 13px;
   line-height: 120%;
@@ -1478,7 +1470,6 @@
 }
 
 .lesson__section__info-name {
-  font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 120%;
@@ -1496,7 +1487,7 @@
   border: none;
   border-radius: rem(6);
   padding: rem(8) rem(16);
-  font-family: "Roboto", sans-serif;
+
   font-weight: 500;
   font-size: rem(16);
   line-height: 120%;
@@ -1537,7 +1528,7 @@
   border-radius: 3px;
   padding: 8px;
   width: 80px;
-  font-family: "Roboto", sans-serif;
+
   font-weight: 400;
   font-size: 14px;
   line-height: 120%;
@@ -1559,7 +1550,7 @@
 
 .lesson__section__info-title {
   margin-bottom: rem(32);
-  font-family: "Roboto", sans-serif;
+
   font-weight: 600;
   font-size: 24px;
   line-height: 120%;
@@ -1614,7 +1605,6 @@
 }
 
 .content-tabs__link {
-  font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 14px;
   text-transform: uppercase;
@@ -1646,7 +1636,7 @@
   border: rem(1) solid #bdbdbd;
   border-radius: rem(5);
   padding: rem(7.5) rem(12);
-  font-family: "Roboto", sans-serif;
+
   font-weight: 500;
   font-size: 16px;
   line-height: 120%;
@@ -1666,7 +1656,6 @@
 }
 
 .lesson__section__options-item {
-  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 13px;
   line-height: 120%;
@@ -1704,7 +1693,7 @@
 .lesson__section--message {
   border-radius: rem(5);
   padding: rem(8) rem(16);
-  font-family: "Roboto", sans-serif;
+
   font-weight: 500;
   font-size: rem(14);
   text-transform: uppercase;
@@ -1718,7 +1707,6 @@
   gap: rem(12);
 
   p {
-    font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-size: 14px;
     line-height: 120%;
@@ -1733,7 +1721,7 @@
 
   p {
     margin-bottom: rem(8);
-    font-family: "Roboto", sans-serif;
+
     font-weight: 500;
     font-size: rem(16);
     line-height: 120%;
@@ -1761,7 +1749,6 @@
   margin-bottom: rem(34);
 
   h2 {
-    font-family: "Roboto", sans-serif;
     font-weight: 600;
     font-size: 24px;
     line-height: 120%;
@@ -1783,7 +1770,7 @@
   border: rem(1) solid #bdbdbd;
   border-radius: rem(5);
   padding: rem(4) rem(12);
-  font-family: "Roboto", sans-serif;
+
   font-weight: 500;
   font-size: rem(16);
   line-height: 120%;
@@ -1805,7 +1792,6 @@
 }
 
 .lesson-section__content-nav-item {
-  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: rem(13);
   line-height: 120%;
@@ -1828,7 +1814,7 @@
   border: rem(1) solid #ffa349;
   border-radius: rem(5);
   padding: rem(8) rem(16);
-  font-family: "Roboto", sans-serif;
+
   font-weight: 500;
   font-size: rem(14);
   text-transform: uppercase;
@@ -1889,7 +1875,7 @@
   border: rem(1) solid #bdbdbd;
   border-radius: rem(5);
   padding: rem(4) rem(12);
-  font-family: "Roboto", sans-serif;
+
   font-weight: 500;
   font-size: rem(16);
   line-height: 120%;

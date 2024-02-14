@@ -56,12 +56,11 @@
 
   &__title-info {
     margin-bottom: rem(33);
-    font-family: "Roboto", sans-serif;
+
     font-weight: 500;
     font-size: rem(20);
     line-height: 120%;
     color: #1c1c1c;
-    
   }
 
   &__body {
@@ -93,13 +92,12 @@
     margin-bottom: rem(37);
   }
 
-
   &__coures {
     &-svg {
       width: rem(70);
       height: rem(70);
       fill: transparent;
-      stroke: #BDBDBD;
+      stroke: #bdbdbd;
       stroke-width: 4;
     }
   }
@@ -121,7 +119,7 @@
 
   &__card-name {
     margin-bottom: rem(8);
-    font-family: "Roboto", sans-serif;
+
     font-weight: 500;
     font-size: rem(14);
     line-height: 120%;
@@ -129,7 +127,6 @@
   }
 
   &__card-teacher {
-    font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-size: rem(12);
     line-height: 120%;
@@ -198,7 +195,7 @@
     border: none;
     border-radius: rem(5);
     padding: rem(8) rem(16) rem(8) rem(56);
-    font-family: "Roboto", sans-serif;
+
     font-weight: 400;
     font-size: rem(14);
     line-height: 120%;
@@ -211,7 +208,7 @@
     border: none;
     border-radius: rem(5);
     padding: rem(15) 0 rem(68) rem(15);
-    font-family: "Roboto", sans-serif;
+
     font-weight: 400;
     font-size: rem(14);
     line-height: 120%;
@@ -233,7 +230,7 @@
 
     &-text {
       text-align: center;
-      font-family: "Roboto", sans-serif;
+
       font-size: rem(12);
       font-weight: 500;
       line-height: 120%;
@@ -257,20 +254,17 @@
       height: rem(40);
     }
 
-    
-
     &-svg {
       width: rem(70);
       height: rem(70);
-      fill: #BDBDBD;
+      fill: #bdbdbd;
     }
 
     &-decor {
       display: flex;
-     justify-content: center;
-     margin-bottom: rem(30);
+      justify-content: center;
+      margin-bottom: rem(30);
     }
-   
   }
 
   &__info {
@@ -296,7 +290,7 @@
     border-radius: rem(5);
     padding: rem(8) rem(16);
     width: rem(188);
-    font-family: "Roboto", sans-serif;
+
     font-weight: 500;
     font-size: 14px;
     text-transform: uppercase;
@@ -329,7 +323,7 @@
     align-items: center;
 
     /* Design/BTN */
-    font-family: "Roboto", sans-serif;
+
     font-weight: 500;
     font-style: normal;
     font-size: 14px;
@@ -343,7 +337,7 @@
 
   &__wrapper__wants-text {
     margin-bottom: rem(15);
-    font-family: "Roboto", sans-serif;
+
     font-weight: 400;
     font-size: rem(13);
     line-height: 120%;
@@ -353,7 +347,7 @@
 
   &__link-label {
     position: relative;
-    font-family: "Roboto", sans-serif;
+
     font-weight: 500;
     font-size: rem(16);
     line-height: 120%;
@@ -515,7 +509,7 @@
 
     margin: 0 auto;
     width: fit-content;
-    font-family: "Inter", sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: rem(14);
@@ -548,7 +542,6 @@
   }
 
   &__wrapper-span {
-    font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-size: rem(14);
     line-height: 120%;
@@ -580,7 +573,7 @@
   }
 
   &__label-cheked::before {
-    content: "";
+    content: '';
     position: absolute;
     left: rem(3);
     top: rem(3);
@@ -642,7 +635,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .modal {
     height: var(--app-height);
 
@@ -815,7 +808,7 @@
   }
 }
 
-@include mq("sm") {
+@include mq('sm') {
   .modal {
     &__documents {
       grid-template-columns: 1fr 1fr;
@@ -855,7 +848,7 @@
 
 .modal__span-text {
   display: inline-block;
-  font-family: "Roboto", sans-serif;
+
   font-weight: 500;
   font-size: 14px;
   line-height: 120%;
@@ -863,7 +856,7 @@
 }
 
 .modal__span-text::before {
-  content: "";
+  content: '';
   position: absolute;
   right: 0;
   top: 0;
@@ -874,7 +867,7 @@
 }
 
 .modal__span-text::after {
-  content: "";
+  content: '';
   position: absolute;
   right: 5px;
   top: 0;

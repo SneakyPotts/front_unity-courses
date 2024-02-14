@@ -19,7 +19,6 @@
   }
 
   &__content-item {
-    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 13px;
     line-height: 120%;
@@ -45,7 +44,7 @@
   &__images-title {
     margin-bottom: rem(13);
     max-width: rem(173);
-    font-family: 'Roboto', sans-serif;
+
     font-weight: 500;
     font-size: 14px;
     line-height: 120%;
@@ -60,7 +59,7 @@
   &__images-btn {
     display: flex;
     align-items: center;
-    font-family: 'Roboto', sans-serif;
+
     font-weight: 500;
     font-size: 14px;
     text-transform: uppercase;
@@ -87,13 +86,11 @@
   }
 
   &__view-number {
-    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 20px;
     color: #ffa349;
 
     span {
-      font-family: 'Roboto', sans-serif;
       font-weight: 400;
       font-size: 14px;
       line-height: 120%;
@@ -102,7 +99,6 @@
   }
 
   &__view-percent {
-    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 14px;
     line-height: 120%;
@@ -119,7 +115,7 @@
   &__status-text {
     border-radius: rem(2);
     padding: rem(5);
-    font-family: 'Roboto', sans-serif;
+
     font-weight: 500;
     font-size: 14px;
     color: #fff;

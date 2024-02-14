@@ -80,7 +80,6 @@
     &--input {
       flex-grow: 1;
 
-      font-family: 'Roboto', sans-serif;
       font-size: rem(14);
       line-height: 120%;
       color: var(--grey-3);
@@ -129,7 +128,7 @@
   &__card-message {
     display: flex;
     align-items: center;
-    font-family: 'Roboto', sans-serif;
+
     font-weight: 500;
     font-size: rem(14);
     text-transform: uppercase;
@@ -145,7 +144,7 @@
 
   &__card-link {
     margin-bottom: rem(12);
-    font-family: 'Roboto', sans-serif;
+
     font-weight: 500;
     font-size: rem(14);
     line-height: 120%;
@@ -169,7 +168,7 @@
 
     p {
       margin-bottom: rem(8);
-      font-family: 'Roboto', sans-serif;
+
       font-weight: 500;
       font-size: 16px;
       line-height: 120%;
@@ -183,7 +182,7 @@
 
   &__block-text {
     margin-bottom: rem(8);
-    font-family: 'Roboto', sans-serif;
+
     font-weight: 500;
     font-size: rem(16);
     line-height: 120%;
@@ -197,7 +196,6 @@
   }
 
   &__box-text {
-    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: rem(16);
     line-height: 120%;
@@ -211,7 +209,6 @@
   }
 
   &__text--black {
-    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: rem(18);
     line-height: 120%;
@@ -227,7 +224,7 @@
 
     p {
       margin-bottom: rem(32);
-      font-family: 'Roboto', sans-serif;
+
       font-weight: 400;
       font-size: rem(16);
       line-height: 130%;
@@ -236,7 +233,7 @@
 
     h3 {
       margin-bottom: rem(20);
-      font-family: 'Roboto', sans-serif;
+
       font-weight: 700;
       font-size: rem(16);
       line-height: 130%;
@@ -248,7 +245,6 @@
     }
 
     li {
-      font-family: 'Roboto', sans-serif;
       font-weight: 400;
       font-size: rem(16);
       line-height: 130%;
@@ -259,7 +255,7 @@
   &__block-result {
     p {
       margin-bottom: rem(32);
-      font-family: 'Roboto', sans-serif;
+
       font-weight: 400;
       font-size: rem(16);
       line-height: 130%;

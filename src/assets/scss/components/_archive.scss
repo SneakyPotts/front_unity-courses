@@ -22,7 +22,7 @@
   &__title {
     max-width: rem(400);
     color: #1c1c1c;
-    font-family: "Roboto", sans-serif;
+
     font-size: rem(26);
     font-weight: 600;
     line-height: 130%;
@@ -68,7 +68,7 @@
 
     &-text {
       max-width: rem(360);
-      font-family: "Roboto", sans-serif;
+
       font-size: rem(13);
       font-weight: 400;
       line-height: 120%;
@@ -97,7 +97,6 @@
     gap: rem(8);
 
     &-text {
-      font-family: "Roboto", sans-serif;
       font-size: rem(13);
       font-weight: 400;
       line-height: 120%;
@@ -116,7 +115,6 @@
     gap: rem(8);
 
     &-span {
-      font-family: "Roboto", sans-serif;
       font-size: rem(13);
       font-weight: 500;
       line-height: 120%;
@@ -124,7 +122,6 @@
     }
 
     &-text {
-      font-family: "Roboto", sans-serif;
       font-size: rem(20);
       font-weight: 500;
       line-height: 120%;
@@ -133,7 +130,6 @@
   }
 
   &__subtitle {
-    font-family: "Roboto", sans-serif;
     font-size: rem(20);
     font-weight: 500;
     line-height: 120%;
@@ -158,7 +154,7 @@
   &__about {
     &-title {
       margin-bottom: rem(30);
-      font-family: "Roboto", sans-serif;
+
       font-size: rem(24);
       font-weight: 600;
       line-height: 120%;
@@ -173,7 +169,7 @@
     }
     &-text {
       max-width: rem(870);
-      font-family: "Roboto", sans-serif;
+
       font-size: rem(16);
       font-weight: 400;
       line-height: 130%;
@@ -225,7 +221,7 @@
     &-text {
       margin-bottom: rem(20);
       max-width: rem(600);
-      font-family: "Roboto", sans-serif;
+
       font-size: rem(13);
       font-weight: 400;
       line-height: 120%;
@@ -243,7 +239,7 @@
       max-width: rem(600);
       list-style-type: disc;
       color: #828282;
-      font-family: "Roboto", sans-serif;
+
       font-size: rem(14);
       font-weight: 400;
       line-height: 120%;
@@ -302,7 +298,7 @@
 
       p {
         color: #1c1c1c;
-        font-family: "Roboto", sans-serif;
+
         font-size: rem(14);
         font-weight: 500;
         line-height: 120%;
@@ -315,7 +311,6 @@
       gap: rem(10);
 
       p {
-        font-family: "Roboto", sans-serif;
         font-size: rem(13);
         font-weight: 400;
         line-height: 120%;
@@ -331,7 +326,7 @@
       margin-bottom: rem(12);
       overflow: hidden;
       text-overflow: ellipsis;
-      font-family: "Roboto", sans-serif;
+
       font-size: rem(13);
       font-weight: 400;
       line-height: 120%;
@@ -340,7 +335,7 @@
 
     &-link {
       text-decoration-line: underline;
-      font-family: "Roboto", sans-serif;
+
       font-size: rem(13);
       font-weight: 400;
       line-height: 120%;
@@ -356,7 +351,7 @@
   }
 }
 
-@include mq("xxl") {
+@include mq('xxl') {
   .archive {
     &__reviews {
       &-content {
@@ -368,7 +363,7 @@
   }
 }
 
-@include mq("xl") {
+@include mq('xl') {
   .archive {
     &__inner {
       display: flex;
@@ -381,7 +376,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .archive {
     &__head {
       grid-template-columns: 1fr;
@@ -449,7 +444,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .archive {
     &__reviews {
       &-content {
@@ -459,7 +454,7 @@
   }
 }
 
-@include mq("sm") {
+@include mq('sm') {
   .archive {
     &__title {
       font-size: rem(18);

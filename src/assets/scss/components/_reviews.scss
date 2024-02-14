@@ -40,7 +40,6 @@
     margin-bottom: rem(20);
 
     &-text {
-      font-family: "Roboto", sans-serif;
       font-size: rem(16);
       font-weight: 400;
       line-height: 130%;
@@ -87,7 +86,6 @@
   }
 
   &__name {
-    font-family: "Roboto", sans-serif;
     font-size: rem(16);
     font-weight: 500;
     line-height: 120%;
@@ -97,7 +95,7 @@
   &__data {
     overflow: hidden;
     text-overflow: ellipsis;
-    font-family: "Roboto", sans-serif;
+
     font-size: rem(13);
     font-weight: 400;
     line-height: 120%;
@@ -119,7 +117,6 @@
     }
 
     &-text {
-      font-family: "Roboto", sans-serif;
       font-size: rem(14);
       font-weight: 400;
       line-height: 120%;
@@ -134,7 +131,7 @@
     &-text,
     &-texts {
       max-width: rem(690);
-      font-family: "Roboto", sans-serif;
+
       font-size: rem(13);
       font-weight: 400;
       line-height: 120%;
@@ -164,7 +161,7 @@
     gap: rem(10);
     &-btn {
       text-decoration-line: underline;
-      font-family: "Roboto", sans-serif;
+
       font-size: rem(13);
       font-weight: 400;
       line-height: 120%;
@@ -196,7 +193,6 @@
     margin-top: rem(28);
 
     &-title {
-      font-family: "Roboto", sans-serif;
       font-size: rem(24);
       font-weight: 600;
       line-height: 120%;
@@ -209,7 +205,7 @@
   }
 }
 
-@include mq("xl") {
+@include mq('xl') {
   .reviews {
     &__inner {
       grid-template-columns: 1fr;
@@ -217,7 +213,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .reviews {
     &__head {
       flex-direction: column-reverse;
@@ -257,7 +253,6 @@
 
     &__data {
       grid-column: 2;
-
     }
 
     &__paginations {
@@ -265,15 +260,14 @@
     }
 
     &__content {
-
       &--btn {
         max-width: rem(192);
       }
-    }    
+    }
   }
 }
 
-@include mq("sm") {
+@include mq('sm') {
   .reviews {
     &__shop {
       align-items: baseline;
@@ -289,8 +283,8 @@
       &--btn {
         max-width: none;
       }
-    }  
-    
+    }
+
     &__head {
       &-blackout {
         grid-template-columns: 1fr auto;
