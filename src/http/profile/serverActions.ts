@@ -14,16 +14,16 @@ type FormSchema = z.infer<typeof schema>
 export async function SignInServerAction(data: FormSchema) {
   const response = await serverFetch<{ access: string; refresh: string }>(`/token/`, {
     method: 'POST',
-    // headers: {
-    //   'Content-Type': 'application/json',
-    // },
     body: JSON.stringify(data),
   })
 
   console.log(SignInServerAction, response)
 
   if (response.data) {
-    cookies().set('accessToken', response.data.access)
+    cookies().set('accessToken', response.data.access, {
+      path: '/',
+      // expires: add(new Date(), { days: 1 }), //TODO: add variable "saveMe"
+    })
     revalidateTag('aboutMe')
   }
 
