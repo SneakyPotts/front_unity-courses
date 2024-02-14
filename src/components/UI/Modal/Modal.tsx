@@ -22,6 +22,7 @@ const typesMatch = {
   studentCard: 'student-card',
   courseInvite: 'course-invite',
   signInCourses: 'signIn-courses',
+  basketModal: 'basket-model',
   empty: '',
 }
 

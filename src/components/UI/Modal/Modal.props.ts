@@ -15,6 +15,7 @@ export interface ModalProps {
     | 'courseInvite'
     | 'signInCourses'
     | 'empty'
+    | 'basket-model'
   title: string
   tip?: string
   onClose?: () => void

@@ -742,6 +742,8 @@
     letter-spacing: 0;
   }
 
+
+
   &__time {
     @include flex-v-center;
   }
@@ -749,6 +751,7 @@
   &__list {
     @include flex-v-center;
 
+    position: relative;
     gap: rem(20);
   }
 
@@ -838,7 +841,7 @@
   }
 
   &__submenu {
-    position: absolute;
+    position: fixed;
     top: rem(70);
     right: rem(30);
 

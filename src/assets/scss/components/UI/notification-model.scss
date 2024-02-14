@@ -1,0 +1,176 @@
+.notification {
+  position: fixed;
+  top: rem(70);
+  right: rem(27);
+  z-index: var(--ui-index-5);
+  padding: rem(20);
+  background: var(--white);
+  border: rem(1) solid var(--orange-400);
+  border-radius: rem(10);
+
+  &__head {
+    @include flex-all-sb;
+
+    margin-bottom: rem(12);
+
+    &-text {
+      color: var(--grey-3);
+      font-family: "Roboto", sans-serif;
+      font-size: rem(13);
+      font-weight: 500;
+      line-height: rem(16);
+      letter-spacing: 0em;
+    }
+
+    &-close {
+      svg {
+        width: rem(14);
+        height: rem(14);
+      }
+    }
+  }
+
+  &__list {
+    @include flex-all-sb;
+
+    &:not(:last-child) {
+      margin-bottom: rem(12);
+    }
+
+    border-radius: rem(5);
+
+    gap: rem(12);
+    padding: rem(8) rem(12);
+    background: var(--bg);
+
+    &-img {
+      img {
+        border-radius: rem(2);
+      }
+    }
+
+    &-name {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+
+      max-width: rem(309);
+      font-family: "Roboto", sans-serif;
+      font-size: rem(16);
+      font-weight: 400;
+      line-height: rem(21);
+      letter-spacing: 0em;
+    }
+
+    &-sale {
+      display: flex;
+      flex-direction: column;
+      gap: rem(6);
+
+      font-family: "Roboto", sans-serif;
+      font-size: rem(20);
+      font-weight: 500;
+      line-height: rem(24);
+      letter-spacing: 0em;
+      color: var(--grey-1);
+
+      s {
+        text-decoration-color: red;
+        text-decoration-thickness: rem(1);
+        text-decoration-skip-ink: none;
+        font-family: "Roboto", sans-serif;
+        font-size: rem(13);
+        font-weight: 500;
+        line-height: rem(16);
+        letter-spacing: 0em;
+        color: var(--grey-3);
+      }
+    }
+  }
+
+  &__result {
+    @include flex-all-sb;
+
+    margin-top: rem(12);
+
+    &-text {
+      @include flex-v-center;
+      gap: rem(5);
+
+      font-family: "Roboto", sans-serif;
+      font-size: rem(24);
+      font-weight: 600;
+      line-height: rem(29);
+      letter-spacing: 0em;
+
+      p {
+        color: var(--grey-3);
+        font-family: "Roboto", sans-serif;
+        font-size: rem(16);
+        font-weight: 500;
+        line-height: rem(19);
+        letter-spacing: 0em;
+      }
+    }
+  }
+}
+
+@include mq("lg") {
+  .notification {
+    &__result {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: rem(35);
+    }
+  }
+}
+
+@include mq("md") {
+  .notification {
+    left: rem(15);
+    right: rem(15);
+
+    &__list {
+      &-img {
+        img {
+          width: rem(40);
+          height: rem(40);
+        }
+      }
+
+      &-name {
+        max-width: rem(135);
+        font-size: rem(14);
+        font-weight: 400;
+        line-height: rem(14);
+      }
+
+      &-sale {
+        font-size: rem(16);
+        font-weight: 500;
+        line-height: rem(19);
+
+        p {
+          font-size: rem(13);
+          font-weight: 500;
+          line-height: rem(16);
+        }
+      }
+
+      &-result {
+        &-text {
+          font-size: rem(20);
+          font-weight: 500;
+          line-height: rem(24);
+
+          p {
+            font-size: rem(16);
+            font-weight: 500;
+            line-height: rem(19);
+          }
+        }
+      }
+    }
+  }
+}
