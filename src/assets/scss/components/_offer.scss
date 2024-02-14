@@ -1,0 +1,83 @@
+.offer {
+  padding: rem(76) 0;
+  background: url("/img/offer-bg.png") cover no-repeat center;
+
+  &__inner {
+    max-width: rem(673);
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  &__title {
+    @include flex-all-center;
+
+    gap: rem(40);
+
+    margin-bottom: rem(40);
+    font-family: "Roboto", sans-serif;
+    font-size: rem(32);
+    font-weight: 600;
+    line-height: rem(38);
+
+    svg {
+      width: rem(85);
+      height: rem(71);
+      fill: var(--orange-500);
+    }
+  }
+
+  &__item {
+  }
+
+  &__item {
+    display: flex;
+
+    gap: rem(10);
+
+    max-width: rem(626);
+    font-size: rem(18);
+    font-weight: 400;
+    line-height: rem(22);
+
+    &:not(:last-of-type) {
+      margin-bottom: rem(32);
+    }
+
+    &-check {
+      @include flex-all-center;
+
+      flex-shrink: 0;
+      border-radius: 50%;
+      width: rem(36);
+      height: rem(36);
+      background: var(--orange-500);
+
+      svg {
+        fill: var(--white);
+        width: rem(19);
+        height: rem(14);
+      }
+    }
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__btn {
+    margin-top: rem(40);
+  }
+
+  &__decor {
+    margin-top: rem(40);
+    display: flex;
+    justify-content: center;
+    
+    svg {
+      fill: var(--blue-400);
+      width: rem(77);
+      height: rem(72);
+    }
+  }
+}

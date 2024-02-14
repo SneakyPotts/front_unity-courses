@@ -200,7 +200,7 @@
   }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .basket-model {
     .modal__body {
       padding: 0;
@@ -214,7 +214,7 @@
     }
 
     .modal__close {
-      background: url('/assets/img/static/basket__close.svg') no-repeat center/ contain;
+      background: url("/assets/img/static/basket__close.svg") no-repeat center/ contain;
       top: rem(25);
       left: rem(25);
 
@@ -289,10 +289,14 @@
   }
 }
 
-@include mq('md') {
+@include mq("md") {
   .basket-model {
     &.modal.modal--open {
       background-color: rgba(var(--grey-3--rgb), 0.8);
+    }
+
+    .modal__main {
+      padding: rem(15);
     }
 
     .modal__body {
@@ -306,16 +310,28 @@
 
     &__list {
       &-price {
+        text-align: right;
         margin: unset;
+      }
+
+      &-text {
+        margin: unset;
+      }
+
+      &-delete {
+        margin-left: rem(20);
       }
     }
 
     &__card {
+      &-price {
+        flex-shrink: 0;
+      }
       &-quantity {
         li {
-          gap: rem(2);
+          gap: rem(8);
           p {
-            flex: 0 0 rem(155);
+            flex: 0 1 rem(155);
           }
         }
       }

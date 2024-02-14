@@ -126,10 +126,10 @@ export default function CoursesCatalog() {
                     </Button>
                   </div>
                 </div>
+                <Button className={'some_button courses-catalog__filter-throw'}>скинути</Button>
               </div>
             </div>
           )}
-
           <div className={'courses-catalog__catalog'}>
             <CatalogFilterPopup />
 

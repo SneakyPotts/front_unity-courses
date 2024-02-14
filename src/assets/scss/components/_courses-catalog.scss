@@ -13,6 +13,10 @@
     height: max-content;
     border-radius: rem(5);
     background-color: #fff8ed;
+
+    &-throw {
+      width: 100%;
+    }
   }
 
   &__inner {
@@ -291,6 +295,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    &--selected {
+      opacity: 0.5;
+    }
+
   }
 
   &__tabs {
@@ -506,7 +515,7 @@
   }
 }
 
-@include mq('xxl') {
+@include mq("xxl") {
   .courses-catalog {
     &__cards {
       grid-template-columns: repeat(2, 1fr);
@@ -536,7 +545,7 @@
 //   }
 // }
 
-@include mq('lg') {
+@include mq("lg") {
   .courses-catalog {
     &__catalog {
       min-width: 0;
@@ -578,6 +587,10 @@
       border-radius: 0;
       z-index: 12;
       height: 100%;
+
+      &-throw {
+        display: none
+      }
 
       &-body {
         @include hide-scroll;
@@ -624,6 +637,7 @@
     &__toggle {
       display: block;
     }
+    
 
     &__buttons {
       display: flex;
@@ -638,7 +652,7 @@
   }
 }
 
-@include mq('md') {
+@include mq("md") {
   .courses-catalog {
     &__cards {
       grid-template-columns: 1fr;
