@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { revalidateTag } from 'next/cache'
 import { cookies } from 'next/headers'
 
-import { schema } from '@components/Header/SignIn.schema'
+import { schema } from '@components/Modals/AuthModal/SignIn.schema'
 
 import { serverFetch } from '@http/api'
 

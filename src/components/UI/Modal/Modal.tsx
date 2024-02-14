@@ -66,7 +66,10 @@ export function Modal({ variant, title, tip, onClose, onBack, children }: PropsW
               )}
 
               {onBack && (
-                <button className="modal__back">
+                <button
+                  className="modal__back"
+                  onClick={onBack}
+                >
                   <svg className="modal__back-svg">
                     <use href="/img/sprite.svg#arrow-back"></use>
                   </svg>

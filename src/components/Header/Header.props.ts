@@ -5,9 +5,10 @@ import type { TAboutMe } from '@/http/profile/type'
 export interface HeaderProps extends HTMLProps<HTMLElement> {
   profile?: TAboutMe
 }
-export interface ProfilePopupProps {
+
+export interface BasketModalProps {
   onClose: () => void
 }
-export interface AuthModalProps {
+export interface ProfilePopupProps {
   onClose: () => void
 }

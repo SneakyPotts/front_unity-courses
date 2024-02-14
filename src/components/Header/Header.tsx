@@ -1,32 +1,23 @@
 'use client'
 
 import classNames from 'classnames'
-import React, { ChangeEventHandler, useContext, useRef, useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import React, { useContext, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useOnClickOutside } from 'usehooks-ts'
-import { z } from 'zod'
 
 import Image from 'next/image'
 import Link from 'next/link'
 
 import { appContext } from '@components/Context/context'
+import { AuthModal, BasketModal } from '@components/Modals'
 
 import { Button } from '@UI/Button'
-import { Checkbox } from '@UI/Checkbox'
-import { Field } from '@UI/Field'
 import { HeaderClock } from '@UI/HeaderClock'
-import { Modal } from '@UI/Modal'
-import { RequestError } from '@UI/RequestError'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { SignInServerAction, SignOutAction } from '@http/profile/serverActions'
+import { SignOutAction } from '@http/profile/serverActions'
 
-import type { AuthModalProps, HeaderProps, ProfilePopupProps } from './Header.props'
-import { schema } from './SignIn.schema'
-
-type FormSchema = z.infer<typeof schema>
+import type { HeaderProps, ProfilePopupProps } from './Header.props'
 
 export function Header({ profile, className }: HeaderProps) {
   const { header } = useContext(appContext)
@@ -248,242 +239,5 @@ function ProfilePopup({ onClose }: ProfilePopupProps) {
         </button>
       </div>
     </div>
-  )
-}
-
-function AuthModal({ onClose }: AuthModalProps) {
-  const error = !!0
-
-  const [saveMe, setSaveMe] = useState(false)
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormSchema>({
-    resolver: zodResolver(schema),
-  })
-
-  const handleSaveMe: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setSaveMe(e.target.checked)
-  }
-
-  const onSubmit: SubmitHandler<FormSchema> = async (data) => {
-    SignInServerAction(data)
-      .then(() => {
-        onClose()
-      })
-      .catch(console.log)
-  }
-
-  return (
-    <Modal
-      variant="signInCourses"
-      title={'Вхід'}
-      onClose={onClose}
-    >
-      <form
-        className="login__form"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <div className="login__form-img">
-          <Image
-            className="login__form-logo"
-            src="/img/aside-logo.svg"
-            fill
-            alt="alt"
-          />
-        </div>
-        <div className="login__form-inner">
-          <Field
-            {...register('email')}
-            className={'modal__field'}
-            type={'text'}
-            placeholder={'Ваш email'}
-            label={'Пошта'}
-            inputMode="email"
-            error={errors?.email?.message}
-          />
-          <Field
-            {...register('password')}
-            type={'password'}
-            className={'modal__field'}
-            placeholder={'Ваш пароль'}
-            label={'Пароль'}
-            error={errors?.password?.message}
-          />
-          <div className="login__form-bottom">
-            <Checkbox
-              label={'Запам’ятати мене'}
-              onChange={handleSaveMe}
-              checked={saveMe}
-            />
-            <Link
-              href={'/auth/forgot-password'}
-              className="login__form__bottom-text"
-            >
-              Забули пароль?
-            </Link>
-          </div>
-
-          {error && <RequestError data={error} />}
-
-          <div className="login__form-controls">
-            <Button
-              className="login__form-btn"
-              type="submit"
-            >
-              <svg className="login__form-svg">
-                <use href="/img/sprite.svg#login"></use>
-              </svg>
-              Увійти
-            </Button>
-
-            <span>Або</span>
-
-            <Button
-              className="login__form-btn"
-              variant={'border'}
-            >
-              <svg className="login__form-svg">
-                <use href="/img/sprite.svg#login"></use>
-              </svg>
-              google
-            </Button>
-          </div>
-
-          <p className="login__signUp">
-            Ще не зареєстровані? <Link href={'#'}>Створити аккаунт</Link>
-          </p>
-        </div>
-      </form>
-    </Modal>
-  )
-}
-
-interface BasketModalProps {
-  onClose: () => void
-}
-
-function BasketModal({ onClose }: BasketModalProps) {
-  return (
-    <Modal
-      variant="empty" /*basket-model*/
-      title="Кошик"
-      onClose={onClose}
-    >
-      <div className={'basket-model__block'}>
-        <div className="basket-model__courses">
-          <ul className={'basket-model__list'}>
-            <li className={'basket-model__list-img'}>
-              <Image
-                src="https://loremflickr.com/100/100"
-                style={{ objectFit: 'cover', borderRadius: '5px' }}
-                alt="alt"
-                width={100}
-                height={100}
-              />
-            </li>
-            <li className={'basket-model__list-text'}>
-              Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями
-            </li>
-            <li className={'basket-model__list-price'}>
-              <s>6 800 грн.</s>
-              <p>5 300 грн.</p>
-            </li>
-            <li className={'basket-model__list-basket'}>
-              <button className={'basket-model__list-delete'}>
-                <svg>
-                  <use href="/img/sprite.svg#basket"></use>
-                </svg>
-              </button>
-            </li>
-          </ul>
-          <ul className={'basket-model__list'}>
-            <li className={'basket-model__list-img'}>
-              <Image
-                src="https://loremflickr.com/100/100"
-                style={{ objectFit: 'cover', borderRadius: '5px' }}
-                alt="alt"
-                width={100}
-                height={100}
-              />
-            </li>
-            <li className={'basket-model__list-text'}>
-              Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями
-            </li>
-            <li className={'basket-model__list-price'}>
-              <s>6 800 грн.</s>
-              <p>5 300 грн.</p>
-            </li>
-            <li className={'basket-model__list-basket'}>
-              <button className={'basket-model__list-delete'}>
-                <svg>
-                  <use href="/img/sprite.svg#basket"></use>
-                </svg>
-              </button>
-            </li>
-          </ul>
-          <ul className={'basket-model__list'}>
-            <li className={'basket-model__list-img'}>
-              <Image
-                src="https://loremflickr.com/100/100"
-                style={{ objectFit: 'cover', borderRadius: '5px' }}
-                alt="alt"
-                width={100}
-                height={100}
-              />
-            </li>
-            <li className={'basket-model__list-text'}>
-              Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями
-            </li>
-            <li className={'basket-model__list-price'}>
-              <s>6 800 грн.</s>
-              <p>5 300 грн.</p>
-            </li>
-            <li className={'basket-model__list-basket'}>
-              <button className={'basket-model__list-delete'}>
-                <svg>
-                  <use href="/img/sprite.svg#basket"></use>
-                </svg>
-              </button>
-            </li>
-          </ul>
-        </div>
-        <div className="basket-model__card">
-          <div className="basket-model__card-title">Придбати курс (и)</div>
-          <ul className={'basket-model__card-conditions'}>
-            <li>Ви будете додані до безкоштовного курсу (курсів)</li>
-            <li>Батькам буде відправлено запрос на покупку курсу (курсів).</li>
-          </ul>
-          <ul className={'basket-model__card-quantity'}>
-            <li>
-              <span>x1</span> <p>до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями</p>
-              <div className="basket-model__card-price">5 300 ₴</div>
-            </li>
-            <li>
-              <span>x1</span>
-              <p>Medium рівень програмування на JavaScript: розширення навичок з веб-розробки та створення динамічних інтерактивних веб-сайтів</p>
-              <div className="basket-model__card-price">5 300 ₴</div>
-            </li>
-            <li>
-              <span>x1</span>
-              <p>Образотворче мистецтво для 10-11 класів веб-сайтів</p>
-              <div className="basket-model__card-price">Безкоштовно</div>
-            </li>
-          </ul>
-
-          <div className="basket-model__buttons">
-            <Button
-              className={'some_button basket-model__buttons-btn'}
-              variant={'border'}
-            >
-             відхилити
-            </Button >
-            <Button className={'basket-model__buttons-btn'}>підтвердити</Button>
-          </div>
-        </div>
-      </div>
-    </Modal>
   )
 }
