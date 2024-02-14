@@ -1,5 +1,6 @@
 import { type PropsWithChildren, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
+
 import { PortalProps } from './Portal.props'
 
 const modalRoot = typeof document !== 'undefined' ? (document.querySelector('body') as HTMLElement) : null

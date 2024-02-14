@@ -193,7 +193,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .aside {
     position: unset;
     width: 100%;

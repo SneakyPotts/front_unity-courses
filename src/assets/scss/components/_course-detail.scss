@@ -19,7 +19,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .course-detail {
     &__ridth {
       grid-row: 1/-1;

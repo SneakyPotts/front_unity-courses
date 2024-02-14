@@ -3,8 +3,9 @@
 import classNames from 'classnames'
 import React, { MouseEventHandler } from 'react'
 
-import type { ButtonProps } from './Button.props'
 import { useRouter } from 'next/navigation'
+
+import type { ButtonProps } from './Button.props'
 
 export function Button({ variant = 'accent', href, target, type = 'button', onClick, className, disabled, children, fulFill, ...props }: ButtonProps) {
   const router = useRouter()

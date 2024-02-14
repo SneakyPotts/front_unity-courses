@@ -92,7 +92,7 @@ export const navListChildren = [
     name: 'Статистика',
     link: '/statistics',
     list: [],
-  }
+  },
 ]
 
 export const navListTeacher = [
