@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { Button } from '@UI/Button'
 import { Modal } from '@UI/Modal'
 
+import { Checkbox } from '@/components/UI/Checkbox'
+
 import type { BasketModalProps } from './BasketModal.props'
 
 export function BasketModal({ onClose }: BasketModalProps) {
@@ -56,8 +58,78 @@ export function BasketModal({ onClose }: BasketModalProps) {
                 height={100}
               />
             </li>
-            <li className={'basket-model__list-text'}>
-              Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями
+            <li className={''}>
+              <p className={'basket-model__list-text'}>
+                Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями
+              </p>
+            </li>
+            <li>
+              <div className={'basket-model__container'}>
+                <p className={'basket-model__container-text'}>Оберіть для кого:</p>
+                <div className={'basket-model__container-img'}>
+                  <Image
+                    width={24}
+                    height={24}
+                    objectFit={'cover'}
+                    src="https://loremflickr.com/100/100"
+                  />
+                  <Image
+                    width={24}
+                    height={24}
+                    objectFit={'cover'}
+                    src="https://loremflickr.com/100/100"
+                  />
+                  <Image
+                    width={24}
+                    height={24}
+                    objectFit={'cover'}
+                    src="https://loremflickr.com/100/100"
+                  />
+                </div>
+                <button className={'basket-model__container-btn'}>
+                  <svg>
+                    <use href="/img/sprite.svg#basket-modal__arrow"></use>
+                  </svg>
+                </button>
+                <ul className={'basket-model__catalog'}>
+                  <li className={'basket-model__catalog-item'}>
+                    <Checkbox classWrapper={'some-wrapper-class'} />
+                    <div className={'basket-model__catalog-block'}>
+                      <Image
+                        src="https://loremflickr.com/24/24"
+                        width={24}
+                        height={24}
+                        objectFit={'cover'}
+                      />
+                      <p>Дмитро</p>
+                    </div>
+                  </li>
+                  <li className={'basket-model__catalog-item'}>
+                    <Checkbox classWrapper={'some-wrapper-class'} />
+                    <div className={'basket-model__catalog-block'}>
+                      <Image
+                        src="https://loremflickr.com/24/24"
+                        width={24}
+                        height={24}
+                        objectFit={'cover'}
+                      />
+                      <p>Дмитро</p>
+                    </div>
+                  </li>
+                  <li className={'basket-model__catalog-item'}>
+                    <Checkbox classWrapper={'some-wrapper-class'} />
+                    <div className={'basket-model__catalog-block'}>
+                      <Image
+                        src="https://loremflickr.com/24/24"
+                        width={24}
+                        height={24}
+                        objectFit={'cover'}
+                      />
+                      <p>Дмитро</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li className={'basket-model__list-price'}>
               <s>6 800 грн.</s>
@@ -99,6 +171,21 @@ export function BasketModal({ onClose }: BasketModalProps) {
         </div>
         <div className="basket-model__card">
           <div className="basket-model__card-title">Придбати курс (и)</div>
+          <div className="">
+            <p className={'basket-model__card-subtitle'}>На одне замовлення можна застосувати лише один код знижки</p>
+            <div className={'basket-model__field'}>
+              <input
+                className={'input  '}
+                placeholder={'Ваш код тут'}
+                type=""
+              />
+              <button className={'basket-model__field-btn'}>
+                <svg>
+                  <use href="/img/sprite.svg#check-mark"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
           <ul className={'basket-model__card-conditions'}>
             <li>Ви будете додані до безкоштовного курсу (курсів)</li>
             <li>Батькам буде відправлено запрос на покупку курсу (курсів).</li>
@@ -119,6 +206,26 @@ export function BasketModal({ onClose }: BasketModalProps) {
               <div className="basket-model__card-price">Безкоштовно</div>
             </li>
           </ul>
+          <ul className={'basket-model__card-quantity'}>
+            <li>
+              <span>x1</span> <p>Промо код</p>
+              <div className="basket-model__card-price">5 300 ₴</div>
+            </li>
+          </ul>
+          <ul className={'basket-model__card-quantity basket-model__card-quantity--element'}>
+            <li>
+              <p>підсумок</p>
+              <div className="basket-model__card-price basket-model__card-price--element">5 300 ₴</div>
+            </li>
+          </ul>
+
+          <div className={'basket-model__result'}>
+            <p className={'basket-model__result-text'}>Всього:</p>
+            <p className={'basket-model__result-sum'}> 20 700 грн.</p>
+          </div>
+          <div className={'basket-model__button'}>
+            <Button>оплатити</Button>
+          </div>
 
           <div className="basket-model__buttons">
             <Button

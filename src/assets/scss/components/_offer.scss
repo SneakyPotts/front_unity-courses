@@ -1,20 +1,18 @@
 .offer {
   padding: rem(76) 0;
-  background: url("/img/offer-bg.png") cover no-repeat center;
+  background: url("/img/offer-bg.png") no-repeat center / cover;
+  border-radius: rem(10);
 
   &__inner {
-    max-width: rem(673);
     width: 100%;
+    max-width: rem(683);
     margin: 0 auto;
   }
 
   &__title {
-    @include flex-all-center;
+    @include flex-v-center;
 
     gap: rem(40);
-
-    margin-bottom: rem(40);
-    font-family: "Roboto", sans-serif;
     font-size: rem(32);
     font-weight: 600;
     line-height: rem(38);
@@ -26,58 +24,114 @@
     }
   }
 
-  &__item {
+  &__list {
+    margin-top: rem(40);
   }
 
   &__item {
-    display: flex;
+    @include flex-h-center;
+
+    &:not(:last-child) {
+      margin-bottom: rem(32);
+    }
 
     gap: rem(10);
-
     max-width: rem(626);
     font-size: rem(18);
     font-weight: 400;
     line-height: rem(22);
+    color: var(--black);
 
-    &:not(:last-of-type) {
-      margin-bottom: rem(32);
-    }
-
-    &-check {
+    &-mark {
       @include flex-all-center;
 
-      flex-shrink: 0;
-      border-radius: 50%;
       width: rem(36);
       height: rem(36);
+      flex-shrink: 0;
+      border-radius: 50%;
       background: var(--orange-500);
 
       svg {
-        fill: var(--white);
         width: rem(19);
         height: rem(14);
+        fill: var(--white);
       }
     }
   }
 
   &__button {
-    display: flex;
-    justify-content: center;
+    @include flex-h-center;
+
+    margin-top: rem(40);
   }
 
   &__btn {
-    margin-top: rem(40);
+    svg {
+      width: rem(15);
+      height: rem(13);
+      fill: var(--white);
+    }
   }
 
   &__decor {
+    @include flex-h-center;
+
     margin-top: rem(40);
-    display: flex;
-    justify-content: center;
-    
+
     svg {
-      fill: var(--blue-400);
       width: rem(77);
       height: rem(72);
+      fill: var(--blue-400);
+    }
+  }
+}
+
+@include mq("lg") {
+  .offer {
+    padding: rem(30) rem(20);
+
+    &__inner {
+      width: unset;
+    }
+
+    &__title {
+      justify-content: space-between;
+      font-size: rem(24);
+      font-weight: 600;
+      line-height: rem(29);
+
+      svg {
+        width: rem(85);
+        height: rem(71);
+      }
+    }
+
+    &__item {
+      font-size: rem(16);
+      font-weight: 400;
+      line-height: rem(21);
+
+      &-mark {
+        width: rem(20);
+        height: rem(20);
+
+        svg {
+          width: rem(10);
+          height: rem(8);
+        }
+      }
+    }
+
+    &__button {
+      margin-top: rem(60);
+      
+      .btn.btn--accent {
+        width: unset;
+      }
+    }
+
+    &__decor {
+      margin-top: rem(20);
     }
   }
 }

@@ -88,7 +88,7 @@ export default function CoursesArchive() {
                   </div>
                   <div className={'archive__result archive__item--element'}>
                     <div className="archive__price">
-                      <span className={'archive__price-span'}>Ціна:</span>
+                      <s className={'archive__price-discount'}>6 800 грн.</s>
                       <p className={'archive__price-text'}>5 300 грн.</p>
                     </div>
                     <Button className={'some_button  reviews__content--btn'}>
@@ -192,7 +192,7 @@ function AboutTab() {
         </div>
         <div className={'offer'}>
           <div className={'offer__inner'}>
-            <div className="offer__title">
+            <div className={'offer__title'}>
               Ще не знаєте, з якого курсу почати?
               <svg>
                 <use href="/img/sprite.svg#course-magnifying"></use>
@@ -200,7 +200,7 @@ function AboutTab() {
             </div>
             <ul className={'offer__list'}>
               <li className={'offer__item'}>
-                <span className={'offer__item-check'}>
+                <span className={'offer__item-mark'}>
                   <svg>
                     <use href="/img/sprite.svg#check-mark"></use>
                   </svg>
@@ -208,7 +208,7 @@ function AboutTab() {
                 Зверніть увагу на наші рекомендації або скористайтеся пошуком, щоб знайти те, що вам дійсно цікаво.
               </li>
               <li className={'offer__item'}>
-                <span className={'offer__item-check'}>
+                <span className={'offer__item-mark'}>
                   <svg>
                     <use href="/img/sprite.svg#check-mark"></use>
                   </svg>
@@ -217,8 +217,14 @@ function AboutTab() {
               </li>
             </ul>
             <div className={'offer__button'}>
-              <Button className={'offer__btn'}>каталог курсів</Button>
+              <Button className={'offer__btn'}>
+                <svg>
+                  <use href="/img/sprite.svg#cours"></use>
+                </svg>
+                каталог курсів
+              </Button>
             </div>
+
             <div className={'offer__decor'}>
               <svg>
                 <use href="/img/sprite.svg#offer-like"></use>
