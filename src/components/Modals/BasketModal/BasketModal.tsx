@@ -33,8 +33,10 @@ export function BasketModal({ onClose }: BasketModalProps) {
                 height={100}
               />
             </li>
-            <li className={'basket-model__list-text'}>
-              Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями
+            <li className={'basket-model__info'}>
+              <p className={'basket-model__list-text'}>
+                Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями
+              </p>
             </li>
             <li className={'basket-model__list-price'}>
               <s>6 800 грн.</s>
@@ -58,12 +60,12 @@ export function BasketModal({ onClose }: BasketModalProps) {
                 height={100}
               />
             </li>
-            <li className={''}>
+            <li className={'basket-model__info'}>
               <p className={'basket-model__list-text'}>
                 Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями
               </p>
             </li>
-            <li>
+            <li className={'basket-model__sorting'}>
               <div className={'basket-model__container'}>
                 <p className={'basket-model__container-text'}>Оберіть для кого:</p>
                 <div className={'basket-model__container-img'}>
@@ -153,8 +155,10 @@ export function BasketModal({ onClose }: BasketModalProps) {
                 height={100}
               />
             </li>
-            <li className={'basket-model__list-text'}>
-              Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями
+            <li className={'basket-model__info'}>
+              <p className={'basket-model__list-text'}>
+                Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями
+              </p>
             </li>
             <li className={'basket-model__list-price'}>
               <s>6 800 грн.</s>
