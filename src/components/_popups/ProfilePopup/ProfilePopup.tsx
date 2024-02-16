@@ -2,17 +2,23 @@ import classNames from 'classnames'
 import React, { useState } from 'react'
 
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 import { SignOutAction } from '@http/profile/actions'
 
 import type { ProfilePopupProps } from './ProfilePopup.props'
 
 export function ProfilePopup({ onClose, showProfileModal, profile }: ProfilePopupProps) {
+  const router = useRouter()
+
   const [lang, setLang] = useState('uk')
 
   const handleExit = () => {
     SignOutAction()
-      .then(() => onClose())
+      .then(() => {
+        onClose()
+        router.push('/')
+      })
       .catch(console.log)
   }
 

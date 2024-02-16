@@ -1,23 +1,18 @@
 'use client'
 
 import classNames from 'classnames'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 
-import dynamic from 'next/dynamic'
-
-import { appContext } from '@components/Context/context'
 import { CoursesProgress } from '@components/CoursesProgress'
 import { Recommended } from '@components/Recommended'
 import { ScheduleDay } from '@components/ScheduleDay'
 import { StatisticSubjects } from '@components/StatisticSubjects'
 import { TestKnowledgeList } from '@components/TestKnowledgeList'
 import { ToDoList } from '@components/ToDoList'
-import { UrgentTasks } from '@components/UrgentTasks'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 
 import { Banner } from '_ui/Banner'
-import { Button } from '_ui/Button'
 import { Loader } from '_ui/Loader'
 import { PageWrapper } from '_ui/PageWrapper'
 

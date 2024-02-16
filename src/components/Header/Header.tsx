@@ -25,6 +25,12 @@ const BasketPopup = dynamic(() => import('_popups/BasketPopup').then((m) => m.Ba
 export function Header({ profile, className }: HeaderProps) {
   const { header } = useContext(appContext)
 
+  const role = {
+    teacher: profile?.role === 20,
+    student: profile?.role === 2,
+    parent: profile?.role === 10,
+  }
+
   const profileRef = useRef(null)
   const basketRef = useRef(null)
 
@@ -122,7 +128,8 @@ export function Header({ profile, className }: HeaderProps) {
               )}
               {isShowProfileModal && (
                 <ProfileInfoModal
-                  teacherId={profile?.id}
+                  teacherId={role.teacher ? profile?.id : undefined}
+                  studentId={role.student ? profile?.id : undefined}
                   onClose={() => setIsShowProfileModal(false)}
                 />
               )}

@@ -12,9 +12,6 @@ import { Modal } from '_ui/Modal'
 import type { ProfileInfoModalProps } from './ProfileInfoModal.props'
 
 export function ProfileInfoModal({ onClose, studentId, teacherId }: ProfileInfoModalProps) {
-  // const { result: student, loading: studentIsLoading, error: studentIsError } = useAsyncAbortable(getStudentProfileInfo, [studentId])
-  // const { result: teacher, loading: teacherIsLoading, error: teacherIsError } = useAsyncAbortable(getTeacherProfileInfo, [teacherId])
-
   const {
     profile: { data: student, isLoading: studentIsLoading, isError: studentIsError },
   } = useQueryStudent(studentId)
