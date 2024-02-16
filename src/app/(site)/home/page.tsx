@@ -1,10 +1,10 @@
 import dynamic from 'next/dynamic'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 import { AboutMeRequest } from '@http/profile/server'
 
 import { Loader } from '_ui/Loader'
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 
 const HomeContent = dynamic(() => import('./home.content').then((mod) => mod.default), {
   loading: () => <Loader />,
@@ -14,8 +14,7 @@ const HomeContent = dynamic(() => import('./home.content').then((mod) => mod.def
 export default async function HomePage() {
   const token = cookies().get('accessToken')
 
-  if (!token)
-    redirect('/')
+  if (!token) redirect('/')
 
   const { data } = await AboutMeRequest()
 
