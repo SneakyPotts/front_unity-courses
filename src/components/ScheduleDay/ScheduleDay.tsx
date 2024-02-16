@@ -3,7 +3,7 @@ import React from 'react'
 
 import { LessonItem } from '@components/LessonItem'
 
-import { Loader } from '@UI/Loader'
+import { Loader } from '_ui/Loader'
 
 import type { ScheduleDayProps } from './ScheduleDay.props'
 

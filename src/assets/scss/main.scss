@@ -57,6 +57,7 @@
 @import 'components/UI/loader';
 @import 'components/UI/editor-teacher';
 @import 'components/UI/notification-model';
+@import 'components/UI/timepicker';
 
 // 6. All Components
 @import 'components/header';
@@ -102,6 +103,10 @@
 @import 'components/test-knowledge-item';
 @import 'components/teacher-week';
 @import 'components/login';
+@import 'components/toast';
+@import 'components/lesson-editing';
+@import 'components/answer-block';
+@import 'components/tests';
 
 // 30.11.23
 @import 'components/courses-catalog';

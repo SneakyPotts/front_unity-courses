@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 
-import { Banner } from '@UI/Banner'
-import { Button } from '@UI/Button'
-import { Tabs } from '@UI/Tabs'
+import { Banner } from '_ui/Banner'
+import { Button } from '_ui/Button'
+import { Tabs } from '_ui/Tabs'
 
 const tabs = ['Про курс', 'Програма та графік', 'Викладачі', 'Відгуки']
 

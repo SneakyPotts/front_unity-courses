@@ -73,6 +73,12 @@
     min-height: 100%;
   }
 
+  &__wrapper {
+    &-finish {
+      height: rem(45);
+    }
+  }
+
   &__link__lable-svg {
     position: absolute;
     left: rem(19);
@@ -388,6 +394,41 @@
     .field__label {
       color: var(--grey-3);
     }
+
+    &-link {
+      margin-bottom: rem(20);
+      padding: rem(8) rem(16) rem(8) rem(50);
+    }
+
+    &-text {
+      margin-bottom: rem(8);
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      font-size: rem(16);
+      line-height: 120%;
+      color: #bdbdbd;
+    }
+
+    &-textrea {
+      margin-bottom: rem(30);
+      height: rem(100);
+    }
+
+    &-button {
+      display: flex;
+      justify-content: center;
+    }
+
+    &-btn {
+      width: rem(188);
+      height: rem(45);
+    }
+
+    &-svg {
+      position: absolute;
+      left: rem(16);
+      top: rem(8);
+    }
   }
 
   &__confirm {
@@ -445,9 +486,27 @@
     }
   }
 
+  &__delete {
+    &-text {
+      text-align: center;
+    }
+  }
+
   &__text {
     font-size: rem(13);
     color: var(--grey-3);
+
+    &-text {
+      text-align: center;
+    }
+  }
+
+  &__box {
+    @include flex-all-sb;
+
+    &-btn {
+      width: 214px !important;
+    }
   }
 
   &__upload {
@@ -583,6 +642,12 @@
     background-color: #fff;
   }
 
+  &__button {
+    &-btn {
+      width: rem(214);
+    }
+  }
+
   &.change-photo {
     .modal__document {
       margin: 0 auto;
@@ -633,6 +698,27 @@
     background-color: #fe7c11;
     transition: all 0.5s;
   }
+
+  &__lesson-edit {
+    &--text {
+      text-align: center;
+      color: var(--grey-4);
+
+      &:not(:last-of-type) {
+        margin-bottom: rem(15);
+      }
+
+      &:last-of-type {
+        margin-bottom: rem(30);
+      }
+    }
+
+    &--btn {
+      width: min(310px, 100%) !important;
+      height: rem(40);
+      margin: 0 auto;
+    }
+  }
 }
 
 @include mq('md') {
@@ -660,6 +746,16 @@
 
     &__btn {
       max-width: 100%;
+    }
+
+    &__box {
+      flex-direction: column;
+      gap: rem(12);
+
+      &-btn {
+        margin-top: 0;
+        width: 100% !important;
+      }
     }
 
     &__logo {
@@ -814,6 +910,7 @@
       grid-template-columns: 1fr 1fr;
     }
   }
+
   .personal-cabinet__value {
     text-align: end;
   }

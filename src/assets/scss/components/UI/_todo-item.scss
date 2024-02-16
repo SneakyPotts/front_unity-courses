@@ -1,5 +1,5 @@
 .todo-item {
-  @include mb(rem(10));
+  //@include mb(rem(10));
 
   display: flex;
   border: rem(1) solid var(--blue-200);
@@ -22,6 +22,15 @@
   &--create {
     .todo-item__checkbox {
       align-items: center;
+    }
+
+    .checkbox {
+      &__value {
+        width: 100%;
+      }
+      &__field {
+        height: rem(22);
+      }
     }
   }
 

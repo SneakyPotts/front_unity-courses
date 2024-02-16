@@ -232,6 +232,10 @@
       width: rem(30);
       height: rem(30);
     }
+
+    &.student-name {
+      cursor: pointer;
+    }
   }
 
   &__info {

@@ -1,10 +1,11 @@
 import classNames from 'classnames'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
+import 'react-toastify/dist/ReactToastify.css'
+import 'simplebar-react/dist/simplebar.min.css'
 
 import RobotoFont from '@assets/font'
 import '@assets/scss/main.scss'
-
 import { AppProvider } from '@components/Context/context'
 
 export const metadata: Metadata = {

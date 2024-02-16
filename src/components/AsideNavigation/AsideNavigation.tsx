@@ -6,7 +6,7 @@ import { useToggle } from 'usehooks-ts'
 
 import Link from 'next/link'
 
-import { Button } from '@UI/Button'
+import { Button } from '_ui/Button'
 
 import { extraClass, navListChildren } from './AsideNavigation.data'
 import type { AsideNavigationProps, NavAccordionProps } from './AsideNavigation.props'

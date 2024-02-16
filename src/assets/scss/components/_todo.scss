@@ -3,10 +3,39 @@
   flex-direction: column;
   gap: rem(20);
 
+  &__list {
+    & > li {
+      @include mb(rem(10));
+    }
+  }
+
+  &__edits {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+    margin-left: auto;
+    width: 20px;
+    gap: rem(3);
+
+    &-span {
+      border-radius: rem(25);
+      width: rem(3);
+      height: rem(3);
+      background: #bdbdbd;
+    }
+
+    &-controls {
+      @include flex-v-center;
+      column-gap: rem(12);
+    }
+  }
+
   &__block {
     border-radius: rem(10);
     padding: rem(20) 0 rem(20) rem(20);
-    padding-bottom: 0;
+    //padding-bottom: 0;
     background-color: var(--blue-50);
 
     &--yellow {
@@ -43,15 +72,61 @@
     }
   }
 
-  &__bottom {
+  &__edit {
+    @include flex;
+
+    flex-direction: column;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    gap: rem(3);
+
+    &-span {
+      border-radius: rem(25);
+      width: rem(3);
+      height: rem(3);
+      background-color: #bdbdbd;
+    }
+  }
+
+  &__box {
+    //position: absolute;
+    //right: 0;
+    //top: 0;
+    //z-index: 1;
+    display: flex;
+    flex-direction: column;
+    border: rem(1) solid #bdbdbd;
+    border-radius: rem(5);
+    padding: rem(20);
+    box-shadow: 0 rem(8) rem(24) 0 rgba(0, 0, 0, 13%);
+    background: #fff;
+    gap: rem(15);
+
+    &-edit {
+      @include flex-v-center;
+
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+      font-size: rem(14);
+      line-height: 120%;
+      color: #1c1c1c;
+      gap: rem(10);
+    }
   }
 
   &__top {
     @include flex-all-sb;
+    gap: rem(20);
 
     margin-bottom: rem(20);
     padding-right: rem(20);
-    gap: rem(20);
+
+    transition: margin-bottom 0.3s var(--ease-in-out);
+
+    &.--editing-block {
+      height: rem(33);
+    }
   }
 
   &__add {
@@ -108,9 +183,9 @@
         will-change: height;
       }
 
-      .todo__list {
-        padding-bottom: rem(20);
-      }
+      //.todo__list {
+      //  padding-bottom: rem(20);
+      //}
 
       .todo__add-svg {
         width: rem(16);
@@ -122,6 +197,7 @@
     &--active {
       .todo__bottom {
         grid-template-rows: 1fr;
+        max-height: rem(422);
       }
 
       .todo__add-svg {

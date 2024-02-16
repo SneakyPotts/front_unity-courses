@@ -10,8 +10,8 @@
 }
 
 .content-tabs__edit__svg {
-  width: rem(12);
-  height: rem(12);
+  width: rem(14);
+  height: rem(14);
   fill: #828282;
 }
 
@@ -108,6 +108,10 @@
     display: inline-block;
     min-width: rem(19);
   }
+
+  &.--no-handler {
+    border-radius: rem(5);
+  }
 }
 
 .dropdawn__list {
@@ -146,6 +150,10 @@
   line-height: 120%;
   background-color: #eef4ff;
   cursor: pointer;
+
+  &.--no-handler {
+    width: 50px;
+  }
 }
 
 .dropdawn__list-item:hover {
@@ -154,6 +162,7 @@
 
 .dropdawn__list--visible {
   display: block;
+  max-width: fit-content;
 }
 
 .dropdown__ipnut-hidden {

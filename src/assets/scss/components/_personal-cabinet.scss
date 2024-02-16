@@ -375,29 +375,6 @@
   background-color: #bdbdbd;
 }
 
-.recommended {
-  padding: rem(82) 0 rem(82);
-  background-color: #f2f2f2;
-}
-
-.recommended__inner {
-  display: flex;
-  justify-content: center;
-}
-
-.recommended__inner-title {
-  max-width: rem(720);
-
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 120%; /* 36px */
-  text-align: center;
-  text-transform: uppercase;
-  color: #1c1c1c;
-}
-
-//
-
 @include mq('lg') {
   .personal-cabinet {
     &__block {
