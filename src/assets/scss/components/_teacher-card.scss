@@ -30,7 +30,7 @@
     margin: rem(60) 0 rem(60);
     border-bottom: rem(1) solid #e0e0e0;
     padding-bottom: rem(8);
-    font-family: 'Roboto', sans-serif;
+
     font-weight: 500;
     font-size: rem(20);
     line-height: 120%;
@@ -51,7 +51,6 @@
   }
 
   &__top-title {
-    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: rem(20);
     line-height: 120%;
@@ -74,7 +73,7 @@
   &__sctatistic__item-title {
     margin-bottom: rem(64);
     max-width: rem(119);
-    font-family: 'Roboto', sans-serif;
+
     font-weight: 400;
     font-size: rem(14);
     line-height: 120%;
@@ -95,7 +94,6 @@
   }
 
   &__sctatistic__list-span {
-    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: rem(40);
     color: #ffa349;

@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Tabs } from '@UI/Tabs'
+
+import { Tabs } from '_ui/Tabs'
 
 const tabs = ['Конспект', 'Самостійна робота', 'Тест']
 

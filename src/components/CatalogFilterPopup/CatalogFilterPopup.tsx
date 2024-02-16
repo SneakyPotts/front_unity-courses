@@ -5,8 +5,8 @@ import { useOnClickOutside } from 'usehooks-ts'
 import { appContext } from '@components/Context/context'
 import { SearchField } from '@components/SearchField'
 
-import { Button } from '@UI/Button'
-import { Checkbox } from '@UI/Checkbox'
+import { Button } from '_ui/Button'
+import { Checkbox } from '_ui/Checkbox'
 
 import type { CatalogFilterPopupProps } from './CatalogFilterPopup.props'
 

@@ -46,10 +46,13 @@
   }
 
   &__calendar {
-    margin-top: rem(8);
-    margin-right: rem(14);
-    width: rem(20);
-    height: rem(20);
+    //margin-top: rem(8);
+    //margin-right: rem(14);
+    //width: rem(20);
+    //height: 100%;
+    @include flex-all-center;
+
+    padding-right: rem(14);
 
     &-svg {
       width: rem(20);
@@ -91,6 +94,19 @@
 
       svg {
         fill: var(--orange-400);
+      }
+
+      &.test-right,
+      &.test-pale {
+        svg {
+          fill: #27ae60;
+        }
+      }
+
+      &.test-wrong {
+        svg {
+          fill: #eb5757;
+        }
       }
     }
 

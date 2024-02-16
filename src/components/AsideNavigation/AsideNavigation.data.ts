@@ -55,21 +55,42 @@ export const navListChildren = [
     id: 1,
     name: 'Головна',
     imgId: 'group',
-    link: '/',
+    link: '/home',
     list: [],
   },
   {
     id: 2,
     name: 'Каталог курсів',
     imgId: 'cours',
-    link: '/schedule',
+    link: '/',
     list: [],
   },
   {
     id: 3,
     imgId: 'list',
     name: 'Мої курси',
-    link: '/any',
+    link: '/courses/my',
+    list: [],
+  },
+  {
+    id: 3.1,
+    imgId: 'list',
+    name: 'Курс детально',
+    link: '/courses/detail',
+    list: [],
+  },
+  {
+    id: 3.2,
+    imgId: 'list',
+    name: 'Урок курсу',
+    link: '/courses/lesson',
+    list: [],
+  },
+  {
+    id: 3.3,
+    imgId: 'list',
+    name: 'Архівний курс',
+    link: '/courses/archive',
     list: [],
   },
   {
@@ -92,7 +113,7 @@ export const navListChildren = [
     name: 'Статистика',
     link: '/statistics',
     list: [],
-  }
+  },
 ]
 
 export const navListTeacher = [

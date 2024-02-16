@@ -13,7 +13,6 @@
 
       gap: rem(12);
 
-      font-family: 'Roboto', sans-serif;
       font-size: rem(14);
       font-weight: 500;
       line-height: rem(17);
@@ -36,6 +35,22 @@
       margin-left: auto;
       margin-right: 0;
     }
+  }
+
+  &__link-svg {
+    display: block;
+    width: rem(25);
+    height: rem(25);
+    fill: var(--blue-300);
+
+    &--stroke {
+      fill: none;
+      stroke: var(--blue-300);
+      stroke-width: rem(1.25);
+    }
+  }
+
+  &__right {
   }
 }
 

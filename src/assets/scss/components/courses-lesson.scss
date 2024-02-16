@@ -84,7 +84,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .courses-lesson {
     &__inner {
       display: flex;
@@ -129,7 +129,7 @@
   }
 }
 
-@include mq("sm") {
+@include mq('sm') {
   .courses-lesson {
     &__title {
       &--element {
@@ -139,7 +139,5 @@
         -webkit-line-clamp: 2;
       }
     }
-
-    
   }
 }

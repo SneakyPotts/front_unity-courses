@@ -157,3 +157,23 @@
     align-items: flex-end;
   }
 }
+
+@include mq('lg') {
+  .mobile__calendar--show {
+    padding-top: rem(395 + 20);
+  }
+
+  .schedule__calendar {
+    display: none;
+
+    position: fixed;
+    top: rem(130);
+    left: rem(15);
+
+    &--show {
+      display: initial;
+
+      width: calc(100% - 30px);
+    }
+  }
+}

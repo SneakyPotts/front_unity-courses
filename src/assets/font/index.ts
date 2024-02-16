@@ -1,23 +1,23 @@
 import localFont from 'next/font/local'
 
-const SFUITextFont = localFont({
+const RobotoFont = localFont({
   src: [
     {
-      path: './/SFUIText-Regular.woff2',
+      path: './Roboto/Roboto-Regular.ttf',
       weight: '400',
       style: 'normal',
     },
     {
-      path: './SFUIText-Medium.woff2',
+      path: './Roboto/Roboto-Medium.ttf',
       weight: '500',
       style: 'normal',
     },
     {
-      path: './SFUIText-Bold.woff2',
+      path: './Roboto/Roboto-Bold.ttf',
       weight: '700',
       style: 'normal',
     },
   ],
 })
 
-export default SFUITextFont
+export default RobotoFont
