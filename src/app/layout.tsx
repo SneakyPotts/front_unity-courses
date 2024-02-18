@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
+import 'react-loading-skeleton/dist/skeleton.css'
 import 'react-toastify/dist/ReactToastify.css'
 import 'simplebar-react/dist/simplebar.min.css'
 

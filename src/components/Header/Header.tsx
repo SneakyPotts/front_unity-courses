@@ -3,12 +3,12 @@
 import classNames from 'classnames'
 import React, { useContext, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 import { useOnClickOutside } from 'usehooks-ts'
 
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 
+import { imgBlur } from '@assets/utils'
 import { appContext } from '@components/Context/context'
 
 import type { HeaderProps } from './Header.props'
@@ -114,6 +114,7 @@ export function Header({ profile, className }: HeaderProps) {
                   src={profile?.avatar || '/img/static/default-avatar.png'}
                   fill
                   style={{ objectFit: 'cover' }}
+                  {...imgBlur}
                   alt="alt"
                 />
               </button>

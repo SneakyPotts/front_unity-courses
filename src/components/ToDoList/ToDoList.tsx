@@ -8,7 +8,7 @@ import { useOnClickOutside, useToggle } from 'usehooks-ts'
 
 import { DeadlinePicker } from '@components/DeadlinePicker'
 import { Portal } from '@components/Portal'
-import { useQueryToDo } from '@http/profile/client'
+import { useQueryToDo } from '@http/common/todo.client'
 import { TToDo } from '@http/profile/type'
 
 import { Button } from '_ui/Button'
@@ -80,16 +80,16 @@ export function ToDoList({}: ToDoListProps) {
               {isError && <p className="text-center">Щось пішло не так</p>}
               {!!unCompletedToDo.length
                 ? unCompletedToDo?.map((toDo) => (
-                  <ToDoItem
-                    key={toDo.id}
-                    {...toDo}
-                    edit={{
-                      show: isCreating === toDo.id,
-                      setShow: () => setIsCreating(toDo.id),
-                      setClose: () => setIsCreating(''),
-                    }}
-                  />
-                ))
+                    <ToDoItem
+                      key={toDo.id}
+                      {...toDo}
+                      edit={{
+                        show: isCreating === toDo.id,
+                        setShow: () => setIsCreating(toDo.id),
+                        setClose: () => setIsCreating(''),
+                      }}
+                    />
+                  ))
                 : !isLoading && !isCreating.length && <li className="text-center">Список задач пустий...</li>}
             </ul>
           </SimpleBar>

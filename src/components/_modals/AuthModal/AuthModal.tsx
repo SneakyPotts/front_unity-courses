@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { SignInServerAction } from '@http/profile/actions'
+import { SignInServerAction, getGoogleAuthUriAction } from '@http/profile/actions'
 
 import { Button } from '_ui/Button'
 import { Checkbox } from '_ui/Checkbox'
@@ -34,6 +34,17 @@ export function AuthModal({ onClose }: AuthModalProps) {
 
   const handleSaveMe: ChangeEventHandler<HTMLInputElement> = (e) => {
     setSaveMe(e.target.checked)
+  }
+
+  const handleGoogleAuth = async () => {
+    const domain = window.location.origin
+
+    await getGoogleAuthUriAction(domain)
+    // const { data, error } = await getGoogleAuthUriAction(domain)
+
+    // if (!error && data?.google_auth_uri) {
+    //   window.location.href = data?.google_auth_uri
+    // }
   }
 
   const onSubmit: SubmitHandler<FormSchema> = async (data) => {
@@ -110,8 +121,9 @@ export function AuthModal({ onClose }: AuthModalProps) {
             <span>Або</span>
 
             <Button
-              className="login__form-btn"
               variant={'border'}
+              className="login__form-btn"
+              onClick={handleGoogleAuth}
             >
               <Image
                 src="/img/icons/google_logo.svg"

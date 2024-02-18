@@ -1,59 +1,16 @@
-import { clientAuthFetch } from '@http/clientApi'
-import type { TToDo } from '@http/profile/type'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-
-const getToDoList = () => clientAuthFetch<TToDo[]>(`/todo/`)
-
-const createToDo = (body: { title: string; deadline?: string; is_completed?: boolean }) =>
-  clientAuthFetch<any>(`/todo/`, {
-    method: 'POST',
-    body: JSON.stringify(body),
-  })
-
-const updateToDo = ({ id, ...body }: { id: string; title?: string; deadline?: string; is_completed?: boolean }) =>
-  clientAuthFetch<any>(`/todo/${id}/`, {
-    method: 'PATCH',
-    body: JSON.stringify(body),
-  })
-
-const removeToDo = (id: string) =>
-  clientAuthFetch<any>(`/todo/${id}/`, {
-    method: 'DELETE',
-  })
-
-export function useQueryToDo() {
-  const queryClient = useQueryClient()
-
-  const get = useQuery({
-    queryKey: ['ToDoList'],
-    queryFn: getToDoList,
-  })
-
-  const { mutateAsync: create } = useMutation({
-    mutationFn: createToDo,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['ToDoList'] })
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+async function signInByGoogle(domain: string) {
+  const response = await fetch(`${API_URL}/users/oauth/google/get_uri/`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
+    body: JSON.stringify({ domain }),
   })
 
-  const { mutateAsync: edit } = useMutation({
-    mutationFn: updateToDo,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['ToDoList'] })
-    },
-  })
+  const result = await response.json()
 
-  const { mutateAsync: remove } = useMutation({
-    mutationFn: removeToDo,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['ToDoList'] })
-    },
-  })
+  console.log('result', result)
 
-  return {
-    get,
-    create,
-    edit,
-    remove,
-  }
+  return result
 }
