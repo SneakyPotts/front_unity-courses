@@ -25,7 +25,6 @@ export async function serverFetch<T>(url: string, init?: RequestInit & { skip?: 
 
     return { data: response as T, error: null }
   } catch (error) {
-    console.log(error)
     return { data: undefined, error: new Error(error as string) }
   }
 }

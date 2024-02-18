@@ -111,14 +111,14 @@
   }
 
   &__price {
-    @include flex-v-center;
     gap: rem(8);
 
-    &-span {
+    &-discount {
+      text-decoration-color: var(--red);
+      color: var(--grey-3);
       font-size: rem(13);
       font-weight: 500;
-      line-height: 120%;
-      color: #828282;
+      line-height: rem(16);
     }
 
     &-text {

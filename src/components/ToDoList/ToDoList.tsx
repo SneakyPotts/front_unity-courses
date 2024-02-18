@@ -8,7 +8,7 @@ import { useOnClickOutside, useToggle } from 'usehooks-ts'
 
 import { DeadlinePicker } from '@components/DeadlinePicker'
 import { Portal } from '@components/Portal'
-import { useQueryToDo } from '@http/profile/client'
+import { useQueryToDo } from '@http/common/todo.client'
 import { TToDo } from '@http/profile/type'
 
 import { Button } from '_ui/Button'

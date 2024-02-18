@@ -57,10 +57,10 @@ export function StatisticSubjects({ studentId, isShort = false }: StatisticSubje
           {isLoading && <Loader />}
           {isError && <p className="text-center">Щось пішло не так...</p>}
           {statistics?.map(
-            (item) =>
+            (item, i) =>
               (item.type === 'attendance' || !!item.value) && (
                 <StatisticsItem
-                  key={item.type}
+                  key={`${item.value}_${item.type}-${i}`}
                   {...item}
                 />
               ),

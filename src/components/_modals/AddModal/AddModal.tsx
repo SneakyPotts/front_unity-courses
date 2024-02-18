@@ -3,13 +3,15 @@ import { useWindowSize } from 'usehooks-ts'
 
 import Image from 'next/image'
 
+import { imgBlur } from '@assets/utils'
+
 import { Button } from '_ui/Button'
 import { Checkbox } from '_ui/Checkbox'
 import { Modal } from '_ui/Modal'
 
-import type { BasketModalProps } from './BasketModal.props'
+import type { AddModalProps } from './AddModal.props'
 
-export function BasketModal({ onClose }: BasketModalProps) {
+export function AddModal({ onClose }: AddModalProps) {
   const { width } = useWindowSize()
   const isDesktop = width > 991
 
@@ -117,6 +119,7 @@ export function BasketModal({ onClose }: BasketModalProps) {
                         width={24}
                         height={24}
                         style={{ objectFit: 'cover' }}
+                        {...imgBlur}
                         alt="alt"
                       />
                       <p>Дмитро</p>
