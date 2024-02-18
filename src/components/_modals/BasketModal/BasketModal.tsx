@@ -2,7 +2,7 @@ import React from 'react'
 import { useWindowSize } from 'usehooks-ts'
 
 import Image from 'next/image'
-
+import { imgBlur } from '@assets/utils'
 import { Button } from '_ui/Button'
 import { Checkbox } from '_ui/Checkbox'
 import { Modal } from '_ui/Modal'
@@ -30,6 +30,7 @@ export function BasketModal({ onClose }: BasketModalProps) {
                 alt="alt"
                 width={100}
                 height={100}
+                {...imgBlur}
               />
             </li>
             <li className={'basket-model__info'}>
@@ -71,19 +72,19 @@ export function BasketModal({ onClose }: BasketModalProps) {
                   <Image
                     width={24}
                     height={24}
-                    objectFit={'cover'}
+                    style={{ objectFit: 'cover' }}
                     src="https://loremflickr.com/100/100"
                   />
                   <Image
                     width={24}
                     height={24}
-                    objectFit={'cover'}
+                    style={{ objectFit: 'cover' }}
                     src="https://loremflickr.com/100/100"
                   />
                   <Image
                     width={24}
                     height={24}
-                    objectFit={'cover'}
+                    style={{ objectFit: 'cover' }}
                     src="https://loremflickr.com/100/100"
                   />
                 </div>
@@ -100,7 +101,7 @@ export function BasketModal({ onClose }: BasketModalProps) {
                         src="https://loremflickr.com/24/24"
                         width={24}
                         height={24}
-                        objectFit={'cover'}
+                        style={{ objectFit: 'cover' }}
                       />
                       <p>Дмитро</p>
                     </div>
@@ -112,7 +113,7 @@ export function BasketModal({ onClose }: BasketModalProps) {
                         src="https://loremflickr.com/24/24"
                         width={24}
                         height={24}
-                        objectFit={'cover'}
+                        style={{ objectFit: 'cover' }}
                       />
                       <p>Дмитро</p>
                     </div>
@@ -124,7 +125,7 @@ export function BasketModal({ onClose }: BasketModalProps) {
                         src="https://loremflickr.com/24/24"
                         width={24}
                         height={24}
-                        objectFit={'cover'}
+                        style={{ objectFit: 'cover' }}
                       />
                       <p>Дмитро</p>
                     </div>

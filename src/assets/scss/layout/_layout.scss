@@ -44,7 +44,7 @@
 //   grid-area: footer;
 // }
 
-@include mq('lg') {
+@include mq("lg") {
   .base-layout {
     display: block;
 
@@ -65,8 +65,12 @@
   }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .layout {
+    .main {
+      padding: unset;
+    }
+
     .main--active {
       padding: unset;
     }

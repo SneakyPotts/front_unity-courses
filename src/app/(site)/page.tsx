@@ -88,7 +88,7 @@ export default function CoursesCatalog() {
         <div className={'courses-catalog__wrapper'}>
           {!asideIsOpen && (
             <div className={'courses-catalog__body'}>
-              <div className={'courses-catalog__filter visible'}>
+              <div className={'courses-catalog__filter '}>
                 <div className={'courses-catalog__filter-body'}>
                   <h2 className={'courses-catalog__title'}>Фільтрувати</h2>
                   <div className={'courses-catalog__mobile'}>
@@ -177,8 +177,8 @@ function CourseCardPaid() {
           <a href="#">
             <Image
               src="https://loremflickr.com/640/360"
-              width={360}
-              height={200}
+              width={640}
+              height={360}
               alt=""
               {...imgBlur}
             />
@@ -195,20 +195,19 @@ function CourseCardPaid() {
         <div className={'courses-catalog__teachers'}>
           <div className={'courses-catalog__teacher'}>
             <div className={'courses-catalog__teacher-img'}>
-              <img
+              <Image
                 src="https://loremflickr.com/640/360"
-                alt=""
+                style={{ objectFit: 'cover' }}
+                alt="alt"
+                width={640}
+                height={360}
+                {...imgBlur}
               />
             </div>
             <button>Бондар О. М.</button>
           </div>
           <div className={'courses-catalog__teacher'}>
-            <div className={'courses-catalog__teacher-img'}>
-              <img
-                src="https://loremflickr.com/640/360"
-                alt=""
-              />
-            </div>
+            <div className={'courses-catalog__teacher-img'}></div>
             <button>Бондар О. М.</button>
           </div>
         </div>
@@ -269,9 +268,13 @@ function CourseCardPaidPromotion() {
         </span>
         <div className={'courses-catalog__photo'}>
           <a href="#">
-            <img
+            <Image
               src="https://loremflickr.com/640/360"
-              alt="courses-catalog__photo"
+              style={{ objectFit: 'cover' }}
+              alt="alt"
+              width={640}
+              height={360}
+              {...imgBlur}
             />
           </a>
         </div>
@@ -286,18 +289,26 @@ function CourseCardPaidPromotion() {
         <div className={'courses-catalog__teachers'}>
           <div className={'courses-catalog__teacher'}>
             <div className={'courses-catalog__teacher-img'}>
-              <img
+              <Image
                 src="https://loremflickr.com/640/360"
-                alt=""
+                style={{ objectFit: 'cover' }}
+                alt="alt"
+                width={640}
+                height={360}
+                {...imgBlur}
               />
             </div>
             <button>Бондар О. М.</button>
           </div>
           <div className={'courses-catalog__teacher'}>
             <div className={'courses-catalog__teacher-img'}>
-              <img
+              <Image
                 src="https://loremflickr.com/640/360"
-                alt=""
+                style={{ objectFit: 'cover' }}
+                alt="alt"
+                width={640}
+                height={360}
+                {...imgBlur}
               />
             </div>
             <button>Бондар О. М.</button>
@@ -362,9 +373,13 @@ function CourseCardFree() {
         </span>
         <div className={'courses-catalog__photo'}>
           <a href="#">
-            <img
+            <Image
               src="https://loremflickr.com/640/360"
-              alt=""
+              style={{ objectFit: 'cover' }}
+              alt="alt"
+              width={640}
+              height={360}
+              {...imgBlur}
             />
           </a>
         </div>
@@ -379,9 +394,13 @@ function CourseCardFree() {
         <div className={'courses-catalog__teachers'}>
           <div className={'courses-catalog__teacher'}>
             <div className={'courses-catalog__teacher-img'}>
-              <img
+              <Image
                 src="https://loremflickr.com/640/360"
-                alt=""
+                style={{ objectFit: 'cover' }}
+                alt="alt"
+                width={640}
+                height={360}
+                {...imgBlur}
               />
             </div>
             <button>Бондар О. М.</button>
