@@ -42,27 +42,50 @@
 
 @include mq('lg') {
   .stepper {
-    align-items: center;
-    border: rem(1) solid var(--blue-400);
-    border-radius: rem(5);
-    padding: rem(9) rem(12);
-
-    &__value {
-      font-weight: 500;
-      font-style: normal;
-      font-size: rem(16);
-      line-height: 1.2;
+    &:not(.--isDay) {
+      height: rem(40);
+      gap: rem(8);
     }
 
-    &__icon {
-      display: block;
-      width: rem(20);
-      height: rem(20);
-      fill: var(--grey-3);
+    &__value {
+      font-size: rem(16);
+
+      &.month {
+        text-transform: initial;
+      }
     }
 
     &__button {
-      display: none;
+      width: rem(32);
+      height: rem(32);
+    }
+  }
+
+  .--isDay {
+    &.stepper {
+      align-items: center;
+      border: rem(1) solid var(--blue-400);
+      border-radius: rem(5);
+      padding: rem(9) rem(12);
+    }
+    .stepper {
+      &__value {
+        font-weight: 500;
+        font-style: normal;
+        font-size: rem(16);
+        line-height: 1.2;
+      }
+
+      &__icon {
+        display: block;
+        width: rem(20);
+        height: rem(20);
+        fill: var(--grey-3);
+      }
+
+      &__button {
+        display: none;
+      }
     }
   }
 }

@@ -4,10 +4,11 @@ import React, { useState } from 'react'
 
 import Link from 'next/link'
 
-import { ProfileInfoModal } from '@components/ProfileInfoModal'
 import { TypesList } from '@components/TypesList'
 
-import { Button } from '@UI/Button'
+import { Button } from '_ui/Button'
+
+import { ProfileInfoModal } from '_modals/ProfileInfoModal'
 
 import type { TeacherProps } from './LessonItem.props'
 

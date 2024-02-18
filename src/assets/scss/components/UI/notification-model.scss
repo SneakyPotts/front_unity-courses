@@ -19,7 +19,7 @@
       font-size: rem(13);
       font-weight: 500;
       line-height: rem(16);
-      letter-spacing: 0em;
+      letter-spacing: 0;
     }
 
     &-close {
@@ -60,7 +60,7 @@
       font-size: rem(16);
       font-weight: 400;
       line-height: rem(21);
-      letter-spacing: 0em;
+      letter-spacing: 0;
     }
 
     &-sale {
@@ -71,7 +71,7 @@
       font-size: rem(20);
       font-weight: 500;
       line-height: rem(24);
-      letter-spacing: 0em;
+      letter-spacing: 0;
       color: var(--grey-1);
 
       s {
@@ -82,7 +82,7 @@
         font-size: rem(13);
         font-weight: 500;
         line-height: rem(16);
-        letter-spacing: 0em;
+        letter-spacing: 0;
         color: var(--grey-3);
       }
     }
@@ -100,7 +100,7 @@
       font-size: rem(24);
       font-weight: 600;
       line-height: rem(29);
-      letter-spacing: 0em;
+      letter-spacing: 0;
 
       p {
         color: var(--grey-3);
@@ -108,7 +108,7 @@
         font-size: rem(16);
         font-weight: 500;
         line-height: rem(19);
-        letter-spacing: 0em;
+        letter-spacing: 0;
       }
     }
   }

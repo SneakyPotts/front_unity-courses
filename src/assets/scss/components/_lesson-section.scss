@@ -18,6 +18,7 @@
 
     @media screen and (min-width: 992px) {
       max-height: none !important;
+      background-color: initial !important;
     }
   }
 
@@ -351,6 +352,7 @@
     .document-block__list {
       grid-template-columns: repeat(auto-fill, minmax(rem(205), 1fr));
       gap: rem(30);
+      grid-template-rows: initial;
     }
   }
 
@@ -383,7 +385,10 @@
   &__link {
     @include flex-v-center;
 
-    width: rem(316);
+    width: 100%;
+
+    // min-width: rem(310);
+    max-width: rem(310);
     font-weight: 500;
     font-size: rem(16);
     line-height: 1.2;
@@ -459,7 +464,11 @@
     flex-direction: column;
     align-items: flex-start;
 
-    gap: rem(20);
+    // gap: rem(20);
+  }
+
+  &__description {
+    margin-right: auto;
   }
 
   &__edit {
@@ -779,6 +788,20 @@
 
   &__work {
     margin-bottom: rem(20);
+  }
+
+  &__lable {
+    display: flex;
+    align-items: center;
+    gap: rem(12);
+
+    &-text {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+      font-size: rem(16);
+      line-height: 130%;
+      color: #1c1c1c;
+    }
   }
 
   &__notification &__teacher-btn {
@@ -1720,7 +1743,7 @@
   position: relative;
 
   p {
-    margin-bottom: rem(8);
+    //margin-bottom: rem(8);
 
     font-weight: 500;
     font-size: rem(16);

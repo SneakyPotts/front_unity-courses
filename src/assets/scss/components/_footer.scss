@@ -36,6 +36,22 @@
       margin-right: 0;
     }
   }
+
+  &__link-svg {
+    display: block;
+    width: rem(25);
+    height: rem(25);
+    fill: var(--blue-300);
+
+    &--stroke {
+      fill: none;
+      stroke: var(--blue-300);
+      stroke-width: rem(1.25);
+    }
+  }
+
+  &__right {
+  }
 }
 
 @include mq('lg') {

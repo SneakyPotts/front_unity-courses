@@ -1,0 +1,261 @@
+@import 'src/assets/scss/abstracts/functions';
+@import 'src/assets/scss/abstracts/mixins';
+
+#deadline {
+  * {
+    float: none;
+  }
+
+  .deadline {
+    &-picker {
+      margin-bottom: rem(32);
+    }
+
+    &__calendar {
+      width: rem(360);
+      max-width: calc(100vw - 10px);
+      padding: rem(24);
+
+      .react-datepicker__triangle {
+        &:before,
+        &:after {
+          display: none;
+        }
+      }
+    }
+
+    &__weekDay {
+      font-family: Roboto, sans-serif;
+      font-size: rem(16);
+      font-weight: 400;
+      color: var(--grey-4);
+      text-transform: capitalize;
+    }
+
+    &__day {
+      flex-shrink: 0;
+
+      width: rem(40);
+      height: rem(40);
+      padding: rem(6);
+
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+
+      font-family: Roboto, sans-serif;
+      font-size: rem(16);
+      font-weight: 400;
+      color: var(--black);
+      text-align: center;
+
+      &:not(.react-datepicker__day--selected) {
+        @include hover {
+          background-color: var(--blue-50);
+        }
+      }
+
+      &.react-datepicker__day--selected {
+        color: var(--white);
+        background-color: var(--blue-400);
+      }
+
+      &:not(.react-datepicker__day--weekend) {
+        border-radius: 50%;
+      }
+    }
+
+    &__controls {
+      display: flex;
+      justify-content: space-between;
+      gap: rem(16);
+    }
+
+    &__time-toggler {
+      width: 100%;
+      padding-top: rem(16);
+      margin-top: rem(16 - 6.4);
+      margin-bottom: rem(16);
+
+      border-top: rem(1) solid var(--grey-5);
+
+      font-weight: 500;
+      line-height: normal;
+      text-transform: uppercase;
+      text-align: left;
+      color: var(--grey-4);
+    }
+  }
+
+  .month-navigate {
+    margin-bottom: rem(16);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__buttons {
+      display: flex;
+      gap: rem(12);
+    }
+
+    &__button {
+      padding: rem(8);
+
+      border-radius: 50%;
+      background-color: var(--blue-50);
+
+      @include hover() {
+        background-color: var(--blue-200);
+      }
+
+      &:first-child {
+        rotate: 180deg;
+      }
+
+      &-icon {
+        width: rem(16);
+        height: rem(16);
+        fill: var(--gray-2);
+      }
+    }
+  }
+
+  .current-value {
+    font-family: Roboto, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+    color: var(--black);
+  }
+
+  .react-datepicker {
+    &__header {
+      border: none;
+    }
+
+    &__header--custom {
+      padding: 0;
+
+      background-color: #fff;
+    }
+
+    &__month {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    &__day-names,
+    &__week {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__day--today:not(.react-datepicker__day--selected) {
+      color: var(--blue-400);
+      background-color: var(--white);
+      box-shadow: 0 0 0 2px var(--blue-50) inset;
+    }
+
+    &__day--outside-month {
+      color: var(--grey-4);
+    }
+
+    &__children-container {
+      width: 100%;
+    }
+
+    &__input-time-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      width: unset;
+      padding-top: rem(16);
+      margin-top: rem(16);
+      margin-bottom: rem(16);
+
+      border-top: rem(1) solid var(--grey-5);
+    }
+
+    &-time__input {
+      margin: 0;
+    }
+
+    &-time__caption {
+      font-family: Roboto, sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%;
+    }
+  }
+}
+
+input.react-datepicker-time__input {
+  padding: rem(8) rem(16);
+
+  border: none;
+  border-radius: rem(5);
+  background-color: var(--blue-50);
+
+  font-family: Roboto, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--black);
+}
+
+.--deadline {
+  margin-bottom: rem(32);
+}
+
+.deadline__wrapper {
+  &:not(.--custom) {
+    //margin-bottom: rem(32);
+  }
+
+  &.--custom {
+    @include flex-all-center;
+  }
+}
+
+.deadline-picker .field__wrapper {
+  display: flex;
+  align-items: center;
+
+  background-color: var(--blue-50);
+  border-radius: rem(5);
+  cursor: pointer;
+
+  transition: background-color 0.1s var(--ease-out);
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: rem(16);
+
+    width: 24px;
+    height: 24px;
+
+    background: url('/assets/img/sprite.svg#calendar-field-icon') center/cover no-repeat;
+  }
+
+  @include hover() {
+    background-color: var(--blue-200);
+
+    input {
+      background-color: var(--blue-200);
+    }
+  }
+
+  input {
+    cursor: pointer;
+  }
+}
+
+.create__type--active .create__icon-num {
+  color: var(--blue-400);
+}

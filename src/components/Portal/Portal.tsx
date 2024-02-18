@@ -9,13 +9,15 @@ export function Portal({ children }: PropsWithChildren<PortalProps>) {
   const el = useRef(typeof document !== 'undefined' ? document.createElement('div') : null)
 
   useEffect(() => {
-    if (modalRoot !== null && el.current !== null) {
-      modalRoot.appendChild(el.current)
+    const element = el.current
+
+    if (modalRoot !== null && element !== null) {
+      modalRoot.appendChild(element)
     }
 
     return () => {
-      if (modalRoot !== null && el.current !== null) {
-        modalRoot.removeChild(el.current)
+      if (modalRoot !== null && element !== null && modalRoot.contains(element)) {
+        modalRoot.removeChild(element)
       }
     }
   }, [])

@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@UI/Button'
+import { Button } from '_ui/Button'
 
 export default function CoursesMyCatalog() {
   return (
