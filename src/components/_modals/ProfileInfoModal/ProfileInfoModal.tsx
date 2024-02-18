@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 
 import Image from 'next/image'
 
+import default_avatar from '@assets/img/static/default-avatar.png'
 import { useQueryStudent } from '@http/student/client'
 import { useQueryTeacher } from '@http/teacher/client'
 
@@ -36,14 +37,12 @@ export function ProfileInfoModal({ onClose, studentId, teacherId }: ProfileInfoM
           <div className="modal__card-image">
             <Image
               className="modal__card-img"
-              src={data?.avatar || '/img/static/default-avatar.png'}
+              src={data?.avatar || default_avatar}
               width={168}
               height={168}
               alt={data?.last_name}
-              onError={({ currentTarget }) => {
-                currentTarget.onerror = null
-                currentTarget.src = '/img/static/default-avatar.png'
-              }}
+              placeholder="blur"
+              blurDataURL={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8sh8AAo0BpUfDY3MAAAAASUVORK5CYII='}
             />
           </div>
           <ul className="personal-cabinet__list modal__cabinet--list">

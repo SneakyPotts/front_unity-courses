@@ -3,6 +3,9 @@
 import classNames from 'classnames'
 import { Fragment, useContext, useState } from 'react'
 
+import Image from 'next/image'
+
+import { imgBlur } from '@assets/utils'
 import { CatalogFilterPopup } from '@components/CatalogFilterPopup'
 import { appContext } from '@components/Context/context'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
@@ -172,9 +175,12 @@ function CourseCardPaid() {
         </span>
         <div className={'courses-catalog__photo'}>
           <a href="#">
-            <img
+            <Image
               src="https://loremflickr.com/640/360"
+              width={360}
+              height={200}
               alt=""
+              {...imgBlur}
             />
           </a>
         </div>
@@ -265,7 +271,7 @@ function CourseCardPaidPromotion() {
           <a href="#">
             <img
               src="https://loremflickr.com/640/360"
-              alt=""
+              alt="courses-catalog__photo"
             />
           </a>
         </div>

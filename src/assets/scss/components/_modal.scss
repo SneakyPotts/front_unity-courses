@@ -109,6 +109,8 @@
   }
 
   &__photo-teacher {
+    flex-shrink: 0;
+
     border: rem(1) solid #c8d9fd;
     border-radius: 50%;
     width: rem(65);
