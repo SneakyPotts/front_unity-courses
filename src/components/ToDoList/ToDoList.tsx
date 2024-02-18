@@ -80,16 +80,16 @@ export function ToDoList({}: ToDoListProps) {
               {isError && <p className="text-center">Щось пішло не так</p>}
               {!!unCompletedToDo.length
                 ? unCompletedToDo?.map((toDo) => (
-                    <ToDoItem
-                      key={toDo.id}
-                      {...toDo}
-                      edit={{
-                        show: isCreating === toDo.id,
-                        setShow: () => setIsCreating(toDo.id),
-                        setClose: () => setIsCreating(''),
-                      }}
-                    />
-                  ))
+                  <ToDoItem
+                    key={toDo.id}
+                    {...toDo}
+                    edit={{
+                      show: isCreating === toDo.id,
+                      setShow: () => setIsCreating(toDo.id),
+                      setClose: () => setIsCreating(''),
+                    }}
+                  />
+                ))
                 : !isLoading && !isCreating.length && <li className="text-center">Список задач пустий...</li>}
             </ul>
           </SimpleBar>

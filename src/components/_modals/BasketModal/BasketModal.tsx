@@ -71,20 +71,23 @@ export function BasketModal({ onClose }: BasketModalProps) {
                   <Image
                     width={24}
                     height={24}
-                    objectFit={'cover'}
+                    style={{ objectFit: 'cover' }}
                     src="https://loremflickr.com/100/100"
+                    alt="alt"
                   />
                   <Image
                     width={24}
                     height={24}
-                    objectFit={'cover'}
+                    style={{ objectFit: 'cover' }}
                     src="https://loremflickr.com/100/100"
+                    alt="alt"
                   />
                   <Image
                     width={24}
                     height={24}
-                    objectFit={'cover'}
+                    style={{ objectFit: 'cover' }}
                     src="https://loremflickr.com/100/100"
+                    alt="alt"
                   />
                 </div>
                 <button className={'basket-model__container-btn'}>
@@ -100,7 +103,8 @@ export function BasketModal({ onClose }: BasketModalProps) {
                         src="https://loremflickr.com/24/24"
                         width={24}
                         height={24}
-                        objectFit={'cover'}
+                        style={{ objectFit: 'cover' }}
+                        alt="alt"
                       />
                       <p>Дмитро</p>
                     </div>
@@ -112,7 +116,8 @@ export function BasketModal({ onClose }: BasketModalProps) {
                         src="https://loremflickr.com/24/24"
                         width={24}
                         height={24}
-                        objectFit={'cover'}
+                        style={{ objectFit: 'cover' }}
+                        alt="alt"
                       />
                       <p>Дмитро</p>
                     </div>
@@ -124,7 +129,8 @@ export function BasketModal({ onClose }: BasketModalProps) {
                         src="https://loremflickr.com/24/24"
                         width={24}
                         height={24}
-                        objectFit={'cover'}
+                        style={{ objectFit: 'cover' }}
+                        alt="alt"
                       />
                       <p>Дмитро</p>
                     </div>

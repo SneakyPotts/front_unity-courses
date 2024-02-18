@@ -362,7 +362,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .basket-model {
     .modal__body {
       padding: 0;
@@ -376,7 +376,7 @@
     }
 
     .modal__close {
-      background: url("/assets/img/static/basket__close.svg") no-repeat center/ contain;
+      background: url('/assets/img/static/basket__close.svg') no-repeat center/ contain;
       top: rem(25);
       left: rem(25);
 
@@ -451,7 +451,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .basket-model {
     &.modal.modal--open {
       background-color: rgba(var(--grey-3--rgb), 0.8);

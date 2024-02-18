@@ -1,6 +1,6 @@
 .offer {
   padding: rem(76) 0;
-  background: url("/img/offer-bg.png") no-repeat center / cover;
+  background: url('/img/offer-bg.png') no-repeat center / cover;
   border-radius: rem(10);
 
   &__inner {
@@ -86,7 +86,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .offer {
     padding: rem(30) rem(20);
 
@@ -124,7 +124,7 @@
 
     &__button {
       margin-top: rem(60);
-      
+
       .btn.btn--accent {
         width: unset;
       }
