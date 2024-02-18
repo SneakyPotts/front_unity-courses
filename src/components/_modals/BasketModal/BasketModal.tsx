@@ -4,9 +4,8 @@ import { useWindowSize } from 'usehooks-ts'
 import Image from 'next/image'
 
 import { Button } from '_ui/Button'
+import { Checkbox } from '_ui/Checkbox'
 import { Modal } from '_ui/Modal'
-
-import { Checkbox } from '@/components/UI/Checkbox'
 
 import type { BasketModalProps } from './BasketModal.props'
 

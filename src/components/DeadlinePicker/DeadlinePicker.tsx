@@ -15,7 +15,7 @@ import { Field } from '_ui/Field'
 import type { DeadlinePickerProps } from './DeadlinePicker.props'
 import './DeadlinePicker.scss'
 
-// import { toastPromise } from '@UI/ToastUtils'
+// import { toastPromise } from '_ui/ToastUtils'
 
 registerLocale('uk', uk)
 

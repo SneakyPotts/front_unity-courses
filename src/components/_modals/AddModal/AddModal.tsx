@@ -3,10 +3,11 @@ import { useWindowSize } from 'usehooks-ts'
 
 import Image from 'next/image'
 
-import { Button } from '@UI/Button'
-import { Modal } from '@UI/Modal'
+import { imgBlur } from '@assets/utils'
 
-import { Checkbox } from '@/components/UI/Checkbox'
+import { Button } from '_ui/Button'
+import { Checkbox } from '_ui/Checkbox'
+import { Modal } from '_ui/Modal'
 
 import type { AddModalProps } from './AddModal.props'
 
@@ -72,20 +73,23 @@ export function AddModal({ onClose }: AddModalProps) {
                   <Image
                     width={24}
                     height={24}
-                    objectFit={'cover'}
+                    style={{ objectFit: 'cover' }}
                     src="https://loremflickr.com/100/100"
+                    alt="alt"
                   />
                   <Image
                     width={24}
                     height={24}
-                    objectFit={'cover'}
+                    style={{ objectFit: 'cover' }}
                     src="https://loremflickr.com/100/100"
+                    alt="alt"
                   />
                   <Image
                     width={24}
                     height={24}
-                    objectFit={'cover'}
+                    style={{ objectFit: 'cover' }}
                     src="https://loremflickr.com/100/100"
+                    alt="alt"
                   />
                 </div>
                 <button className={'basket-model__container-btn'}>
@@ -101,7 +105,8 @@ export function AddModal({ onClose }: AddModalProps) {
                         src="https://loremflickr.com/24/24"
                         width={24}
                         height={24}
-                        objectFit={'cover'}
+                        style={{ objectFit: 'cover' }}
+                        alt="alt"
                       />
                       <p>Дмитро</p>
                     </div>
@@ -113,7 +118,9 @@ export function AddModal({ onClose }: AddModalProps) {
                         src="https://loremflickr.com/24/24"
                         width={24}
                         height={24}
-                        objectFit={'cover'}
+                        style={{ objectFit: 'cover' }}
+                        {...imgBlur}
+                        alt="alt"
                       />
                       <p>Дмитро</p>
                     </div>
@@ -125,7 +132,8 @@ export function AddModal({ onClose }: AddModalProps) {
                         src="https://loremflickr.com/24/24"
                         width={24}
                         height={24}
-                        objectFit={'cover'}
+                        style={{ objectFit: 'cover' }}
+                        alt="alt"
                       />
                       <p>Дмитро</p>
                     </div>
