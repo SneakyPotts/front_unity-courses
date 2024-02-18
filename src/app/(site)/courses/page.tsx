@@ -97,6 +97,7 @@ export default function CoursesCatalog() {
                         <use href="/img/sprite.svg#close"></use>
                       </svg>
                     </button>
+                   
                   </div>
                   <div className={'courses-catalog__inner'}>
                     {filtersList.map((filterBlock, index) => (
@@ -139,6 +140,7 @@ export default function CoursesCatalog() {
               )}
             </div>
             <div className={'courses-catalog__paginations'}>
+              
               <ul className={'courses-catalog__paginations-list'}>
                 <li className={'courses-catalog__paginations-item courses-catalog__paginations--active'}>1</li>
                 <li className={'courses-catalog__paginations-item'}>2</li>
@@ -234,7 +236,7 @@ function CourseCardPaid() {
           onClick={() => setShowModal(true)}
         >
           <svg className="courses-catalog__svg courses-catalog__svg-rocket ">
-            <use href="/img/sprite.svg#rocket"></use>
+            <use href="/img/sprite.svg#courses-add-course"></use>
           </svg>
           Хочу на курс
         </Button>
@@ -328,9 +330,9 @@ function CourseCardPaidPromotion() {
           onClick={() => setShowModal(true)}
         >
           <svg className="courses-catalog__svg courses-catalog__svg-rocket ">
-            <use href="/img/sprite.svg#rocket"></use>
+            <use href="/img/sprite.svg#cours"></use>
           </svg>
-          Хочу на курс
+          додати в кошик
         </Button>
       </div>
       {showModal && <CourseInviteModal onClose={() => setShowModal(false)} />}
