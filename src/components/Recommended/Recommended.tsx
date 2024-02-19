@@ -1,6 +1,9 @@
 import React from 'react'
 
+import Image from 'next/image'
 import Link from 'next/link'
+
+import { imgBlur } from '@assets/utils'
 
 import { CustomLink } from '_ui/CustomLink'
 
@@ -47,9 +50,12 @@ function RecommendedCard() {
         href="#"
         className="recommended-card__image"
       >
-        <img
-          src="https://picsum.photos/600/500?random=1"
+        <Image
+          src="https://loremflickr.com/640/360"
+          width={600}
+          height={500}
           alt=""
+          {...imgBlur}
         />
       </Link>
       <div className="recommended-card__info">
@@ -64,9 +70,12 @@ function RecommendedCard() {
           className="recommended-card__teacher teacher"
         >
           <div className="teacher__img">
-            <img
-              src="https://picsum.photos/200/300"
+            <Image
+              src="https://loremflickr.com/640/360"
+              width={200}
+              height={300}
               alt=""
+              {...imgBlur}
             />
           </div>
           Бондар Олег Михайлович

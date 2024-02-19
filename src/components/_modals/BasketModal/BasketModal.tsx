@@ -2,7 +2,7 @@ import React from 'react'
 import { useWindowSize } from 'usehooks-ts'
 
 import Image from 'next/image'
-
+import { imgBlur } from '@assets/utils'
 import { Button } from '_ui/Button'
 import { Checkbox } from '_ui/Checkbox'
 import { Modal } from '_ui/Modal'
@@ -26,11 +26,13 @@ export function BasketModal({ onClose }: BasketModalProps) {
             <li className={'basket-model__list-img'}>
               <Image
                 src="https://loremflickr.com/100/100"
-                style={{ objectFit: 'cover', borderRadius: '5px' }}
-                alt="alt"
                 width={100}
                 height={100}
+                style={{ objectFit: 'cover', borderRadius: '5px' }}
+                {...imgBlur}
+                alt="alt"
               />
+
             </li>
             <li className={'basket-model__info'}>
               <p className={'basket-model__list-text'}>
@@ -53,10 +55,11 @@ export function BasketModal({ onClose }: BasketModalProps) {
             <li className={'basket-model__list-img'}>
               <Image
                 src="https://loremflickr.com/100/100"
-                style={{ objectFit: 'cover', borderRadius: '5px' }}
-                alt="alt"
                 width={100}
                 height={100}
+                style={{ objectFit: 'cover', borderRadius: '5px' }}
+                {...imgBlur}
+                alt="alt"
               />
             </li>
             <li className={'basket-model__info'}>
@@ -69,24 +72,27 @@ export function BasketModal({ onClose }: BasketModalProps) {
                 <p className={'basket-model__container-text'}>Оберіть для кого:</p>
                 <div className={'basket-model__container-img'}>
                   <Image
+                    src="https://loremflickr.com/100/100"
                     width={24}
                     height={24}
                     style={{ objectFit: 'cover' }}
-                    src="https://loremflickr.com/100/100"
+                    {...imgBlur}
                     alt="alt"
                   />
                   <Image
+                    src="https://loremflickr.com/100/100"
                     width={24}
                     height={24}
                     style={{ objectFit: 'cover' }}
-                    src="https://loremflickr.com/100/100"
+                    {...imgBlur}
                     alt="alt"
                   />
                   <Image
+                    src="https://loremflickr.com/100/100"
                     width={24}
                     height={24}
                     style={{ objectFit: 'cover' }}
-                    src="https://loremflickr.com/100/100"
+                    {...imgBlur}
                     alt="alt"
                   />
                 </div>
@@ -104,6 +110,7 @@ export function BasketModal({ onClose }: BasketModalProps) {
                         width={24}
                         height={24}
                         style={{ objectFit: 'cover' }}
+                        {...imgBlur}
                         alt="alt"
                       />
                       <p>Дмитро</p>
@@ -117,6 +124,7 @@ export function BasketModal({ onClose }: BasketModalProps) {
                         width={24}
                         height={24}
                         style={{ objectFit: 'cover' }}
+                        {...imgBlur}
                         alt="alt"
                       />
                       <p>Дмитро</p>
@@ -130,6 +138,7 @@ export function BasketModal({ onClose }: BasketModalProps) {
                         width={24}
                         height={24}
                         style={{ objectFit: 'cover' }}
+                        {...imgBlur}
                         alt="alt"
                       />
                       <p>Дмитро</p>
