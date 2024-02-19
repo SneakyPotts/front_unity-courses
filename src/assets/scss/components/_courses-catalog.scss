@@ -5,11 +5,14 @@
     display: flex;
     //display: grid;
     //grid-template-columns: rem(310) auto;
-    gap: 30px;
+    gap: rem(30);
   }
 
   &__body {
     flex-shrink: 0;
+  }
+
+  &__item {
   }
 
   &__filter {
@@ -45,16 +48,13 @@
       top: rem(12);
     }
 
-    &-list {
-    }
-
     &-item {
       display: flex;
       justify-content: space-between;
 
-      font-size: 14px;
+      font-size: rem(14);
       font-weight: 500;
-      line-height: 17px;
+      line-height: rem(17);
       letter-spacing: 0;
       text-align: left;
     }
@@ -287,7 +287,7 @@
       fill: transparent;
     }
 
-    use[href$='#basket-course'] {
+    use[href$="#basket-course"] {
       fill: transparent;
       stroke: #fff;
     }
@@ -329,19 +329,26 @@
 
   &__box {
     position: relative;
+    height: rem(200);
   }
 
   &__tag {
+    @include flex-v-center;
+
     position: absolute;
     top: rem(12);
     left: rem(16);
-    padding: rem(7) rem(5);
+    flex-wrap: wrap;
+    gap: rem(4);
 
-    font-size: rem(14);
-    font-weight: 500;
-    border-radius: rem(2);
-    color: #fff;
-    background: #6fcf97;
+    li {
+      padding: rem(7) rem(5);
+      font-size: rem(14);
+      font-weight: 500;
+      border-radius: rem(2);
+      color: #fff;
+      background: #6fcf97;
+    }
   }
 
   &__decor {
@@ -372,6 +379,15 @@
   }
 
   &__photo {
+    width: 100%;
+    height: 100%;
+
+    a {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
     img {
       width: 100%;
       height: 100%;
@@ -381,24 +397,25 @@
   }
 
   &__info {
-    flex: 1;
-
     @include flex;
     flex-direction: column;
-
+    flex: 1;
     padding: rem(12) rem(16);
     border-radius: 0 0 rem(5) rem(5);
     background: #f4f4fd;
 
     &-title {
-      max-width: rem(275);
       margin-bottom: auto;
       text-overflow: ellipsis;
-
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      max-width: max-content;
       font-size: rem(18);
       font-weight: 700;
       line-height: 120%;
-      color: #1c1c1c;
+      color: var(--black);
     }
   }
 
@@ -458,9 +475,9 @@
 
   &__price {
     @include flex-all-sb;
+
     margin-top: rem(12);
     padding-top: rem(12);
-
     border-top: rem(1) solid #c8d9fd;
 
     p {
@@ -474,16 +491,15 @@
   &__prices {
     @include flex-all-sb;
     border-top: rem(1) solid #c8d9fd;
-    margin-top: rem(12);
   }
 
   &__cost {
-    //font-size: 1.25rem;
-    //font-weight: 500;
-    //line-height: 120%;
-    //color: var(--red);
+    position: relative;
 
     &-discount {
+      position: absolute;
+      top: rem(-13);
+      left: 0;
       font-size: rem(13);
       font-weight: 500;
       line-height: rem(15.6);
@@ -524,7 +540,7 @@
   }
 }
 
-@include mq('xxl') {
+@include mq("xxl") {
   .courses-catalog {
     &__cards {
       grid-template-columns: repeat(2, 1fr);
@@ -532,7 +548,7 @@
   }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .courses-catalog {
     &__catalog {
       min-width: 0;
@@ -640,7 +656,7 @@
   }
 }
 
-@include mq('md') {
+@include mq("md") {
   .courses-catalog {
     &__cards {
       grid-template-columns: 1fr;
@@ -667,15 +683,6 @@
   }
 }
 
-// @include mq("sm") {
-//   .courses-catalog {
-
-//     &__palen {
-//       width: 100%;
-//     }
-
-// }
-
 // класс для открытия
 .visible {
   display: block;
@@ -684,5 +691,5 @@
 .checkbox__input:checked + .checkbox__block ~ .checkbox__value {
   font-weight: 500;
   text-overflow: ellipsis;
-  color: #4f4f4f;
+  color: var(--grey-2);
 }

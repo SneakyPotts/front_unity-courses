@@ -49,12 +49,12 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
     <div className={'courses-catalog__element'}>
       <div className="courses-catalog__box">
         {props.categories_repr?.map((category, i) => (
-          <span
+          <ul
             key={`${i}${category}`}
             className={'courses-catalog__tag'}
           >
-            {category}
-          </span>
+            <li>{category}</li>
+          </ul>
         ))}
         <span className={'courses-catalog__lesson courses-catalog__decor '}>
           <svg className="courses-catalog__svg">
@@ -74,6 +74,7 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
               src={props.cover}
               width={640}
               height={360}
+              style={{ objectFit: 'contain' }}
               alt={props.title}
               {...imgBlur}
             />
