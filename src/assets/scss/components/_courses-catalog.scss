@@ -93,7 +93,7 @@
       padding: rem(3) rem(8);
       border: rem(1) solid #e0e0e0;
       border-radius: rem(2);
-      color: #828282;
+      color: var(--grey-3);
 
       font-size: rem(17);
       font-weight: 400;
@@ -108,7 +108,7 @@
       position: absolute;
       height: rem(20);
       width: rem(20);
-      fill: #828282;
+      fill: var(--grey-3);
     }
 
     &-svg {
@@ -131,7 +131,7 @@
       font-weight: 500;
       line-height: rem(16);
       letter-spacing: 0;
-      color: #828282;
+      color: var(--grey-3);
     }
 
     &-list {
@@ -185,7 +185,7 @@
     border-radius: rem(10);
 
     &-text {
-      color: #828282;
+      color: var(--grey-3);
       margin-bottom: rem(12);
 
       font-size: rem(13);
@@ -217,7 +217,7 @@
     font-size: 20px;
     font-weight: 500;
     line-height: 120%;
-    color: #828282;
+    color: var(--grey-3);
   }
 
   &__mobile {
@@ -283,8 +283,13 @@
     fill: #fff;
 
     &-stroke {
-      stroke: #828282;
+      stroke: var(--grey-3);
       fill: transparent;
+    }
+
+    use[href$='#basket-course'] {
+      fill: transparent;
+      stroke: #fff;
     }
   }
 
@@ -307,7 +312,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 120%;
-    color: #828282;
+    color: var(--grey-3);
 
     &--active {
       color: #7d98f6;
@@ -376,6 +381,8 @@
   }
 
   &__info {
+    flex: 1;
+
     @include flex;
     flex-direction: column;
 
@@ -385,6 +392,7 @@
 
     &-title {
       max-width: rem(275);
+      margin-bottom: auto;
       text-overflow: ellipsis;
 
       font-size: rem(18);
@@ -444,7 +452,7 @@
       font-size: rem(13);
       font-weight: 400;
       line-height: 120%;
-      color: #828282;
+      color: var(--grey-3);
     }
   }
 
@@ -470,19 +478,25 @@
   }
 
   &__cost {
-    font-size: 1.25rem;
-    font-weight: 500;
-    line-height: 120%;
-    color: #eb5757;
+    //font-size: 1.25rem;
+    //font-weight: 500;
+    //line-height: 120%;
+    //color: var(--red);
 
     &-discount {
       font-size: rem(13);
       font-weight: 500;
       line-height: rem(15.6);
       letter-spacing: 0;
-      color: #828282;
-      s {
-        text-decoration: line-through;
+      text-decoration: line-through;
+      color: var(--red);
+
+      span {
+        color: var(--grey-3);
+      }
+
+      & ~ p {
+        color: var(--red);
       }
     }
   }
@@ -510,7 +524,7 @@
   }
 }
 
-@include mq("xxl") {
+@include mq('xxl') {
   .courses-catalog {
     &__cards {
       grid-template-columns: repeat(2, 1fr);
@@ -518,7 +532,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .courses-catalog {
     &__catalog {
       min-width: 0;
@@ -626,7 +640,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .courses-catalog {
     &__cards {
       grid-template-columns: 1fr;

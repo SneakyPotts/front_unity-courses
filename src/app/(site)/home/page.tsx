@@ -2,12 +2,11 @@ import dynamic from 'next/dynamic'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
+import { dynamicOptions } from '@assets/constants'
 import { AboutMeRequest } from '@http/profile/server'
 
-import { Loader } from '_ui/Loader'
-
 const HomeContent = dynamic(() => import('./home.content').then((mod) => mod.default), {
-  loading: () => <Loader />,
+  ...dynamicOptions,
   ssr: false,
 })
 
