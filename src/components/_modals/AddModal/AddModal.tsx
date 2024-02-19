@@ -12,7 +12,7 @@ export function AddModal({ onClose }: AddModalProps) {
 
   return (
     <Modal
-      variant="add-modal"
+      variant="addModal"
       title="Додати курс"
       onClose={isDesktop ? onClose : undefined}
       onBack={isDesktop ? undefined : onClose}
