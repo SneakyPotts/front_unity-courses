@@ -8,13 +8,15 @@ import { redirect } from 'next/navigation'
 
 import { serverFetch } from '@http/api'
 
-import { schema } from '_modals/AuthModal/AuthModal.schema'
+import { schema as schemaSignIn } from '_modals/AuthModal/AuthModal.schema'
+import { schema as schemaSignUp } from '_modals/RegisterModal/RegisterModal.schema'
 
-type FormSchema = z.infer<typeof schema>
+type SignInSchema = z.infer<typeof schemaSignIn>
+type SignUpSchema = z.infer<typeof schemaSignUp>
 
 const env = process.env.NODE_ENV
 
-export async function SignInServerAction(data: FormSchema) {
+export async function signInServerAction(data: SignInSchema) {
   const response = await serverFetch<{ access: string; refresh: string }>(`/token/`, {
     method: 'POST',
     body: JSON.stringify(data),
@@ -41,8 +43,15 @@ export async function getGoogleAuthUriAction(domain: string) {
   }
 }
 
-export async function SignOutAction() {
+export async function signOutAction() {
   cookies().delete('accessToken')
   revalidateTag('aboutMe')
   revalidatePath('/')
+}
+
+export async function signUpServerAction(data: SignUpSchema) {
+  return await serverFetch<{ first_name: string; last_name: string }>(`/users/`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
 }

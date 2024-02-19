@@ -11,11 +11,16 @@ import Image from 'next/image'
 import { imgBlur } from '@assets/utils'
 import { appContext } from '@components/Context/context'
 
+import { AuthModal } from '_modals/AuthModal'
+import { RegisterModal } from '_modals/RegisterModal'
+
 import type { HeaderProps } from './Header.props'
 
 const HeaderClock = dynamic(() => import('_ui/HeaderClock').then((m) => m.HeaderClock))
 
-const AuthModal = dynamic(() => import('_modals/AuthModal').then((m) => m.AuthModal))
+// const AuthModal = dynamic(() => import('_modals/AuthModal').then((m) => m.AuthModal))
+// const RegisterModal = dynamic(() => import('_modals/RegisterModal').then((m) => m.RegisterModal))
+
 const ProfilePopup = dynamic(() => import('_popups/ProfilePopup').then((m) => m.ProfilePopup))
 const ProfileInfoModal = dynamic(() => import('_modals/ProfileInfoModal').then((m) => m.ProfileInfoModal))
 
@@ -35,6 +40,8 @@ export function Header({ profile, className }: HeaderProps) {
   const basketRef = useRef(null)
 
   const [isShowAuthModal, setIsShowAuthModal] = useState(false)
+  const [isShowRegisterModal, setIsShowRegisterModal] = useState(false)
+
   const [isShowProfilePopup, setIsShowProfilePopup] = useState(false)
   const [isShowProfileModal, setIsShowProfileModal] = useState(false)
 
@@ -53,6 +60,16 @@ export function Header({ profile, className }: HeaderProps) {
 
   const handleProfileClick = () => {
     profile ? setIsShowProfilePopup((p) => !p) : setIsShowAuthModal(true)
+  }
+
+  const handleShowAuthModal = () => {
+    setIsShowAuthModal(true)
+    setIsShowRegisterModal(false)
+  }
+
+  const handleShowRegisterModal = () => {
+    setIsShowAuthModal(false)
+    setIsShowRegisterModal(true)
   }
 
   useOnClickOutside(profileRef, () => setIsShowProfilePopup(false))
@@ -113,13 +130,25 @@ export function Header({ profile, className }: HeaderProps) {
                 <Image
                   src={profile?.avatar || '/img/static/default-avatar.png'}
                   fill
+                  sizes="100vw"
                   style={{ objectFit: 'cover' }}
                   {...imgBlur}
                   alt="alt"
                 />
               </button>
 
-              {isShowAuthModal && <AuthModal onClose={() => setIsShowAuthModal(false)} />}
+              {isShowAuthModal && (
+                <AuthModal
+                  onClose={() => setIsShowAuthModal(false)}
+                  showRegister={handleShowRegisterModal}
+                />
+              )}
+              {isShowRegisterModal && (
+                <RegisterModal
+                  onClose={() => setIsShowRegisterModal(false)}
+                  showAuth={handleShowAuthModal}
+                />
+              )}
               {isShowProfilePopup && (
                 <ProfilePopup
                   profile={profile}

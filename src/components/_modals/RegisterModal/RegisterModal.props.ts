@@ -1,1 +1,4 @@
-export interface RegisterModalProps {}
+export interface RegisterModalProps {
+  showAuth: () => void
+  onClose: () => void
+}

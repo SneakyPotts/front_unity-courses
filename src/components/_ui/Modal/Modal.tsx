@@ -23,6 +23,7 @@ const typesMatch = {
   courseInvite: 'course-invite',
   basketModal: 'basket-model',
   signInCourses: 'signIn-courses',
+  signUpCourses: 'signUp-courses',
   addModal: 'add-modal',
   empty: '',
 }

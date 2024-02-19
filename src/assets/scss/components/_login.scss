@@ -2,6 +2,9 @@
   .modal__title {
     padding-top: rem(52);
   }
+  .error {
+    margin-bottom: rem(15);
+  }
 }
 
 .login {
@@ -54,7 +57,7 @@
     text-align: center;
     color: var(--grey-4);
 
-    & > a {
+    .to-register {
       text-decoration: underline;
       color: var(--blue-400);
     }
