@@ -1,6 +1,8 @@
+import type { ErrorResponse } from '@assets/types/globals'
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
-export async function serverFetch<T>(url: string, init?: RequestInit & { skip?: boolean }): Promise<{ data: T | undefined; error: Error | null }> {
+export async function serverFetch<T>(url: string, init?: RequestInit & { skip?: boolean }): Promise<{ data: T | undefined; error: ErrorResponse | null }> {
   if (init?.skip)
     return {
       data: undefined,
@@ -18,13 +20,13 @@ export async function serverFetch<T>(url: string, init?: RequestInit & { skip?: 
     })
 
     if (!res.ok) {
-      return { data: undefined, error: new Error(`Failed to fetch data with status: ${res.status} ${res.statusText}`) }
+      return { data: undefined, error: (await res.json()) as ErrorResponse }
     }
 
     const response = await res.json()
 
     return { data: response as T, error: null }
   } catch (error) {
-    return { data: undefined, error: new Error(error as string) }
+    return { data: undefined, error: { message: JSON.stringify(error), extra: { fields: {} } } }
   }
 }

@@ -1,3 +1,3 @@
 import type { ErrorResponse } from '@assets/types/globals'
 
-export interface RequestErrorProps extends Omit<ErrorResponse, 'status'> {}
+export interface RequestErrorProps extends ErrorResponse {}

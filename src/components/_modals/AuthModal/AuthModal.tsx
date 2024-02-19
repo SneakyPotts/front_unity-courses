@@ -5,8 +5,9 @@ import { z } from 'zod'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import type { ErrorResponse } from '@assets/types/globals'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { SignInServerAction, getGoogleAuthUriAction } from '@http/profile/actions'
+import { getGoogleAuthUriAction, signInServerAction } from '@http/profile/actions'
 
 import { Button } from '_ui/Button'
 import { Checkbox } from '_ui/Checkbox'
@@ -19,10 +20,9 @@ import { schema } from './AuthModal.schema'
 
 type FormSchema = z.infer<typeof schema>
 
-export function AuthModal({ onClose }: AuthModalProps) {
-  const error = !!0
-
+export function AuthModal({ showRegister, onClose }: AuthModalProps) {
   const [saveMe, setSaveMe] = useState(false)
+  const [reqError, setReqError] = useState<ErrorResponse | null>(null)
 
   const {
     register,
@@ -40,19 +40,14 @@ export function AuthModal({ onClose }: AuthModalProps) {
     const domain = window.location.origin
 
     await getGoogleAuthUriAction(domain)
-    // const { data, error } = await getGoogleAuthUriAction(domain)
-
-    // if (!error && data?.google_auth_uri) {
-    //   window.location.href = data?.google_auth_uri
-    // }
   }
 
-  const onSubmit: SubmitHandler<FormSchema> = async (data) => {
-    SignInServerAction(data)
-      .then(() => {
-        onClose()
+  const onSubmit: SubmitHandler<FormSchema> = (data) => {
+    signInServerAction(data)
+      .then((res) => {
+        res.error ? setReqError(res.error) : onClose()
       })
-      .catch(console.log)
+      .catch(console.error)
   }
 
   return (
@@ -105,7 +100,7 @@ export function AuthModal({ onClose }: AuthModalProps) {
             </Link>
           </div>
 
-          {error && <RequestError data={error} />}
+          {reqError && <RequestError {...reqError} />}
 
           <div className="login__form-controls">
             <Button
@@ -136,7 +131,14 @@ export function AuthModal({ onClose }: AuthModalProps) {
           </div>
 
           <p className="login__signUp">
-            Ще не зареєстровані? <Link href={'#'}>Створити аккаунт</Link>
+            Ще не зареєстровані?{' '}
+            <button
+              type="button"
+              className="to-register"
+              onClick={showRegister}
+            >
+              Створити аккаунт
+            </button>
           </p>
         </div>
       </form>

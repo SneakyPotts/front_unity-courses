@@ -3,14 +3,14 @@ export type ServerResponse<T> = {
   data: T
 }
 
-export type ErrorResponse = ServerResponse<{
+export type ErrorResponse = {
   extra: {
     fields: {
       [key: string]: string[]
     }
   }
   message: string
-}>
+}
 
 export type ChildRoute = {
   title: string
