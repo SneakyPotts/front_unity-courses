@@ -247,12 +247,17 @@
 
     &--hide {
       // padding: rem(16) rem(15);
-
       .aside {
         &__top {
           margin: 0;
           border: none;
           padding: 0;
+        }
+
+        &__button {
+          &-link {
+            display: none;
+          }
         }
 
         &__logo {
@@ -287,7 +292,7 @@
 
 //style teacher-aside
 .nav__down-btn {
-  width: 175px;
+  width: rem(175);
   display: flex;
   justify-content: center;
 }

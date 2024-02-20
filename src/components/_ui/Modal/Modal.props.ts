@@ -15,6 +15,8 @@ export interface ModalProps {
     | 'courseInvite'
     | 'basketModal'
     | 'signInCourses'
+    | 'addModal'
+    | 'signUpCourses'
     | 'empty'
   title: string
   tip?: string

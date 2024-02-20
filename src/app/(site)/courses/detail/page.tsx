@@ -1,3 +1,7 @@
+import Image from 'next/image'
+
+import { imgBlur } from '@assets/utils'
+
 export default function CourseDetail() {
   return (
     <div className="content">
@@ -39,9 +43,13 @@ export default function CourseDetail() {
                       </div>
                       <div className={'my-catalog__item  my-catalog__teacher'}>
                         <div className={'courses-catalog__teacher-img'}>
-                          <img
+                          <Image
                             src="https://loremflickr.com/640/360"
-                            alt="аватарка акаунта"
+                            style={{ objectFit: 'cover' }}
+                            alt="alt"
+                            width={640}
+                            height={360}
+                            {...imgBlur}
                           />
                         </div>
                         <button className={'my-catalog__item-name'}>Мітрошина Г. О.</button>
@@ -63,9 +71,13 @@ export default function CourseDetail() {
                       <p>дійсний ще 105 днів</p>
                     </div>
                     <div className={'my-catalog__ridth-photo'}>
-                      <img
-                        src="https://picsum.photos/100/100"
-                        alt="фото курсу"
+                      <Image
+                        src="https://loremflickr.com/100/100"
+                        style={{ objectFit: 'cover' }}
+                        alt="alt"
+                        width={100}
+                        height={100}
+                        {...imgBlur}
                       />
                     </div>
                   </div>
@@ -82,9 +94,13 @@ export default function CourseDetail() {
                           </svg>
                         </span>
                         <div className={'teacher-card__image'}>
-                          <img
+                          <Image
                             src="https://loremflickr.com/640/360"
-                            alt="фотография профиля"
+                            style={{ objectFit: 'cover' }}
+                            alt="alt"
+                            width={640}
+                            height={360}
+                            {...imgBlur}
                           />
                         </div>
                         <div className={'teacher-card__info'}>
@@ -102,9 +118,13 @@ export default function CourseDetail() {
                     <div className={'teacher-card teacher-card--big'}>
                       <div className={'teacher-card__top'}>
                         <div className={'teacher-card__image'}>
-                          <img
+                          <Image
                             src="https://loremflickr.com/640/360"
-                            alt="фотография профиля"
+                            style={{ objectFit: 'cover' }}
+                            alt="alt"
+                            width={640}
+                            height={360}
+                            {...imgBlur}
                           />
                         </div>
                         <div className={'teacher-card__info'}>

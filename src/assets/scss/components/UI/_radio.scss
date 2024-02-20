@@ -2,10 +2,13 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: rem(10) rem(16);
   width: 100%;
   cursor: pointer;
   gap: rem(10);
+
+  &:not(.--no-border) {
+    padding: rem(10) rem(16);
+  }
 
   &__text {
     color: var(--grey-3);

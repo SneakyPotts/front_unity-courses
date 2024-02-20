@@ -1,4 +1,4 @@
-import { revalidateTag } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { cookies, headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import type { NextRequest, NextResponse } from 'next/server'
@@ -31,6 +31,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
       path: '/',
     })
     revalidateTag('aboutMe')
+    revalidatePath('/')
 
     redirect('/home')
   } else {

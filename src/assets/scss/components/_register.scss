@@ -1,0 +1,141 @@
+.signUp-courses {
+  .modal {
+    &__content {
+      max-width: rem(900 + 32 + 40);
+    }
+    &__main {
+      padding: rem(20);
+    }
+    &__title {
+      display: none;
+    }
+    &__wrapper {
+      display: flex;
+      column-gap: rem(32);
+    }
+  }
+}
+
+.signUp {
+  /*LEFT SIDE*/
+  &__left {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    max-width: rem(400);
+    padding: rem(20);
+
+    border-radius: rem(5);
+    background-color: var(--orange-50);
+  }
+
+  &__logo {
+    position: relative;
+
+    aspect-ratio: 92 / 22;
+    max-width: rem(92);
+    margin-bottom: rem(60);
+  }
+
+  &__desc {
+    &-title {
+      margin-bottom: 20px;
+
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 29px;
+    }
+
+    &-text {
+      margin-bottom: auto;
+
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 21px;
+      color: var(--grey-2);
+    }
+  }
+
+  /*RIGHT SIDE*/
+  &__right {
+    flex: 1;
+
+    max-width: rem(500);
+
+    &-inner {
+      display: flex;
+      flex-direction: column;
+
+      max-width: rem(360);
+      margin-inline: auto;
+    }
+  }
+
+  &__form {
+    &-title {
+      margin-bottom: rem(32);
+
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 24px;
+    }
+    &-row {
+      &:not(:last-child) {
+        margin-bottom: rem(12);
+      }
+    }
+  }
+
+  &__terms {
+    align-items: flex-start;
+
+    margin-bottom: rem(32);
+
+    .checkbox__value {
+      color: var(--grey-4);
+    }
+
+    &-link {
+      text-decoration: underline;
+      color: var(--blue-400);
+    }
+  }
+
+  &__controls {
+    @include flex-v-center;
+    flex-direction: column;
+    gap: rem(16);
+
+    margin-bottom: rem(32);
+
+    &-btn {
+      width: 100% !important;
+      max-width: rem(250);
+      margin-inline: auto;
+    }
+
+    & > span {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 21px;
+      color: var(--grey-3);
+    }
+  }
+
+  &__switch {
+    text-align: center;
+    color: var(--grey-4);
+
+    .to-auth {
+      text-decoration: underline;
+      color: var(--blue-400);
+    }
+  }
+}
+
+.double {
+  display: flex;
+  gap: rem(12);
+}

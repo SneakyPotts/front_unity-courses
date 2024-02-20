@@ -16,6 +16,7 @@
 		"^_ui/(.*)$",
 		"^_modals/(.*)$",
 		"^_popups/(.*)$",
+		"^_content/(.*)$",
 		"^[./]"
 	],
 	"importOrderSeparation": true,

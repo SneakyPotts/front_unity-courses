@@ -1,16 +1,27 @@
+import type { PropsWithChildren } from 'react'
+
 export type ServerResponse<T> = {
   status: string | number
   data: T
 }
 
-export type ErrorResponse = ServerResponse<{
+export type ErrorResponse = {
   extra: {
     fields: {
       [key: string]: string[]
     }
   }
   message: string
-}>
+}
+
+/** Partial for same fields */
+export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+
+/** Page props type */
+export type TPageProps = { params: { [key: string]: string | string[] }; searchParams: { [key: string]: string } }
+
+/** Layout props type */
+export type TLayoutProps = PropsWithChildren<{ params: { [key: string]: string } }>
 
 export type ChildRoute = {
   title: string

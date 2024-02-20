@@ -1,3 +1,6 @@
+import { format } from 'date-fns'
+import { uk } from 'date-fns/locale'
+
 import { ImageProps } from 'next/image'
 
 const blurData =
@@ -7,4 +10,27 @@ const blurData =
 export const imgBlur: Pick<ImageProps, 'placeholder' | 'blurDataURL'> = {
   placeholder: 'blur',
   blurDataURL: blurData,
+}
+
+export const courseCaption = {
+  live: 'Заняття проводяться з викладачем у live режимі (НЕ відео-запис)',
+  self: 'Заняття проводяться самостійно',
+  mix: 'Заняття проводяться з викладачем у live режимі, та також самостійно.',
+}
+
+export const formattedPrice = (price: number) =>
+  price.toLocaleString('uk-UA', {
+    maximumFractionDigits: 0,
+    // minimumFractionDigits: fractionDigits,
+  })
+
+export function formatDateInGenitive(date: Date): string {
+  const genitiveMonths = ['січня', 'лютого', 'березня', 'квітня', 'травня', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня']
+
+  const formattedTime = format(date, 'dd LLLL yyyy', { locale: uk })
+
+  const monthName = format(date, 'LLLL', { locale: uk })
+  const monthNameGenitive = genitiveMonths[date.getMonth()]
+
+  return formattedTime.replace(monthName, monthNameGenitive)
 }

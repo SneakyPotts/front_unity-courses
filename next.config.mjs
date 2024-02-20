@@ -9,6 +9,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'picsum.photos',
+      },
+      {
+        protocol: 'https',
         hostname: 's3.us-east-005.backblazeb2.com',
       },
     ],

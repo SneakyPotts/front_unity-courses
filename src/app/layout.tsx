@@ -8,6 +8,7 @@ import 'simplebar-react/dist/simplebar.min.css'
 import RobotoFont from '@assets/font'
 import '@assets/scss/main.scss'
 import { AppProvider } from '@components/Context/context'
+import '@smastrom/react-rating/style.css'
 
 export const metadata: Metadata = {
   title: 'Unity - Courses',

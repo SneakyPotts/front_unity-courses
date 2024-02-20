@@ -1,5 +1,9 @@
 import React from 'react'
 
+import Image from 'next/image'
+
+import { imgBlur } from '@assets/utils'
+
 export function Banner({ isVertical = true }: { isVertical?: boolean }) {
   const min = 1
   const max = 3
@@ -9,10 +13,11 @@ export function Banner({ isVertical = true }: { isVertical?: boolean }) {
     <div className="banner">
       {isVertical ? (
         <div className="banner__image-wrapper banner__image-wrapper--vertical">
-          <img
+          <Image
             src={`/img/static/banner_${randomNumber}.png`}
             width={194}
             height={350}
+            {...imgBlur}
             alt="banner for test"
           />
         </div>

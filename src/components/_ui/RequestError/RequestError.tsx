@@ -2,10 +2,10 @@ import React from 'react'
 
 import type { RequestErrorProps } from './RequestError.props'
 
-export function RequestError({ data }: RequestErrorProps) {
+export function RequestError({ message, extra }: RequestErrorProps) {
   return (
-    <div className={'text-center'}>
-      <span className="field__error">{data.extra?.fields?.[0] || data.message}</span>
+    <div className={'text-center error'}>
+      <span className="field__error">{extra?.fields?.[0] || message}</span>
     </div>
   )
 }

@@ -67,6 +67,10 @@
 
 @include mq('lg') {
   .layout {
+    .main {
+      padding: unset;
+    }
+
     .main--active {
       padding: unset;
     }
