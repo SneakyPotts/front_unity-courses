@@ -1,8 +1,11 @@
 'use client'
 
 import { Button } from '_ui/Button'
+import { MyCoursesEmpty } from '_ui/MyCoursesEmpty'
 
 export default function CoursesMyCatalog() {
+  if (!0) return <MyCoursesEmpty />
+
   return (
     <div className="content">
       <div className="content__container container">

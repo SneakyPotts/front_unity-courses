@@ -23,6 +23,7 @@
       "_ui/*": ["./src/components/_ui/*"],
       "_modals/*": ["./src/components/_modals/*"],
       "_popups/*": ["./src/components/_popups/*"],
+      "_content/*": ["./src/components/_content/*"],
       "@components/*": ["./src/components/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@store/*": ["./src/store/*"],

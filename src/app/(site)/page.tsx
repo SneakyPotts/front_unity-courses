@@ -1,15 +1,20 @@
-import { getCoursesCatalog } from '@http/courses/server'
+import { CatalogContent } from '_content/CatalogContent'
+
+import { getCoursesCatalog, getCoursesFilters } from '@http/courses/server'
 
 import { RequestError } from '_ui/RequestError'
 
-import { CatalogContent } from './catalog.content'
-
 export default async function CoursesCatalog() {
-  const { data, error } = await getCoursesCatalog()
+  const [catalog, filters] = await Promise.all([getCoursesCatalog(), getCoursesFilters()])
 
-  console.log('catalog', { data, error })
+  const isError = catalog.error || filters.error
 
-  if (error) return <RequestError message="Щось пішло не так..." />
+  if (isError) return <RequestError message="Щось пішло не так..." />
 
-  return <CatalogContent data={data} />
+  return (
+    <CatalogContent
+      data={catalog?.data}
+      filters={filters.data}
+    />
+  )
 }

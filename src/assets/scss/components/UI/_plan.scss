@@ -95,6 +95,8 @@
   }
 
   &__date {
+    @include flex-v-center;
+
     font-weight: 500;
     font-style: normal;
     font-size: rem(13);
@@ -184,6 +186,20 @@
     display: flex;
     flex-direction: column;
     gap: rem(34);
+  }
+
+  &__is-free {
+    display: inline-flex;
+    align-items: center;
+    gap: rem(4);
+
+    margin-right: rem(8);
+
+    color: var(--primary-orange);
+
+    .btn__icon {
+      fill: var(--primary-orange);
+    }
   }
 }
 

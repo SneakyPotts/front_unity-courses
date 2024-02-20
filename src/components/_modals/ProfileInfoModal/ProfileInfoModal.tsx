@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 
 import default_avatar from '@assets/img/static/default-avatar.png'
+import { imgBlur } from '@assets/utils'
 import { useQueryStudent } from '@http/student/client'
 import { useQueryTeacher } from '@http/teacher/client'
 
@@ -21,17 +22,19 @@ export function ProfileInfoModal({ onClose, studentId, teacherId }: ProfileInfoM
   } = useQueryTeacher(teacherId)
 
   const data = student || teacher
+  const isError = studentIsError || teacherIsError || (!studentId && !teacherId)
+  const modalTitle = studentIsLoading || teacherIsLoading ? 'Завантаження...' : isError ? 'Виникла помилка...' : `${data?.last_name} ${data?.first_name} ${data?.patronymic}`
 
   const [showTeacher, setShowTeacher] = useState(false)
 
   return (
     <Modal
-      title={studentIsLoading || teacherIsLoading ? 'Завантаження...' : `${data?.last_name} ${data?.first_name} ${data?.patronymic}`}
+      title={modalTitle}
       variant={'studentCard'}
       onClose={onClose}
     >
       {(studentIsLoading || teacherIsLoading) && <Loader />}
-      {(studentIsError || teacherIsError) && <p className="text-center">Щось пішло не так...</p>}
+      {isError && <p className="text-center">Щось пішло не так...</p>}
       {data && (
         <div className="modal__card">
           <div className="modal__card-image">
@@ -40,9 +43,8 @@ export function ProfileInfoModal({ onClose, studentId, teacherId }: ProfileInfoM
               src={data?.avatar || default_avatar}
               width={168}
               height={168}
-              alt={data?.last_name}
-              placeholder="blur"
-              blurDataURL={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8sh8AAo0BpUfDY3MAAAAASUVORK5CYII='}
+              {...imgBlur}
+              alt={`${data?.last_name} ${data?.first_name}`}
             />
           </div>
           <ul className="personal-cabinet__list modal__cabinet--list">
@@ -89,14 +91,13 @@ export function ProfileInfoModal({ onClose, studentId, teacherId }: ProfileInfoM
               <h3 className="modal__title-info">Класний керівник</h3>
               <div className="modal__info">
                 <div className="modal__name">
-                  <img
+                  <Image
                     className="modal__photo-teacher"
+                    width={65}
+                    height={65}
                     src={student?.classroom[0].teacher.avatar || '/img/static/default-avatar.png'}
-                    alt={student?.classroom[0].teacher.last_name}
-                    onError={({ currentTarget }) => {
-                      currentTarget.onerror = null
-                      currentTarget.src = '/img/static/default-avatar.png'
-                    }}
+                    {...imgBlur}
+                    alt={`${student?.classroom[0].teacher.last_name} ${student?.classroom[0].teacher.first_name}`}
                   />
                   <div className="modal__card-block">
                     <p

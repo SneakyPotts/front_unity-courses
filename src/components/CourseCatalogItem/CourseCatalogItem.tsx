@@ -1,11 +1,11 @@
 import { format } from 'date-fns'
-import React, { useContext, useMemo, useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { imgBlur } from '@assets/utils'
+import { formattedPrice, imgBlur } from '@assets/utils'
 import { appContext } from '@components/Context/context'
 
 import { Button } from '_ui/Button'
@@ -13,37 +13,20 @@ import { Button } from '_ui/Button'
 import type { CourseCatalogItemProps } from './CourseCatalogItem.props'
 
 const CourseInviteModal = dynamic(() => import('_modals/CourseInviteModal').then((mod) => mod.CourseInviteModal))
+const ProfileInfoModal = dynamic(() => import('_modals/ProfileInfoModal').then((mod) => mod.ProfileInfoModal))
 
 export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
   const { profile } = useContext(appContext)
   const isStudent = profile?.role === 2
 
-  const [showModal, setShowModal] = useState(false)
+  const [isShowInviteModal, setIsShowInviteModal] = useState(false)
+  const [isShowTeacherId, setIsShowTeacherId] = useState('')
 
-  const formattedPrice = (price: number) =>
-    price.toLocaleString('uk-UA', {
-      maximumFractionDigits: 0,
-      // minimumFractionDigits: fractionDigits,
-    })
-
-  const btnOptions = useMemo(() => {
-    if (!props.price)
-      return {
-        text: 'Отримати',
-        iconId: 'cours',
-      }
-
-    if (isStudent)
-      return {
-        text: 'Хочу на курс',
-        iconId: 'rocket',
-      }
-
-    return {
-      text: 'Додати в кошик',
-      iconId: 'basket-course',
+  const handleAddToBasket = () => {
+    if (isStudent) {
+      setIsShowInviteModal(true)
     }
-  }, [isStudent, props.price])
+  }
 
   return (
     <div className={'courses-catalog__element'}>
@@ -69,7 +52,7 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
           {props.rating}
         </span>
         <div className={'courses-catalog__photo'}>
-          <Link href="#">
+          <Link href={`/courses/${props.id}`}>
             <Image
               src={props.cover}
               width={640}
@@ -86,7 +69,7 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
       >
         <Link
           className={'courses-catalog__info-title'}
-          href="#"
+          href={`/courses/${props.id}`}
         >
           {props.title}
         </Link>
@@ -102,11 +85,10 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
                   width={20}
                   height={20}
                   style={{ objectFit: 'cover' }}
-                  {...imgBlur}
                   alt={`${lecturer.first_name} ${lecturer.last_name}`}
                 />
               </div>
-              <button>{`${lecturer.last_name} ${lecturer.first_name[0]}. ${lecturer.patronymic[0]}.`}</button>
+              <button onClick={() => setIsShowTeacherId(lecturer.id)}>{`${lecturer.last_name} ${lecturer.first_name[0]}. ${lecturer.patronymic[0]}.`}</button>
             </div>
           ))}
         </div>
@@ -147,15 +129,21 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
         </div>
         <Button
           className={'some_button courses-catalog__btn'}
-          onClick={() => setShowModal(true)}
+          onClick={handleAddToBasket}
         >
           <svg className="courses-catalog__svg courses-catalog__svg-rocket ">
-            <use href={`/img/sprite.svg#${btnOptions.iconId}`}></use>
+            <use href={`/img/sprite.svg#${props.price ? 'basket-course' : 'cours'}`}></use>
           </svg>
-          {btnOptions.text}
+          {props.price ? 'Додати в кошик' : 'Отримати'}
         </Button>
       </div>
-      {showModal && <CourseInviteModal onClose={() => setShowModal(false)} />}
+      {isShowInviteModal && <CourseInviteModal onClose={() => setIsShowInviteModal(false)} />}
+      {!!isShowTeacherId?.length && (
+        <ProfileInfoModal
+          teacherId={isShowTeacherId}
+          onClose={() => setIsShowTeacherId('')}
+        />
+      )}
     </div>
   )
 }
