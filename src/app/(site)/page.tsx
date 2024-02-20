@@ -1,8 +1,8 @@
-import { CatalogContent } from '_content/CatalogContent'
-
 import { getCoursesCatalog, getCoursesFilters } from '@http/courses/server'
 
 import { RequestError } from '_ui/RequestError'
+
+import { CatalogContent } from '_content/CatalogContent'
 
 export default async function CoursesCatalog() {
   const [catalog, filters] = await Promise.all([getCoursesCatalog(), getCoursesFilters()])
