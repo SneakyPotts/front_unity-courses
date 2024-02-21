@@ -9,7 +9,8 @@
   }
 
   &__body {
-    flex-shrink: 0;
+    flex: 1 0 rem(310);
+    //max-width: rem(310);
   }
 
   &__item {
@@ -255,13 +256,27 @@
     display: flex;
     flex-direction: column;
     gap: rem(12);
-    margin-bottom: rem(24);
+    margin-bottom: 0;
+
+    overflow: hidden;
+
+    &.--animate {
+      transition: all 0.2s ease;
+    }
+
+    &.--open {
+      margin-bottom: rem(24);
+    }
   }
 
   &__class {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: rem(12) rem(12);
+    //display: grid;
+    //grid-template-columns: repeat(3, 1fr);
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: rem(12);
   }
 
   &__menu {

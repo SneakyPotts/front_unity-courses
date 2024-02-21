@@ -5,16 +5,15 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useToggle } from 'usehooks-ts'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import { Button } from '_ui/Button'
 
 import { extraClass, navListChildren } from './AsideNavigation.data'
 import type { AsideNavigationProps, NavAccordionProps } from './AsideNavigation.props'
 
-// import { useRouter } from 'next/router'
-
 export function AsideNavigation({}: AsideNavigationProps) {
-  // const router = useRouter()
+  const pathname = usePathname()
 
   const [navList, setNavList] = useState<NavAccordionProps[]>(navListChildren)
 
@@ -30,7 +29,7 @@ export function AsideNavigation({}: AsideNavigationProps) {
               <NavAccordion {...v} />
             ) : (
               <Link
-                className={classNames('nav__link', { 'nav__link--active': v.link === 'some_value' })}
+                className={classNames('nav__link', { 'nav__link--active': pathname.endsWith(v.link) })}
                 href={v.link}
               >
                 <svg className="nav__link-svg">

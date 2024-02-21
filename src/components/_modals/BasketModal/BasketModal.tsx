@@ -2,7 +2,9 @@ import React from 'react'
 import { useWindowSize } from 'usehooks-ts'
 
 import Image from 'next/image'
+
 import { imgBlur } from '@assets/utils'
+
 import { Button } from '_ui/Button'
 import { Checkbox } from '_ui/Checkbox'
 import { Modal } from '_ui/Modal'
@@ -32,7 +34,6 @@ export function BasketModal({ onClose }: BasketModalProps) {
                 {...imgBlur}
                 alt="alt"
               />
-
             </li>
             <li className={'basket-model__info'}>
               <p className={'basket-model__list-text'}>

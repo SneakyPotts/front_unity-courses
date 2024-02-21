@@ -21,7 +21,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .add-modal {
     width: 90%;
     height: 100%;
