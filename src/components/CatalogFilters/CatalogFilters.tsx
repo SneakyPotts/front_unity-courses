@@ -36,6 +36,16 @@ export function CatalogFilters({ filters }: CatalogFiltersProps) {
     [searchParams],
   )
 
+  const handleFilterReset = () => {
+    const params = new URLSearchParams(searchParams.toString())
+
+    for (const key of params.keys()) {
+      key !== 'search' && params.delete(key)
+    }
+
+    router.replace(`${pathname}?${params.toString()}`)
+  }
+
   return (
     <div className={'courses-catalog__body'}>
       <div className={'courses-catalog__filter '}>
@@ -62,19 +72,26 @@ export function CatalogFilters({ filters }: CatalogFiltersProps) {
                 key={`${index}${filterBlock.title}`}
                 {...filterBlock}
                 handler={(value) => handleChange(filterBlock.name, value)}
+                name={filterBlock.name}
                 initialActive
               />
             ))}
           </div>
           <div className={'courses-catalog__update'}>
-            <Button className={'some_button courses-catalog__update-btn'}>скинути</Button>
+            <Button
+              className={'some_button courses-catalog__update-btn'}
+              onClick={handleFilterReset}
+            >
+              скинути
+            </Button>
           </div>
           <div className="courses-catalog__buttons close">
             <Button className={'some_button'}>застосувати</Button>
 
             <Button
-              className={'some_button courses-catalog__buttons-btn'}
               variant={'border'}
+              className={'some_button courses-catalog__buttons-btn'}
+              onClick={handleFilterReset}
             >
               скинути фільтри
             </Button>
@@ -85,7 +102,9 @@ export function CatalogFilters({ filters }: CatalogFiltersProps) {
   )
 }
 
-function FilterBlock({ isRating, handler, initialActive = false, ...data }: FilterBlockProps) {
+function FilterBlock({ isRating, handler, initialActive = false, name, ...data }: FilterBlockProps) {
+  const searchParams = useSearchParams()
+
   const panelRef = useRef<HTMLUListElement>(null)
   const enableTransition = useRef<boolean>(!initialActive)
 
@@ -141,6 +160,7 @@ function FilterBlock({ isRating, handler, initialActive = false, ...data }: Filt
                 classWrapper={'some-wrapper-class courses-catalog__item'}
                 label={filterItem.title}
                 onChange={() => handler(filterItem.value)}
+                checked={!!searchParams.get(name)?.includes(filterItem.value.toString())}
               />
             )}
           </li>
