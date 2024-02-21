@@ -190,8 +190,95 @@ export function BasketModal({ onClose }: BasketModalProps) {
         </div>
         <div className="basket-model__card">
           <div className="basket-model__card-title">Придбати курс (и)</div>
-          <div className="">
-            <p className={'basket-model__card-subtitle'}>На одне замовлення можна застосувати лише один код знижки</p>
+          <div className={'basket-model__wrapper'}>
+            <p className={'basket-model__wrapper-subtitle'}>На одне замовлення можна застосувати лише один код знижки</p>
+            <div className={'basket-model__form'}>
+              <div className={'field modal__field'}>
+                <label
+                  className="field__label"
+                  htmlFor="form[email]"
+                >
+                  Пошта
+                </label>
+                <div className="field__wrapper">
+                  <input
+                    id="form[email]"
+                    className="field__input input"
+                    placeholder="Ваш email"
+                    inputMode="email"
+                    data-input=""
+                    type="text"
+                    name="email"
+                  />
+                </div>
+              </div>
+              <div className={'field modal__field'}>
+                <label
+                  className="field__label"
+                  htmlFor="form[password]"
+                >
+                  Пароль
+                </label>
+                <div className="field__wrapper">
+                  <input
+                    id="form[password]"
+                    className="field__input input"
+                    placeholder="Ваш пароль"
+                    data-input=""
+                    type="password"
+                    name="password"
+                  />
+                </div>
+              </div>
+              <div className={'login__form-bottom'}>
+                <label className="checkbox">
+                  <input
+                    className="checkbox__input"
+                    type="checkbox"
+                  />
+                  <div className="checkbox__block">
+                    <span className="checkbox__checkmark checkbox__checkmark--default">
+                      <svg>
+                        <use href="/img/sprite.svg#checkbox-default" />
+                      </svg>
+                    </span>
+                    <span className="checkbox__checkmark checkbox__checkmark--active">
+                      <svg>
+                        <use href="/img/sprite.svg#checkbox-active" />
+                      </svg>
+                    </span>
+                  </div>
+                  <div className="checkbox__value">Запам’ятати мене</div>
+                </label>
+                <a
+                  className="login__form__bottom-text"
+                  href="/auth/forgot-password"
+                >
+                  Забули пароль?
+                </a>
+              </div>
+              <div className={'basket-model__form-btn'}>
+                <Button>
+                  <svg>
+                    <use href="/img/sprite.svg#check-mark"></use>
+                  </svg>
+                  Зареєструватися
+                </Button>
+                <span>Або</span>
+                <Button
+                  className={'fulfill'}
+                  variant="border"
+                >
+                  {/* <Image src={'google-logo.svg'} /> */}
+                  google
+                </Button>
+              </div>
+              <div className={'basket-model__form-alternative'}>
+                <p>Вже є аккаунт?</p>
+                <a href="#">Увійдіть зараз</a>
+              </div>
+            </div>
+
             <div className={'basket-model__field'}>
               <input
                 className={'input  '}

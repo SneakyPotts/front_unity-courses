@@ -50,7 +50,7 @@ export function ScheduleSection({ courseId, courseFree, topics }: ScheduleSectio
                       {lecture.is_free && !courseFree && (
                         <span className="plan__is-free">
                           <svg className="btn__icon">
-                            <use href="/img/sprite.svg#rocket"></use>
+                            <use href="/img/sprite.svg#hot-offer"></use>
                           </svg>
                           <span>безкоштовно</span>
                         </span>
