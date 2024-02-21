@@ -18,9 +18,6 @@ import type { HeaderProps } from './Header.props'
 
 const HeaderClock = dynamic(() => import('_ui/HeaderClock').then((m) => m.HeaderClock))
 
-// const AuthModal = dynamic(() => import('_modals/AuthModal').then((m) => m.AuthModal))
-// const RegisterModal = dynamic(() => import('_modals/RegisterModal').then((m) => m.RegisterModal))
-
 const ProfilePopup = dynamic(() => import('_popups/ProfilePopup').then((m) => m.ProfilePopup))
 const ProfileInfoModal = dynamic(() => import('_modals/ProfileInfoModal').then((m) => m.ProfileInfoModal))
 
@@ -28,7 +25,7 @@ const BasketModal = dynamic(() => import('_modals/BasketModal').then((m) => m.Ba
 const BasketPopup = dynamic(() => import('_popups/BasketPopup').then((m) => m.BasketPopup))
 
 export function Header({ profile, className }: HeaderProps) {
-  const { header } = useContext(appContext)
+  const { header, basket } = useContext(appContext)
 
   const role = {
     teacher: profile?.role === 20,
@@ -90,8 +87,8 @@ export function Header({ profile, className }: HeaderProps) {
               className="header__item"
             >
               <button
-                className="header__item-btn"
-                onClick={() => setIsShowBasketPopup(true)}
+                className={classNames({ 'header__item-btn': !!basket?.length })}
+                onClick={() => !!basket?.length && setIsShowBasketPopup(true)}
               >
                 <svg className="header__item-svg header__item--basket">
                   <use href="/img/sprite.svg#basket-course"></use>

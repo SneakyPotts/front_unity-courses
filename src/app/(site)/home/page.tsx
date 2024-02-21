@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 import { dynamicOptions } from '@assets/constants'
-import { AboutMeRequest } from '@http/profile/server'
+import { aboutMeRequest } from '@http/profile/server'
 
 const HomeContent = dynamic(() => import('./home.content').then((mod) => mod.default), {
   ...dynamicOptions,
@@ -15,7 +15,7 @@ export default async function HomePage() {
 
   if (!token) redirect('/')
 
-  const { data } = await AboutMeRequest()
+  const { data } = await aboutMeRequest()
 
   const role = {
     teacher: data?.role === 20,

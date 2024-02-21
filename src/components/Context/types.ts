@@ -1,4 +1,6 @@
-import type { TAboutMe } from '@http/profile/type'
+import type { Dispatch, SetStateAction } from 'react'
+
+import type { TAboutMe, TBasketCourse } from '@http/profile/type'
 
 export interface IContext {
   asideIsOpen?: boolean
@@ -7,6 +9,8 @@ export interface IContext {
   setHeader: (args: THeader) => void
   profile?: TAboutMe
   setProfile: (profile?: TAboutMe) => void
+  basket?: TBasketCourse[]
+  setBasket: Dispatch<SetStateAction<TBasketCourse[] | undefined>>
 }
 
 export type THeader = {

@@ -114,6 +114,16 @@
     @include flex-all-sb;
 
     margin-top: rem(12);
+
+    &.--loading {
+      & > * {
+        flex: 1;
+      }
+    }
+
+    &.--in-basket {
+      justify-content: flex-end;
+    }
   }
 
   &__price {

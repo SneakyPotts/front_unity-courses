@@ -85,6 +85,8 @@
     }
 
     &-img {
+      display: block;
+
       grid-column: 1/2;
       grid-row: 1/3;
 
@@ -105,15 +107,21 @@
       flex: 0 0 rem(100);
 
       s {
-        color: var(--grey-3);
+        color: var(--red);
 
         font-size: rem(13);
         font-weight: 400;
         line-height: rem(16);
+
+        & > span {
+          color: var(--grey-3);
+        }
+
+        & + p {
+          color: var(--red);
+        }
       }
       p {
-        color: var(--red);
-
         font-size: rem(16);
         font-weight: 500;
         line-height: rem(19);
