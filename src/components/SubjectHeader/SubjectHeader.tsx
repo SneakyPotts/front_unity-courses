@@ -1,14 +1,25 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
 
 import Image from 'next/image'
 
 import { courseCaption, formatDateInGenitive, formattedPrice, imgBlur } from '@assets/utils'
+import { AddToBasketButton } from '@components/AddToBasketButton'
+import { appContext } from '@components/Context/context'
 
 import { Button } from '_ui/Button'
 
 import type { SubjectHeaderProps } from './SubjectHeader.props'
 
-export function SubjectHeader({ ...data }: SubjectHeaderProps) {
+export function SubjectHeader({ data }: SubjectHeaderProps) {
+  const { basket } = useContext(appContext)
+
+  const [inBasket, setInBasket] = useState(false)
+
+  useEffect(() => {
+    setInBasket(!!basket?.find((v) => v.id === data?.id))
+  }, [basket])
+
   return (
     <div
       className="archive__head"
@@ -101,18 +112,37 @@ export function SubjectHeader({ ...data }: SubjectHeaderProps) {
             Задати питання
           </button>
         </div>
-        <div className={'archive__result archive__item--element'}>
-          <div className="archive__price">
-            {!!data?.discount && <s className={'archive__price-discount'}>{formattedPrice(data.discount)} грн.</s>}
-            <p className={'archive__price-text'}>{data?.price ? `${formattedPrice(data.price)} грн.` : 'Безкоштовно'}</p>
+        {basket === undefined ? (
+          <div className={'archive__result archive__item--element --loading'}>
+            <Skeleton height={33} />
           </div>
-          <Button className={'some_button  reviews__content--btn'}>
-            <svg className="courses-catalog__svg courses-catalog__svg-rocket ">
-              <use href="/img/sprite.svg#rocket"></use>
-            </svg>
-            Хочу на курс
-          </Button>
-        </div>
+        ) : inBasket ? (
+          <div className={'archive__result archive__item--element --in-basket'}>
+            <Button
+              variant="border"
+              className={'some_button  reviews__content--btn'}
+              disabled
+            >
+              <svg className="btn__icon">
+                <use href={`/img/sprite.svg#check`}></use>
+              </svg>
+              В кошику
+            </Button>
+          </div>
+        ) : (
+          <div className={'archive__result archive__item--element'}>
+            <div className="archive__price">
+              {!!data?.discount && <s className={'archive__price-discount'}>{formattedPrice(data.price)} грн.</s>}
+              <p className={'archive__price-text'}>{data?.price ? `${formattedPrice(data.discount || data.price)} грн.` : 'Безкоштовно'}</p>
+            </div>
+
+            <AddToBasketButton
+              courseId={data?.id!}
+              isFree={!data?.price}
+              callback={() => setInBasket(true)}
+            />
+          </div>
+        )}
       </div>
     </div>
   )

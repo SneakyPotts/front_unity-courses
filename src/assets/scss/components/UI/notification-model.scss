@@ -44,6 +44,8 @@
     background: var(--bg);
 
     &-img {
+      display: block;
+
       img {
         border-radius: rem(2);
       }

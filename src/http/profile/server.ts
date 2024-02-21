@@ -1,9 +1,9 @@
 import { cache } from 'react'
 
 import { serverFetchAuth } from '@http/authApi'
-import type { TAboutMe } from '@http/profile/type'
+import { TAboutMe, TBasket } from '@http/profile/type'
 
-const AboutMeRequest = cache(
+const aboutMeRequest = cache(
   async () =>
     await serverFetchAuth<TAboutMe>('/users/me/', {
       cache: 'reload',
@@ -13,4 +13,14 @@ const AboutMeRequest = cache(
     }),
 )
 
-export { AboutMeRequest }
+const myBasketRequest = cache(
+  async () =>
+    await serverFetchAuth<TBasket>('/courses/cart/me/', {
+      cache: 'reload',
+      next: {
+        tags: ['basket'],
+      },
+    }),
+)
+
+export { aboutMeRequest, myBasketRequest }

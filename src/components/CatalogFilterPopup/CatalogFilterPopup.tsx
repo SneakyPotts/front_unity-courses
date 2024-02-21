@@ -260,7 +260,10 @@ export function CatalogFilterPopup({}: CatalogFilterPopupProps) {
       {/*  </ul>*/}
       {/*</nav>*/}
       <div className="courses-catalog__palen">
-        <SearchField onChange={handleSearchDebounce} />
+        <SearchField
+          value={searchParams.get('search') ?? ''}
+          onChange={handleSearchDebounce}
+        />
       </div>
     </div>
   )

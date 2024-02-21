@@ -20,7 +20,7 @@ export function CourseDetailContent({ data }: CourseDetailContentProps) {
 
   return (
     <div className={'archive__block'}>
-      <SubjectHeader {...data} />
+      <SubjectHeader data={data} />
 
       <div className={'archive__menu'}>
         <div className="content-tabs content-tabs--small">

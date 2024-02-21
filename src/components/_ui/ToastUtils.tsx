@@ -1,5 +1,5 @@
 import React from 'react'
-import { toast } from 'react-toastify'
+import { ToastContentProps, toast } from 'react-toastify'
 
 export const successIcon = {
   icon: (
@@ -33,7 +33,7 @@ export const infoIcon = {
   ),
 }
 
-export const toastPromise = ({
+export function toastPromise<T = any>({
   handler,
   successMessage = 'Данні успішно збережені',
   successCallback,
@@ -42,18 +42,18 @@ export const toastPromise = ({
 }: {
   handler: Promise<any>
   successMessage?: string
-  successCallback?: () => void
+  successCallback?: (e?: ToastContentProps<T>) => void
   errorMessage?: string
   pendingMessage?: string
-}) => {
+}) {
   toast.promise(handler, {
     pending: {
       render: pendingMessage,
       ...pendingIcon,
     },
     success: {
-      render() {
-        successCallback && successCallback()
+      render(e: ToastContentProps<T>) {
+        successCallback && successCallback(e)
         return successMessage
       },
       ...successIcon,

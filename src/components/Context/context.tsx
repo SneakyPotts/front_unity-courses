@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify'
 
 import type { IContext, THeader } from '@components/Context/types'
 import { QueryProvider } from '@components/QueryProvider'
-import { TAboutMe } from '@http/profile/type'
+import { TAboutMe, TBasketCourse } from '@http/profile/type'
 
 const config = {
   loader: { load: ['[tex]/html'] },
@@ -26,12 +26,14 @@ const config = {
 const appContext = createContext<IContext>({
   setHeader: () => {},
   setProfile: () => {},
+  setBasket: () => {},
 })
 
 function AppProvider({ children }: PropsWithChildren) {
   const [asideIsOpen, setAsideIsOpen] = useState(false)
   const [header, setHeader] = useState<THeader | undefined>(undefined)
   const [profile, setProfile] = useState<TAboutMe | undefined>(undefined)
+  const [basket, setBasket] = useState<TBasketCourse[] | undefined>(undefined)
 
   const handleSetAsideIsOpen = () => setAsideIsOpen((p) => !p)
 
@@ -44,6 +46,8 @@ function AppProvider({ children }: PropsWithChildren) {
     setHeader: handleSetHeader,
     profile,
     setProfile,
+    basket,
+    setBasket,
   }
 
   return (

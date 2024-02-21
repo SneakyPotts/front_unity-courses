@@ -9,12 +9,13 @@ import { Header } from '@components/Header'
 
 import type { BaseLayoutInnerProps } from './BaseLayoutInner.props'
 
-export function BaseLayoutInner({ about, children }: BaseLayoutInnerProps) {
-  const { asideIsOpen, setProfile } = useContext(appContext)
+export function BaseLayoutInner({ about, basket, children }: BaseLayoutInnerProps) {
+  const { asideIsOpen, setProfile, setBasket } = useContext(appContext)
 
   useLayoutEffect(() => {
     setProfile(about)
-  }, [about])
+    setBasket(basket ?? [])
+  }, [about, basket])
 
   return (
     <div className={classNames('main inner-layout', { 'main--active': asideIsOpen })}>
