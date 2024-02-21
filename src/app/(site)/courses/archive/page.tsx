@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import Image from 'next/image'
 
-import { formattedPrice, imgBlur } from '@assets/utils'
+import { imgBlur } from '@assets/utils'
 
 import { Banner } from '_ui/Banner'
 import { Button } from '_ui/Button'
@@ -32,6 +32,7 @@ export default function CoursesArchive() {
                       width={400}
                       height={200}
                       {...imgBlur}
+                      alt="фото курса"
                     />
                   </div>
                 </div>
