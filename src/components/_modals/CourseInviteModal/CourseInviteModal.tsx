@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { Button } from '_ui/Button'
 import { Modal } from '_ui/Modal'
 
 import type { CourseInviteModalProps } from './CourseInviteModal.props'
