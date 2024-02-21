@@ -1,4 +1,6 @@
-import { THuman } from '@assets/types/globals'
+import type { ReactNode } from 'react'
+
+import type { THuman } from '@assets/types/globals'
 
 export type TCatalog = {
   count: number
@@ -36,11 +38,13 @@ type TFilterItemResponse = {
 
 export type TFilters = TFilterItem[]
 
-type TFilterItem = {
+export type TFilterItem = {
   title: string
+  name: string
   filters: Array<{
     id: string
-    title: string
+    title: string | ReactNode
+    value: string | boolean
   }>
   extraClass?: string
 }

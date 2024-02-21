@@ -1,6 +1,9 @@
-import React, { useContext, useRef, useState } from 'react'
+import { debounce } from 'lodash-es'
+import React, { useCallback, useContext, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
 import { useOnClickOutside } from 'usehooks-ts'
+
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import { appContext } from '@components/Context/context'
 import { SearchField } from '@components/SearchField'
@@ -11,6 +14,10 @@ import { Checkbox } from '_ui/Checkbox'
 import type { CatalogFilterPopupProps } from './CatalogFilterPopup.props'
 
 export function CatalogFilterPopup({}: CatalogFilterPopupProps) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
   const { asideIsOpen } = useContext(appContext)
 
   const container = useRef<HTMLDivElement | null>(null)
@@ -24,6 +31,19 @@ export function CatalogFilterPopup({}: CatalogFilterPopupProps) {
     placement: 'bottom-start',
     modifiers: [{ name: 'offset', options: { offset: [0, -1] } }],
   })
+
+  const handleSearch = useCallback(
+    (value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+
+      !!value.trim().length ? params.set('search', value.trim()) : params.delete('search')
+
+      router.replace(`${pathname}?${params.toString()}`)
+    },
+    [searchParams],
+  )
+
+  const handleSearchDebounce = debounce(handleSearch, 500)
 
   useOnClickOutside(container, () => setIsOpen(false))
 
@@ -225,22 +245,22 @@ export function CatalogFilterPopup({}: CatalogFilterPopupProps) {
           </div>
         )}
       </div>
-      {/* <nav className="courses-catalog__navigation">
-                  <ul className={'courses-catalog__tabs'}>
-                    {tabs.map((tab, index) => (
-                      <li key={`${index}${tab.title}`}>
-                        <button
-                          className={classNames('courses-catalog__tab', { 'courses-catalog__tab--active': activeTab === index + 1 })}
-                          onClick={() => setActiveTab(index + 1)}
-                        >
-                          {tab.title}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </nav> */}
+      {/*<nav className="courses-catalog__navigation">*/}
+      {/*  <ul className={'courses-catalog__tabs'}>*/}
+      {/*    {tabs.map((tab, index) => (*/}
+      {/*      <li key={`${index}${tab.title}`}>*/}
+      {/*        <button*/}
+      {/*          className={classNames('courses-catalog__tab', { 'courses-catalog__tab--active': activeTab === index + 1 })}*/}
+      {/*          onClick={() => setActiveTab(index + 1)}*/}
+      {/*        >*/}
+      {/*          {tab.title}*/}
+      {/*        </button>*/}
+      {/*      </li>*/}
+      {/*    ))}*/}
+      {/*  </ul>*/}
+      {/*</nav>*/}
       <div className="courses-catalog__palen">
-        <SearchField />
+        <SearchField onChange={handleSearchDebounce} />
       </div>
     </div>
   )

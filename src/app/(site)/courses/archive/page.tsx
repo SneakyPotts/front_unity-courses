@@ -2,6 +2,10 @@
 
 import { useState } from 'react'
 
+import Image from 'next/image'
+
+import { imgBlur } from '@assets/utils'
+
 import { Banner } from '_ui/Banner'
 import { Button } from '_ui/Button'
 import { Tabs } from '_ui/Tabs'
@@ -22,8 +26,12 @@ export default function CoursesArchive() {
                 <div className={'archive__item archive__photo'}>
                   <span className={'courses-catalog__tag'}>Підготовка</span>
                   <div className={'archive__img'}>
-                    <img
+                    <Image
                       src="https://picsum.photos/400/200"
+                      style={{ objectFit: 'cover' }}
+                      width={400}
+                      height={200}
+                      {...imgBlur}
                       alt="фото курса"
                     />
                   </div>
@@ -190,7 +198,7 @@ function AboutTab() {
           <ReviewsCard />
           <ReviewsCard />
         </div>
-        <div className={'offer'}>
+        {/* <div className={'offer'}>
           <div className={'offer__inner'}>
             <div className={'offer__title'}>
               Ще не знаєте, з якого курсу почати?
@@ -231,7 +239,7 @@ function AboutTab() {
               </svg>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

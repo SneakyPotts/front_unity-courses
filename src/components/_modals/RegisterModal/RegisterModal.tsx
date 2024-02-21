@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { signUpServerAction } from '@http/profile/actions'
+import { getGoogleAuthUriAction, signUpServerAction } from '@http/profile/actions'
 
 import { Button } from '_ui/Button'
 import { Checkbox } from '_ui/Checkbox'
@@ -40,6 +40,12 @@ export function RegisterModal({ showAuth, onClose }: RegisterModalProps) {
         }
       })
       .catch(console.error)
+  }
+
+  const handleSignUpByGoogle = async () => {
+    const domain = window.location.origin
+
+    await getGoogleAuthUriAction(domain)
   }
 
   return (
@@ -154,6 +160,7 @@ export function RegisterModal({ showAuth, onClose }: RegisterModalProps) {
               <Button
                 variant="border"
                 className="signUp__controls-btn"
+                onClick={handleSignUpByGoogle}
               >
                 <Image
                   src="/img/icons/google_logo.svg"

@@ -32,24 +32,29 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
     <div className={'courses-catalog__element'}>
       <div className="courses-catalog__box">
         {props.categories_repr?.map((category, i) => (
-          <span
+          <ul
             key={`${i}${category}`}
             className={'courses-catalog__tag'}
           >
-            {category}
-          </span>
+            <li>{category}</li>
+          </ul>
         ))}
-        <span className={'courses-catalog__lesson courses-catalog__decor '}>
+        <span className={'courses-catalog__lesson courses-catalog__review--decor'}>
           <svg className="courses-catalog__svg">
             <use href="/img/sprite.svg#material"></use>
           </svg>
           {props.number_of_lectures} занять
         </span>
-        <span className={'courses-catalog__review courses-catalog__decor '}>
+        <span className={'courses-catalog__review courses-catalog__review--decor '}>
           <svg className={'courses-catalog__svg'}>
             <use href="/img/sprite.svg#star"></use>
           </svg>
           {props.rating}
+        </span>
+        <span className={'courses-catalog__like'}>
+          <svg>
+            <use href="/img/sprite.svg#course-catalog-like"></use>
+          </svg>
         </span>
         <div className={'courses-catalog__photo'}>
           <Link href={`/courses/${props.id}`}>
@@ -57,6 +62,7 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
               src={props.cover}
               width={640}
               height={360}
+              style={{ objectFit: 'cover' }}
               alt={props.title}
               {...imgBlur}
             />
@@ -155,13 +161,13 @@ export function CourseCardPaid() {
     <div className={'courses-catalog__element'}>
       <div className="courses-catalog__box">
         <span className={'courses-catalog__tag'}>Програми</span>
-        <span className={'courses-catalog__lesson courses-catalog__decor '}>
+        <span className={'courses-catalog__lesson courses-catalog__review--decor '}>
           <svg className="courses-catalog__svg">
             <use href="/img/sprite.svg#material"></use>{' '}
           </svg>
           25 занять
         </span>
-        <span className={'courses-catalog__review courses-catalog__decor '}>
+        <span className={'courses-catalog__review courses-catalog__review--decor '}>
           <svg className={'courses-catalog__svg'}>
             <use href="/img/sprite.svg#star"></use>
           </svg>
@@ -248,13 +254,13 @@ export function CourseCardPaidPromotion() {
     <div className={'courses-catalog__element'}>
       <div className="courses-catalog__box">
         <span className={'courses-catalog__tag'}>Програми</span>
-        <span className={'courses-catalog__lesson courses-catalog__decor '}>
+        <span className={'courses-catalog__lesson courses-catalog__review--decor'}>
           <svg className="courses-catalog__svg">
             <use href="/img/sprite.svg#material"></use>{' '}
           </svg>
           25 занять
         </span>
-        <span className={'courses-catalog__review courses-catalog__decor '}>
+        <span className={'courses-catalog__review courses-catalog__review--decor'}>
           <svg className={'courses-catalog__svg '}>
             <use href="/img/sprite.svg#star"></use>{' '}
           </svg>
@@ -355,13 +361,13 @@ export function CourseCardFree() {
     <div className={'courses-catalog__element'}>
       <div className="courses-catalog__box">
         <span className={'courses-catalog__tag'}>ІТ</span>
-        <span className={'courses-catalog__lesson courses-catalog__decor '}>
+        <span className={'courses-catalog__lesson courses-catalog__review--decor '}>
           <svg className="courses-catalog__svg">
             <use href="/img/sprite.svg#material"></use>{' '}
           </svg>
           25 занять
         </span>
-        <span className={'courses-catalog__review courses-catalog__decor '}>
+        <span className={'courses-catalog__review courses-catalog__review--decor '}>
           <svg className={'courses-catalog__svg'}>
             <use href="/img/sprite.svg#star"></use>{' '}
           </svg>

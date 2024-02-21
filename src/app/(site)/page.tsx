@@ -1,11 +1,23 @@
-import { CatalogContent } from '_content/CatalogContent'
-
+import { TPageProps } from '@assets/types/globals'
 import { getCoursesCatalog, getCoursesFilters } from '@http/courses/server'
 
 import { RequestError } from '_ui/RequestError'
 
-export default async function CoursesCatalog() {
-  const [catalog, filters] = await Promise.all([getCoursesCatalog(), getCoursesFilters()])
+import { CatalogContent } from '_content/CatalogContent'
+
+export default async function CoursesCatalog({ searchParams }: TPageProps) {
+  const reqParams = () => {
+    let res = []
+
+    for (const key in searchParams) {
+      const value = searchParams[key].split(',')
+      res.push(...value.map((v) => `${key}=${v}`))
+    }
+
+    return res.join('&')
+  }
+
+  const [catalog, filters] = await Promise.all([getCoursesCatalog(reqParams()), getCoursesFilters()])
 
   const isError = catalog.error || filters.error
 
