@@ -36,11 +36,13 @@ type TFilterItemResponse = {
 
 export type TFilters = TFilterItem[]
 
-type TFilterItem = {
+export type TFilterItem = {
   title: string
+  name: string
   filters: Array<{
     id: string
     title: string
+    value: string | boolean
   }>
   extraClass?: string
 }

@@ -256,7 +256,17 @@
     display: flex;
     flex-direction: column;
     gap: rem(12);
-    margin-bottom: rem(24);
+    margin-bottom: 0;
+
+    overflow: hidden;
+
+    &.--animate {
+      transition: all 0.2s ease;
+    }
+
+    &.--open {
+      margin-bottom: rem(24);
+    }
   }
 
   &__class {
