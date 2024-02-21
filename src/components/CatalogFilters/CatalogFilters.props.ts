@@ -5,7 +5,7 @@ export interface CatalogFiltersProps {
 }
 
 export interface FilterBlockProps extends TFilterItem {
+  handler: (value: string | boolean) => void
   isRating?: boolean
-  handler: (name: string, value: string | boolean) => void
   initialActive?: boolean
 }

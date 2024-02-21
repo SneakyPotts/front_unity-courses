@@ -1,6 +1,9 @@
+import { ReactNode } from 'react'
+
+import type { TFilterItem } from '@http/courses/type'
 import { Rating } from '@smastrom/react-rating'
 
-export const filtersRatings = {
+export const filtersRatings: TFilterItem = {
   title: 'Рейтинг',
   name: 'rating',
   filters: Array.from({ length: 5 }, (_, i) => ({
@@ -17,7 +20,7 @@ export const filtersRatings = {
         />
         <span>{5 - 0.5 * (i + 1)} і вище</span>
       </div>
-    ),
+    ) as ReactNode,
     value: (5 - 0.5 * (i + 1)).toString(),
   })),
   extraClass: '',

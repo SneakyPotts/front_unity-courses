@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
@@ -15,32 +15,26 @@ export function CatalogFilters({ filters }: CatalogFiltersProps) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  // const createQueryString = useCallback(
-  //   (name: string, value: string) => {
-  //     const params = new URLSearchParams(searchParams.toString())
-  //     params.set(name, value)
-  //
-  //     return params.toString()
-  //   },
-  //   [searchParams],
-  // )
+  const handleChange = useCallback(
+    (name: string, value: string | boolean) => {
+      const params = new URLSearchParams(searchParams.toString())
 
-  const handleChange = (name: string, value: string | boolean) => {
-    const params = new URLSearchParams(searchParams.toString())
+      if (params.has(name)) {
+        const currentValue = params.get(name)
+        const valueArr = currentValue?.split(',') || []
+        const newValue = currentValue?.includes(value.toString()) ? valueArr?.filter((v) => v !== value.toString()) : [...valueArr, value.toString()]
 
-    if (params.has(name)) {
-      const currentValue = params.get(name)
-      const newValue = currentValue?.split(',').filter((v) => v !== value.toString()) || []
+        !newValue?.length ? params.delete(name) : params.set(name, newValue.join(','))
 
-      !!newValue?.length ? params.delete(name) : params.set(name, newValue?.join(','))
+        router.replace(`${pathname}?${params.toString()}`)
+      } else {
+        params.set(name, value.toString())
 
-      router.replace(`${pathname}?${params.toString()}`)
-    } else {
-      params.set(name, value.toString())
-
-      router.replace(`${pathname}?${params.toString()}`)
-    }
-  }
+        router.replace(`${pathname}?${params.toString()}`)
+      }
+    },
+    [searchParams],
+  )
 
   return (
     <div className={'courses-catalog__body'}>
@@ -56,49 +50,19 @@ export function CatalogFilters({ filters }: CatalogFiltersProps) {
             </button>
           </div>
           <div className={'courses-catalog__inner'}>
-            {/*<FilterBlock*/}
-            {/*  {...filtersRatings}*/}
-            {/*  handler={() => {}}*/}
-            {/*/>*/}
-
-            {/*ratings*/}
-            <p className={'courses-catalog__subtitle'}>{filtersRatings.title}</p>
-            <ul className={classNames('courses-catalog__list', filtersRatings.extraClass, '--open')}>
-              {filtersRatings.filters.map((ratingItem, i) => (
-                <li key={ratingItem.id}>
-                  <Radio
-                    classWrapper={'some-wrapper-class courses-catalog__item'}
-                    label={ratingItem.title}
-                    name="rating"
-                    value={5 - 0.5 * (i + 1)}
-                  />
-                </li>
-              ))}
-            </ul>
-
-            {/*other filters*/}
-            {/*{[...filtersList, ...(filters ?? [])]?.map((filterBlock, index) => (*/}
-            {/*  <Fragment key={`${index}${filterBlock.title}`}>*/}
-            {/*    <p className={'courses-catalog__subtitle'}>{filterBlock.title}</p>*/}
-            {/*    <ul className={classNames('courses-catalog__list', filterBlock?.extraClass)}>*/}
-            {/*      {filterBlock.filters.map((filterItem) => (*/}
-            {/*        <li key={filterItem.id}>*/}
-            {/*          <Checkbox*/}
-            {/*            classWrapper={'some-wrapper-class courses-catalog__item'}*/}
-            {/*            label={filterItem.title}*/}
-            {/*            onChange={() => handleChange(filterBlock.name, filterItem.value)}*/}
-            {/*          />*/}
-            {/*        </li>*/}
-            {/*      ))}*/}
-            {/*    </ul>*/}
-            {/*  </Fragment>*/}
-            {/*))}*/}
+            <FilterBlock
+              {...filtersRatings}
+              handler={() => {}}
+              isRating
+              initialActive
+            />
 
             {[...filtersList, ...(filters ?? [])].map((filterBlock, index) => (
               <FilterBlock
                 key={`${index}${filterBlock.title}`}
                 {...filterBlock}
                 handler={(value) => handleChange(filterBlock.name, value)}
+                initialActive
               />
             ))}
           </div>
@@ -118,11 +82,11 @@ export function CatalogFilters({ filters }: CatalogFiltersProps) {
   )
 }
 
-function FilterBlock({ isRating, handler, initialActive, ...data }: FilterBlockProps) {
+function FilterBlock({ isRating, handler, initialActive = false, ...data }: FilterBlockProps) {
   const panelRef = useRef<HTMLUListElement>(null)
   const enableTransition = useRef<boolean>(!initialActive)
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(initialActive)
   const [blockHeight, setBlockHeight] = useState(0)
 
   const toggleHandler = () => {
@@ -152,8 +116,11 @@ function FilterBlock({ isRating, handler, initialActive, ...data }: FilterBlockP
       </p>
       <ul
         ref={panelRef}
-        className={classNames('courses-catalog__list', data.extraClass, { '--open': isOpen, '--animate': enableTransition })}
-        style={{ maxHeight: isOpen ? blockHeight : 0 }}
+        className={classNames('courses-catalog__list', data.extraClass, {
+          '--open': isOpen,
+          '--animate': enableTransition.current,
+        })}
+        style={enableTransition.current ? { maxHeight: isOpen ? blockHeight : 0 } : { maxHeight: data.filters.length * 20 + (data.filters.length - 1) * 12 }}
       >
         {data.filters.map((filterItem, i) => (
           <li key={filterItem.id}>
@@ -168,7 +135,7 @@ function FilterBlock({ isRating, handler, initialActive, ...data }: FilterBlockP
               <Checkbox
                 classWrapper={'some-wrapper-class courses-catalog__item'}
                 label={filterItem.title}
-                onChange={() => handler(data.name, filterItem.value)}
+                onChange={() => handler(filterItem.value)}
               />
             )}
           </li>
