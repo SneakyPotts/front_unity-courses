@@ -66,6 +66,9 @@ export function CatalogFilters({ filters }: CatalogFiltersProps) {
               />
             ))}
           </div>
+          <div className={'courses-catalog__update'}>
+            <Button className={'some_button courses-catalog__update-btn'}>скинути</Button>
+          </div>
           <div className="courses-catalog__buttons close">
             <Button className={'some_button'}>застосувати</Button>
 
@@ -108,10 +111,12 @@ function FilterBlock({ isRating, handler, initialActive = false, ...data }: Filt
       <p className={'courses-catalog__subtitle'}>
         <span>{data.title}</span>
         <button
+          className={'courses-catalog__subtitle-btn'}
           onClick={toggleHandler}
-          style={{ width: 20, height: 20, backgroundColor: 'tomato' }}
         >
-          x
+          <svg>
+            <use href="/img/sprite.svg#coure-filter-arrow"></use>
+          </svg>
         </button>
       </p>
       <ul
