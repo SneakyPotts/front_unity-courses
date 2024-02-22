@@ -54,11 +54,11 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
           </svg>
           {props.rating}
         </span>
-        <span className={'courses-catalog__like'}>
+        <button className={'courses-catalog__like'}>
           <svg>
             <use href="/img/sprite.svg#course-catalog-like"></use>
           </svg>
-        </span>
+        </button>
         <div className={'courses-catalog__photo'}>
           <Link href={`/courses/${props.id}`}>
             <Image

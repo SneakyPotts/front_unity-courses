@@ -381,7 +381,7 @@
 
       span {
         text-align: center;
-        font-family: 'Roboto', sans-serif;
+        font-family: "Roboto", sans-serif;
         font-size: rem(16);
         font-weight: 400;
         line-height: rem(21);
@@ -426,9 +426,13 @@
       }
     }
   }
+
+  &__card {
+    max-width: rem(320);
+  }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .basket-model {
     .modal__body {
       padding: 0;
@@ -442,7 +446,7 @@
     }
 
     .modal__close {
-      background: url('/assets/img/static/basket__close.svg') no-repeat center/ contain;
+      background: url("/assets/img/static/basket__close.svg") no-repeat center/ contain;
       top: rem(25);
       left: rem(25);
 
@@ -456,6 +460,9 @@
     }
 
     &__list {
+      grid-template-columns: rem(40) 1fr auto auto;
+      gap: rem(12);
+
       &-img {
         img {
           width: rem(40);
@@ -494,6 +501,8 @@
     }
 
     &__card {
+      max-width: unset;
+
       &-title {
         font-size: rem(16);
         font-weight: 500;
@@ -526,7 +535,7 @@
   }
 }
 
-@include mq('md') {
+@include mq("md") {
   .basket-model {
     &.modal.modal--open {
       background-color: rgba(var(--grey-3--rgb), 0.8);
@@ -543,10 +552,6 @@
 
     .modal__title {
       margin-top: rem(7);
-    }
-
-    &__list {
-      grid-template-columns: rem(40) 1fr auto auto;
     }
 
     &__sorting {
