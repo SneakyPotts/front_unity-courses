@@ -226,15 +226,6 @@
       letter-spacing: 0;
     }
 
-    &-subtitle {
-      margin-bottom: rem(12);
-      max-width: rem(280);
-      color: var(--grey-4);
-      font-size: rem(14);
-      font-weight: 400;
-      line-height: rem(17);
-    }
-
     &-conditions {
       padding-bottom: rem(20);
       border-bottom: rem(1) solid var(--grey-5);
@@ -323,6 +314,17 @@
     }
   }
 
+  &__wrapper {
+    &-subtitle {
+      margin-bottom: rem(12);
+      max-width: rem(280);
+      color: var(--grey-4);
+      font-size: rem(14);
+      font-weight: 400;
+      line-height: rem(17);
+    }
+  }
+
   &__result {
     display: flex;
     align-items: center;
@@ -368,9 +370,65 @@
       width: 100%;
     }
   }
+
+  &__form {
+    &-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: rem(16);
+      margin-bottom: rem(24);
+
+      span {
+        text-align: center;
+        font-family: "Roboto", sans-serif;
+        font-size: rem(16);
+        font-weight: 400;
+        line-height: rem(21);
+        color: var(--grey-3);
+      }
+
+      .btn.btn--trans.fulfill {
+        width: rem(250);
+      }
+
+      button {
+        width: rem(250);
+
+        svg {
+          width: rem(16);
+          height: rem(12);
+          fill: var(--white);
+        }
+      }
+    }
+
+    &-alternative {
+      @include flex-v-center;
+
+      gap: rem(5);
+
+      p {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 17px;
+        letter-spacing: 0em;
+        text-align: left;
+        color: var(--grey-4);
+      }
+
+      a {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 17px;
+        letter-spacing: 0em;
+        color: var(--blue-400);
+      }
+    }
+  }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .basket-model {
     .modal__body {
       padding: 0;
@@ -384,7 +442,7 @@
     }
 
     .modal__close {
-      background: url('/assets/img/static/basket__close.svg') no-repeat center/ contain;
+      background: url("/assets/img/static/basket__close.svg") no-repeat center/ contain;
       top: rem(25);
       left: rem(25);
 
@@ -456,10 +514,19 @@
         }
       }
     }
+
+    &__form {
+      &-btn {
+        .btn.btn--trans.fulfill {
+          // width: rem(250);
+          width: 100%;
+        }
+      }
+    }
   }
 }
 
-@include mq('md') {
+@include mq("md") {
   .basket-model {
     &.modal.modal--open {
       background-color: rgba(var(--grey-3--rgb), 0.8);

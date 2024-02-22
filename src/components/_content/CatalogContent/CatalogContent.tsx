@@ -43,6 +43,15 @@ export function CatalogContent({ data, filters }: CatalogContentProps) {
               {/*<CourseCardPaidPromotion />*/}
               {/*<CourseCardFree />*/}
             </div>
+
+            <div className={'courses-catalog__empty close'}>
+              <div className="courses-catalog__empty-text">
+                <p>На ваш запит нічого не знайдено. Уточніть свій запит</p>
+              </div>
+              <svg className={'courses-catalog__empty-svg'}>
+                <use href="/img/sprite.svg#course-magnifying"></use>
+              </svg>
+            </div>
             <div className={'courses-catalog__paginations'}>
               <ul className={'courses-catalog__paginations-list'}>
                 <li className={'courses-catalog__paginations-item courses-catalog__paginations--active'}>1</li>
