@@ -1,7 +1,6 @@
-import { debounce } from 'lodash-es'
 import React, { useCallback, useContext, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
-import { useOnClickOutside } from 'usehooks-ts'
+import { useDebounceCallback, useOnClickOutside } from 'usehooks-ts'
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
@@ -43,7 +42,7 @@ export function CatalogFilterPopup({}: CatalogFilterPopupProps) {
     [searchParams],
   )
 
-  const handleSearchDebounce = debounce(handleSearch, 500)
+  const handleSearchDebounce = useDebounceCallback(handleSearch, 500)
 
   useOnClickOutside(container, () => setIsOpen(false))
 

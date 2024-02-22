@@ -14,7 +14,6 @@ import { Button } from '_ui/Button'
 
 import type { CourseCatalogItemProps } from './CourseCatalogItem.props'
 
-const CourseInviteModal = dynamic(() => import('_modals/CourseInviteModal').then((mod) => mod.CourseInviteModal))
 const ProfileInfoModal = dynamic(() => import('_modals/ProfileInfoModal').then((mod) => mod.ProfileInfoModal))
 
 export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
@@ -25,7 +24,6 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
     parent: profile?.role === 10,
   }
 
-  const [isShowInviteModal, setIsShowInviteModal] = useState(false)
   const [isShowTeacherId, setIsShowTeacherId] = useState('')
   const [inBasket, setInBasket] = useState(false)
 
@@ -160,13 +158,11 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
             <p>{!!props.price ? `${formattedPrice(props.discount || props.price)} грн.` : 'Безкоштовно'}</p>
           </div>
           <AddToBasketButton
-            courseId={props.id}
-            isFree={!props.price}
+            course={props}
             callback={() => setInBasket(true)}
           />
         </div>
       )}
-      {isShowInviteModal && <CourseInviteModal onClose={() => setIsShowInviteModal(false)} />}
       {!!isShowTeacherId?.length && (
         <ProfileInfoModal
           teacherId={isShowTeacherId}

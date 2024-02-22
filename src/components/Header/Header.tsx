@@ -21,8 +21,9 @@ const HeaderClock = dynamic(() => import('_ui/HeaderClock').then((m) => m.Header
 const ProfilePopup = dynamic(() => import('_popups/ProfilePopup').then((m) => m.ProfilePopup))
 const ProfileInfoModal = dynamic(() => import('_modals/ProfileInfoModal').then((m) => m.ProfileInfoModal))
 
-const BasketModal = dynamic(() => import('_modals/BasketModal').then((m) => m.BasketModal))
 const BasketPopup = dynamic(() => import('_popups/BasketPopup').then((m) => m.BasketPopup))
+const BasketModal = dynamic(() => import('_modals/BasketModal').then((m) => m.BasketModal))
+const ChildBoughtModal = dynamic(() => import('_modals/ChildBoughtModal').then((m) => m.ChildBoughtModal))
 
 export function Header({ profile, className }: HeaderProps) {
   const { header, basket } = useContext(appContext)
@@ -44,10 +45,16 @@ export function Header({ profile, className }: HeaderProps) {
 
   const [isShowBasketPopup, setIsShowBasketPopup] = useState(false)
   const [isShowBasketModal, setIsShowBasketModal] = useState(false)
+  const [isShowChildBought, setIsShowChildBought] = useState(false)
 
   const handleShowCheckout = () => {
     setIsShowBasketPopup(false)
     setIsShowBasketModal(true)
+  }
+
+  const handleChildBought = () => {
+    setIsShowBasketModal(false)
+    setIsShowChildBought(true)
   }
 
   const handleShowProfile = () => {
@@ -100,7 +107,17 @@ export function Header({ profile, className }: HeaderProps) {
                   showCheckoutModal={handleShowCheckout}
                 />
               )}
-              {isShowBasketModal && <BasketModal onClose={() => setIsShowBasketModal(false)} />}
+              {/*<BasketModal*/}
+              {/*  onClose={() => setIsShowBasketModal(false)}*/}
+              {/*  showChildBoughtModal={handleChildBought}*/}
+              {/*/>*/}
+              {isShowBasketModal && (
+                <BasketModal
+                  onClose={() => setIsShowBasketModal(false)}
+                  showChildBoughtModal={handleChildBought}
+                />
+              )}
+              {isShowChildBought && <ChildBoughtModal onClose={() => setIsShowChildBought(false)} />}
             </li>
             <li className="header__item">
               <button className="header__item-btn">

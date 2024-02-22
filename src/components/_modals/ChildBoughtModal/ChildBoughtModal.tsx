@@ -4,9 +4,9 @@ import { useWindowSize } from 'usehooks-ts'
 import { Button } from '_ui/Button'
 import { Modal } from '_ui/Modal'
 
-import type { AddModalProps } from './AddModal.props'
+import type { ChildBoughtModalProps } from './ChildBoughtModal.props'
 
-export function AddModal({ onClose }: AddModalProps) {
+export function ChildBoughtModal({ onClose }: ChildBoughtModalProps) {
   const { width } = useWindowSize()
   const isDesktop = width > 991
 
