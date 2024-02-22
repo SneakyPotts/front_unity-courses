@@ -24,7 +24,7 @@ const typesMatch = {
   basketModal: 'basket-model',
   signInCourses: 'signIn-courses',
   signUpCourses: 'signUp-courses',
-  addModal: 'add-modal',
+  childBought: 'child-bought',
   empty: '',
 }
 

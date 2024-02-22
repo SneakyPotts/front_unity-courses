@@ -12,33 +12,32 @@ export function ChildBoughtModal({ onClose }: ChildBoughtModalProps) {
 
   return (
     <Modal
-      variant="addModal"
-      title="Додати курс"
+      variant="childBought"
+      title="Заявка на курс"
       onClose={isDesktop ? onClose : undefined}
       onBack={isDesktop ? undefined : onClose}
     >
-      <div className={'add-modal__block'}>
-        <div className={'add-modal__decor'}>
-          <svg>
-            <use href="/img/sprite.svg#coure-list"></use>
-          </svg>
-        </div>
-        <div className={'add-modal__text'}>
-          <p>Ви будете додані до курсу “Вступ до мови програмування Python“</p>
-        </div>
-        <div className={'add-modal__buttons'}>
-          <Button
-            className={'some_button'}
-            variant={'border'}
-          >
-            відхилити
-          </Button>
-          <Button
-            className={'some_button'}
-            variant={'gray'}
-          >
-            підтвердити
-          </Button>
+      <div className={'child-bought__block'}>
+        <p className={'child-bought__block-text'}>Батькам було відправлено заявку на придбання курсу </p>
+        <ul className={'child-bought__list'}>
+          <li>
+            <span>x1</span>
+            <p>Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями</p>
+            <p className={'child-bought__price'}>5 300 ₴</p>
+          </li>
+          <li>
+            <span>x1</span>
+            <p>Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями</p>
+            <p className={'child-bought__price'}>5 300 ₴</p>
+          </li>
+          <li>
+            <span>x1</span>
+            <p>Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями</p>
+            <p className={'child-bought__price'}>Безкоштовно</p>
+          </li>
+        </ul>
+        <div className={'child-bought__buttons'}>
+          <Button>головна</Button>
         </div>
       </div>
     </Modal>
