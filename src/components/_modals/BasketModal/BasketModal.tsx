@@ -127,6 +127,7 @@ export function BasketModal({ onClose, showChildBoughtModal }: BasketModalProps)
             basket={basket}
             role={role}
             showChildBoughtModal={showChildBoughtModal}
+            onClose={onClose}
           />
         ) : (
           <NotAuthInfo />
@@ -136,7 +137,7 @@ export function BasketModal({ onClose, showChildBoughtModal }: BasketModalProps)
   )
 }
 
-function AuthInfo({ basket, role, showChildBoughtModal }: AuthInfoProps) {
+function AuthInfo({ basket, role, showChildBoughtModal, onClose }: AuthInfoProps) {
   const totalPrice = basket?.reduce((acc, item) => acc + (item.discount || item.price), 0)
   const hasFree = basket?.find((v) => v.price === 0)
 
@@ -208,6 +209,7 @@ function AuthInfo({ basket, role, showChildBoughtModal }: AuthInfoProps) {
           <Button
             className={'some_button basket-model__buttons-btn'}
             variant={'border'}
+            onClick={onClose}
           >
             відхилити
           </Button>

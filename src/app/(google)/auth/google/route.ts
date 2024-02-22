@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import type { NextRequest, NextResponse } from 'next/server'
 
 import { serverFetch } from '@http/api'
+import { addToBasketOnAuthAction } from '@http/profile/actions'
 
 const env = process.env.NODE_ENV
 
@@ -30,8 +31,12 @@ export async function GET(req: NextRequest, res: NextResponse) {
     cookies().set('accessToken', authResponse.data.jwt_pair.access, {
       path: '/',
     })
-    revalidateTag('aboutMe')
+
+    await addToBasketOnAuthAction(authResponse.data.jwt_pair.access)
+
     revalidatePath('/')
+    revalidateTag('aboutMe')
+    revalidateTag('basket')
 
     redirect('/home')
   } else {
