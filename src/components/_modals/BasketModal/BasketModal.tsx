@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import { useForm } from 'react-hook-form'
 import Cookies from 'universal-cookie'
 import { useLocalStorage, useWindowSize } from 'usehooks-ts'
 
@@ -8,13 +7,11 @@ import Link from 'next/link'
 
 import { formattedPrice, imgBlur } from '@assets/utils'
 import { appContext } from '@components/Context/context'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { removeFromBasketAction } from '@http/profile/actions'
 import { TBasketCourse } from '@http/profile/type'
 
 import { Button } from '_ui/Button'
 import { Checkbox } from '_ui/Checkbox'
-import { Field } from '_ui/Field'
 import { Modal } from '_ui/Modal'
 import { toastPromise } from '_ui/ToastUtils'
 

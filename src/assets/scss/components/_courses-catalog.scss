@@ -304,10 +304,10 @@
     gap: rem(40);
     padding: rem(76) rem(10);
     border-radius: rem(10);
-    background: url("/img/offer-bg.png") no-repeat center / cover;
+    background: url('/img/offer-bg.png') no-repeat center / cover;
 
     &-text {
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(32);
       font-weight: 600;
       line-height: rem(38);
