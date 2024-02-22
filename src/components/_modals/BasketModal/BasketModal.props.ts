@@ -1,8 +1,8 @@
 import type { TBasketCourse } from '@http/profile/type'
 
 export interface BasketModalProps {
-  onClose: () => void
   showChildBoughtModal: () => void
+  onClose: () => void
 }
 
 export interface AuthInfoProps {
@@ -13,4 +13,5 @@ export interface AuthInfoProps {
     parent: boolean
   }
   showChildBoughtModal: () => void
+  onClose: () => void
 }

@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import React, { type ChangeEventHandler, useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
+import { useLocalStorage } from 'usehooks-ts'
 import { z } from 'zod'
 
 import Image from 'next/image'
@@ -9,6 +10,7 @@ import Link from 'next/link'
 import type { ErrorResponse } from '@assets/types/globals'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { getGoogleAuthUriAction, signInServerAction } from '@http/profile/actions'
+import { TBasketCourse } from '@http/profile/type'
 
 import { Button } from '_ui/Button'
 import { Checkbox } from '_ui/Checkbox'
@@ -21,7 +23,7 @@ import { schema } from './AuthModal.schema'
 
 type FormSchema = z.infer<typeof schema>
 
-export function AuthModal({ showRegister, onClose }: AuthModalProps) {
+export function AuthModal({ onClose, ...props }: AuthModalProps) {
   return (
     <Modal
       variant="signInCourses"
@@ -30,13 +32,15 @@ export function AuthModal({ showRegister, onClose }: AuthModalProps) {
     >
       <AuthForm
         onClose={onClose}
-        showRegister={showRegister}
+        {...props}
       />
     </Modal>
   )
 }
 
-export function AuthForm({ onClose, showRegister, isBasket }: AuthFormProps) {
+export function AuthForm({ onClose, showRegister, showRegisterBasket, isBasket }: AuthFormProps) {
+  const [_, setBasketLocal] = useLocalStorage<TBasketCourse[] | null>('basket', null, { serializer: JSON.stringify, deserializer: JSON.parse })
+
   const [saveMe, setSaveMe] = useState(false)
   const [reqError, setReqError] = useState<ErrorResponse | null>(null)
 
@@ -56,12 +60,16 @@ export function AuthForm({ onClose, showRegister, isBasket }: AuthFormProps) {
     const domain = window.location.origin
 
     await getGoogleAuthUriAction(domain)
+
+    setBasketLocal(null)
   }
 
   const onSubmit: SubmitHandler<FormSchema> = (data) => {
     signInServerAction(data)
       .then((res) => {
         res.error ? setReqError(res.error) : onClose && onClose()
+
+        setBasketLocal(null)
       })
       .catch(console.error)
   }
@@ -130,7 +138,10 @@ export function AuthForm({ onClose, showRegister, isBasket }: AuthFormProps) {
           <span>Або</span>
 
           {isBasket ? (
-            <Button className="login__form-btn">
+            <Button
+              className="login__form-btn"
+              onClick={showRegisterBasket}
+            >
               <svg className={'btn__icon'}>
                 <use href="/img/sprite.svg#check"></use>
               </svg>
