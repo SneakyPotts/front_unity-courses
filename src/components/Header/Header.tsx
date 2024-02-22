@@ -112,10 +112,6 @@ export function Header({ profile, className }: HeaderProps) {
                   showCheckoutModal={handleShowCheckout}
                 />
               )}
-              {/*<BasketModal*/}
-              {/*  onClose={() => setIsShowBasketModal(false)}*/}
-              {/*  showChildBoughtModal={handleChildBought}*/}
-              {/*/>*/}
               {isShowBasketModal && (
                 <BasketModal
                   onClose={() => setIsShowBasketModal(false)}
