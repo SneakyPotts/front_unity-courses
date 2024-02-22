@@ -1,5 +1,7 @@
+import classNames from 'classnames'
 import React, { type ChangeEventHandler, useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
+import { useLocalStorage } from 'usehooks-ts'
 import { z } from 'zod'
 
 import Image from 'next/image'
@@ -8,6 +10,7 @@ import Link from 'next/link'
 import type { ErrorResponse } from '@assets/types/globals'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { getGoogleAuthUriAction, signInServerAction } from '@http/profile/actions'
+import { TBasketCourse } from '@http/profile/type'
 
 import { Button } from '_ui/Button'
 import { Checkbox } from '_ui/Checkbox'
@@ -15,12 +18,29 @@ import { Field } from '_ui/Field'
 import { Modal } from '_ui/Modal'
 import { RequestError } from '_ui/RequestError'
 
-import type { AuthModalProps } from './AuthModal.props'
+import { AuthFormProps, AuthModalProps } from './AuthModal.props'
 import { schema } from './AuthModal.schema'
 
 type FormSchema = z.infer<typeof schema>
 
-export function AuthModal({ showRegister, onClose }: AuthModalProps) {
+export function AuthModal({ onClose, ...props }: AuthModalProps) {
+  return (
+    <Modal
+      variant="signInCourses"
+      title={'Вхід'}
+      onClose={onClose}
+    >
+      <AuthForm
+        onClose={onClose}
+        {...props}
+      />
+    </Modal>
+  )
+}
+
+export function AuthForm({ onClose, showRegister, showRegisterBasket, isBasket }: AuthFormProps) {
+  const [_, setBasketLocal] = useLocalStorage<TBasketCourse[] | null>('basket', null, { serializer: JSON.stringify, deserializer: JSON.parse })
+
   const [saveMe, setSaveMe] = useState(false)
   const [reqError, setReqError] = useState<ErrorResponse | null>(null)
 
@@ -40,26 +60,26 @@ export function AuthModal({ showRegister, onClose }: AuthModalProps) {
     const domain = window.location.origin
 
     await getGoogleAuthUriAction(domain)
+
+    setBasketLocal(null)
   }
 
   const onSubmit: SubmitHandler<FormSchema> = (data) => {
     signInServerAction(data)
       .then((res) => {
-        res.error ? setReqError(res.error) : onClose()
+        res.error ? setReqError(res.error) : onClose && onClose()
+
+        setBasketLocal(null)
       })
       .catch(console.error)
   }
 
   return (
-    <Modal
-      variant="signInCourses"
-      title={'Вхід'}
-      onClose={onClose}
+    <form
+      className="login__form"
+      onSubmit={handleSubmit(onSubmit)}
     >
-      <form
-        className="login__form"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      {!isBasket && (
         <div className="login__form-img">
           <Image
             className="login__form-logo"
@@ -68,53 +88,66 @@ export function AuthModal({ showRegister, onClose }: AuthModalProps) {
             alt="alt"
           />
         </div>
-        <div className="login__form-inner">
-          <Field
-            {...register('email')}
-            className={'modal__field'}
-            type={'text'}
-            placeholder={'Ваш email'}
-            label={'Пошта'}
-            inputMode="email"
-            error={errors?.email?.message}
+      )}
+      <div className="login__form-inner">
+        <Field
+          {...register('email')}
+          className={'modal__field'}
+          type={'text'}
+          placeholder={'Ваш email'}
+          label={'Пошта'}
+          inputMode="email"
+          error={errors?.email?.message}
+        />
+        <Field
+          {...register('password')}
+          type={'password'}
+          className={'modal__field'}
+          placeholder={'Ваш пароль'}
+          label={'Пароль'}
+          error={errors?.password?.message}
+        />
+        <div className="login__form-bottom">
+          <Checkbox
+            label={'Запам’ятати мене'}
+            onChange={handleSaveMe}
+            checked={saveMe}
           />
-          <Field
-            {...register('password')}
-            type={'password'}
-            className={'modal__field'}
-            placeholder={'Ваш пароль'}
-            label={'Пароль'}
-            error={errors?.password?.message}
-          />
-          <div className="login__form-bottom">
-            <Checkbox
-              label={'Запам’ятати мене'}
-              onChange={handleSaveMe}
-              checked={saveMe}
-            />
-            <Link
-              href={'/auth/forgot-password'}
-              className="login__form__bottom-text"
-            >
-              Забули пароль?
-            </Link>
-          </div>
+          <Link
+            href={'/auth/forgot-password'}
+            className="login__form__bottom-text"
+          >
+            Забули пароль?
+          </Link>
+        </div>
 
-          {reqError && <RequestError {...reqError} />}
+        {reqError && <RequestError {...reqError} />}
 
-          <div className="login__form-controls">
+        <div className="login__form-controls">
+          <Button
+            variant={isBasket ? 'border' : 'accent'}
+            className={classNames('login__form-btn', { '--is-basket': isBasket })}
+            type="submit"
+          >
+            <svg className={isBasket ? 'btn__icon' : 'login__form-svg'}>
+              <use href="/img/sprite.svg#login"></use>
+            </svg>
+            Увійти
+          </Button>
+
+          <span>Або</span>
+
+          {isBasket ? (
             <Button
               className="login__form-btn"
-              type="submit"
+              onClick={showRegisterBasket}
             >
-              <svg className="login__form-svg">
-                <use href="/img/sprite.svg#login"></use>
+              <svg className={'btn__icon'}>
+                <use href="/img/sprite.svg#check"></use>
               </svg>
-              Увійти
+              Зареєструватися
             </Button>
-
-            <span>Або</span>
-
+          ) : (
             <Button
               variant={'border'}
               className="login__form-btn"
@@ -128,8 +161,10 @@ export function AuthModal({ showRegister, onClose }: AuthModalProps) {
               />
               google
             </Button>
-          </div>
+          )}
+        </div>
 
+        {!isBasket && (
           <p className="login__signUp">
             Ще не зареєстровані?{' '}
             <button
@@ -140,8 +175,8 @@ export function AuthModal({ showRegister, onClose }: AuthModalProps) {
               Створити аккаунт
             </button>
           </p>
-        </div>
-      </form>
-    </Modal>
+        )}
+      </div>
+    </form>
   )
 }

@@ -123,6 +123,11 @@
   }
 }
 
+.nav__link-svg {
+  width: rem(16);
+  height: rem(16);
+}
+
 @include mq('lg') {
   .nav {
     border-radius: rem(20) rem(20) 0 0;

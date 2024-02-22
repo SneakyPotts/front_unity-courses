@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 
 import type { THuman } from '@assets/types/globals'
+import { TBasketCourse } from '@http/profile/type'
 
 export type TCatalog = {
   count: number
@@ -9,12 +10,9 @@ export type TCatalog = {
   results: TCourse[]
 }
 
-export type TCourse = {
-  id: string
-  title: string
+export type TCourse = TBasketCourse & {
   format: string
   color: string
-  cover: string
   categories_repr: string[]
   rating: number
   number_of_lectures: number
@@ -22,8 +20,6 @@ export type TCourse = {
   start_date: string
   number_of_students: number
   max_number_of_students: number
-  price: number
-  discount: number
 }
 
 export type TFiltersResponse = {
@@ -49,12 +45,9 @@ export type TFilterItem = {
   extraClass?: string
 }
 
-export type TCourseDetail = {
-  id: string
-  title: string
+export type TCourseDetail = TBasketCourse & {
   format: 'live' | 'self' | 'mix'
   color: string
-  cover: string
   categories_repr: string[]
   number_of_lectures: number
   rating: number
@@ -62,8 +55,6 @@ export type TCourseDetail = {
   start_date: string
   number_of_students: number
   max_number_of_students: number
-  price: number
-  discount: number
   topics: Topic[]
   materials: ExtraMaterial[]
   links: ExtraMaterial[]

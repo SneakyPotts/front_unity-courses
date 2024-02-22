@@ -4,6 +4,7 @@ export const courseMockData: TCourse[] = [
   {
     id: 'asdasd#1',
     title: 'Тестовий курс',
+    description: 'Тестовий курс',
     start_date: '2020-01-01',
     categories_repr: ['Тестовий курс', 'IT'],
     price: 1100,
@@ -28,6 +29,7 @@ export const courseMockData: TCourse[] = [
   {
     id: 'asdasd#2',
     title: 'Тестовий курс 2',
+    description: 'Тестовий курс',
     start_date: '2020-01-01',
     categories_repr: ['Тестовий курс', 'IT'],
     price: 0,
@@ -52,6 +54,7 @@ export const courseMockData: TCourse[] = [
   {
     id: 'asdasd#3',
     title: 'Тестовий курс 3. Поглиблене вивчення',
+    description: 'Тестовий курс',
     start_date: '2020-01-01',
     categories_repr: ['Тестовий курс', 'IT'],
     price: 9991,

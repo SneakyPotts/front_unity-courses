@@ -1,5 +1,6 @@
+import type { TBasketCourse } from '@http/profile/type'
+
 export interface AddToBasketButtonProps {
-  courseId: string
-  isFree: boolean
+  course: TBasketCourse
   callback: () => void
 }

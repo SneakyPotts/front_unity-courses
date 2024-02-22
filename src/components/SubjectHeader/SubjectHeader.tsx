@@ -137,8 +137,7 @@ export function SubjectHeader({ data }: SubjectHeaderProps) {
             </div>
 
             <AddToBasketButton
-              courseId={data?.id!}
-              isFree={!data?.price}
+              course={data!}
               callback={() => setInBasket(true)}
             />
           </div>
