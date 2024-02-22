@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import Image from 'next/image'
+import Link from 'next/link'
+
+import { formattedPrice, imgBlur } from '@assets/utils'
+import { appContext } from '@components/Context/context'
 
 import { Button } from '_ui/Button'
 
 import type { BasketPopupProps } from './BasketPopup.props'
 
 export function BasketPopup({ showCheckoutModal, onClose }: BasketPopupProps) {
+  const { basket } = useContext(appContext)
+
+  const totalPrice = basket?.reduce((acc, item) => acc + (item.discount || item.price), 0)
+
   return (
     <div className="notification">
       <div className="notification__head">
@@ -21,43 +29,41 @@ export function BasketPopup({ showCheckoutModal, onClose }: BasketPopupProps) {
         </button>
       </div>
       <div className={'notification__content'}>
-        <ul className={'notification__list'}>
-          <li className={'notification__list-img'}>
-            <Image
-              src="https://loremflickr.com/60/60"
-              style={{ objectFit: 'cover' }}
-              alt="alt"
-              width={60}
-              height={60}
+        {basket?.map((v) => (
+          <div
+            key={v.id}
+            className={'notification__list'}
+          >
+            <Link
+              href={`/courses/${v.id}`}
+              className={'notification__list-img'}
+            >
+              <Image
+                src={v.cover || '/img/static/default-avatar.png'}
+                width={60}
+                height={60}
+                style={{ objectFit: 'cover' }}
+                {...imgBlur}
+                alt="alt"
+              />
+            </Link>
+            <div
+              className={'notification__list-name'}
+              dangerouslySetInnerHTML={{ __html: v.description }}
             />
-          </li>
-          <li className={'notification__list-name'}>Medium рівень програмування на JavaScript Medium рівень програмування на JavaScript</li>
-          <li className={'notification__list-price'}>
-            <div className="notification__list-sale">5 300 грн.</div>
-          </li>
-        </ul>
-        <ul className={'notification__list'}>
-          <li className={'notification__list-img'}>
-            <Image
-              src="https://loremflickr.com/60/60"
-              style={{ objectFit: 'cover' }}
-              alt="alt"
-              width={60}
-              height={60}
-            />
-          </li>
-          <li className={'notification__list-name'}>Medium рівень програмування на JavaScript Medium рівень програмування на JavaScript</li>
-          <li className={'notification__list-price'}>
-            <div className="notification__list-sale">
-              <s>6 800 грн.</s>5 300 грн.
+            <div className={'notification__list-price'}>
+              <div className="notification__list-sale">
+                {!!v.discount && <s>{formattedPrice(v.price)} грн.</s>}
+                {formattedPrice(v.discount || v.price)} грн.
+              </div>
             </div>
-          </li>
-        </ul>
+          </div>
+        ))}
       </div>
       <div className={'notification__result'}>
         <div className={'notification__result-text'}>
           <p>Всього:</p>
-          10 600 грн.
+          {formattedPrice(totalPrice ?? 0)} грн.
         </div>
         <Button
           className={'some_button'}

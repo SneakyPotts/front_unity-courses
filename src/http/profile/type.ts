@@ -74,3 +74,18 @@ export type TToDo = {
   is_completed: boolean
 }
 /*ToDoList*/
+
+/*basket*/
+export interface TBasket {
+  courses: TBasketCourse[]
+}
+
+export interface TBasketCourse {
+  id: string
+  title: string
+  description: string
+  cover: string
+  price: number
+  discount: number
+}
+/*basket*/

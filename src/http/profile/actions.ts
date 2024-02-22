@@ -7,6 +7,8 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 import { serverFetch } from '@http/api'
+import { serverFetchAuth } from '@http/authApi'
+import { TBasket } from '@http/profile/type'
 
 import { schema as schemaSignIn } from '_modals/AuthModal/AuthModal.schema'
 import { schema as schemaSignUp } from '_modals/RegisterModal/RegisterModal.schema'
@@ -53,5 +55,19 @@ export async function signUpServerAction(data: SignUpSchema) {
   return await serverFetch<{ first_name: string; last_name: string }>(`/users/`, {
     method: 'POST',
     body: JSON.stringify(data),
+  })
+}
+
+export async function addToBasketAction(course_id: string) {
+  return await serverFetchAuth<TBasket>(`/courses/cart/add/`, {
+    method: 'POST',
+    body: JSON.stringify({ id: course_id }),
+  })
+}
+
+export async function removeFromBasketAction(course_id: string) {
+  return await serverFetchAuth<TBasket>(`/courses/cart/remove/`, {
+    method: 'POST',
+    body: JSON.stringify({ id: course_id }),
   })
 }

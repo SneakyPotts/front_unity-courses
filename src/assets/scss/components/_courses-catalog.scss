@@ -304,10 +304,10 @@
     gap: rem(40);
     padding: rem(76) rem(60);
     border-radius: rem(10);
-    background: url("/img/offer-bg.png") no-repeat center / cover;
+    background: url('/img/offer-bg.png') no-repeat center / cover;
 
     &-text {
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: rem(32);
       font-weight: 600;
       line-height: rem(38);
@@ -344,7 +344,7 @@
       fill: transparent;
     }
 
-    use[href$="#basket-course"] {
+    use[href$='#basket-course'] {
       fill: transparent;
       stroke: #fff;
     }
@@ -357,6 +357,7 @@
 
     &--selected {
       opacity: 0.5;
+      pointer-events: none;
     }
   }
 
@@ -555,6 +556,14 @@
       line-height: 120%;
       color: #333;
     }
+
+    &.--loading > * {
+      flex: 1;
+    }
+
+    &.--in-basket {
+      justify-content: flex-end;
+    }
   }
 
   &__prices {
@@ -611,7 +620,7 @@
   }
 }
 
-@include mq("xxl") {
+@include mq('xxl') {
   .courses-catalog {
     &__cards {
       grid-template-columns: repeat(2, 1fr);
@@ -619,7 +628,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .courses-catalog {
     &__catalog {
       min-width: 0;
@@ -749,7 +758,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .courses-catalog {
     &__cards {
       grid-template-columns: 1fr;
