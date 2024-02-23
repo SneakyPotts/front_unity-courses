@@ -1,27 +1,31 @@
-import React, { useCallback, useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
-import { useDebounceCallback, useOnClickOutside } from 'usehooks-ts'
+import { useOnClickOutside } from 'usehooks-ts'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
+import { filtersList, filtersRatings } from '@components/CatalogFilters/CatalogFilters.data'
 import { appContext } from '@components/Context/context'
 import { SearchField } from '@components/SearchField'
 
 import { Button } from '_ui/Button'
 import { Checkbox } from '_ui/Checkbox'
 
-import type { CatalogFilterPopupProps } from './CatalogFilterPopup.props'
+import type { CatalogFilterPopupProps, FilterActiveTagsProps, TActiveTag } from './CatalogFilterPopup.props'
 
-export function CatalogFilterPopup({}: CatalogFilterPopupProps) {
-  const router = useRouter()
-  const pathname = usePathname()
+export function CatalogFilterPopup({ filters, handler, reset }: CatalogFilterPopupProps) {
   const searchParams = useSearchParams()
 
   const { asideIsOpen } = useContext(appContext)
 
+  const filterBlocksList = [filtersRatings, ...filtersList, ...(filters ?? [])]
+
   const container = useRef<HTMLDivElement | null>(null)
 
   const [isOpen, setIsOpen] = useState(false)
+
+  const [activeFilter, setActiveFilter] = useState('')
+  const [activeTags, setActiveTags] = useState<TActiveTag[]>([])
 
   const [referenceElement, setReferenceElement] = useState<any>(null)
   const [popperElement, setPopperElement] = useState<any>(null)
@@ -31,18 +35,37 @@ export function CatalogFilterPopup({}: CatalogFilterPopupProps) {
     modifiers: [{ name: 'offset', options: { offset: [0, -1] } }],
   })
 
-  const handleSearch = useCallback(
-    (value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
+  const handleChange = (name: string, value: string | boolean) => {
+    handler(name, value)
 
-      !!value.trim().length ? params.set('search', value.trim()) : params.delete('search')
+    const block = filterBlocksList.find((block) => block.name === name)
+    const item = block?.filters?.find((filter) => filter.value === value)
 
-      router.replace(`${pathname}?${params.toString()}`)
-    },
-    [searchParams],
-  )
+    const isIncluding = activeTags.findIndex((tag) => tag.name === block!.name && tag.value === item!.value.toString())
 
-  const handleSearchDebounce = useDebounceCallback(handleSearch, 500)
+    setActiveTags((prev) =>
+      isIncluding >= 0 ? prev.filter((_, index) => index !== isIncluding) : [...prev, { title: item!.title, name: block!.name, value: item!.value.toString() }],
+    )
+  }
+
+  const handleRemove = (name: string, value: string | boolean) => {
+    handler(name, value)
+
+    setActiveTags((prev) => prev.filter((f) => f.value !== value))
+  }
+
+  const handleReset = () => {
+    reset()
+    setActiveTags([])
+  }
+
+  useEffect(() => {
+    setIsOpen(false)
+  }, [asideIsOpen])
+
+  useEffect(() => {
+    setActiveFilter('')
+  }, [])
 
   useOnClickOutside(container, () => setIsOpen(false))
 
@@ -74,196 +97,142 @@ export function CatalogFilterPopup({}: CatalogFilterPopupProps) {
             <div className="courses-catalog__searchs">
               <div className="courses-catalog__searchs-head">
                 <p className="courses-catalog__searchs-text">Фільтр</p>
-                <button className="courses-catalog__searchs-btn">скинути</button>
+                <button
+                  className="courses-catalog__searchs-btn"
+                  onClick={handleReset}
+                >
+                  скинути
+                </button>
               </div>
-              <div className={'courses-catalog__area'}>
-                {/* строка поиска */}
-                <div className={'courses-catalog__area-input'}>
-                  <input
-                    className={''}
-                    type="text"
-                    placeholder={'Почніть вводити текст'}
-                  />
-                  <svg className="courses-catalog__area-search">
-                    <use href="/img/sprite.svg#search"></use>
-                  </svg>
-                </div>
-                {/* область куда попадают выбранные курсы */}
-                <ul className={'courses-catalog__area-favorites'}>
-                  <li className={'courses-catalog__area-item'}>
-                    Підготовка до ЗНО
-                    <button>
-                      <svg className="courses-catalog__area-svg">
-                        <use href="/img/sprite.svg#close"></use>
-                      </svg>
-                    </button>
-                  </li>
-                  <li className={'courses-catalog__area-item'}>
-                    IT
-                    <button>
-                      <svg className="courses-catalog__area-svg">
-                        <use href="/img/sprite.svg#close"></use>
-                      </svg>
-                    </button>
-                  </li>
-                  <li className={'courses-catalog__area-item'}>
-                    Право
-                    <button>
-                      <svg className="courses-catalog__area-svg">
-                        <use href="/img/sprite.svg#close"></use>
-                      </svg>
-                    </button>
-                  </li>
-                  <li className={'courses-catalog__area-item'}>
-                    Суспільні науки
-                    <button>
-                      <svg className="courses-catalog__area-svg">
-                        <use href="/img/sprite.svg#close"></use>
-                      </svg>
-                    </button>
-                  </li>
-                </ul>
-              </div>
+              {!!searchParams.size && (
+                <FilterActiveTags
+                  activeTags={activeTags}
+                  setActiveTags={setActiveTags}
+                  handleRemove={handleRemove}
+                  filters={filterBlocksList}
+                />
+              )}
               <ul className={'courses-catalog__searchs-list'}>
-                <li className={'courses-catalog__searchs-item'}>
-                  Рейтинг
-                  <svg className="courses-catalog__search__item-svg">
-                    <use href="/img/sprite.svg#arrow-right"></use>
-                  </svg>
-                </li>
-                <li className={'courses-catalog__searchs-item'}>
-                  Рейтинг
-                  <svg className="courses-catalog__search__item-svg">
-                    <use href="/img/sprite.svg#arrow-right"></use>
-                  </svg>
-                </li>
-                <li className={'courses-catalog__searchs-item'}>
-                  Рейтинг
-                  <svg className="courses-catalog__search__item-svg">
-                    <use href="/img/sprite.svg#arrow-right"></use>
-                  </svg>
-                </li>
-                <li className={'courses-catalog__searchs-item'}>
-                  Рейтинг
-                  <svg className="courses-catalog__search__item-svg">
-                    <use href="/img/sprite.svg#arrow-right"></use>
-                  </svg>
-                </li>
-                <li className={'courses-catalog__searchs-item'}>
-                  Рейтинг
-                  <svg className="courses-catalog__search__item-svg">
-                    <use href="/img/sprite.svg#arrow-right"></use>
-                  </svg>
-                </li>
-                <li className={'courses-catalog__searchs-item'}>
-                  Рейтинг
-                  <svg className="courses-catalog__search__item-svg">
-                    <use href="/img/sprite.svg#arrow-right"></use>
-                  </svg>
-                </li>
+                {filterBlocksList.map((v) => (
+                  <li
+                    key={v.title}
+                    className={'courses-catalog__searchs-item'}
+                    onClick={() => setActiveFilter((p) => (p === v.name ? '' : v.name))}
+                  >
+                    {v.title}
+                    <svg className="courses-catalog__search__item-svg">
+                      <use href="/img/sprite.svg#arrow-right"></use>
+                    </svg>
+                  </li>
+                ))}
               </ul>
             </div>
-            <div className="courses-catalog__crisper">
-              <p className={'courses-catalog__crisper-text'}>Теми</p>
-              <ul className="courses-catalog__crisper-list">
-                <li className={'courses-catalog__crisper-item'}>
-                  <Checkbox
-                    classWrapper={'some-wrapper-class'}
-                    label={'Some label checkbox'}
-                  />
-                </li>
-                <li className={'courses-catalog__crisper-item'}>
-                  <Checkbox
-                    classWrapper={'some-wrapper-class'}
-                    label={'Some label checkbox'}
-                  />
-                </li>
-                <li className={'courses-catalog__crisper-item'}>
-                  <Checkbox
-                    classWrapper={'some-wrapper-class'}
-                    label={'Some label checkbox'}
-                  />
-                </li>
-                <li className={'courses-catalog__crisper-item'}>
-                  <Checkbox
-                    classWrapper={'some-wrapper-class'}
-                    label={'Some label checkbox'}
-                  />
-                </li>
-                <li className={'courses-catalog__crisper-item'}>
-                  <Checkbox
-                    classWrapper={'some-wrapper-class'}
-                    label={'Some label checkbox'}
-                  />
-                </li>
-                <li className={'courses-catalog__crisper-item'}>
-                  <Checkbox
-                    classWrapper={'some-wrapper-class'}
-                    label={'Some label checkbox'}
-                  />
-                </li>
-                <li className={'courses-catalog__crisper-item'}>
-                  <Checkbox
-                    classWrapper={'some-wrapper-class'}
-                    label={'Some label checkbox'}
-                  />
-                </li>
-
-                <li className={'courses-catalog__crisper-item'}>
-                  <Checkbox
-                    classWrapper={'some-wrapper-class'}
-                    label={'Some label checkbox'}
-                  />
-                </li>
-                <li className={'courses-catalog__crisper-item'}>
-                  <Checkbox
-                    classWrapper={'some-wrapper-class'}
-                    label={'Some label checkbox'}
-                  />
-                </li>
-                <li className={'courses-catalog__crisper-item'}>
-                  <Checkbox
-                    classWrapper={'some-wrapper-class'}
-                    label={'Some label checkbox'}
-                  />
-                </li>
-                <li className={'courses-catalog__crisper-item'}>
-                  <Checkbox
-                    classWrapper={'some-wrapper-class'}
-                    label={'Some label checkbox'}
-                  />
-                </li>
-                <li className={'courses-catalog__crisper-item'}>
-                  <Checkbox
-                    classWrapper={'some-wrapper-class'}
-                    label={'Some label checkbox'}
-                  />
-                </li>
-              </ul>
-            </div>
+            {filterBlocksList.map(
+              (v) =>
+                activeFilter === v.name && (
+                  <div
+                    key={v.name}
+                    className="courses-catalog__crisper"
+                  >
+                    <p className={'courses-catalog__crisper-text'}>{v.title}</p>
+                    <ul className="courses-catalog__crisper-list">
+                      {v.filters.map((f) => (
+                        <li
+                          key={f.id}
+                          className={'courses-catalog__crisper-item'}
+                        >
+                          <Checkbox
+                            classWrapper={'some-wrapper-class'}
+                            label={f.title}
+                            onChange={() => handleChange(v.name, f.value)}
+                            checked={!!searchParams.get(v.name)?.includes(f.value.toString())}
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ),
+            )}
           </div>
         )}
       </div>
-      {/*<nav className="courses-catalog__navigation">*/}
-      {/*  <ul className={'courses-catalog__tabs'}>*/}
-      {/*    {tabs.map((tab, index) => (*/}
-      {/*      <li key={`${index}${tab.title}`}>*/}
-      {/*        <button*/}
-      {/*          className={classNames('courses-catalog__tab', { 'courses-catalog__tab--active': activeTab === index + 1 })}*/}
-      {/*          onClick={() => setActiveTab(index + 1)}*/}
-      {/*        >*/}
-      {/*          {tab.title}*/}
-      {/*        </button>*/}
-      {/*      </li>*/}
-      {/*    ))}*/}
-      {/*  </ul>*/}
-      {/*</nav>*/}
+
+      {/* TODO: there can be sort */}
+
       <div className="courses-catalog__palen">
-        <SearchField
-          value={searchParams.get('search') ?? ''}
-          onChange={handleSearchDebounce}
-        />
+        <SearchField />
       </div>
     </div>
   )
 }
+
+function FilterActiveTags({ activeTags, setActiveTags, handleRemove, filters }: FilterActiveTagsProps) {
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    setActiveTags([])
+
+    for (const key of searchParams.keys()) {
+      const block = filters.find((block) => block.name === key)
+
+      searchParams
+        .get(key)!
+        .split(',')
+        .forEach((value) => {
+          const item = block?.filters?.find((filter) => filter.value.toString() === value)
+
+          setActiveTags((p) => [...p, { title: item!.title, name: key, value: value }])
+        })
+    }
+  }, [])
+
+  return (
+    <div className={'courses-catalog__area'}>
+      {/* TODO: there can be search */}
+
+      <ul className={'courses-catalog__area-favorites'}>
+        {activeTags.map((v, i) => (
+          <li
+            key={`${v.value}-${i}`}
+            className={'courses-catalog__area-item'}
+          >
+            {v.title}
+            <button onClick={() => handleRemove(v.name, v.value)}>
+              <svg className="courses-catalog__area-svg">
+                <use href="/img/sprite.svg#close"></use>
+              </svg>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+// -- SEARCH INPUT --
+// <div className={'courses-catalog__area-input'}>
+//   <input
+// className={classNames({ '--active': !!0 })}
+// type="text"
+// placeholder={'Почніть вводити текст'}
+// />
+// <svg className="courses-catalog__area-search">
+//   <use href="/img/sprite.svg#search"></use>
+// </svg>
+// </div>
+
+// -- SORT TABS --
+// <nav className="courses-catalog__navigation">
+//   <ul className={'courses-catalog__tabs'}>
+//     {tabs.map((tab, index) => (
+//       <li key={`${index}${tab.title}`}>
+//         <button
+//           className={classNames('courses-catalog__tab', { 'courses-catalog__tab--active': activeTab === index + 1 })}
+//           onClick={() => setActiveTab(index + 1)}
+//         >
+//           {tab.title}
+//         </button>
+//       </li>
+//     ))}
+//   </ul>
+// </nav>

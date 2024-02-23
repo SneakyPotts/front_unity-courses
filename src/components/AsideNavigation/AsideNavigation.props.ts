@@ -8,4 +8,6 @@ export interface NavAccordionProps {
     name: string
     link: string
   }[]
+
+  pathname?: string
 }

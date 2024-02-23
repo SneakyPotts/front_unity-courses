@@ -30,7 +30,7 @@ const appContext = createContext<IContext>({
 })
 
 function AppProvider({ children }: PropsWithChildren) {
-  const [asideIsOpen, setAsideIsOpen] = useState(false)
+  const [asideIsOpen, setAsideIsOpen] = useState(true)
   const [header, setHeader] = useState<THeader | undefined>(undefined)
   const [profile, setProfile] = useState<TAboutMe | undefined>(undefined)
   const [basket, setBasket] = useState<TBasketCourse[] | undefined>(undefined)

@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 
-import type { TFilterItem } from '@http/courses/type'
+import type { TFilterBlock } from '@http/courses/type'
 import { Rating } from '@smastrom/react-rating'
 
-export const filtersRatings: TFilterItem = {
+export const filtersRatings: TFilterBlock = {
   title: 'Рейтинг',
   name: 'rating',
   filters: Array.from({ length: 5 }, (_, i) => ({

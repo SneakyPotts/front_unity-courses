@@ -441,16 +441,6 @@
       display: none;
     }
 
-    .modal__close {
-      background: url('/assets/img/static/basket__close.svg') no-repeat center/ contain;
-      top: rem(25);
-      left: rem(25);
-
-      svg {
-        display: none;
-      }
-    }
-
     &__block {
       flex-direction: column;
     }
