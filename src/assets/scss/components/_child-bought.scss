@@ -63,11 +63,12 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .child-bought {
     &__list {
       li {
         grid-template-columns: rem(14) auto auto;
+        gap: rem(20);
       }
     }
 
@@ -79,7 +80,12 @@
       display: none;
     }
     .modal__body {
-      padding: 15px;
+      padding: rem(15);
+    }
+
+    .modal__back {
+      right: rem(20);
+      left: unset;
     }
 
     &__price {
@@ -94,7 +100,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .child-bought {
     &.modal.modal--open {
       background-color: rgba(var(--grey-3--rgb), 0.8);

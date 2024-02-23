@@ -1,7 +1,8 @@
 import classNames from 'classnames'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useRef } from 'react'
+import { useToggle } from 'usehooks-ts'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 import { Button } from '_ui/Button'
 import { Checkbox } from '_ui/Checkbox'
@@ -10,42 +11,7 @@ import { Radio } from '_ui/Radio'
 import { filtersList, filtersRatings } from './CatalogFilters.data'
 import type { CatalogFiltersProps, FilterBlockProps } from './CatalogFilters.props'
 
-export function CatalogFilters({ filters }: CatalogFiltersProps) {
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-
-  const handleChange = useCallback(
-    (name: string, value: string | boolean) => {
-      const params = new URLSearchParams(searchParams.toString())
-
-      if (params.has(name)) {
-        const currentValue = params.get(name)
-        const valueArr = currentValue?.split(',') || []
-        const newValue = currentValue?.includes(value.toString()) ? valueArr?.filter((v) => v !== value.toString()) : [...valueArr, value.toString()]
-
-        !newValue?.length ? params.delete(name) : params.set(name, newValue.join(','))
-
-        router.replace(`${pathname}?${params.toString()}`)
-      } else {
-        params.set(name, value.toString())
-
-        router.replace(`${pathname}?${params.toString()}`)
-      }
-    },
-    [searchParams],
-  )
-
-  const handleFilterReset = () => {
-    const params = new URLSearchParams(searchParams.toString())
-
-    for (const key of params.keys()) {
-      key !== 'search' && params.delete(key)
-    }
-
-    router.replace(`${pathname}?${params.toString()}`)
-  }
-
+export function CatalogFilters({ filters, handler, reset }: CatalogFiltersProps) {
   return (
     <div className={'courses-catalog__body'}>
       <div className={'courses-catalog__filter '}>
@@ -60,27 +26,21 @@ export function CatalogFilters({ filters }: CatalogFiltersProps) {
             </button>
           </div>
           <div className={'courses-catalog__inner'}>
-            <FilterBlock
-              {...filtersRatings}
-              handler={() => {}}
-              isRating
-              initialActive
-            />
-
-            {[...filtersList, ...(filters ?? [])].map((filterBlock, index) => (
+            {[filtersRatings, ...filtersList, ...(filters ?? [])].map((filterBlock, index) => (
               <FilterBlock
                 key={`${index}${filterBlock.title}`}
                 {...filterBlock}
-                handler={(value) => handleChange(filterBlock.name, value)}
+                handler={(value) => handler(filterBlock.name, value)}
                 name={filterBlock.name}
-                initialActive
+                // isRating={filterBlock.name === 'rating'}
+                initialActive={filterBlock.name === 'rating'}
               />
             ))}
           </div>
           <div className={'courses-catalog__update'}>
             <Button
               className={'some_button courses-catalog__update-btn'}
-              onClick={handleFilterReset}
+              onClick={reset}
             >
               скинути
             </Button>
@@ -91,7 +51,7 @@ export function CatalogFilters({ filters }: CatalogFiltersProps) {
             <Button
               variant={'border'}
               className={'some_button courses-catalog__buttons-btn'}
-              onClick={handleFilterReset}
+              onClick={reset}
             >
               скинути фільтри
             </Button>
@@ -106,66 +66,48 @@ function FilterBlock({ isRating, handler, initialActive = false, name, ...data }
   const searchParams = useSearchParams()
 
   const panelRef = useRef<HTMLUListElement>(null)
-  const enableTransition = useRef<boolean>(!initialActive)
 
-  const [isOpen, setIsOpen] = useState(initialActive)
-  const [blockHeight, setBlockHeight] = useState(0)
-
-  const toggleHandler = () => {
-    setIsOpen((prev) => !prev)
-
-    if (!enableTransition.current) {
-      enableTransition.current = true
-    }
-  }
-
-  useEffect(() => {
-    if (panelRef?.current) {
-      setBlockHeight(panelRef.current?.scrollHeight)
-    }
-  }, [])
+  const [isOpen, setIsOpen] = useToggle(initialActive)
 
   return (
-    <>
+    <div className={classNames('courses-catalog__block', { '--open': isOpen })}>
       <p className={'courses-catalog__subtitle'}>
         <span>{data.title}</span>
         <button
           className={'courses-catalog__subtitle-btn'}
-          onClick={toggleHandler}
+          onClick={setIsOpen}
         >
           <svg>
             <use href="/img/sprite.svg#coure-filter-arrow"></use>
           </svg>
         </button>
       </p>
-      <ul
-        ref={panelRef}
-        className={classNames('courses-catalog__list', data.extraClass, {
-          '--open': isOpen,
-          '--animate': enableTransition.current,
-        })}
-        style={enableTransition.current ? { maxHeight: isOpen ? blockHeight : 0 } : { maxHeight: data.filters.length * 20 + (data.filters.length - 1) * 12 }}
-      >
-        {data.filters.map((filterItem, i) => (
-          <li key={filterItem.id}>
-            {isRating ? (
-              <Radio
-                classWrapper={'some-wrapper-class courses-catalog__item'}
-                label={filterItem.title}
-                name="rating"
-                value={5 - 0.5 * (i + 1)}
-              />
-            ) : (
-              <Checkbox
-                classWrapper={'some-wrapper-class courses-catalog__item'}
-                label={filterItem.title}
-                onChange={() => handler(filterItem.value)}
-                checked={!!searchParams.get(name)?.includes(filterItem.value.toString())}
-              />
-            )}
-          </li>
-        ))}
-      </ul>
-    </>
+      <div className={classNames('courses-catalog__list-wrapper', { '--open': isOpen })}>
+        <ul
+          ref={panelRef}
+          className={classNames('courses-catalog__list', data.extraClass)}
+        >
+          {data.filters.map((filterItem, i) => (
+            <li key={filterItem.id}>
+              {isRating ? (
+                <Radio
+                  classWrapper={'some-wrapper-class courses-catalog__item'}
+                  label={filterItem.title}
+                  name="rating"
+                  value={5 - 0.5 * (i + 1)}
+                />
+              ) : (
+                <Checkbox
+                  classWrapper={'some-wrapper-class courses-catalog__item'}
+                  label={filterItem.title}
+                  onChange={() => handler(filterItem.value)}
+                  checked={!!searchParams.get(name)?.includes(filterItem.value.toString())}
+                />
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   )
 }

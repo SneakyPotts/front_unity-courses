@@ -1,4 +1,1 @@
-export interface SearchFieldProps {
-  value?: string
-  onChange: (value: string) => void
-}
+export interface SearchFieldProps {}

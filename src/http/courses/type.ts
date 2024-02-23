@@ -32,17 +32,19 @@ type TFilterItemResponse = {
   title: string
 }
 
-export type TFilters = TFilterItem[]
+export type TFilters = TFilterBlock[]
 
-export type TFilterItem = {
+export type TFilterBlock = {
   title: string
   name: string
-  filters: Array<{
-    id: string
-    title: string | ReactNode
-    value: string | boolean
-  }>
+  filters: TFilterItem[]
   extraClass?: string
+}
+
+export type TFilterItem = {
+  id: string
+  title: string | ReactNode
+  value: string | boolean
 }
 
 export type TCourseDetail = TBasketCourse & {
