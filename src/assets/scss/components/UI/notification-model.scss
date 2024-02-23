@@ -116,7 +116,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .notification {
     &__result {
       flex-direction: column;
@@ -126,7 +126,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .notification {
     left: rem(15);
     right: rem(15);
