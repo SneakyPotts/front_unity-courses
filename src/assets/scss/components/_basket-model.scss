@@ -381,7 +381,6 @@
 
       span {
         text-align: center;
-        font-family: 'Roboto', sans-serif;
         font-size: rem(16);
         font-weight: 400;
         line-height: rem(21);
@@ -426,6 +425,10 @@
       }
     }
   }
+
+  &__card {
+    max-width: rem(320);
+  }
 }
 
 @include mq('lg') {
@@ -446,6 +449,9 @@
     }
 
     &__list {
+      grid-template-columns: rem(40) 1fr auto auto;
+      gap: rem(12);
+
       &-img {
         img {
           width: rem(40);
@@ -484,6 +490,8 @@
     }
 
     &__card {
+      max-width: unset;
+
       &-title {
         font-size: rem(16);
         font-weight: 500;
@@ -533,10 +541,6 @@
 
     .modal__title {
       margin-top: rem(7);
-    }
-
-    &__list {
-      grid-template-columns: rem(40) 1fr auto auto;
     }
 
     &__sorting {
