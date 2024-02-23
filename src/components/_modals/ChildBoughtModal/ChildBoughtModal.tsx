@@ -23,17 +23,17 @@ export function ChildBoughtModal({ onClose }: ChildBoughtModalProps) {
           <li>
             <span>x1</span>
             <p>Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями</p>
-            <p className={'child-bought__price'}>5 300 ₴</p>
+            <p className={'child-bought__list-price'}>5 300 ₴</p>
           </li>
           <li>
             <span>x1</span>
             <p>Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями</p>
-            <p className={'child-bought__price'}>5 300 ₴</p>
+            <p className={'child-bought__list-price'}>5 300 ₴</p>
           </li>
           <li>
             <span>x1</span>
             <p>Вступ до мови програмування Python початковий рівень для студентів з практичним застосуванням в реальних проєктах та інтерактивними завданнями</p>
-            <p className={'child-bought__price'}>Безкоштовно</p>
+            <p className={'child-bought__list-price'}>Безкоштовно</p>
           </li>
         </ul>
         <div className={'child-bought__buttons'}>
