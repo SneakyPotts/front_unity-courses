@@ -54,4 +54,5 @@ export type TStudentActiveCourseItem = {
   start_date: string
   duration_in_months: number
   closest_lecture: string
+  available_days: number
 }

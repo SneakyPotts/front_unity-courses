@@ -61,6 +61,9 @@ export type TCourseDetail = TBasketCourse & {
   topics: Topic[]
   materials: ExtraMaterial[]
   links: ExtraMaterial[]
+  duration_in_months: number
+  available_days: number
+  lectures_hours: number
 }
 
 export interface Topic {

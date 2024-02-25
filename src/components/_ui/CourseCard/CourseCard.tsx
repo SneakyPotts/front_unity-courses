@@ -49,12 +49,14 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
         )}
         <div className="my-catalog__box">
           {isArchived ? (
-            <div className="my-catalog__ridth-time">
-              <svg className="nav__link-svg">
-                <use href="/img/sprite.svg#clock"></use>
-              </svg>
-              <p>дійсний 30 днів</p>
-            </div>
+            !!course.available_days && (
+              <div className="my-catalog__ridth-time">
+                <svg className="nav__link-svg">
+                  <use href="/img/sprite.svg#clock"></use>
+                </svg>
+                <p>дійсний {course.available_days} днів</p>
+              </div>
+            )
           ) : (
             <>
               {!!course.duration_in_months && (
@@ -130,7 +132,9 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
             <svg className="nav__link-svg">
               <use href="/img/sprite.svg#clock"></use>
             </svg>
-            <p>{course?.start_date ? `старт курсу - ${formatDateInGenitive(new Date(course.start_date))}` : 'курс дійсний 30 днів'}</p>
+            {course.format === 'self'
+              ? !!course?.available_days && <p>курс дійсний {course?.available_days} днів</p>
+              : !!course?.start_date && <p>{`старт курсу - ${formatDateInGenitive(new Date(course.start_date))}`}</p>}
           </div>
         )}
 
