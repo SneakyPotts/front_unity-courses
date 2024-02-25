@@ -77,17 +77,6 @@ export function CatalogFilterPopup({}: CatalogFilterPopupProps) {
                 <button className="courses-catalog__searchs-btn">скинути</button>
               </div>
               <div className={'courses-catalog__area'}>
-                {/* строка поиска */}
-                <div className={'courses-catalog__area-input'}>
-                  <input
-                    className={''}
-                    type="text"
-                    placeholder={'Почніть вводити текст'}
-                  />
-                  <svg className="courses-catalog__area-search">
-                    <use href="/img/sprite.svg#search"></use>
-                  </svg>
-                </div>
                 {/* область куда попадают выбранные курсы */}
                 <ul className={'courses-catalog__area-favorites'}>
                   <li className={'courses-catalog__area-item'}>
@@ -240,6 +229,30 @@ export function CatalogFilterPopup({}: CatalogFilterPopupProps) {
                   />
                 </li>
               </ul>
+              <div className={'courses-catalog__crisper-block'}>
+                <div className="courses-catalog__crisper__block-head">
+                  <p>Сертифікація</p>
+                  <button>
+                    <svg className="courses-catalog__search__item-svg">
+                      <use href="/img/sprite.svg#basket-modal__arrow"></use>
+                    </svg>
+                  </button>
+                </div>
+                <ul className={'courses-catalog__search-list'}>
+                  <li>
+                    <Checkbox
+                      classWrapper={'some-wrapper-class'}
+                      label={'З сертифікатом'}
+                    />
+                  </li>
+                  <li>
+                    <Checkbox
+                      classWrapper={'some-wrapper-class'}
+                      label={'Без сертифікатом'}
+                    />
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         )}
