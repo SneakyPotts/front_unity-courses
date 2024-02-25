@@ -15,6 +15,7 @@ import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import { Banner } from '_ui/Banner'
 import { Loader } from '_ui/Loader'
 import { PageWrapper } from '_ui/PageWrapper'
+import { Tabs } from '_ui/Tabs'
 
 export interface HomeContentProps {
   role: {
@@ -36,9 +37,13 @@ export default function HomeContent({ role }: HomeContentProps) {
 
   return (
     <PageWrapper
-      list={['Курси', 'Завдання', 'Прогрес курсів']}
-      activeTab={activeTab}
-      setActiveTab={setActiveTab}
+      aboveElement={
+        <Tabs
+          list={['Курси', 'Завдання', 'Прогрес курсів']}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
+      }
     >
       <section className="schedule">
         <div className="schedule__inner">

@@ -8,10 +8,11 @@ import { redirect } from 'next/navigation'
 
 import { serverFetch } from '@http/api'
 import { serverFetchAuth } from '@http/authApi'
-import { TBasket } from '@http/profile/type'
 
 import { schema as schemaSignIn } from '_modals/AuthModal/AuthModal.schema'
 import { schema as schemaSignUp } from '_modals/RegisterModal/RegisterModal.schema'
+
+import type { TBasket } from './type'
 
 type SignInSchema = z.infer<typeof schemaSignIn>
 type SignUpSchema = z.infer<typeof schemaSignUp>
@@ -70,6 +71,13 @@ export async function addToBasketAction(course_id: string) {
   })
 }
 
+export async function removeFromBasketAction(course_id: string) {
+  return await serverFetchAuth<TBasket>(`/courses/cart/remove/`, {
+    method: 'POST',
+    body: JSON.stringify({ id: course_id }),
+  })
+}
+
 export async function addToBasketOnAuthAction(token: string) {
   const localBasket = cookies().get('basket')?.value
 
@@ -88,9 +96,10 @@ export async function addToBasketOnAuthAction(token: string) {
   cookies().delete('basket')
 }
 
-export async function removeFromBasketAction(course_id: string) {
-  return await serverFetchAuth<TBasket>(`/courses/cart/remove/`, {
-    method: 'POST',
-    body: JSON.stringify({ id: course_id }),
-  })
+export async function buyByLiqPay() {
+  return await serverFetchAuth<{
+    data: string
+    signature: string
+    status: string
+  }>(`/courses/cart/liqpay/init/`)
 }

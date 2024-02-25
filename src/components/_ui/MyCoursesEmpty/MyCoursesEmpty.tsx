@@ -33,7 +33,10 @@ export function MyCoursesEmpty({}: MyCoursesEmptyProps) {
           </li>
         </ul>
         <div className={'offer__button'}>
-          <Button className={'offer__btn'}>
+          <Button
+            className={'offer__btn'}
+            href="/"
+          >
             <svg>
               <use href="/img/sprite.svg#cours"></use>
             </svg>

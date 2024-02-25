@@ -1,6 +1,4 @@
-import type { THuman } from '@assets/types/globals'
-
-type TTeacher = THuman & { id: string }
+import { TTeacher } from '@assets/types/globals'
 
 export interface TeachersSectionProps {
   lectors?: TTeacher[]

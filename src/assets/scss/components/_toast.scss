@@ -1,4 +1,4 @@
-:root {
+:root .Toastify {
   --toastify-toast-width: 550px;
   --toastify-toast-min-height: 45px;
 
@@ -9,7 +9,7 @@
 .Toastify__toast-container {
 }
 
-.Toastify {
+.Toastify .Toastify {
   &__toast {
     padding: 14px 20px;
 
@@ -41,6 +41,7 @@
   &__toast--success {
     border: 1px solid #fe7c11;
   }
+
   &__toast--error {
     border: 1px solid #eb5757;
   }
