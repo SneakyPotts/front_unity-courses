@@ -70,6 +70,13 @@ export async function addToBasketAction(course_id: string) {
   })
 }
 
+export async function removeFromBasketAction(course_id: string) {
+  return await serverFetchAuth<TBasket>(`/courses/cart/remove/`, {
+    method: 'POST',
+    body: JSON.stringify({ id: course_id }),
+  })
+}
+
 export async function addToBasketOnAuthAction(token: string) {
   const localBasket = cookies().get('basket')?.value
 
@@ -88,9 +95,10 @@ export async function addToBasketOnAuthAction(token: string) {
   cookies().delete('basket')
 }
 
-export async function removeFromBasketAction(course_id: string) {
-  return await serverFetchAuth<TBasket>(`/courses/cart/remove/`, {
-    method: 'POST',
-    body: JSON.stringify({ id: course_id }),
-  })
+export async function buyByLiqPay() {
+  return await serverFetchAuth<{
+    data: string
+    signature: string
+    status: string
+  }>(`/courses/cart/liqpay/init/`)
 }
