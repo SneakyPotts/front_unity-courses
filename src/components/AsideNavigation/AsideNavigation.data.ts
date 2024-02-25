@@ -69,7 +69,7 @@ export const navListChildren = [
     id: 3,
     imgId: 'list',
     name: 'Мої курси',
-    link: '/courses/my',
+    link: '/my-courses',
     list: [],
   },
   {

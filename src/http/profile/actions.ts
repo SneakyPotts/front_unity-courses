@@ -8,10 +8,11 @@ import { redirect } from 'next/navigation'
 
 import { serverFetch } from '@http/api'
 import { serverFetchAuth } from '@http/authApi'
-import { TBasket } from '@http/profile/type'
 
 import { schema as schemaSignIn } from '_modals/AuthModal/AuthModal.schema'
 import { schema as schemaSignUp } from '_modals/RegisterModal/RegisterModal.schema'
+
+import type { TBasket } from './type'
 
 type SignInSchema = z.infer<typeof schemaSignIn>
 type SignUpSchema = z.infer<typeof schemaSignUp>

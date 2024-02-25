@@ -2,7 +2,8 @@ import { cache } from 'react'
 
 import { serverFetch } from '@http/api'
 import { serverFetchAuth } from '@http/authApi'
-import { TCatalog, TCourseDetail, TFilters, TFiltersResponse } from '@http/courses/type'
+
+import type { TCatalog, TCourseDetail, TFilters, TFiltersResponse } from './type'
 
 const getCoursesCatalog = cache(
   async (filters: string = '') =>

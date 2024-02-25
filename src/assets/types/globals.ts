@@ -69,15 +69,15 @@ export interface Subject {
   color: string
   icon: string
   cover: string
-  teacher?: Teacher
-  second_teacher?: Teacher
+  teacher?: TTeacher
+  second_teacher?: TTeacher
   estimate_assessment?: string
   visiting?: string
   classroom?: TClass
   student_avatars?: string[]
 }
 
-export interface Teacher extends THuman {
+export type TTeacher = THuman & {
   id: string
   qualification?: string
 }
@@ -98,8 +98,8 @@ export interface SubjectDetails {
   other_test_average_estimate: Statisticks
   description: string
   title: string
-  teacher: Teacher
-  second_teacher: Teacher
+  teacher: TTeacher
+  second_teacher: TTeacher
   color: string
   cover: string
   icon: string
@@ -251,7 +251,7 @@ export interface StudentLesson {
   topic_title: string
   icon: string
   color: string
-  teacher: Teacher
+  teacher: TTeacher
   content: string
   files: File[]
   links: Link[]
