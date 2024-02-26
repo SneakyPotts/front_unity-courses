@@ -41,8 +41,7 @@
   &--textarea {
     height: fit-content;
     min-height: rem(146);
-    background-image: url('/assets/img/static/message.svg'); //react
-    //background-image: url('../img/static/message.svg'); //layout
+    background-image: url('/img/static/message.svg');
     background-position: rem(15) rem(8);
     background-repeat: no-repeat;
     background-color: var(--blue-50);

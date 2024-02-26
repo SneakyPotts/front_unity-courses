@@ -13,6 +13,7 @@ export const courseMockData: TCourse[] = [
     color: '',
     cover: 'https://loremflickr.com/640/360',
     format: 'live',
+    purchased: false,
     lectors: [
       {
         id: 'asdasd#1',
@@ -38,6 +39,7 @@ export const courseMockData: TCourse[] = [
     color: 'pink',
     cover: 'https://loremflickr.com/640/360',
     format: 'live',
+    purchased: true,
     lectors: [
       {
         id: 'asdasd#1',
@@ -63,6 +65,7 @@ export const courseMockData: TCourse[] = [
     color: '#fff8ed',
     cover: 'https://loremflickr.com/640/360',
     format: 'live',
+    purchased: false,
     lectors: [
       {
         id: 'asdasd#1',

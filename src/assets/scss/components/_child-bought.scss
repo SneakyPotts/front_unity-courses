@@ -63,7 +63,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .child-bought {
     &__list {
       li {
@@ -100,7 +100,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .child-bought {
     &.modal.modal--open {
       background-color: rgba(var(--grey-3--rgb), 0.8);
@@ -110,7 +110,7 @@
       padding: rem(15);
       border-radius: rem(10);
       background: var(--white);
-      box-shadow: 2px 2px 8px 0px #0000001a;
+      box-shadow: 2px 2px 8px 0 #0000001a;
     }
 
     &__block {

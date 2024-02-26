@@ -1,15 +1,19 @@
 import { cache } from 'react'
 
+import { cookies } from 'next/headers'
+
 import { serverFetch } from '@http/api'
 import { serverFetchAuth } from '@http/authApi'
-import { TCatalog, TCourseDetail, TFilters, TFiltersResponse } from '@http/courses/type'
 
-const getCoursesCatalog = cache(
-  async (filters: string = '') =>
-    await serverFetch<TCatalog>(`/courses/?${filters}`, {
-      cache: 'reload',
-    }),
-)
+import type { TCatalog, TCourseDetail, TFilters, TFiltersResponse } from './type'
+
+const getCoursesCatalog = cache(async (filters: string = '') => {
+  const isAuth = cookies().get('accessToken')?.value
+
+  return await (isAuth ? serverFetchAuth : serverFetch)<TCatalog>(`/courses/?${filters}`, {
+    cache: 'reload',
+  })
+})
 
 const getCoursesFilters = cache(async () => {
   const response = await serverFetch<TFiltersResponse>('/courses/filter_options/', {
@@ -44,11 +48,12 @@ const getCoursesFilters = cache(async () => {
   }
 })
 
-const getCourseDetail = cache(
-  async (id: string, isAuth: boolean) =>
-    await (isAuth ? serverFetchAuth : serverFetch)<TCourseDetail>(`/courses/${id}`, {
-      cache: 'reload',
-    }),
-)
+const getCourseDetail = cache(async (id: string) => {
+  const isAuth = cookies().get('accessToken')?.value
+
+  return await (isAuth ? serverFetchAuth : serverFetch)<TCourseDetail>(`/courses/${id}`, {
+    cache: 'reload',
+  })
+})
 
 export { getCoursesCatalog, getCoursesFilters, getCourseDetail }

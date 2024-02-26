@@ -97,7 +97,7 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
                   alt={`${lecturer.first_name} ${lecturer.last_name}`}
                 />
               </div>
-              <button onClick={() => setIsShowTeacherId(lecturer.id)}>{`${lecturer.last_name} ${lecturer.first_name[0]}. ${lecturer.patronymic[0]}.`}</button>
+              <button onClick={() => !!profile && setIsShowTeacherId(lecturer.id)}>{`${lecturer.last_name} ${lecturer.first_name[0]}. ${lecturer.patronymic[0]}.`}</button>
             </div>
           ))}
         </div>
@@ -134,7 +134,7 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
             width="100%"
           />
         </div>
-      ) : inBasket ? (
+      ) : inBasket || props.purchased ? (
         <div className="courses-catalog__price --in-basket">
           <Button
             variant="border"
@@ -144,7 +144,7 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
             <svg className="btn__icon">
               <use href={`/img/sprite.svg#check`}></use>
             </svg>
-            В кошику
+            {inBasket ? 'В кошику' : 'Придбано'}
           </Button>
         </div>
       ) : (

@@ -1,5 +1,5 @@
-import type { PropsWithChildren } from 'react'
+import type { PropsWithChildren, ReactNode } from 'react'
 
-import type { TabsProps } from '_ui/Tabs/Tabs.props'
-
-export type PageWrapperProps = PropsWithChildren<{ list?: undefined } | TabsProps>
+export interface PageWrapperProps extends PropsWithChildren {
+  aboveElement?: ReactNode
+}

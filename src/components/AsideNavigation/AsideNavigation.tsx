@@ -1,7 +1,7 @@
 'use client'
 
 import classNames from 'classnames'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useToggle } from 'usehooks-ts'
 
 import Link from 'next/link'
@@ -29,7 +29,7 @@ export function AsideNavigation({}: AsideNavigationProps) {
               <NavAccordion {...v} />
             ) : (
               <Link
-                className={classNames('nav__link', { 'nav__link--active': pathname.endsWith(v.link) })}
+                className={classNames('nav__link', { 'nav__link--active': pathname?.endsWith(v.link) })}
                 href={v.link}
               >
                 <svg className="nav__link-svg">
@@ -58,24 +58,15 @@ export function AsideNavigation({}: AsideNavigationProps) {
   )
 }
 
-function NavAccordion({ ...props }: NavAccordionProps) {
-  const dropRef = useRef<HTMLDivElement>(null)
-
+function NavAccordion({ pathname, ...props }: NavAccordionProps) {
   const [open, setOpen] = useToggle(false)
-  const [dropHeight, setDropHeight] = useState(0)
-
-  useEffect(() => {
-    if (dropRef?.current) {
-      setDropHeight(dropRef.current?.scrollHeight)
-    }
-  }, [props])
 
   return (
-    <div className={classNames('nav__accordion', { 'nav__accordion--active': open })}>
+    <div className={'nav__accordion'}>
       <div className="nav__top">
         <Link
           href={props.link}
-          // className={({ isActive }) => classNames('nav__link', { 'nav__link--active': isActive || location.pathname.includes(props.link.slice(0, -1)) })}
+          className={classNames('nav__link', { 'nav__link--active': pathname?.endsWith(props.link) })}
         >
           <svg className="nav__link-svg">
             <use href={`/img/sprite.svg#${props.imgId}`}></use>
@@ -88,16 +79,12 @@ function NavAccordion({ ...props }: NavAccordionProps) {
           aria-expanded={open}
           aria-label={open ? 'Закрити блок меню' : 'Відкрити меню'}
         >
-          <svg className="nav__open-arrow">
+          <svg className={classNames('nav__open-arrow', { '--open': open })}>
             <use href="/img/sprite.svg#arrow-down-mini"></use>
           </svg>
         </button>
       </div>
-      <div
-        ref={dropRef}
-        className="nav__down"
-        style={{ maxHeight: open ? dropHeight + 'px' : 0 }}
-      >
+      <div className={classNames('nav__down', { '--open': open })}>
         <ul className="nav__sublist">
           {props.list?.map((w) => (
             <li

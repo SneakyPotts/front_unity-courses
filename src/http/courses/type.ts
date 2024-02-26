@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import type { THuman } from '@assets/types/globals'
+import { THuman, TTeacher } from '@assets/types/globals'
 import { TBasketCourse } from '@http/profile/type'
 
 export type TCatalog = {
@@ -16,10 +16,11 @@ export type TCourse = TBasketCourse & {
   categories_repr: string[]
   rating: number
   number_of_lectures: number
-  lectors: Array<THuman & { id: string }>
+  lectors: TTeacher[]
   start_date: string
   number_of_students: number
   max_number_of_students: number
+  purchased: boolean
 }
 
 export type TFiltersResponse = {
@@ -32,17 +33,19 @@ type TFilterItemResponse = {
   title: string
 }
 
-export type TFilters = TFilterItem[]
+export type TFilters = TFilterBlock[]
 
-export type TFilterItem = {
+export type TFilterBlock = {
   title: string
   name: string
-  filters: Array<{
-    id: string
-    title: string | ReactNode
-    value: string | boolean
-  }>
+  filters: TFilterItem[]
   extraClass?: string
+}
+
+export type TFilterItem = {
+  id: string
+  title: string | ReactNode
+  value: string | boolean
 }
 
 export type TCourseDetail = TBasketCourse & {
@@ -51,13 +54,16 @@ export type TCourseDetail = TBasketCourse & {
   categories_repr: string[]
   number_of_lectures: number
   rating: number
-  lectors: Array<THuman & { id: string }>
+  lectors: TTeacher[]
   start_date: string
   number_of_students: number
   max_number_of_students: number
   topics: Topic[]
   materials: ExtraMaterial[]
   links: ExtraMaterial[]
+  duration_in_months: number
+  available_days: number
+  lectures_hours: number
 }
 
 export interface Topic {

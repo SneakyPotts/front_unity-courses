@@ -1,4 +1,5 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { toast } from 'react-toastify'
 import Cookies from 'universal-cookie'
 import { useLocalStorage, useWindowSize } from 'usehooks-ts'
 
@@ -7,13 +8,12 @@ import Link from 'next/link'
 
 import { formattedPrice, imgBlur } from '@assets/utils'
 import { appContext } from '@components/Context/context'
-import { removeFromBasketAction } from '@http/profile/actions'
+import { buyByLiqPay, removeFromBasketAction } from '@http/profile/actions'
 import { TBasketCourse } from '@http/profile/type'
 
 import { Button } from '_ui/Button'
-import { Checkbox } from '_ui/Checkbox'
 import { Modal } from '_ui/Modal'
-import { toastPromise } from '_ui/ToastUtils'
+import { successIcon, toastPromise } from '_ui/ToastUtils'
 
 import { AuthForm } from '_modals/AuthModal'
 
@@ -124,9 +124,9 @@ export function BasketModal({ onClose, showChildBoughtModal }: BasketModalProps)
         </div>
         {!!profile ? (
           <AuthInfo
-            basket={basket}
             role={role}
             showChildBoughtModal={showChildBoughtModal}
+            onClose={onClose}
           />
         ) : (
           <NotAuthInfo />
@@ -136,13 +136,60 @@ export function BasketModal({ onClose, showChildBoughtModal }: BasketModalProps)
   )
 }
 
-function AuthInfo({ basket, role, showChildBoughtModal }: AuthInfoProps) {
+function AuthInfo({ role, showChildBoughtModal, onClose }: AuthInfoProps) {
+  const { basket, setBasket } = useContext(appContext)
+
+  const payForm = useRef<HTMLFormElement>(null)
+
   const totalPrice = basket?.reduce((acc, item) => acc + (item.discount || item.price), 0)
   const hasFree = basket?.find((v) => v.price === 0)
+
+  const [isPayCreating, setIsPayCreating] = useState(false)
+  const [liqPayKeys, setLiqPayKeys] = useState<{ data?: string; signature?: string }>({
+    data: undefined,
+    signature: undefined,
+  })
 
   const handleApprove = () => {
     showChildBoughtModal()
   }
+
+  const handlePaying = async () => {
+    setIsPayCreating(true)
+    // const timeout = setTimeout(() => {
+    //   setLiqPayKeys({
+    // eslint-disable-next-line max-len
+    //     data: 'eyJhY3Rpb24iOiAicGF5IiwgImFtb3VudCI6ICI3MDAiLCAiY3VycmVuY3kiOiAiVUFIIiwgImRlc2NyaXB0aW9uIjogIlx1MDQxZVx1MDQzZlx1MDQzYlx1MDQzMFx1MDQ0Mlx1MDQzMCBcdTA0M2FcdTA0NDNcdTA0NDBcdTA0NDFcdTA0NTZcdTA0MzIgKFx1MDQxNFx1MDQzMFx1MDQzZFx1MDQ1Nlx1MDQ1Nlx1MDQzYiBcdTA0MWFcdTA0NDBcdTA0MzBcdTA0MzJcdTA0NDdcdTA0MzVcdTA0M2RcdTA0M2FcdTA0M2UpIiwgIm9yZGVyX2lkIjogImQ4MTcwODAwLTUwYWMtNDNiNS1iN2Q0LTdjNmM5Zjg4ZjZkYSIsICJwdWJsaWNfa2V5IjogInNhbmRib3hfaTMyODkyMjU0ODg2IiwgInJyb19pbmZvIjogeyJkZWxpdmVyeV9lbWFpbHMiOiBbInN0dWRlbnQxQG1haWwuY29tIl0sICJpdGVtcyI6IFt7ImlkIjogIjZjOGY4MmE1LTM0ZTMtNGVhMy04MWY0LWM5NWQ0MzgxYjJmOSIsICJwcmljZSI6IDcwMCwgInRpdGxlIjogIkNvdXJzZSA0IiwgInR5cGUiOiAiY291cnNlIn1dfSwgInNhbmRib3giOiAwLCAic2VydmVyX3VybCI6ICJodHRwczovL2ZsYXQtY29ybmVycy1zaW5rLmxvY2EubHQvYXBpL3YxL2NvdXJzZXMvY2FydC9wYXkvIiwgInZlcnNpb24iOiAiMyJ9',
+    //     signature: '6lg1anzlJf15DOqYDtT0yPHt0EQ=',
+    //   })
+    //
+    //   clearTimeout(timeout)
+    // }, 2000)
+
+    buyByLiqPay().then(({ data, error }) => {
+      if (!error && !!data) {
+        const { status, ...reqData } = data
+
+        if (!!status && !reqData.data && !reqData.signature) {
+          setBasket([])
+
+          toast.success('Ви успішно отримали безкоштовний курс', successIcon)
+          onClose()
+        } else {
+          setLiqPayKeys(reqData)
+        }
+      }
+    })
+  }
+
+  useEffect(() => {
+    if (!!liqPayKeys.data && !!liqPayKeys.signature) {
+      payForm.current?.submit()
+
+      setIsPayCreating(false)
+      onClose()
+    }
+  }, [liqPayKeys])
 
   return (
     <div className="basket-model__card">
@@ -198,7 +245,31 @@ function AuthInfo({ basket, role, showChildBoughtModal }: AuthInfoProps) {
             <p className={'basket-model__result-sum'}>{formattedPrice(totalPrice ?? 0)} грн.</p>
           </div>
           <div className={'basket-model__button'}>
-            <Button>оплатити</Button>
+            <Button
+              onClick={handlePaying}
+              disabled={isPayCreating}
+            >
+              оплатити
+            </Button>
+            <form
+              ref={payForm}
+              className="visually-hidden"
+              method="POST"
+              acceptCharset="utf-8"
+              action="https://www.liqpay.ua/api/3/checkout/"
+              target="_blank"
+            >
+              <input
+                type="hidden"
+                name="data"
+                value={liqPayKeys.data}
+              />
+              <input
+                type="hidden"
+                name="signature"
+                value={liqPayKeys.signature}
+              />
+            </form>
           </div>
         </>
       )}
@@ -208,6 +279,7 @@ function AuthInfo({ basket, role, showChildBoughtModal }: AuthInfoProps) {
           <Button
             className={'some_button basket-model__buttons-btn'}
             variant={'border'}
+            onClick={onClose}
           >
             відхилити
           </Button>

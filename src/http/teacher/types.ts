@@ -1,4 +1,4 @@
-import type { File, Link, THuman, TSchedule, Teacher } from '@assets/types/globals'
+import type { File, Link, THuman, TSchedule, TTeacher } from '@assets/types/globals'
 
 export type TTeacherLesson = {
   id: string
@@ -8,8 +8,8 @@ export type TTeacherLesson = {
   color: string
   icon: string
   online_lesson_link: string
-  teacher: Teacher
-  second_teacher: Teacher
+  teacher: TTeacher
+  second_teacher: TTeacher
   students_list: (TStudent & StudentOnlineLesson)[]
   content: string
   start_time: string
@@ -155,9 +155,7 @@ export type TTeacherProfileInfo = THuman & {
 }
 
 export type TTestAnswers = {
-  student: THuman & {
-    id: string
-  }
+  student: TStudent
   lesson: {
     id: string
     deadline: string

@@ -42,7 +42,6 @@
 
     border-radius: rem(5);
 
-    gap: rem(12);
     padding: rem(8) rem(12);
     background: var(--bg);
 
@@ -119,7 +118,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .notification {
     &__result {
       flex-direction: column;
@@ -129,7 +128,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .notification {
     left: rem(15);
     right: rem(15);
@@ -160,7 +159,6 @@
     }
 
     &__result {
-
       font-size: rem(20);
       font-weight: 500;
       line-height: rem(24);

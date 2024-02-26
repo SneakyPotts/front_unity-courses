@@ -1,9 +1,7 @@
 .my-catalog {
-  &__inner {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: rem(30);
-  }
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: rem(30);
 
   &__active {
     margin-bottom: rem(40);

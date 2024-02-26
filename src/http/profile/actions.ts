@@ -8,10 +8,11 @@ import { redirect } from 'next/navigation'
 
 import { serverFetch } from '@http/api'
 import { serverFetchAuth } from '@http/authApi'
-import { TBasket } from '@http/profile/type'
 
 import { schema as schemaSignIn } from '_modals/AuthModal/AuthModal.schema'
 import { schema as schemaSignUp } from '_modals/RegisterModal/RegisterModal.schema'
+
+import type { TBasket } from './type'
 
 type SignInSchema = z.infer<typeof schemaSignIn>
 type SignUpSchema = z.infer<typeof schemaSignUp>
@@ -24,12 +25,17 @@ export async function signInServerAction(data: SignInSchema) {
     body: JSON.stringify(data),
   })
 
-  if (response.data) {
+  if (!!response.data) {
     cookies().set('accessToken', response.data.access, {
       path: '/',
       // expires: add(new Date(), { days: 1 }), //TODO: add variable "saveMe"
     })
+
+    await addToBasketOnAuthAction(response.data.access)
+
+    revalidatePath('/')
     revalidateTag('aboutMe')
+    revalidateTag('basket')
   }
 
   return response
@@ -70,4 +76,30 @@ export async function removeFromBasketAction(course_id: string) {
     method: 'POST',
     body: JSON.stringify({ id: course_id }),
   })
+}
+
+export async function addToBasketOnAuthAction(token: string) {
+  const localBasket = cookies().get('basket')?.value
+
+  if (!!localBasket?.length) {
+    localBasket.split(',').forEach((course_id) => {
+      serverFetch('/courses/cart/add/', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        method: 'POST',
+        body: JSON.stringify({ id: course_id }),
+      })
+    })
+  }
+
+  cookies().delete('basket')
+}
+
+export async function buyByLiqPay() {
+  return await serverFetchAuth<{
+    data: string
+    signature: string
+    status: string
+  }>(`/courses/cart/liqpay/init/`)
 }

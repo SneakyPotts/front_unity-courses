@@ -1,7 +1,8 @@
 import { cache } from 'react'
 
 import { serverFetchAuth } from '@http/authApi'
-import { TAboutMe, TBasket } from '@http/profile/type'
+
+import type { TAboutMe, TBasket } from './type'
 
 const aboutMeRequest = cache(
   async () =>

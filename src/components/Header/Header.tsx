@@ -76,6 +76,11 @@ export function Header({ profile, className }: HeaderProps) {
     setIsShowRegisterModal(true)
   }
 
+  const handleShowRegisterBasketModal = () => {
+    setIsShowBasketModal(false)
+    setIsShowRegisterModal(true)
+  }
+
   useOnClickOutside(profileRef, () => setIsShowProfilePopup(false))
   useOnClickOutside(basketRef, () => setIsShowBasketPopup(false))
 
@@ -107,10 +112,6 @@ export function Header({ profile, className }: HeaderProps) {
                   showCheckoutModal={handleShowCheckout}
                 />
               )}
-              {/*<BasketModal*/}
-              {/*  onClose={() => setIsShowBasketModal(false)}*/}
-              {/*  showChildBoughtModal={handleChildBought}*/}
-              {/*/>*/}
               {isShowBasketModal && (
                 <BasketModal
                   onClose={() => setIsShowBasketModal(false)}
@@ -155,6 +156,7 @@ export function Header({ profile, className }: HeaderProps) {
                 <AuthModal
                   onClose={() => setIsShowAuthModal(false)}
                   showRegister={handleShowRegisterModal}
+                  showRegisterBasket={handleShowRegisterBasketModal}
                 />
               )}
               {isShowRegisterModal && (

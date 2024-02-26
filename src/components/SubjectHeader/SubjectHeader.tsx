@@ -55,7 +55,9 @@ export function SubjectHeader({ data }: SubjectHeaderProps) {
           <svg className="archive__data-svg">
             <use href="/img/sprite.svg#clock"></use>
           </svg>
-          <p>{data?.start_date ? `старт курсу - ${formatDateInGenitive(new Date(data.start_date))}` : 'курс дійсний 30 днів'}</p>
+          {data?.format === 'self'
+            ? !!data?.available_days && <p>курс дійсний {data?.available_days} днів</p>
+            : !!data?.start_date && <p>{`старт курсу - ${formatDateInGenitive(new Date(data.start_date))}`}</p>}
         </div>
         <div className={'archive__conditions'}>
           <svg className="nav__link-svg">
@@ -64,12 +66,14 @@ export function SubjectHeader({ data }: SubjectHeaderProps) {
           <p className={'archive__conditions-text'}>{courseCaption[data?.format || 'self']}</p>
         </div>
         <div className={'archive__duration'}>
-          <div className={'archive__duration-box'}>
-            <svg className="nav__link-svg">
-              <use href="/img/sprite.svg#calendar"></use>
-            </svg>
-            <p>1 місяць</p>
-          </div>
+          {!!data?.duration_in_months && (
+            <div className={'archive__duration-box'}>
+              <svg className="nav__link-svg">
+                <use href="/img/sprite.svg#calendar"></use>
+              </svg>
+              <p>{data?.duration_in_months} місяць</p>
+            </div>
+          )}
           {!!data?.number_of_lectures && (
             <div className={'archive__duration-box'}>
               <svg className="nav__link-svg">
@@ -78,12 +82,14 @@ export function SubjectHeader({ data }: SubjectHeaderProps) {
               <p>{data.number_of_lectures} занять</p>
             </div>
           )}
-          <div className={'archive__duration-box'}>
-            <svg className="nav__link-svg">
-              <use href="/img/sprite.svg#clock"></use>
-            </svg>
-            <p>10 годин</p>
-          </div>
+          {!!data?.lectures_hours && (
+            <div className={'archive__duration-box'}>
+              <svg className="nav__link-svg">
+                <use href="/img/sprite.svg#clock"></use>
+              </svg>
+              <p>{data?.lectures_hours} годин</p>
+            </div>
+          )}
           <div className={'archive__duration-box'}>
             <svg className="nav__link-svg">
               <use href="/img/sprite.svg#star"></use>

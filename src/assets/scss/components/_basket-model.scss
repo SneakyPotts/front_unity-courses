@@ -381,7 +381,6 @@
 
       span {
         text-align: center;
-        font-family: "Roboto", sans-serif;
         font-size: rem(16);
         font-weight: 400;
         line-height: rem(21);
@@ -432,7 +431,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .basket-model {
     .modal__body {
       padding: 0;
@@ -443,16 +442,6 @@
     }
     .modal__logo {
       display: none;
-    }
-
-    .modal__close {
-      background: url("/assets/img/static/basket__close.svg") no-repeat center/ contain;
-      top: rem(25);
-      left: rem(25);
-
-      svg {
-        display: none;
-      }
     }
 
     &__block {
@@ -535,7 +524,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .basket-model {
     &.modal.modal--open {
       background-color: rgba(var(--grey-3--rgb), 0.8);

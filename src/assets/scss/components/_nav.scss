@@ -28,17 +28,9 @@
       height: rem(12);
       fill: #dbdbdb;
       transition: 0.2s ease;
-    }
-  }
 
-  &__accordion {
-    &--active {
-      .nav {
-        &__open {
-          &-arrow {
-            transform: scale(1, -1);
-          }
-        }
+      &.--open {
+        transform: scale(1, -1);
       }
     }
   }
@@ -86,11 +78,20 @@
       }
     }
   }
+  //
+  //.nav__open-arrow {
+  //  transform: scale(1, -1);
+  //}
 
   &__down {
-    overflow: hidden;
-    max-height: 0;
-    transition: 0.2s var(--ease-in-out);
+    display: grid;
+    grid-template-rows: 0fr;
+
+    transition: grid-template-rows 0.2s var(--ease-in-out);
+
+    &.--open {
+      grid-template-rows: 1fr;
+    }
   }
 
   &__link-svg {
@@ -102,7 +103,7 @@
 
   &__sublist {
     padding-left: rem(28);
-    min-height: 0;
+    overflow: hidden;
   }
 
   &__subitem {
