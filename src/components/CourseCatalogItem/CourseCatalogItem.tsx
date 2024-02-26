@@ -54,7 +54,7 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
           </svg>
           {props.rating}
         </span>
-        <button className={'courses-catalog__like'}>
+        <button className={'courses-catalog__like courses-catalog__like--chosen'}>
           <svg>
             <use href="/img/sprite.svg#course-catalog-like"></use>
           </svg>

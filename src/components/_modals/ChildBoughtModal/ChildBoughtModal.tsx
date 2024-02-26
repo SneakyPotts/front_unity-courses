@@ -29,7 +29,7 @@ export function ChildBoughtModal({ onClose }: ChildBoughtModalProps) {
             <li key={item.id}>
               <span>x1</span>
               <p>{item.title}</p>
-              <p className={'child-bought__price'}>{!!item.price ? `${formattedPrice(item.discount || item.price)} ₴` : 'Безкоштовно'}</p>
+              <p className={'child-bought__list-price'}>{!!item.price ? `${formattedPrice(item.discount || item.price)} ₴` : 'Безкоштовно'}</p>
             </li>
           ))}
         </ul>

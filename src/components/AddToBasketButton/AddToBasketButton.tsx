@@ -65,8 +65,8 @@ export function AddToBasketButton({ callback, course }: AddToBasketButtonProps) 
       className={'some_button  reviews__content--btn'}
       onClick={handleAddToBasket}
     >
-      <svg className="courses-catalog__svg courses-catalog__svg-rocket ">
-        <use href={`/img/sprite.svg#${!course.price ? 'cours' : 'basket-course'}`}></use>
+      <svg className="courses-catalog__icon courses-catalog__icon--element">
+        <use href={`/img/sprite.svg#${!course.price ? 'cours' : 'basket-shopping'}`}></use>
       </svg>
       {!course.price ? 'Отримати' : 'Додати в кошик'}
     </Button>
