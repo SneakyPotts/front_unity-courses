@@ -56,14 +56,16 @@ export type TCourseDetail = TBasketCourse & {
   rating: number
   lectors: TTeacher[]
   start_date: string
+  closest_lecture: string
   number_of_students: number
   max_number_of_students: number
   topics: Topic[]
   materials: ExtraMaterial[]
-  links: ExtraMaterial[]
+  links: ExtraLink[]
   duration_in_months: number
   available_days: number
   lectures_hours: number
+  purchased: boolean
 }
 
 export interface Topic {
@@ -87,4 +89,10 @@ export interface ExtraMaterial {
   id: string
   name: string
   file: string
+}
+
+export interface ExtraLink {
+  id: string
+  title: string
+  link: string
 }

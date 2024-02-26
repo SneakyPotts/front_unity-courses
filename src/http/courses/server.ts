@@ -51,7 +51,7 @@ const getCoursesFilters = cache(async () => {
 const getCourseDetail = cache(async (id: string) => {
   const isAuth = cookies().get('accessToken')?.value
 
-  return await (isAuth ? serverFetchAuth : serverFetch)<TCourseDetail>(`/courses/${id}`, {
+  return await (isAuth ? serverFetchAuth : serverFetch)<TCourseDetail>(`/courses/${id}/`, {
     cache: 'reload',
   })
 })

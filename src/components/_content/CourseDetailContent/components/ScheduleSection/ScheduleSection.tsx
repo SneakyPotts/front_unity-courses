@@ -10,13 +10,13 @@ import { Accordion } from '_ui/Accordion'
 
 import type { ScheduleSectionProps } from './ScheduleSection.props'
 
-export function ScheduleSection({ courseId, courseFree, topics }: ScheduleSectionProps) {
+export function ScheduleSection({ courseId, courseFree, topics, titleClass, wrapperClass }: ScheduleSectionProps) {
   return (
     <div
       id="program"
-      className={'archive__program'}
+      className={wrapperClass}
     >
-      <h3 className={'archive__program-subtitle archive__subtitle'}>Програма та графік</h3>
+      <h3 className={classNames('archive__program-subtitle', titleClass)}>Програма та графік</h3>
 
       {topics?.map((topic, i) => (
         <Accordion

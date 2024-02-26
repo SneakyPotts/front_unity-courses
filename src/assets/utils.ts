@@ -24,10 +24,10 @@ export const formattedPrice = (price: number) =>
     // minimumFractionDigits: fractionDigits,
   })
 
-export function formatDateInGenitive(date: Date): string {
+export function formatDateInGenitive(date: Date, withTime?: boolean): string {
   const genitiveMonths = ['січня', 'лютого', 'березня', 'квітня', 'травня', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня']
 
-  const formattedTime = format(date, 'dd LLLL yyyy', { locale: uk })
+  const formattedTime = format(date, withTime ? 'dd LLLL, HH:mm' : 'dd LLLL yyyy', { locale: uk })
 
   const monthName = format(date, 'LLLL', { locale: uk })
   const monthNameGenitive = genitiveMonths[date.getMonth()]
