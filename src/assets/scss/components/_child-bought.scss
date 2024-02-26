@@ -20,6 +20,14 @@
     border-radius: rem(5);
     margin-bottom: rem(30);
 
+    &-price {
+      text-align: right;
+      font-size: rem(13);
+      font-weight: 400;
+      line-height: rem(16);
+      color: #828282;
+    }
+
     li {
       display: grid;
       grid-template-columns: rem(14) rem(332) rem(83);
@@ -40,17 +48,9 @@
         font-size: rem(13);
         font-weight: 400;
         line-height: rem(16);
-        color: var(--black);
+        // color: var(--black);
       }
     }
-  }
-
-  &__price {
-    text-align: right;
-    font-size: rem(13);
-    font-weight: 400;
-    line-height: rem(16);
-    color: var(--grey-3);
   }
 
   &__buttons {
