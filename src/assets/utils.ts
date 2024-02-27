@@ -18,19 +18,54 @@ export const courseCaption = {
   mix: 'Заняття проводяться з викладачем у live режимі, та також самостійно.',
 }
 
+export const subColor: Record<string, string> = {
+  '#E8E0FF': '#D1C2FC',
+  '#E0EBFF': '#C2D2FC',
+  '#F8DFE0': '#FCC2C2',
+  '#DEFAF1': '#A9F4D8',
+  '#FCEFE0': '#FDDFC2',
+}
+
 export const formattedPrice = (price: number) =>
   price.toLocaleString('uk-UA', {
     maximumFractionDigits: 0,
     // minimumFractionDigits: fractionDigits,
   })
 
-export function formatDateInGenitive(date: Date): string {
+export function formatDateInGenitive(date: Date, withTime?: boolean): string {
   const genitiveMonths = ['січня', 'лютого', 'березня', 'квітня', 'травня', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня']
 
-  const formattedTime = format(date, 'dd LLLL yyyy', { locale: uk })
+  const formattedTime = format(date, withTime ? 'dd LLLL, HH:mm' : 'dd LLLL yyyy', { locale: uk })
 
   const monthName = format(date, 'LLLL', { locale: uk })
   const monthNameGenitive = genitiveMonths[date.getMonth()]
 
   return formattedTime.replace(monthName, monthNameGenitive)
+}
+
+export const nameFromUrl = (url: string): string => {
+  if (!url) return ''
+
+  const splitUrl = url.split('/')
+
+  return splitUrl[splitUrl?.length - 1]
+}
+
+export function uploadRulesCheck(callback: (file: File) => void, files: File[], types: string[], setError: (err: string) => void): void {
+  for (const file of files) {
+    const fileExtension = file.name.split('.').splice(-1)[0]
+
+    if (!types.map((i) => i.toLowerCase()).includes(fileExtension.toLowerCase())) {
+      setError(`Розширення файлу '${fileExtension}' не дозволено. Дозволені розширення: ${types.join(', ')}.`)
+      break
+    }
+
+    const fileSize = file.size / 1024 / 1024
+    if (fileSize > 20) {
+      setError(`Максимальный размер файла 20Mb`)
+      break
+    }
+
+    callback(file)
+  }
 }

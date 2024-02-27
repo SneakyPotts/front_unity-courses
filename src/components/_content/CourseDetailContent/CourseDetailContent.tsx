@@ -44,13 +44,15 @@ export function CourseDetailContent({ data }: CourseDetailContentProps) {
           <div className={'archive__about archive__content'}>
             <AboutSection
               title={data?.title}
-              description={'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid'}
+              description={data?.description}
             />
 
             <ScheduleSection
+              titleClass="archive__subtitle"
+              wrapperClass="archive__program"
               courseId={data?.id}
-              courseFree={data?.format === 'self'}
               topics={data?.topics}
+              courseFree={data?.format === 'self'}
             />
             <TeachersSection lectors={data?.lectors} />
             <ReviewsSection courseId={data?.id} />

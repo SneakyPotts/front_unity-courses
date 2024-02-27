@@ -13,7 +13,10 @@ export function AboutSection({ title, description }: AboutSectionProps) {
       </h3>
       <div className={'archive__about-info'}>
         <p className={'archive__subtitle'}>Про курс</p>
-        <p className={'archive__about-text'}>{description}</p>
+        <div
+          className={'archive__about-text'}
+          dangerouslySetInnerHTML={{ __html: description || '' }}
+        />
       </div>
     </>
   )
