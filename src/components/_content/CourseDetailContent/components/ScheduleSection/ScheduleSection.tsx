@@ -55,7 +55,7 @@ export function ScheduleSection({ courseId, courseFree, topics, titleClass, wrap
                           <span>безкоштовно</span>
                         </span>
                       )}
-                      <time>{lecture.start_time && formatDateInGenitive(new Date(lecture.start_time))}</time>
+                      <time>{lecture.start_time && formatDateInGenitive(new Date(lecture.start_time), true)}</time>
                     </span>
                     <TypesList
                       className="plan__types"

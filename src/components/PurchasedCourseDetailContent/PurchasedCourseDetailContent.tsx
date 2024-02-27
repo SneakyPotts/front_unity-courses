@@ -2,11 +2,16 @@
 
 import React from 'react'
 
+import { UploadDocumentItem } from '@components/UploadDocument'
+import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
+
 import { ScheduleSection } from '_content/CourseDetailContent/components/ScheduleSection'
 
 import type { PurchasedCourseDetailContentProps } from './PurchasedCourseDetailContent.props'
 
 export function PurchasedCourseDetailContent({ data }: PurchasedCourseDetailContentProps) {
+  useSetHeaderParams({ title: 'Курси' })
+
   return (
     <div className="lesson-section__block course-detail__content--element">
       <div className="lesson-section__section">
@@ -24,32 +29,12 @@ export function PurchasedCourseDetailContent({ data }: PurchasedCourseDetailCont
           <div className="lesson-section__document-block document-block">
             <ul className="document-block__list">
               {data?.materials?.map((material, i) => (
-                <li
+                <UploadDocumentItem
                   key={material.id}
-                  className="document-block__item document"
-                >
-                  <div className="document__wrapper">
-                    <a
-                      href={material.file}
-                      className="document__remove"
-                      type="button"
-                      aria-label="Завантажити цей документ"
-                      download={material.file}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <svg className="document__remove-svg">
-                        <use xlinkHref="/img/sprite.svg#download-file" />
-                      </svg>
-                    </a>
-                    <div className="document__preview">
-                      <svg className="document__image">
-                        <use href="/img/sprite.svg#avatar-image" />
-                      </svg>
-                    </div>
-                    <span className="document__title">{material.name}</span>
-                  </div>
-                </li>
+                  name={material.name}
+                  link={material.file}
+                  type="download"
+                />
               ))}
             </ul>
           </div>
@@ -67,9 +52,11 @@ export function PurchasedCourseDetailContent({ data }: PurchasedCourseDetailCont
                 <a
                   href={v.link}
                   className="lesson-section__link"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   <svg>
-                    <use xlinkHref="img/sprite.svg#link" />
+                    <use href="/img/sprite.svg#link" />
                   </svg>
                   <span>{v.link}</span>
                 </a>

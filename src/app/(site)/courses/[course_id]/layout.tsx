@@ -1,10 +1,10 @@
 import classNames from 'classnames'
-import React, { ReactNode } from 'react'
+import React, { type ReactNode } from 'react'
 
 import Image from 'next/image'
 
 import type { TLayoutProps, TTeacher } from '@assets/types/globals'
-import { formatDateInGenitive, imgBlur } from '@assets/utils'
+import { formatDateInGenitive, imgBlur, subColor } from '@assets/utils'
 import { getCourseDetail } from '@http/courses/server'
 import type { TCourseDetail } from '@http/courses/type'
 
@@ -21,7 +21,7 @@ interface CoursesDetailLayoutProps extends TLayoutProps {
 export default async function CoursesDetailLayout({ children, aside, statistics, params }: CoursesDetailLayoutProps) {
   const { data, error } = await getCourseDetail(params.course_id as string)
 
-  const isPurchase = !data?.purchased
+  const isPurchase = !!data?.purchased
 
   return (
     <PageWrapper>
@@ -48,7 +48,10 @@ export default async function CoursesDetailLayout({ children, aside, statistics,
 function PurchasedHeader({ data }: { data: TCourseDetail }) {
   return (
     <div className={'subject__left'}>
-      <div className={' subject-card--blue my-catalog__block'}>
+      <div
+        className={' subject-card--blue my-catalog__block'}
+        style={{ backgroundColor: data.color }}
+      >
         <div className="my-catalog__left">
           <h3 className={'my-catalog__left-title'}>{data.title}</h3>
           <div
@@ -56,12 +59,17 @@ function PurchasedHeader({ data }: { data: TCourseDetail }) {
             dangerouslySetInnerHTML={{ __html: data.description }}
           />
           <div className={'my-catalog__duration'}>
-            <div className={'my-catalog__condition my-catalog__condition--violet'}>
-              <svg className={data.format === 'self' ? 'courses-catalog__svg courses-catalog__svg-stroke' : 'archive__data-svg'}>
-                <use href={`/img/sprite.svg#${data.format === 'self' ? 'learn' : 'clock'}`}></use>
-              </svg>
-              <p>найближче заняття - {formatDateInGenitive(new Date(data.closest_lecture || new Date()), true)}</p>
-            </div>
+            {!!data.closest_lecture && (
+              <div
+                className={'my-catalog__condition my-catalog__condition--violet'}
+                style={{ backgroundColor: subColor[data.color] }}
+              >
+                <svg className={data.format === 'self' ? 'courses-catalog__svg courses-catalog__svg-stroke' : 'archive__data-svg'}>
+                  <use href={`/img/sprite.svg#${data.format === 'self' ? 'learn' : 'clock'}`}></use>
+                </svg>
+                <p>найближче заняття - {formatDateInGenitive(new Date(data.closest_lecture), true)}</p>
+              </div>
+            )}
             {data.format !== 'self' && (
               <div className={'my-catalog__duration-item'}>
                 <svg className={'nav__link-svg'}>

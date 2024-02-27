@@ -336,7 +336,7 @@ export interface StudentTest {
   quiz: IQuiz
 }
 
-export interface IQuiz {
+export type IQuiz = {
   id: string
   questions: TQuestion[]
 }

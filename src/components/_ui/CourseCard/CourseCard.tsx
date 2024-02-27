@@ -1,10 +1,10 @@
-import { isAfter, parseISO } from 'date-fns'
+import { isAfter } from 'date-fns'
 import React from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { courseCaption, formatDateInGenitive } from '@assets/utils'
+import { formatDateInGenitive, subColor } from '@assets/utils'
 import { Rating } from '@smastrom/react-rating'
 
 import { Button } from '_ui/Button'
@@ -13,8 +13,6 @@ import { TeacherForCourse } from '_ui/TeacherForCourse'
 import type { CourseCardProps } from './CourseCard.props'
 
 export function CourseCard({ isArchived, ...course }: CourseCardProps) {
-  console.log(isAfter(new Date(), new Date(course?.start_date)))
-
   return (
     <div
       className="my-catalog__block"
@@ -37,7 +35,10 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
         />
         {!isArchived && (
           <div className={'my-catalog__duration'}>
-            <div className={'my-catalog__condition my-catalog__condition--violet'}>
+            <div
+              className={'my-catalog__condition my-catalog__condition--violet'}
+              style={{ backgroundColor: subColor[course.color] }}
+            >
               <svg className={course.format === 'self' ? 'courses-catalog__svg courses-catalog__svg-stroke' : 'archive__data-svg'}>
                 <use href={`/img/sprite.svg#${course.format === 'self' ? 'learn' : 'clock'}`}></use>
               </svg>

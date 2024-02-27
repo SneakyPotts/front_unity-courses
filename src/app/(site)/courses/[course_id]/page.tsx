@@ -9,9 +9,9 @@ import { CourseDetailContent } from '_content/CourseDetailContent'
 export default async function CourseDetailPage({ params, searchParams }: TPageProps) {
   const { data, error } = await getCourseDetail(params.course_id as string)
 
-  const isPurchase = !data?.purchased
+  const isPurchase = !!data?.purchased
 
-  if (error) return <RequestError message="Щось пішло не так..." />
+  if (error) return <RequestError message={error.message || 'Щось пішло не так...'} />
 
   return isPurchase ? <PurchasedCourseDetailContent data={data} /> : <CourseDetailContent data={data} />
 }

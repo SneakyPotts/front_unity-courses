@@ -26,14 +26,13 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
   return (
     <div className={'courses-catalog__element'}>
       <div className="courses-catalog__box">
-        {props.categories_repr?.map((category, i) => (
-          <ul
-            key={`${i}${category}`}
-            className={'courses-catalog__tag'}
-          >
-            <li>{category}</li>
+        {!!props.categories_repr.length && (
+          <ul className={'courses-catalog__tag'}>
+            {props.categories_repr.map((category, i) => (
+              <li key={`${i}${category}`}>{category}</li>
+            ))}
           </ul>
-        ))}
+        )}
         <span className={'courses-catalog__lesson courses-catalog__review--decor'}>
           <svg className="courses-catalog__svg">
             <use href="/img/sprite.svg#material"></use>
