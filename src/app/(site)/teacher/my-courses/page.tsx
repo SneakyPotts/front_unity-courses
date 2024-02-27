@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 
+import { TeacherCase } from '@/components/TeacherCardLesson'
+import { Banner } from '@/components/_ui/Banner'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import { useQueryStudentCourses } from '@http/student/client'
 import { TStudentCourses } from '@http/student/types'
@@ -20,19 +22,36 @@ export default function TeacherMyCourses() {
   useSetHeaderParams({ title: 'Мої курси' })
 
   return (
-    <div className={'my-catalog__courses'}>
-      <Tabs
-        list={tabs}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        isStatic
-      />
-      <div className={'my-catalog__active'}>
-        {activeTab === 1 && <ActiveCoursesTab />}
-        {activeTab === 2 && <UnderinspectionCoursesTab />}
-        {activeTab === 3 && <TemplatesCoursesTab />}
-        {activeTab === 4 && <DraftCoursesTab />}
-        {activeTab === 5 && <ArchivedCoursesTab />}
+    <div className={'content'}>
+      <div className={'content__container container'}>
+        <section className={'teacher-course'}>
+          <div className="teacher-course__content">
+            <Tabs
+              list={tabs}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              isStatic
+              element={
+                <button className={'teacher-course__create'}>
+                  <svg>
+                    <use href="/img/sprite.svg#plus"></use>
+                  </svg>
+                  створити шаблон
+                </button>
+              }
+            />
+
+            {activeTab === 1 && <ActiveCoursesTab />}
+            {activeTab === 2 && <UnderinspectionCoursesTab />}
+            {activeTab === 3 && <TemplatesCoursesTab />}
+            {activeTab === 4 && <DraftCoursesTab />}
+            {activeTab === 5 && <ArchivedCoursesTab />}
+          </div>
+
+          <div className={'teacher-course__banner'}>
+            <Banner />
+          </div>
+        </section>
       </div>
     </div>
   )
@@ -45,19 +64,19 @@ function ActiveCoursesTab() {
 }
 
 function UnderinspectionCoursesTab() {
-  return <h2>1</h2>
+  return <TeacherCase />
 }
 
 function TemplatesCoursesTab() {
-  return <h4>5</h4>
+  return <TeacherCase />
 }
 
 function DraftCoursesTab() {
-  return <p>1</p>
+  return <TeacherCase />
 }
 
 function ArchivedCoursesTab() {
-  return <p>1</p>
+  return <TeacherCase />
 }
 
 interface TabContentProps {
