@@ -1,7 +1,7 @@
 import type { HTMLProps } from 'react'
 
 import { TAnswerCheck } from '@assets/types/globals'
-import type { TOption } from '@store/teacher/types'
+import { TOption } from '@http/teacher/types'
 
 export type SingleProps = {
   id: string

@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { Document, Page, pdfjs } from 'react-pdf'
 import SimpleBar from 'simplebar-react'

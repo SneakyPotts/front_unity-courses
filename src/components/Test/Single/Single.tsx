@@ -1,10 +1,9 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import { TestWrapper } from '@components/Test'
-
 import { TAnswerCheck } from '@assets/types/globals'
-import { TOption } from '@store/teacher/types'
+import { TestWrapper } from '@components/Test'
+import { TOption } from '@http/teacher/types'
 
 import type { ListItemProps, SingleProps } from './Single.props'
 
