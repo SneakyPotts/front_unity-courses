@@ -1,4 +1,3 @@
-import { StudentHomework } from '@assets/types/globals'
 import type { TLessonContent, TSelfWorkContent } from '@http/courses/type'
 
 export interface LessonPageContentProps {

@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react'
 
-import { TeacherCase } from '@/components/TeacherCardLesson'
 import { Banner } from '@/components/_ui/Banner'
+import { TeacherCardLesson } from '@components/TeacherCardLesson'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import { useQueryStudentCourses } from '@http/student/client'
 import { TStudentCourses } from '@http/student/types'
@@ -64,19 +64,19 @@ function ActiveCoursesTab() {
 }
 
 function UnderinspectionCoursesTab() {
-  return <TeacherCase />
+  return <TeacherCardLesson />
 }
 
 function TemplatesCoursesTab() {
-  return <TeacherCase />
+  return <TeacherCardLesson />
 }
 
 function DraftCoursesTab() {
-  return <TeacherCase />
+  return <TeacherCardLesson />
 }
 
 function ArchivedCoursesTab() {
-  return <TeacherCase />
+  return <TeacherCardLesson />
 }
 
 interface TabContentProps {

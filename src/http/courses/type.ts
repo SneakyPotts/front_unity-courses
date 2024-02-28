@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import { IQuiz, TDocument, THuman, TTeacher } from '@assets/types/globals'
+import { IQuiz, TDocument, TTeacher } from '@assets/types/globals'
 import { TBasketCourse } from '@http/profile/type'
 
 export type TCatalog = {

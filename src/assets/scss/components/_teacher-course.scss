@@ -20,7 +20,7 @@
   }
 }
 
-@include mq("xl") {
+@include mq('xl') {
   .teacher-course {
     grid-template-columns: 1fr;
 
@@ -30,7 +30,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .teacher-course {
     .content-tabs {
       margin-bottom: rem(73);

@@ -1,1 +1,1 @@
-export * from './TeacherCase'
+export * from './TeacherCardLesson'

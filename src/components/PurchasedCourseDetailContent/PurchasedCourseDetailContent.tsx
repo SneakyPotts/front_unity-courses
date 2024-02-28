@@ -28,7 +28,7 @@ export function PurchasedCourseDetailContent({ data }: PurchasedCourseDetailCont
 
           <div className="lesson-section__document-block document-block">
             <ul className="document-block__list">
-              {data?.materials?.map((material, i) => (
+              {data?.materials?.map((material) => (
                 <UploadDocumentItem
                   key={material.id}
                   name={material.name}
