@@ -40,12 +40,13 @@ export default function TeacherMyCourses() {
                 </button>
               }
             />
-
-            {activeTab === 1 && <ActiveCoursesTab />}
-            {activeTab === 2 && <UnderinspectionCoursesTab />}
-            {activeTab === 3 && <TemplatesCoursesTab />}
-            {activeTab === 4 && <DraftCoursesTab />}
-            {activeTab === 5 && <ArchivedCoursesTab />}
+            <div className={'teacher-course__element'}>
+              {activeTab === 1 && <ActiveCoursesTab />}
+              {activeTab === 2 && <UnderinspectionCoursesTab />}
+              {activeTab === 3 && <TemplatesCoursesTab />}
+              {activeTab === 4 && <DraftCoursesTab />}
+              {activeTab === 5 && <ArchivedCoursesTab />}
+            </div>
           </div>
 
           <div className={'teacher-course__banner'}>
@@ -68,15 +69,15 @@ function UnderinspectionCoursesTab() {
 }
 
 function TemplatesCoursesTab() {
-  return <TeacherCardLesson />
+  return
 }
 
 function DraftCoursesTab() {
-  return <TeacherCardLesson />
+  return
 }
 
 function ArchivedCoursesTab() {
-  return <TeacherCardLesson />
+  return
 }
 
 interface TabContentProps {

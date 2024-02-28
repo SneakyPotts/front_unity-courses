@@ -2,6 +2,7 @@
   padding: rem(20);
   border-radius: rem(10);
   background-color: var(--blue-100);
+  margin-bottom: rem(12);
 
   &__head {
     @include flex-all-sb;
@@ -39,38 +40,9 @@
   }
 
   &__list {
-    &-item {
-      display: flex;
-      gap: rem(8);
-
-      &:not(:last-of-type) {
-        margin-bottom: rem(12);
-      }
-    }
-
-    &-elements {
-      display: flex;
-      gap: rem(4);
-    }
-
-    &-block {
-      display: flex;
-
-      gap: rem(8);
-      svg {
-        width: rem(20);
-        height: rem(20);
-        fill: var(--grey-4);
-      }
-
-      p {
-        max-width: rem(300);
-        font-size: rem(13);
-        font-weight: 400;
-        line-height: rem(16);
-        color: var(--grey-4);
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
   }
 
   &__content {
@@ -96,6 +68,11 @@
   }
 
   &__title {
+    max-width: rem(700);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     margin-bottom: rem(16);
     font-size: rem(26);
     font-weight: 600;
@@ -167,6 +144,24 @@
 
     .btn.btn--trans {
       width: rem(330);
+    }
+  }
+}
+
+@include mq("lg") {
+  .teacher-case {
+    &__content {
+      flex-direction: column;
+    }
+
+    &__btn {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    &__img {
+      display: none;
     }
   }
 }
