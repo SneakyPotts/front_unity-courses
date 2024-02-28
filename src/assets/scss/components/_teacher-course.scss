@@ -1,0 +1,50 @@
+.teacher-course {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: rem(30);
+
+  &__create {
+    @include flex-v-center;
+
+    gap: rem(5);
+    text-transform: uppercase;
+    font-size: rem(14);
+    font-weight: 500;
+    line-height: rem(16);
+    color: var(--grey-3);
+
+    svg {
+      width: rem(12);
+      height: rem(12);
+    }
+  }
+}
+
+@include mq("xl") {
+  .teacher-course {
+    grid-template-columns: 1fr;
+
+    &__banner {
+      display: none;
+    }
+  }
+}
+
+@include mq("lg") {
+  .teacher-course {
+    .content-tabs {
+      margin-bottom: rem(73);
+    }
+
+    &__create {
+      @include flex-h-center;
+
+      position: absolute;
+      width: 100%;
+      bottom: rem(-55);
+      padding: rem(9);
+      border: rem(1) solid var(--orange-400);
+      border-radius: rem(5);
+    }
+  }
+}
