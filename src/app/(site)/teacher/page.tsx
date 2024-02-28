@@ -9,7 +9,7 @@ import { StatisticSubjects } from '@components/StatisticSubjects'
 import { ToDoList } from '@components/ToDoList'
 
 import { Banner } from '_ui/Banner'
-import { MyCoursesEmpty } from '_ui/MyCoursesEmpty'
+// import { MyCoursesEmpty } from '_ui/MyCoursesEmpty'
 import { PageWrapper } from '_ui/PageWrapper'
 import { Tabs } from '_ui/Tabs'
 
@@ -21,7 +21,7 @@ import { Tabs } from '_ui/Tabs'
 //   }
 // }
 
-export default function TeacherHomePage({ role }: {/*HomeContentProps*/}) {
+export default function TeacherHomePage({  }: {/*HomeContentProps*/}) {
   const { width } = useWindowSize()
   const isDesktop = width > 991
   const [activeTab, setActiveTab] = useState(0)
