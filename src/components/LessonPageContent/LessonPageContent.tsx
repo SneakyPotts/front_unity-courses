@@ -2,9 +2,8 @@
 
 import { MathJax } from 'better-react-mathjax'
 import { addMinutes, differenceInSeconds, format, isAfter, parseISO } from 'date-fns'
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 
-import { TDocument } from '@assets/types/globals'
 import { TestsList } from '@components/TestsList'
 import { TextEditor } from '@components/TextEditor'
 import { UploadDocumentItem, UploadDocumentModal } from '@components/UploadDocument'

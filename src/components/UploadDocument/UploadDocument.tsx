@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo, useState } from 'react'
 
 import { Button } from '_ui/Button'
 

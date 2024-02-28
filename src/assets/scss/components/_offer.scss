@@ -1,6 +1,6 @@
 .offer {
-  padding: rem(76) 0;
-  background: url('/img/offer-bg.png') no-repeat center / cover;
+  padding: rem(76);
+  background: url('/img/static/offer-bg.png') no-repeat center / cover;
   border-radius: rem(10);
 
   &__inner {
@@ -21,6 +21,12 @@
       width: rem(85);
       height: rem(71);
       fill: var(--orange-500);
+    }
+
+    &-teacher {
+      width: rem(63);
+      height: rem(91);
+      fill: var(--primary-orange);
     }
   }
 

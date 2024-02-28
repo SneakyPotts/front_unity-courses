@@ -13,6 +13,11 @@ export function MyCoursesEmpty({}: MyCoursesEmptyProps) {
           <svg>
             <use href="/img/sprite.svg#course-magnifying"></use>
           </svg>
+          {/* svg teacher home page  
+          <svg className={'offer__title-teacher'}>
+            <use href="/img/sprite.svg#course-teacher__home-start"></use>
+          </svg> 
+          */}
         </div>
         <ul className={'offer__list'}>
           <li className={'offer__item'}>

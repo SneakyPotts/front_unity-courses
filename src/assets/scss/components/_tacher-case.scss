@@ -1,0 +1,172 @@
+.teacher-case {
+  padding: rem(20);
+  border-radius: rem(10);
+  background-color: var(--blue-100);
+
+  &__head {
+    @include flex-all-sb;
+
+    margin-bottom: rem(8);
+    padding-bottom: rem(8);
+    border-bottom: rem(1) solid var(--grey-4);
+
+    &-subtitle {
+      @include flex-v-center;
+
+      gap: rem(5);
+      text-transform: uppercase;
+      font-size: rem(14);
+      font-weight: 500;
+      line-height: rem(16);
+      color: var(--grey-4);
+    }
+
+    &-btn {
+      @include flex-v-center;
+
+      color: var(--grey-4);
+      gap: rem(5);
+      font-size: rem(14);
+      font-weight: 500;
+      line-height: rem(16);
+
+      svg {
+        width: rem(11);
+        height: rem(10);
+        fill: var(--grey-4);
+      }
+    }
+  }
+
+  &__list {
+    &-item {
+      display: flex;
+      gap: rem(8);
+
+      &:not(:last-of-type) {
+        margin-bottom: rem(12);
+      }
+    }
+
+    &-elements {
+      display: flex;
+      gap: rem(4);
+    }
+
+    &-block {
+      display: flex;
+
+      gap: rem(8);
+      svg {
+        width: rem(20);
+        height: rem(20);
+        fill: var(--grey-4);
+      }
+
+      p {
+        max-width: rem(300);
+        font-size: rem(13);
+        font-weight: 400;
+        line-height: rem(16);
+        color: var(--grey-4);
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    gap: rem(30);
+  }
+
+  &__info {
+    margin-bottom: rem(17);
+
+    &-text {
+      max-width: rem(626);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-size: rem(14);
+      font-weight: 400;
+      line-height: rem(17);
+      color: var(--grey-4);
+    }
+  }
+
+  &__title {
+    margin-bottom: rem(16);
+    font-size: rem(26);
+    font-weight: 600;
+    line-height: rem(34);
+    color: var(--black);
+  }
+
+  &__participants {
+    @include flex-v-center;
+
+    margin-bottom: rem(16);
+    gap: rem(8);
+
+    svg {
+      width: rem(18);
+      height: rem(20);
+      fill: var(--grey-4);
+    }
+
+    &-text {
+      font-size: rem(13);
+      font-weight: 400;
+      line-height: rem(16);
+      color: var(--grey-4);
+    }
+  }
+
+  &__counter {
+    width: max-content;
+    padding: rem(2) rem(4);
+    border-radius: rem(2);
+
+    &-limited {
+      font-size: rem(13);
+      font-weight: 400;
+      line-height: rem(16);
+      color: var(--black);
+    }
+
+    &-unlimited {
+      svg {
+        width: rem(16);
+        height: rem(16);
+        stroke: var(--black);
+        stroke-width: rem(2);
+        fill: transparent;
+      }
+    }
+
+    &-text {
+      font-size: rem(13);
+      font-weight: 400;
+      line-height: rem(16);
+      color: var(--grey-4);
+    }
+  }
+
+  &__price {
+    font-size: rem(20);
+    font-weight: 700;
+    line-height: rem(24);
+    color: var(--red);
+  }
+
+  &__btn {
+    margin-top: rem(20);
+    border-top: rem(1) solid var(--grey-4);
+    padding-top: rem(20);
+
+    .btn.btn--trans {
+      width: rem(330);
+    }
+  }
+}

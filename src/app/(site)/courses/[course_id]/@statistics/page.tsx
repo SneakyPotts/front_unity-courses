@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { Banner } from '_ui/Banner'
-
 export default function AsideRight() {
   return (
     <div className="subject__statistics-block statistics-block statistics-block--row">
