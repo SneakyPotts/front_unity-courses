@@ -2,7 +2,6 @@ import { format } from 'date-fns'
 import React, { useContext, useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -11,20 +10,13 @@ import { AddToBasketButton } from '@components/AddToBasketButton'
 import { appContext } from '@components/Context/context'
 
 import { Button } from '_ui/Button'
+import { TeacherForCourse } from '_ui/TeacherForCourse'
 
 import type { CourseCatalogItemProps } from './CourseCatalogItem.props'
 
-const ProfileInfoModal = dynamic(() => import('_modals/ProfileInfoModal').then((mod) => mod.ProfileInfoModal))
-
 export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
-  const { profile, basket } = useContext(appContext)
-  const role = {
-    teacher: profile?.role === 20,
-    student: profile?.role === 2,
-    parent: profile?.role === 10,
-  }
+  const { basket } = useContext(appContext)
 
-  const [isShowTeacherId, setIsShowTeacherId] = useState('')
   const [inBasket, setInBasket] = useState(false)
 
   useEffect(() => {
@@ -34,14 +26,13 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
   return (
     <div className={'courses-catalog__element'}>
       <div className="courses-catalog__box">
-        {props.categories_repr?.map((category, i) => (
-          <ul
-            key={`${i}${category}`}
-            className={'courses-catalog__tag'}
-          >
-            <li>{category}</li>
+        {!!props.categories_repr.length && (
+          <ul className={'courses-catalog__tag'}>
+            {props.categories_repr.map((category, i) => (
+              <li key={`${i}${category}`}>{category}</li>
+            ))}
           </ul>
-        ))}
+        )}
         <span className={'courses-catalog__lesson courses-catalog__review--decor'}>
           <svg className="courses-catalog__svg">
             <use href="/img/sprite.svg#material"></use>
@@ -84,21 +75,10 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
         </Link>
         <div className={'courses-catalog__teachers'}>
           {props.lectors.map((lecturer) => (
-            <div
+            <TeacherForCourse
               key={lecturer.id}
-              className={'courses-catalog__teacher'}
-            >
-              <div className={'courses-catalog__teacher-img'}>
-                <Image
-                  src={lecturer.avatar || '/img/static/default-avatar.png'}
-                  width={20}
-                  height={20}
-                  style={{ objectFit: 'cover' }}
-                  alt={`${lecturer.first_name} ${lecturer.last_name}`}
-                />
-              </div>
-              <button onClick={() => !!profile && setIsShowTeacherId(lecturer.id)}>{`${lecturer.last_name} ${lecturer.first_name[0]}. ${lecturer.patronymic[0]}.`}</button>
-            </div>
+              lecturer={lecturer}
+            />
           ))}
         </div>
         <div className={'courses-catalog__conditions'}>
@@ -162,12 +142,6 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
             callback={() => setInBasket(true)}
           />
         </div>
-      )}
-      {!!isShowTeacherId?.length && (
-        <ProfileInfoModal
-          teacherId={isShowTeacherId}
-          onClose={() => setIsShowTeacherId('')}
-        />
       )}
     </div>
   )

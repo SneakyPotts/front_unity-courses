@@ -9,19 +9,10 @@ import { StatisticSubjects } from '@components/StatisticSubjects'
 import { ToDoList } from '@components/ToDoList'
 
 import { Banner } from '_ui/Banner'
-// import { MyCoursesEmpty } from '_ui/MyCoursesEmpty'
 import { PageWrapper } from '_ui/PageWrapper'
 import { Tabs } from '_ui/Tabs'
 
-// export interface HomeContentProps {
-//   role: {
-//     teacher: boolean
-//     student: boolean
-//     parent: boolean
-//   }
-// }
-
-export default function TeacherHomePage({  }: {/*HomeContentProps*/}) {
+export default function TeacherHomePage({}: {}) {
   const { width } = useWindowSize()
   const isDesktop = width > 991
   const [activeTab, setActiveTab] = useState(0)
@@ -36,9 +27,7 @@ export default function TeacherHomePage({  }: {/*HomeContentProps*/}) {
         />
       }
     >
-      {/*условие отображения todo. Если у учителя создано хотя бы один курс или шаблон,тогда отображем.
-       Если не чего нет , то только MyCoursesEmpty
-       */}
+      {/*TODO: условие отображения todo. Если у учителя создано хотя бы один курс или шаблон,тогда отображем. Если не чего нет , то только MyCoursesEmpty*/}
 
       <section className="schedule">
         <div className="schedule__inner">

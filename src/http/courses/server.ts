@@ -5,7 +5,7 @@ import { cookies } from 'next/headers'
 import { serverFetch } from '@http/api'
 import { serverFetchAuth } from '@http/authApi'
 
-import type { TCatalog, TCourseDetail, TFilters, TFiltersResponse } from './type'
+import type { TCatalog, TCourseDetail, TFilters, TFiltersResponse, TLessonContent } from './type'
 
 const getCoursesCatalog = cache(async (filters: string = '') => {
   const isAuth = cookies().get('accessToken')?.value
@@ -51,9 +51,16 @@ const getCoursesFilters = cache(async () => {
 const getCourseDetail = cache(async (id: string) => {
   const isAuth = cookies().get('accessToken')?.value
 
-  return await (isAuth ? serverFetchAuth : serverFetch)<TCourseDetail>(`/courses/${id}`, {
+  return await (isAuth ? serverFetchAuth : serverFetch)<TCourseDetail>(`/courses/${id}/`, {
     cache: 'reload',
   })
 })
 
-export { getCoursesCatalog, getCoursesFilters, getCourseDetail }
+const getLessonContent = cache(
+  async (lesson_id: string) =>
+    await serverFetchAuth<TLessonContent>(`/courses/student/lecture/${lesson_id}/`, {
+      cache: 'reload',
+    }),
+)
+
+export { getCoursesCatalog, getCoursesFilters, getCourseDetail, getLessonContent }

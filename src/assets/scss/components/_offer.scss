@@ -1,6 +1,6 @@
 .offer {
   padding: rem(76);
-  background: url("/img/static/offer-bg.png") no-repeat center / cover;
+  background: url('/img/static/offer-bg.png') no-repeat center / cover;
   border-radius: rem(10);
 
   &__inner {
@@ -92,7 +92,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .offer {
     padding: rem(30) rem(20);
 

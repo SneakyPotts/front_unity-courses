@@ -1,24 +1,18 @@
-import React, { useContext, useState } from 'react'
+import { isAfter } from 'date-fns'
+import React from 'react'
 
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { courseCaption, formatDateInGenitive } from '@assets/utils'
-import { appContext } from '@components/Context/context'
+import { formatDateInGenitive, subColor } from '@assets/utils'
 import { Rating } from '@smastrom/react-rating'
 
 import { Button } from '_ui/Button'
+import { TeacherForCourse } from '_ui/TeacherForCourse'
 
 import type { CourseCardProps } from './CourseCard.props'
 
-const ProfileInfoModal = dynamic(() => import('_modals/ProfileInfoModal').then((mod) => mod.ProfileInfoModal))
-
 export function CourseCard({ isArchived, ...course }: CourseCardProps) {
-  const { profile } = useContext(appContext)
-
-  const [isShowTeacherId, setIsShowTeacherId] = useState('')
-
   return (
     <div
       className="my-catalog__block"
@@ -29,7 +23,7 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
           <h3 className="my-catalog__left-title">{course.title}</h3>
         ) : (
           <Link
-            href={`/course/${course.id}`}
+            href={`/courses/${course.id}`}
             className="my-catalog__left-title"
           >
             {course.title}
@@ -40,11 +34,28 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
           dangerouslySetInnerHTML={{ __html: course.description || '' }}
         />
         {!isArchived && (
-          <div className="my-catalog__condition my-catalog__condition--violet">
-            <svg className="courses-catalog__svg courses-catalog__svg-stroke">
-              <use href="/img/sprite.svg#learn"></use>
-            </svg>
-            <p>{courseCaption[course.format]}</p>
+          <div className={'my-catalog__duration'}>
+            <div
+              className={'my-catalog__condition my-catalog__condition--violet'}
+              style={{ backgroundColor: subColor[course.color] }}
+            >
+              <svg className={course.format === 'self' ? 'courses-catalog__svg courses-catalog__svg-stroke' : 'archive__data-svg'}>
+                <use href={`/img/sprite.svg#${course.format === 'self' ? 'learn' : 'clock'}`}></use>
+              </svg>
+              <p>найближче заняття - {formatDateInGenitive(new Date(course.closest_lecture), true)}</p>
+            </div>
+            {course.format !== 'self' && (
+              <div className={'my-catalog__duration-item'}>
+                <svg className={'nav__link-svg'}>
+                  <use href="/img/sprite.svg#camera"></use>
+                </svg>
+                {course.format === 'mix' && (
+                  <svg className={'courses-catalog__svg courses-catalog__svg-stroke'}>
+                    <use href="/img/sprite.svg#learn"></use>
+                  </svg>
+                )}
+              </div>
+            )}
           </div>
         )}
         <div className="my-catalog__box">
@@ -87,23 +98,10 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
           )}
 
           {course.lectors.map((lecturer) => (
-            <div
+            <TeacherForCourse
               key={lecturer.id}
-              className="my-catalog__item my-catalog__teacher"
-            >
-              <div className="courses-catalog__teacher-img">
-                <Image
-                  src={lecturer.avatar || '/img/static/default-avatar.png'}
-                  width={20}
-                  height={20}
-                  alt={`${lecturer.last_name} ${lecturer.first_name[0]}. ${lecturer.patronymic[0]}.`}
-                />
-              </div>
-              <button
-                className="my-catalog__item-name"
-                onClick={() => !!profile && setIsShowTeacherId(lecturer.id)}
-              >{`${lecturer.last_name} ${lecturer.first_name[0]}. ${lecturer.patronymic[0]}.`}</button>
-            </div>
+              lecturer={lecturer}
+            />
           ))}
         </div>
         <div className="my-catalog__contact close">
@@ -132,9 +130,11 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
             <svg className="nav__link-svg">
               <use href="/img/sprite.svg#clock"></use>
             </svg>
-            {course.format === 'self'
-              ? !!course?.available_days && <p>курс дійсний {course?.available_days} днів</p>
-              : !!course?.start_date && <p>{`старт курсу - ${formatDateInGenitive(new Date(course.start_date))}`}</p>}
+            {isAfter(new Date(), new Date(course?.start_date)) ? (
+              <p>курс дійсний {course?.available_days ?? 0} днів</p>
+            ) : (
+              <p>{`старт курсу - ${formatDateInGenitive(new Date(course.start_date))}`}</p>
+            )}
           </div>
         )}
 
@@ -150,13 +150,6 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
           </div>
         )}
       </div>
-
-      {!!isShowTeacherId?.length && (
-        <ProfileInfoModal
-          teacherId={isShowTeacherId}
-          onClose={() => setIsShowTeacherId('')}
-        />
-      )}
     </div>
   )
 }

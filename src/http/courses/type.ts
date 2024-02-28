@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import { THuman, TTeacher } from '@assets/types/globals'
+import { IQuiz, TDocument, TTeacher } from '@assets/types/globals'
 import { TBasketCourse } from '@http/profile/type'
 
 export type TCatalog = {
@@ -56,14 +56,16 @@ export type TCourseDetail = TBasketCourse & {
   rating: number
   lectors: TTeacher[]
   start_date: string
+  closest_lecture: string
   number_of_students: number
   max_number_of_students: number
   topics: Topic[]
-  materials: ExtraMaterial[]
-  links: ExtraMaterial[]
+  materials: TDocument[]
+  links: ExtraLink[]
   duration_in_months: number
   available_days: number
   lectures_hours: number
+  purchased: boolean
 }
 
 export interface Topic {
@@ -83,8 +85,77 @@ export type TLecture = {
   has_self_education_work: boolean
 }
 
-export interface ExtraMaterial {
+export interface ExtraLink {
   id: string
-  name: string
-  file: string
+  title: string
+  link: string
+}
+
+export type TLessonContent = {
+  id: string
+  topic_id: string
+  topic_title: string
+  course_id: string
+  course_title: string
+  course_color: string
+  course_icon: string
+  title: string
+  start_time: string
+  is_free: boolean
+  content: string
+  online_lesson_link: string
+  video_url: string
+  test: string
+  self_education_work: string
+  is_visited: boolean
+  lectors: TTeacher[]
+}
+
+export type TTestContent = {
+  id: string
+  topic_id: string
+  topic_title: string
+  course_id: string
+  course_title: string
+  course_color: string
+  course_icon: string
+  test_type: string
+  external_link: string
+  progress_type: number
+  deadline: string
+  quiz: IQuiz
+  progress: Progress
+}
+
+export interface Progress {
+  answer_timestamp: string
+  is_completed: boolean
+  teacher_reply: string
+  teacher_reply_timestamp: string
+  status: number
+  mark: number
+}
+
+export type TSelfWorkContent = {
+  id: string
+  topic_id: string
+  topic_title: string
+  course_id: string
+  course_title: string
+  course_color: string
+  course_icon: string
+  title: string
+  content: string
+  progress_type: number
+  deadline: string
+  progress: SelfProgress
+}
+
+export interface SelfProgress {
+  id: string
+  student_answer: string
+  status: number
+  answer_timestamp: string
+  block_timestamp: string
+  files: TDocument[]
 }

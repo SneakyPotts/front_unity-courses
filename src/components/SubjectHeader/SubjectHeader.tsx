@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 
 import Image from 'next/image'
 
-import { courseCaption, formatDateInGenitive, formattedPrice, imgBlur } from '@assets/utils'
+import { courseCaption, formatDateInGenitive, formattedPrice, imgBlur, subColor } from '@assets/utils'
 import { AddToBasketButton } from '@components/AddToBasketButton'
 import { appContext } from '@components/Context/context'
 
@@ -51,7 +51,10 @@ export function SubjectHeader({ data }: SubjectHeaderProps) {
         )}
       </div>
       <div className={'archive__item archive__item--element'}>
-        <div className={'archive__data my-catalog__condition--violet'}>
+        <div
+          className={'archive__data my-catalog__condition--violet'}
+          style={{ backgroundColor: subColor[data?.color || ''] }}
+        >
           <svg className="archive__data-svg">
             <use href="/img/sprite.svg#clock"></use>
           </svg>
