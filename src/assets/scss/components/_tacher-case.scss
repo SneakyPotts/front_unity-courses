@@ -39,10 +39,49 @@
     }
   }
 
+  &__box {
+    &--left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
   &__list {
     display: flex;
     flex-direction: column;
     gap: rem(12);
+  }
+
+  &__elements {
+    @include flex-v-center;
+
+    flex-wrap: wrap;
+    gap: rem(14);
+
+    &-element {
+      @include flex-v-center;
+
+      gap: rem(8);
+
+      svg {
+        width: rem(20);
+        height: rem(20);
+        fill: var(--grey-4);
+      }
+
+      p {
+        max-width: rem(300);
+        font-size: rem(13);
+        font-weight: 400;
+        line-height: rem(16);
+        color: var(--grey-3);
+      }
+
+      span {
+        padding: rem(2) rem(4);
+      }
+    }
   }
 
   &__content {

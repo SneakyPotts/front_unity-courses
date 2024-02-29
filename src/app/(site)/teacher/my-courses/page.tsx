@@ -13,6 +13,8 @@ import { Loader } from '_ui/Loader'
 import { MyCoursesEmpty } from '_ui/MyCoursesEmpty'
 import { RequestError } from '_ui/RequestError'
 import { Tabs } from '_ui/Tabs'
+import { lector } from '@components/TeacherCardLesson' 
+
 
 export default function TeacherMyCourses() {
   const tabs = ['Активні', 'Архівні', 'Шаблони', 'Чернетка', 'Архів']
@@ -65,7 +67,7 @@ function ActiveCoursesTab() {
 }
 
 function UnderinspectionCoursesTab() {
-  return <TeacherCardLesson />
+  return <TeacherCardLesson lecturer={lector} />
 }
 
 function TemplatesCoursesTab() {
