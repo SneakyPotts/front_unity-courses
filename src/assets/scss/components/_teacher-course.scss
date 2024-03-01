@@ -36,6 +36,15 @@
       margin-bottom: rem(73);
     }
 
+    .content-tabs__wrapper {
+      width: 100%;
+      overflow: auto;
+    }
+
+    .content-tabs__list {
+      flex-wrap: nowrap;
+    }
+
     &__element {
       margin-bottom: rem(90);
     }

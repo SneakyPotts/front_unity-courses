@@ -32,8 +32,8 @@
       line-height: rem(16);
 
       svg {
-        width: rem(11);
-        height: rem(10);
+        width: rem(12);
+        height: rem(12);
         fill: var(--grey-4);
       }
     }
@@ -45,19 +45,35 @@
       flex-direction: column;
       justify-content: space-between;
     }
+
+    &--ridth {
+      grid-row: 2 span;
+    }
+  }
+
+  &__img {
+    margin-bottom: rem(12);
   }
 
   &__list {
     display: flex;
     flex-direction: column;
     gap: rem(12);
+
+    li {
+      padding: rem(4) rem(5);
+    }
   }
 
   &__elements {
-    @include flex-v-center;
-
+    display: flex;
     flex-wrap: wrap;
     gap: rem(14);
+
+    &--svg {
+      fill: transparent;
+      stroke: var(--grey-3);
+    }
 
     &-element {
       @include flex-v-center;
@@ -82,12 +98,17 @@
         padding: rem(2) rem(4);
       }
     }
+
+    &--unique {
+      align-items: unset;
+    }
   }
 
   &__content {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
     gap: rem(30);
+    row-gap: 0;
   }
 
   &__info {
@@ -176,13 +197,23 @@
     color: var(--red);
   }
 
-  &__btn {
+  &__buttons {
     margin-top: rem(20);
     border-top: rem(1) solid var(--grey-4);
     padding-top: rem(20);
 
+    &-arrow {
+      display: none;
+      svg {
+        width: rem(16);
+        height: rem(16);
+        fill: var(--grey-4);
+      }
+    }
+
     .btn.btn--trans {
       width: rem(330);
+      background: var(--white);
     }
   }
 }
@@ -190,13 +221,39 @@
 @include mq("lg") {
   .teacher-case {
     &__content {
-      flex-direction: column;
+      grid-template-columns: 1fr;
+    }
+    
+
+    &__head {
+      &-subtitle {
+        font-size: rem(14);
+        font-weight: 500;
+        line-height: rem(16);
+      }
     }
 
-    &__btn {
-      width: 100%;
+    &__buttons {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: rem(20);
+
+      &-arrow {
+        display: block;
+      }
+    }
+
+    &__list {
+      margin-bottom: rem(13);
+
+      li {
+        padding: rem(2) rem(5);
+      }
+    }
+
+    &__participants {
+      margin-bottom: rem(12);
     }
 
     &__img {

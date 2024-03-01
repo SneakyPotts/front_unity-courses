@@ -15,7 +15,7 @@ export const lector: TTeacher = {
   id: 'asd',
 }
 
-export function TeacherCardLesson({ ...props }: TeacherCardLessonProps) {
+export function TeacherCardLesson({}: TeacherCardLessonProps) {
   return (
     <div className={'teacher-case'}>
       <div className={'teacher-case__head'}>
@@ -40,21 +40,22 @@ export function TeacherCardLesson({ ...props }: TeacherCardLessonProps) {
               мистецтва та надають можливість долучитися до творчих завдань.
             </p>
           </div>
+
           <div className={'teacher-case__container'}>
             <ul className={'teacher-case__list'}>
               <li>
                 <div className={'teacher-case__elements'}>
-                  <div className={'teacher-case__elements-element'}>
+                  <div className={'teacher-case__elements-element teacher-case__elements--unique'}>
                     <svg>
-                      <use href="/img/sprite.svg#clock"></use>
+                      <use href="/img/sprite.svg#camera"></use>
                     </svg>
                     <p>Заняття проводяться з викладачем у live режимі (НЕ відео-запис)</p>
                   </div>
-                  <div className={'teacher-case__elements-element'}>
+                  <div className={'teacher-case__elements-element teacher-case__elements--unique'}>
                     <svg>
                       <use href="/img/sprite.svg#clock"></use>
                     </svg>
-                    <p>Заняття проводяться з викладачем у live режимі (НЕ відео-запис)</p>
+                    <p>Заняття проводяться самостійно</p>
                   </div>
                 </div>
               </li>
@@ -85,17 +86,30 @@ export function TeacherCardLesson({ ...props }: TeacherCardLessonProps) {
                     <p>курс дійсний:</p>
                     <span>Чекає на заповнення</span>
                   </div>
-                  <div className={'teacher-case__elements-element'}>
-                    <svg>
-                      <use href="/img/sprite.svg#clock"></use>
+                  <div className={'teacher-case__elements-element teacher-case__elements--svg'}>
+                    <svg className={'teacher-case__elements--svg'}>
+                      <use href="/img/sprite.svg#person"></use>
                     </svg>
-                    <p>курс дійсний:</p>
-                    <span>Чекає на заповнення</span>
+                    <p>цільова аудиторія:</p>
+                    <span>6-8 клас</span>
+                    <span>9-11 клас</span>
                   </div>
                 </div>
               </li>
               <li>
                 <div className={'teacher-case__elements'}>
+                  <div className={'teacher-case__elements-element'}>
+                    <svg>
+                      <use href="/img/sprite.svg#list"></use>
+                    </svg>
+                    <span>5 тем</span>
+                  </div>
+                  <div className={'teacher-case__elements-element'}>
+                    <svg>
+                      <use href="/img/sprite.svg#list"></use>
+                    </svg>
+                    <span>5 тем</span>
+                  </div>
                   <TeacherForCourse lecturer={lector} />
                   <TeacherForCourse lecturer={lector} />
                 </div>
@@ -103,14 +117,10 @@ export function TeacherCardLesson({ ...props }: TeacherCardLessonProps) {
             </ul>
           </div>
         </div>
-        <div className={'teacher-case__box'}>
+        <div className={'teacher-case__box teacher-case__box--ridth'}>
           <div className="teacher-case__img">
-            {/* <ul className={'teacher-case__box-tags'}>
-                <li>Підготовка</li>
-                <li>Підготовка</li>
-              </ul> */}
             <Image
-              src={''}
+              src={'https://loremflickr.com/640/360'}
               width={400}
               height={200}
               style={{ objectFit: 'cover', borderRadius: 5 }}
@@ -141,8 +151,13 @@ export function TeacherCardLesson({ ...props }: TeacherCardLessonProps) {
           </div>
         </div>
       </div>
-      <div className={'teacher-case__btn'}>
-        <button className={'btn btn--trans'}>відмінити модерацію</button>
+      <div className={'teacher-case__buttons'}>
+        <button className={'teacher-case__buttons-arrow'}>
+          <svg>
+            <use href="/img/sprite.svg#arrow-bottom"></use>
+          </svg>
+        </button>
+        <button className={'btn teacher-case__buttons-btn btn--trans'}>відмінити модерацію</button>
       </div>
     </div>
   )
