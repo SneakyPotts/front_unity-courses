@@ -4,6 +4,7 @@ import { MathJax } from 'better-react-mathjax'
 import { addMinutes, differenceInSeconds, format, isAfter, parseISO } from 'date-fns'
 import React, { useLayoutEffect, useState } from 'react'
 
+import { LessonsNavigation } from '@components/LessonsNavigation'
 import { TestsList } from '@components/TestsList'
 import { TextEditor } from '@components/TextEditor'
 import { UploadDocumentItem, UploadDocumentModal } from '@components/UploadDocument'
@@ -24,8 +25,33 @@ export function LessonPageContent({ data }: LessonPageContentProps) {
   const formattedContent = useAssemblyContent(data?.content)
 
   const [activeTab, setActiveTab] = useState(1)
+  const [isShowSubjectNav, setIsShowSubjectNav] = useState(false)
 
-  useSetHeaderParams({ title: `Урок з ${data?.course_title}` })
+  useSetHeaderParams({
+    title: `Урок з ${data?.course_title}`,
+    titleBefore: (
+      <button
+        className="header__manual"
+        onClick={() => setIsShowSubjectNav((p) => !p)}
+      >
+        <svg className="header__manual-svg">
+          <use href="/img/sprite.svg#list"></use>
+        </svg>
+      </button>
+    ),
+    titleAfter: data?.online_lesson_link && (
+      <Button
+        variant={isAfter(new Date(), new Date(data.start_time)) ? 'gray' : 'accent'}
+        href={data?.online_lesson_link}
+        target="_blank"
+      >
+        <svg className="btn__icon">
+          <use href="/img/sprite.svg#check"></use>
+        </svg>
+        {isAfter(new Date(), new Date(data.start_time)) ? 'Урок пройшов' : 'Посилання на онлайн урок'}
+      </Button>
+    ),
+  })
 
   return (
     <>
@@ -48,6 +74,13 @@ export function LessonPageContent({ data }: LessonPageContentProps) {
       )}
       {activeTab === 3 && data?.self_education_work && <SelfWorkTab selfId={data?.self_education_work} />}
       {activeTab === 4 && data?.test && <TestWorkTab testId={data.test} />}
+
+      {isShowSubjectNav && data?.course_id && (
+        <LessonsNavigation
+          courseId={data.course_id!}
+          onClose={() => setIsShowSubjectNav(false)}
+        />
+      )}
     </>
   )
 }

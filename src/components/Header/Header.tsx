@@ -87,7 +87,15 @@ export function Header({ profile, className }: HeaderProps) {
   return (
     <header className={classNames('header', className)}>
       <div className="header__container container">
-        {header ? <h1 className="header__title">{header.title}</h1> : <Skeleton height={30} />}
+        {header ? (
+          <div className="header__lesson">
+            {header.titleBefore}
+            <h1 className="header__title">{header.title}</h1>
+            {header.titleAfter}
+          </div>
+        ) : (
+          <Skeleton height={30} />
+        )}
 
         <nav className="header__nav">
           <ul className="header__list">

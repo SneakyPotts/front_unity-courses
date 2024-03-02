@@ -209,6 +209,26 @@
       height: rem(20);
     }
   }
+
+  &__lesson {
+    @include flex-v-center;
+    gap: rem(8);
+  }
+
+  &__manual {
+    @include flex-all-center;
+
+    border-radius: rem(5);
+    width: rem(32);
+    height: rem(32);
+    background-color: var(--bg);
+
+    &-svg {
+      width: rem(20);
+      height: rem(20);
+      fill: var(--blue-300);
+    }
+  }
 }
 
 @include mq('lg') {

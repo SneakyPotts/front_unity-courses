@@ -88,39 +88,39 @@ export type TTeacher = THuman & {
   qualification?: string
 }
 
-export interface SubjectDetails {
-  topics: Topic[]
-  quarter_tests: QuarterTest[]
-  extra_tasks: ExtraTask[]
-  materials: Material[]
-  extra_materials: ExtraMaterial[]
-  links: Link[]
-  attendance: Statisticks
-  forecast_estimate: Statisticks
-  lesson_average_estimate: Statisticks
-  homework_average_estimate: Statisticks
-  test_average_estimate: Statisticks
-  self_test_average_estimate: Statisticks
-  other_test_average_estimate: Statisticks
-  description: string
-  title: string
-  teacher: TTeacher
-  second_teacher: TTeacher
-  color: string
-  cover: string
-  icon: string
-  classroom?: TClass
-  estimate_assessment?: string
-  visiting?: string
-  student_avatars?: string[]
-}
+// export interface SubjectDetails {
+//   topics: Topic[]
+//   quarter_tests: QuarterTest[]
+//   extra_tasks: ExtraTask[]
+//   materials: Material[]
+//   extra_materials: ExtraMaterial[]
+//   links: Link[]
+//   attendance: Statisticks
+//   forecast_estimate: Statisticks
+//   lesson_average_estimate: Statisticks
+//   homework_average_estimate: Statisticks
+//   test_average_estimate: Statisticks
+//   self_test_average_estimate: Statisticks
+//   other_test_average_estimate: Statisticks
+//   description: string
+//   title: string
+//   teacher: TTeacher
+//   second_teacher: TTeacher
+//   color: string
+//   cover: string
+//   icon: string
+//   classroom?: TClass
+//   estimate_assessment?: string
+//   visiting?: string
+//   student_avatars?: string[]
+// }
 
-export interface Topic {
-  order_num: number
-  id: string
-  title: string
-  quarter: number
-}
+// export interface Topic {
+//   order_num: number
+//   id: string
+//   title: string
+//   quarter: number
+// }
 
 export interface QuarterTest {
   id: string
