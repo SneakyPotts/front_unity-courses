@@ -5,21 +5,22 @@ import { useForm } from 'react-hook-form'
 import { usePopper } from 'react-popper'
 import { useOnClickOutside } from 'usehooks-ts'
 
-import { TTestResult } from '@assets/types/globals'
+import Image from 'next/image'
+
+import type { TTestResult } from '@assets/types/globals'
+import { imgBlur } from '@assets/utils'
 import { Portal } from '@components/Portal'
 import { Single, TestWrapper, descMatcher } from '@components/Test'
 import { ComplianceGridMatrix } from '@components/Test/ComplianceGridMatrix'
+import { TextEditor } from '@components/TextEditor'
 import { useQueryStudentLesson } from '@http/courses/client'
 
 import { Button } from '_ui/Button'
 import { toastPromise } from '_ui/ToastUtils'
 
-// import { TextEditor } from '@components/TextEditor'
 import type { ComplianceQuestionProps, FillInputProps, FillQuestionProps, FreeQuestionProps, SingleQuestionProps, TestsListProps } from './TestsList.props'
 
 export function TestsList({ questions, test_id, setNotEditing }: TestsListProps) {
-  // const [sendAnswers, { isLoading: sendIsLoading }] = useSendStudentTestAnswersMutation()
-
   const { sendTest: sendAnswers } = useQueryStudentLesson({})
 
   const { handleSubmit, setValue } = useForm<any>()
@@ -187,8 +188,11 @@ function ComplianceQuestion({ id, answer_type, answer_type_str, answers: { left_
             >
               {imgLeft ? (
                 <div className="tests__alternative-photo">
-                  <img
-                    src={v.image_answer}
+                  <Image
+                    src={v.image_answer!}
+                    fill
+                    sizes="10vw"
+                    {...imgBlur}
                     alt={question}
                   />
                 </div>
@@ -206,8 +210,11 @@ function ComplianceQuestion({ id, answer_type, answer_type_str, answers: { left_
             >
               {imgRight ? (
                 <div className="tests__alternative-photo">
-                  <img
-                    src={v.image_answer}
+                  <Image
+                    src={v.image_answer!}
+                    fill
+                    sizes="10vw"
+                    {...imgBlur}
                     alt={question}
                   />
                 </div>
@@ -390,11 +397,11 @@ function FreeQuestion({ id, answer_type, answer_type_str, question, indexNumber,
       indexNumber={indexNumber}
       description={descMatcher[answer_type]}
     >
-      {/*<TextEditor*/}
-      {/*  version={4}*/}
-      {/*  initData={text}*/}
-      {/*  onChange={handleChange}*/}
-      {/*/>*/}
+      <TextEditor
+        version={4}
+        initData={text}
+        onChange={handleChange}
+      />
     </TestWrapper>
   )
 }

@@ -85,13 +85,16 @@ export function useQueryStudentLesson({ course_id, lesson_id, test_id, self_id }
   })
 
   const test = useQuery({
-    queryKey: [test_id],
+    queryKey: ['test', test_id],
     queryFn: () => getTestContent(test_id!),
     enabled: !!test_id,
   })
 
   const { mutateAsync: sendTest } = useMutation({
     mutationFn: sendTestAnswer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['test'] })
+    },
   })
 
   return {
