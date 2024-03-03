@@ -38,6 +38,11 @@ const sendTestAnswer = ({ test_id, body }: { test_id: string; body: TTestResult 
     body: JSON.stringify(body),
   })
 
+const sendIsVisited = ({ lesson_id }: { lesson_id: string }) =>
+  clientAuthFetch<any>(`/courses/student/lecture/${lesson_id}/visit/`, {
+    method: 'PATCH',
+  })
+
 export function useQueryStudentLesson({ course_id, lesson_id, test_id, self_id }: { course_id?: string; lesson_id?: string; test_id?: string; self_id?: string }) {
   const queryClient = useQueryClient()
 
@@ -48,7 +53,7 @@ export function useQueryStudentLesson({ course_id, lesson_id, test_id, self_id }
   })
 
   const content = useQuery({
-    queryKey: [lesson_id],
+    queryKey: ['lesson', lesson_id],
     queryFn: () => getLessonContent(lesson_id!),
     enabled: !!lesson_id,
   })
@@ -97,6 +102,13 @@ export function useQueryStudentLesson({ course_id, lesson_id, test_id, self_id }
     },
   })
 
+  const { mutateAsync: visit } = useMutation({
+    mutationFn: sendIsVisited,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['lesson'] })
+    },
+  })
+
   return {
     course,
     content,
@@ -107,5 +119,6 @@ export function useQueryStudentLesson({ course_id, lesson_id, test_id, self_id }
     sendSelfConfirm,
     test,
     sendTest,
+    visit,
   }
 }

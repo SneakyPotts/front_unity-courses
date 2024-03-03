@@ -20,12 +20,19 @@ import { Tabs } from '_ui/Tabs'
 import { IndividualWordProps, LessonPageContentProps, LessonSelfWorkContentProps, TestWorkTabProps } from './LessonPageContent.props'
 
 export function LessonPageContent({ data }: LessonPageContentProps) {
+  const { visit } = useQueryStudentLesson({})
+
   const tabs = ['Конспект', 'Контрольна  робота', 'Самостійна робота', 'Тест']
 
   const formattedContent = useAssemblyContent(data?.content)
 
   const [activeTab, setActiveTab] = useState(1)
   const [isShowSubjectNav, setIsShowSubjectNav] = useState(false)
+
+  const handleVisitLesson = () => {
+    data?.id && visit({ lesson_id: data.id })
+    window.open(data?.online_lesson_link, '_blank')?.focus()
+  }
 
   useSetHeaderParams({
     title: `Урок з ${data?.course_title}`,
@@ -39,18 +46,23 @@ export function LessonPageContent({ data }: LessonPageContentProps) {
         </svg>
       </button>
     ),
-    titleAfter: data?.online_lesson_link && (
-      <Button
-        variant={isAfter(new Date(), new Date(data.start_time)) ? 'gray' : 'accent'}
-        href={data?.online_lesson_link}
-        target="_blank"
-      >
-        <svg className="btn__icon">
-          <use href="/img/sprite.svg#check"></use>
-        </svg>
-        {isAfter(new Date(), new Date(data.start_time)) ? 'Урок пройшов' : 'Посилання на онлайн урок'}
-      </Button>
-    ),
+    titleAfter:
+      data?.online_lesson_link &&
+      (() => {
+        const isEnded = isAfter(new Date(), addMinutes(new Date(data.start_time), 45))
+
+        return (
+          <Button
+            variant={isEnded ? 'gray' : 'accent'}
+            onClick={handleVisitLesson}
+          >
+            <svg className="btn__icon">
+              <use href="/img/sprite.svg#check"></use>
+            </svg>
+            {isEnded ? `Урок ${data.is_visited ? 'пройшов' : 'пропущено'}` : 'Посилання на онлайн урок'}
+          </Button>
+        )
+      })(),
   })
 
   return (
