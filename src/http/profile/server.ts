@@ -7,9 +7,9 @@ import type { TAboutMe, TBasket } from './type'
 const aboutMeRequest = cache(
   async () =>
     await serverFetchAuth<TAboutMe>('/users/me/', {
-      cache: 'reload',
       next: {
         tags: ['aboutMe'],
+        revalidate: 30,
       },
     }),
 )
@@ -17,9 +17,9 @@ const aboutMeRequest = cache(
 const myBasketRequest = cache(
   async () =>
     await serverFetchAuth<TBasket>('/courses/cart/me/', {
-      cache: 'reload',
       next: {
         tags: ['basket'],
+        revalidate: 30,
       },
     }),
 )

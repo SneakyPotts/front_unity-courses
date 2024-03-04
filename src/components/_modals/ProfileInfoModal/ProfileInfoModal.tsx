@@ -16,7 +16,7 @@ import type { ProfileInfoModalProps } from './ProfileInfoModal.props'
 export function ProfileInfoModal({ onClose, studentId, teacherId }: ProfileInfoModalProps) {
   const {
     profile: { data: student, isLoading: studentIsLoading, isError: studentIsError },
-  } = useQueryStudent(studentId)
+  } = useQueryStudent({ student_id: studentId })
   const {
     profile: { data: teacher, isLoading: teacherIsLoading, isError: teacherIsError },
   } = useQueryTeacher(teacherId)

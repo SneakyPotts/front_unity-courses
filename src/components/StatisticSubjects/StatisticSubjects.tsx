@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
-import { SubjectStatisticArrayItem } from '@assets/types/globals'
+import { useQueryStudent, useQueryStudentCourses } from '@http/student/client'
+import type { TStatsTypes } from '@http/student/types'
 
 import { CustomLink } from '_ui/CustomLink'
 import { Loader } from '_ui/Loader'
@@ -10,21 +11,18 @@ import type { StatisticSubjectsProps } from './StatisticSubjects.props'
 import { StatisticsItem } from './StatisticsItem'
 
 export function StatisticSubjects({ studentId, isShort = false }: StatisticSubjectsProps) {
-  const [subjectId, setSubjectId] = useState('')
+  const [courseId, setCourseId] = useState('')
 
-  const parentParams = studentId ? { student_id: studentId } : {}
+  const {
+    active: { data: courses, isLoading: isCoursesLoading, isError: isCoursesError },
+  } = useQueryStudentCourses({ tab_id: 'active' })
 
-  // const { data: statistics, isLoading, isError } = useGetStudentStatisticOtherQuery({ subject_id: subjectId, ...parentParams })
-  // const { data: subjectsData } = useGetStudentSubjectsQuery(parentParams)
+  const {
+    courseStats: { data: stats, isLoading: isStatsLoading, isError: isStatsError },
+  } = useQueryStudent({ stats: true, course_id: courseId })
 
-  const isLoading = false
-  const isError = false
-  const statistics: SubjectStatisticArrayItem[] = Array.from({ length: 3 }).map(() => ({
-    type: '',
-    value: 5,
-    max_value: 10,
-    percentage: 50,
-  }))
+  const isLoading = isCoursesLoading || isStatsLoading
+  const isError = isCoursesError || isStatsError
 
   return (
     <div className="statistics__block statistics-block">
@@ -34,8 +32,8 @@ export function StatisticSubjects({ studentId, isShort = false }: StatisticSubje
 
           <StatisticDropdown
             name="dropdown"
-            list={[]} //subjectsData?.subjects
-            onChange={(id) => setSubjectId(id)}
+            list={courses?.results}
+            onChange={(id) => setCourseId(id)}
           />
         </div>
 
@@ -53,18 +51,17 @@ export function StatisticSubjects({ studentId, isShort = false }: StatisticSubje
       </div>
 
       <div className="statistics-block__bottom">
+        {isLoading && <Loader />}
+        {isError && <p className="text-center">Щось пішло не так...</p>}
         <div className="statistics-block__list">
-          {isLoading && <Loader />}
-          {isError && <p className="text-center">Щось пішло не так...</p>}
-          {statistics?.map(
-            (item, i) =>
-              (item.type === 'attendance' || !!item.value) && (
-                <StatisticsItem
-                  key={`${item.value}_${item.type}-${i}`}
-                  {...item}
-                />
-              ),
-          )}
+          {stats &&
+            Object.keys(stats)?.map((key, i) => (
+              <StatisticsItem
+                key={`${key}-${i}`}
+                type={key as TStatsTypes}
+                {...stats[key as TStatsTypes]}
+              />
+            ))}
         </div>
       </div>
     </div>

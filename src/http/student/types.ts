@@ -57,3 +57,13 @@ export type TStudentActiveCourseItem = {
   available_days: number
   my_rating: number
 }
+
+export type TStatsTypes = 'visiting' | 'mark' | 'progress'
+
+export type TStatsItem = {
+  value: number
+  max_value: number
+  percentage: number
+}
+
+export type TCourseStats = Record<TStatsTypes, TStatsItem>
