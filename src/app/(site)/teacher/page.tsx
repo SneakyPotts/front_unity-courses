@@ -7,6 +7,7 @@ import { CoursesProgress } from '@components/CoursesProgress'
 import { ScheduleDay } from '@components/ScheduleDay'
 import { StatisticSubjects } from '@components/StatisticSubjects'
 import { ToDoList } from '@components/ToDoList'
+import { MyCoursesEmpty } from '@components/_ui/MyCoursesEmpty'
 
 import { Banner } from '_ui/Banner'
 import { PageWrapper } from '_ui/PageWrapper'
