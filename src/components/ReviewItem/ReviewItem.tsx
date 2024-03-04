@@ -3,16 +3,22 @@ import { format } from 'date-fns'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useToggle } from 'usehooks-ts'
 
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 
+import { dynamicOptions } from '@assets/constants'
 import { appContext } from '@components/Context/context'
-import { TextEditor } from '@components/TextEditor'
 import { Rating } from '@smastrom/react-rating'
 
 import { Button } from '_ui/Button'
 import { TeacherForCourse } from '_ui/TeacherForCourse'
 
 import type { ReviewItemProps } from './ReviewItem.props'
+
+const TextEditor = dynamic(() => import('@components/TextEditor').then((mod) => mod.TextEditor), {
+  ...dynamicOptions,
+  ssr: false,
+})
 
 export function ReviewItem({ ...review }: ReviewItemProps) {
   const { profile } = useContext(appContext)

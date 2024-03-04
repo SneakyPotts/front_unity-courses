@@ -70,15 +70,27 @@ function UnderinspectionCoursesTab() {
 }
 
 function TemplatesCoursesTab() {
-  return
+  return (
+    <div>
+      <p>TemplatesCoursesTab</p>
+    </div>
+  )
 }
 
 function DraftCoursesTab() {
-  return
+  return (
+    <div>
+      <p>DraftCoursesTab</p>
+    </div>
+  )
 }
 
 function ArchivedCoursesTab() {
-  return
+  return (
+    <div>
+      <p>ArchivedCoursesTab</p>
+    </div>
+  )
 }
 
 interface TabContentProps {

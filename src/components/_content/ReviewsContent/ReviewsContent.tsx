@@ -18,17 +18,11 @@ import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import type { TReviewItem } from '@http/courses/type'
 import { Rating } from '@smastrom/react-rating'
 
-import { Button } from '_ui/Button'
 import { TeacherForCourse } from '_ui/TeacherForCourse'
 
-import type { ReviewsContentProps, ReviewsItemProps } from './ReviewsContent.props'
+import type { ReviewsContentProps } from './ReviewsContent.props'
 
 const ReviewAdd = dynamic(() => import('@components/ReviewAdd').then((mod) => mod.ReviewAdd), {
-  ...dynamicOptions,
-  ssr: false,
-})
-
-const TextEditor = dynamic(() => import('@components/TextEditor').then((mod) => mod.TextEditor), {
   ...dynamicOptions,
   ssr: false,
 })

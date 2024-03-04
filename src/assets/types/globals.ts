@@ -14,8 +14,8 @@ export type ErrorResponse = {
   message:
     | string
     | {
-        detail: 'Наданий токен не відповідає жодному типу ключа'
-        code: 'token_not_valid'
+        detail: string
+        code: string
         messages: Array<Record<string, string>>
       }
 }
