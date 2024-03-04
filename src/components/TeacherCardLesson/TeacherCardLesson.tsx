@@ -4,7 +4,8 @@ import Image from 'next/image'
 
 import { TTeacher } from '@/assets/types/globals'
 
-import { TeacherForCourse } from '../_ui/TeacherForCourse'
+import { TeacherForCourse } from '_ui/TeacherForCourse'
+
 import type { TeacherCardLessonProps } from './TeacherCardLesson.props'
 
 export const lector: TTeacher = {
