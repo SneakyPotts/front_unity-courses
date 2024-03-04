@@ -29,14 +29,18 @@ export function SubjectHeader({ data }: SubjectHeaderProps) {
         <h1 className={'archive__title'}>{data?.title}</h1>
       </div>
       <div className={'archive__item archive__photo'}>
-        {data?.categories_repr?.map((cat, i) => (
-          <span
-            key={`${cat}${i}`}
-            className={'courses-catalog__tag'}
-          >
-            {cat}
-          </span>
-        ))}
+        {!!data?.categories_repr.length && (
+          <ul className="courses-catalog__tag">
+            {data?.categories_repr?.map((cat, i) => (
+              <li
+                key={`${cat}${i}`}
+                className=""
+              >
+                {cat}
+              </li>
+            ))}
+          </ul>
+        )}
 
         {data?.cover && (
           <div className={'archive__img'}>

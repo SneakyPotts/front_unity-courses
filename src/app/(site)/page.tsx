@@ -1,4 +1,4 @@
-import { TPageProps } from '@assets/types/globals'
+import type { TPageProps } from '@assets/types/globals'
 import { getCoursesCatalog, getCoursesFilters } from '@http/courses/server'
 
 import { RequestError } from '_ui/RequestError'

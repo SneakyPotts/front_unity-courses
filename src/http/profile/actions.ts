@@ -26,16 +26,9 @@ export async function signInServerAction(data: SignInSchema) {
   })
 
   if (!!response.data) {
-    cookies().set('accessToken', response.data.access, {
-      path: '/',
-      // expires: add(new Date(), { days: 1 }), //TODO: add variable "saveMe"
-    })
+    await signInAction(response.data.access, response.data.refresh)
 
     await addToBasketOnAuthAction(response.data.access)
-
-    revalidatePath('/')
-    revalidateTag('aboutMe')
-    revalidateTag('basket')
   }
 
   return response
@@ -51,9 +44,21 @@ export async function getGoogleAuthUriAction(domain: string) {
   }
 }
 
+export async function signInAction(access: string, refresh: string) {
+  cookies().set('accessToken', access, { path: '/' })
+  cookies().set('refreshToken', refresh, { path: '/' })
+
+  revalidateTag('aboutMe')
+  revalidateTag('basket')
+  revalidatePath('/')
+}
+
 export async function signOutAction() {
   cookies().delete('accessToken')
+  cookies().delete('refreshToken')
+
   revalidateTag('aboutMe')
+  revalidateTag('basket')
   revalidatePath('/')
 }
 

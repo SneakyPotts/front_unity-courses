@@ -1,10 +1,11 @@
 import React from 'react'
 
 import Image from 'next/image'
+import Link from 'next/link'
 
 import type { ReviewsCardProps } from './ReviewsCard.props'
 
-export function ReviewsCard({}: ReviewsCardProps) {
+export function ReviewsCard({ courseId, ...review }: ReviewsCardProps) {
   return (
     <div className={'archive__review'}>
       <div className={'archive__review-top'}>
@@ -12,31 +13,32 @@ export function ReviewsCard({}: ReviewsCardProps) {
           <div className={'reviews__person'}>
             <div className={'archive__review-photo'}>
               <Image
-                src="https://loremflickr.com/640/360"
+                src={review.user.avatar}
                 width={40}
                 height={40}
-                alt="фото профиля"
+                alt={`${review.user.last_name} ${review.user.first_name}`}
               />
             </div>
           </div>
-          <p>Биков Руслан</p>
+          <p>{`${review.user.last_name} ${review.user.first_name}`}</p>
         </div>
         <div className={'archive__review-assessment'}>
           <svg className="archive__reviews-svg">
             <use href="/img/sprite.svg#star"></use>
           </svg>
-          <p>4.5</p>
+          <p>{review.rating}</p>
         </div>
       </div>
-      <p className={'archive__review-text'}>
-        Цей курс змінив мій погляд на мистецтво. Вчитель створив таке захоплююче навчальне середовище, де ми не лише вивчаємо техніку, але і розкриваємо свій в
-      </p>
-      <a
-        href="#"
+      <div
+        className={'archive__review-text'}
+        dangerouslySetInnerHTML={{ __html: review.content || '' }}
+      />
+      <Link
+        href={`/reviews/${courseId}#${review.id}`}
         className={'archive__review-link'}
       >
         Відгук повністю
-      </a>
+      </Link>
     </div>
   )
 }

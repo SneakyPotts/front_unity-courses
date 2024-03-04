@@ -11,11 +11,10 @@ import { TimePicker } from '@components/TimePicker'
 
 import { Button } from '_ui/Button'
 import { Field } from '_ui/Field'
+import { toastPromise } from '_ui/ToastUtils'
 
 import type { DeadlinePickerProps } from './DeadlinePicker.props'
 import './DeadlinePicker.scss'
-
-// import { toastPromise } from '_ui/ToastUtils'
 
 registerLocale('uk', uk)
 

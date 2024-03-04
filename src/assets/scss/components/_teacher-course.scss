@@ -36,15 +36,30 @@
       margin-bottom: rem(73);
     }
 
+    .content-tabs__list {
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      scrollbar-width: none;
+    }
+
+    &__element {
+      margin-bottom: rem(90);
+    }
+
     &__create {
       @include flex-h-center;
 
       position: absolute;
       width: 100%;
-      bottom: rem(-55);
+      bottom: rem(-53);
       padding: rem(9);
       border: rem(1) solid var(--orange-400);
       border-radius: rem(5);
+    }
+
+    &__content {
+      overflow: hidden;
     }
   }
 }

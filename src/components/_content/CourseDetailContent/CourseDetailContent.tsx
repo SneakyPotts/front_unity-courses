@@ -18,6 +18,8 @@ import { TeachersSection } from './components/TeachersSection'
 export function CourseDetailContent({ data }: CourseDetailContentProps) {
   useSetHeaderParams({ title: 'Про курс' })
 
+  console.log(data)
+
   return (
     <div className={'archive__block'}>
       <SubjectHeader data={data} />
@@ -55,7 +57,10 @@ export function CourseDetailContent({ data }: CourseDetailContentProps) {
               courseFree={data?.format === 'self'}
             />
             <TeachersSection lectors={data?.lectors} />
-            <ReviewsSection courseId={data?.id} />
+            <ReviewsSection
+              courseId={data?.id}
+              reviews={data?.reviews}
+            />
           </div>
         </div>
       </div>

@@ -19,16 +19,12 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
       style={{ backgroundColor: isArchived ? '#f2f2f2' : course.color }}
     >
       <div className="my-catalog__left">
-        {isArchived ? (
-          <h3 className="my-catalog__left-title">{course.title}</h3>
-        ) : (
-          <Link
-            href={`/courses/${course.id}`}
-            className="my-catalog__left-title"
-          >
-            {course.title}
-          </Link>
-        )}
+        <Link
+          href={`/courses/${course.id}`}
+          className="my-catalog__left-title"
+        >
+          {course.title}
+        </Link>
         <div
           className="my-catalog__left-text"
           dangerouslySetInnerHTML={{ __html: course.description || '' }}
@@ -114,17 +110,23 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
       </div>
       <div className="my-catalog__ridth">
         {isArchived ? (
-          // <Button className={' courses-catalog__btn  some_button my-catalog__review-btn'}>
-          //   <svg className="courses-catalog__svg">
-          //     <use href="/img/sprite.svg#message"></use>
-          //   </svg>
-          //   залишити відгук
-          // </Button>
-          <Rating
-            style={{ maxWidth: 100 }}
-            value={course.rating || 0}
-            readOnly
-          />
+          course.my_rating ? (
+            <Rating
+              style={{ maxWidth: 100 }}
+              value={course.rating || 0}
+              readOnly
+            />
+          ) : (
+            <Button
+              className={'courses-catalog__btn  some_button my-catalog__review-btn'}
+              href={`/reviews/${course.id}`}
+            >
+              <svg className="courses-catalog__svg">
+                <use href="/img/sprite.svg#message"></use>
+              </svg>
+              залишити відгук
+            </Button>
+          )
         ) : (
           <div className="my-catalog__ridth-time">
             <svg className="nav__link-svg">
@@ -174,7 +176,7 @@ export function CourseReview() {
           </div>
           <div className={'my-catalog__item'}>
             <div className={'courses-catalog__teacher-img'}>
-              <img
+              <Image
                 src="https://loremflickr.com/640/360"
                 alt="аватарка акаунта"
               />
@@ -191,7 +193,7 @@ export function CourseReview() {
           залишити відгук
         </Button>
         <div className={'my-catalog__ridth-photo'}>
-          <img
+          <Image
             src="https://picsum.photos/100/100"
             alt="фото курсу"
           />
@@ -219,7 +221,7 @@ export function CourseGrade() {
           </div>
           <div className={'my-catalog__item'}>
             <div className={'courses-catalog__teacher-img'}>
-              <img
+              <Image
                 src="https://loremflickr.com/640/360"
                 alt="аватарка акаунта"
               />
@@ -248,9 +250,12 @@ export function CourseGrade() {
           <p className={'reviews__ratings-text'}>4.5</p>
         </div>
         <div className={'my-catalog__ridth-photo'}>
-          <img
+          <Image
             src="https://picsum.photos/100/100"
             alt="фото курсу"
+            width={100}
+            height={100}
+            style={{ objectFit: 'cover' }}
           />
         </div>
       </div>

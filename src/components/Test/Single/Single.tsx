@@ -1,7 +1,10 @@
 import classNames from 'classnames'
 import React from 'react'
 
+import Image from 'next/image'
+
 import { TAnswerCheck } from '@assets/types/globals'
+import { imgBlur } from '@assets/utils'
 import { TestWrapper } from '@components/Test'
 import { TOption } from '@http/teacher/types'
 
@@ -91,9 +94,13 @@ function ListItem({ item, type, icon, className, ...props }: ListItemProps) {
                 </svg>
               </span>
             )}
-            <img
+            <Image
               src={item.image_answer}
-              alt={item.text_answer}
+              fill
+              sizes="10vw"
+              style={{ objectFit: 'contain' }}
+              {...imgBlur}
+              alt={item.text_answer || ''}
             />
           </div>
         )}

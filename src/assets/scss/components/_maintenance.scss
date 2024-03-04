@@ -129,18 +129,31 @@
     }
   }
 
-  &__sublist {
-    margin-bottom: rem(20);
-  }
-
   &__subitem {
     @include mb(rem(5));
   }
 
   &__block {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.5s var(--ease-in-out);
+    display: grid;
+    grid-template-rows: 0fr;
+
+    transition: grid-template-rows 0.5s var(--ease-in-out);
+
+    .maintenance__sublist {
+      overflow: hidden;
+
+      margin-bottom: 0;
+
+      transition: margin-bottom 0.5s var(--ease-in-out);
+    }
+
+    &.--open {
+      grid-template-rows: 1fr;
+
+      .maintenance__sublist {
+        margin-bottom: rem(20);
+      }
+    }
   }
 
   &__link {

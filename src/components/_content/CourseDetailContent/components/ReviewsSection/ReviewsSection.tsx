@@ -4,7 +4,7 @@ import { Button } from '_ui/Button'
 
 import type { ReviewsSectionProps } from './ReviewsSection.props'
 
-export function ReviewsSection({ courseId }: ReviewsSectionProps) {
+export function ReviewsSection({ courseId, reviews }: ReviewsSectionProps) {
   return (
     <div
       id="reviews"
@@ -24,9 +24,13 @@ export function ReviewsSection({ courseId }: ReviewsSectionProps) {
         </Button>
       </div>
       <div className={'archive__reviews-content'}>
-        <ReviewsCard />
-        <ReviewsCard />
-        <ReviewsCard />
+        {reviews?.map((review) => (
+          <ReviewsCard
+            key={review.id}
+            courseId={courseId}
+            {...review}
+          />
+        ))}
       </div>
     </div>
   )

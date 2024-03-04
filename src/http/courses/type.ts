@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import { IQuiz, TDocument, TTeacher } from '@assets/types/globals'
+import { IQuiz, TDocument, THuman, TTeacher } from '@assets/types/globals'
 import { TBasketCourse } from '@http/profile/type'
 
 export type TCatalog = {
@@ -66,6 +66,15 @@ export type TCourseDetail = TBasketCourse & {
   available_days: number
   lectures_hours: number
   purchased: boolean
+  reviews: TReviewPreview[]
+}
+
+export interface TReviewPreview {
+  id: string
+  created_at: string
+  user: THuman & { id: string }
+  rating: number
+  content: string
 }
 
 export interface Topic {
@@ -158,4 +167,40 @@ export interface SelfProgress {
   answer_timestamp: string
   block_timestamp: string
   files: TDocument[]
+}
+
+export type TCourseReview = {
+  title: string
+  description: string
+  format: string
+  color: string
+  cover: string
+  categories_repr: string[]
+  lectors: TTeacher[]
+  rating: number
+  reviews: TReviews
+  my_rating: number
+}
+
+export type TReviews = {
+  count: number
+  next: string
+  previous: string
+  results: TReviewItem[]
+}
+
+export interface TReviewItem {
+  id: string
+  created_at: string
+  user: THuman & { id: string }
+  rating: number
+  content: string
+  replies: TReviewReply[]
+}
+
+export type TReviewReply = {
+  id: string
+  user: THuman & { id: string }
+  content: string
+  created_at: string
 }

@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, ReactNode, SetStateAction } from 'react'
 
 import type { TAboutMe, TBasketCourse } from '@http/profile/type'
 
@@ -15,4 +15,6 @@ export interface IContext {
 
 export type THeader = {
   title: string
+  titleBefore?: string | ReactNode
+  titleAfter?: string | ReactNode
 }

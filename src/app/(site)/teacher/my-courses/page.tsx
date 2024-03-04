@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 
 import { Banner } from '@/components/_ui/Banner'
 import { TeacherCardLesson } from '@components/TeacherCardLesson'
+import { lector } from '@components/TeacherCardLesson'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import { useQueryStudentCourses } from '@http/student/client'
 import { TStudentCourses } from '@http/student/types'
@@ -40,12 +41,13 @@ export default function TeacherMyCourses() {
                 </button>
               }
             />
-
-            {activeTab === 1 && <ActiveCoursesTab />}
-            {activeTab === 2 && <UnderinspectionCoursesTab />}
-            {activeTab === 3 && <TemplatesCoursesTab />}
-            {activeTab === 4 && <DraftCoursesTab />}
-            {activeTab === 5 && <ArchivedCoursesTab />}
+            <div className={'teacher-course__element'}>
+              {activeTab === 1 && <ActiveCoursesTab />}
+              {activeTab === 2 && <UnderinspectionCoursesTab />}
+              {activeTab === 3 && <TemplatesCoursesTab />}
+              {activeTab === 4 && <DraftCoursesTab />}
+              {activeTab === 5 && <ArchivedCoursesTab />}
+            </div>
           </div>
 
           <div className={'teacher-course__banner'}>
@@ -64,19 +66,31 @@ function ActiveCoursesTab() {
 }
 
 function UnderinspectionCoursesTab() {
-  return <TeacherCardLesson />
+  return <TeacherCardLesson lecturer={lector} />
 }
 
 function TemplatesCoursesTab() {
-  return <TeacherCardLesson />
+  return (
+    <div>
+      <p>TemplatesCoursesTab</p>
+    </div>
+  )
 }
 
 function DraftCoursesTab() {
-  return <TeacherCardLesson />
+  return (
+    <div>
+      <p>DraftCoursesTab</p>
+    </div>
+  )
 }
 
 function ArchivedCoursesTab() {
-  return <TeacherCardLesson />
+  return (
+    <div>
+      <p>ArchivedCoursesTab</p>
+    </div>
+  )
 }
 
 interface TabContentProps {

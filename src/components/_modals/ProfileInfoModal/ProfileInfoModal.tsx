@@ -78,52 +78,52 @@ export function ProfileInfoModal({ onClose, studentId, teacherId }: ProfileInfoM
                 <span className="personal-cabinet__value">{data?.city}</span>
               </div>
             </li>
-            <li className="personal-cabinet__item">
-              <div className="personal-cabinet__wrapper">
-                <span className="personal-cabinet__label">Клас</span>
-                <div className="personal-cabinet__line"></div>
-                <span className="personal-cabinet__value">{student?.classroom[0].name || teacher?.classroom.join(', ') || '-'}</span>
-              </div>
-            </li>
+            {/*<li className="personal-cabinet__item">*/}
+            {/*  <div className="personal-cabinet__wrapper">*/}
+            {/*    <span className="personal-cabinet__label">Клас</span>*/}
+            {/*    <div className="personal-cabinet__line"></div>*/}
+            {/*    <span className="personal-cabinet__value">{student?.classroom[0].name || teacher?.classroom.join(', ') || '-'}</span>*/}
+            {/*  </div>*/}
+            {/*</li>*/}
           </ul>
-          {student && (
-            <>
-              <h3 className="modal__title-info">Класний керівник</h3>
-              <div className="modal__info">
-                <div className="modal__name">
-                  <Image
-                    className="modal__photo-teacher"
-                    width={65}
-                    height={65}
-                    src={student?.classroom[0].teacher.avatar || '/img/static/default-avatar.png'}
-                    {...imgBlur}
-                    alt={`${student?.classroom[0].teacher.last_name} ${student?.classroom[0].teacher.first_name}`}
-                  />
-                  <div className="modal__card-block">
-                    <p
-                      className="modal__card-name"
-                      onClick={() => setShowTeacher(true)}
-                    >
-                      {`${student?.classroom[0].teacher.last_name} ${student?.classroom[0].teacher.first_name} ${student?.classroom[0].teacher.patronymic}`}
-                    </p>
-                    <p className="modal__card-teacher">{student?.classroom[0].teacher.qualification}</p>
-                  </div>
-                </div>
-                <button className="modal__card-btn">
-                  <svg className="modal__info-svg">
-                    <use href="/img/sprite.svg#message"></use>
-                  </svg>
-                  Написати
-                </button>
-              </div>
-              {showTeacher && (
-                <ProfileInfoModal
-                  onClose={() => setShowTeacher(false)}
-                  teacherId={student?.classroom[0].teacher.id}
-                />
-              )}
-            </>
-          )}
+          {/*{student && (*/}
+          {/*  <>*/}
+          {/*    <h3 className="modal__title-info">Класний керівник</h3>*/}
+          {/*    <div className="modal__info">*/}
+          {/*      <div className="modal__name">*/}
+          {/*        <Image*/}
+          {/*          className="modal__photo-teacher"*/}
+          {/*          width={65}*/}
+          {/*          height={65}*/}
+          {/*          src={student?.classroom[0].teacher.avatar || '/img/static/default-avatar.png'}*/}
+          {/*          {...imgBlur}*/}
+          {/*          alt={`${student?.classroom[0].teacher.last_name} ${student?.classroom[0].teacher.first_name}`}*/}
+          {/*        />*/}
+          {/*        <div className="modal__card-block">*/}
+          {/*          <p*/}
+          {/*            className="modal__card-name"*/}
+          {/*            onClick={() => setShowTeacher(true)}*/}
+          {/*          >*/}
+          {/*            {`${student?.classroom[0].teacher.last_name} ${student?.classroom[0].teacher.first_name} ${student?.classroom[0].teacher.patronymic}`}*/}
+          {/*          </p>*/}
+          {/*          <p className="modal__card-teacher">{student?.classroom[0].teacher.qualification}</p>*/}
+          {/*        </div>*/}
+          {/*      </div>*/}
+          {/*      <button className="modal__card-btn">*/}
+          {/*        <svg className="modal__info-svg">*/}
+          {/*          <use href="/img/sprite.svg#message"></use>*/}
+          {/*        </svg>*/}
+          {/*        Написати*/}
+          {/*      </button>*/}
+          {/*    </div>*/}
+          {/*    {showTeacher && (*/}
+          {/*      <ProfileInfoModal*/}
+          {/*        onClose={() => setShowTeacher(false)}*/}
+          {/*        teacherId={student?.classroom[0].teacher.id}*/}
+          {/*      />*/}
+          {/*    )}*/}
+          {/*  </>*/}
+          {/*)}*/}
         </div>
       )}
     </Modal>
