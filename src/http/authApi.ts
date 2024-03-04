@@ -4,7 +4,8 @@ import type { ErrorResponse } from '@assets/types/globals'
 import { serverFetch } from '@http/api'
 
 export async function serverFetchAuth<T>(url: string, init?: RequestInit & { skip?: boolean }): Promise<{ data: T | undefined; error: ErrorResponse | null }> {
-  const token = cookies().get('accessToken')?.value
+  const token = cookies().get('')?.value
+
 
   return await serverFetch<T>(url, {
     ...init,

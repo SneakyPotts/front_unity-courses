@@ -8,7 +8,7 @@ import { PageWrapper } from '_ui/PageWrapper'
 type TChildren = 'children' | 'aside'
 
 export default function MyCoursesLayout({ children, aside }: Record<TChildren, ReactNode>) {
-  const token = cookies().get('accessToken')
+  const token = cookies().get('/')
 
   if (!token) redirect('/')
 

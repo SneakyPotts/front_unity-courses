@@ -13,6 +13,8 @@ import { Loader } from '_ui/Loader'
 import { MyCoursesEmpty } from '_ui/MyCoursesEmpty'
 import { RequestError } from '_ui/RequestError'
 import { Tabs } from '_ui/Tabs'
+import { lector } from '@components/TeacherCardLesson' 
+
 
 export default function TeacherMyCourses() {
   const tabs = ['Активні', 'Архівні', 'Шаблони', 'Чернетка', 'Архів']
@@ -40,12 +42,13 @@ export default function TeacherMyCourses() {
                 </button>
               }
             />
-
-            {activeTab === 1 && <ActiveCoursesTab />}
-            {activeTab === 2 && <UnderinspectionCoursesTab />}
-            {activeTab === 3 && <TemplatesCoursesTab />}
-            {activeTab === 4 && <DraftCoursesTab />}
-            {activeTab === 5 && <ArchivedCoursesTab />}
+            <div className={'teacher-course__element'}>
+              {activeTab === 1 && <ActiveCoursesTab />}
+              {activeTab === 2 && <UnderinspectionCoursesTab />}
+              {activeTab === 3 && <TemplatesCoursesTab />}
+              {activeTab === 4 && <DraftCoursesTab />}
+              {activeTab === 5 && <ArchivedCoursesTab />}
+            </div>
           </div>
 
           <div className={'teacher-course__banner'}>
@@ -64,19 +67,19 @@ function ActiveCoursesTab() {
 }
 
 function UnderinspectionCoursesTab() {
-  return <TeacherCardLesson />
+  return <TeacherCardLesson lecturer={lector} />
 }
 
 function TemplatesCoursesTab() {
-  return <TeacherCardLesson />
+  return
 }
 
 function DraftCoursesTab() {
-  return <TeacherCardLesson />
+  return
 }
 
 function ArchivedCoursesTab() {
-  return <TeacherCardLesson />
+  return
 }
 
 interface TabContentProps {

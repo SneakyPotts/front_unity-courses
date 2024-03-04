@@ -176,7 +176,7 @@ export function CourseReview() {
           </div>
           <div className={'my-catalog__item'}>
             <div className={'courses-catalog__teacher-img'}>
-              <img
+              <Image
                 src="https://loremflickr.com/640/360"
                 alt="аватарка акаунта"
               />
@@ -193,7 +193,7 @@ export function CourseReview() {
           залишити відгук
         </Button>
         <div className={'my-catalog__ridth-photo'}>
-          <img
+          <Image
             src="https://picsum.photos/100/100"
             alt="фото курсу"
           />
@@ -221,7 +221,7 @@ export function CourseGrade() {
           </div>
           <div className={'my-catalog__item'}>
             <div className={'courses-catalog__teacher-img'}>
-              <img
+              <Image
                 src="https://loremflickr.com/640/360"
                 alt="аватарка акаунта"
               />
@@ -250,9 +250,12 @@ export function CourseGrade() {
           <p className={'reviews__ratings-text'}>4.5</p>
         </div>
         <div className={'my-catalog__ridth-photo'}>
-          <img
+          <Image
             src="https://picsum.photos/100/100"
             alt="фото курсу"
+            width={100}
+            height={100}
+            style={{ objectFit: 'cover' }}
           />
         </div>
       </div>
