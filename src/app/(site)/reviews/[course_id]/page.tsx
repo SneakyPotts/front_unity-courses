@@ -1,11 +1,12 @@
 import React from 'react'
 
 import type { TPageProps } from '@assets/types/globals'
+import { getCourseReviews } from '@http/courses/server'
 
 import { ReviewsContent } from '_content/ReviewsContent'
 
-export default function ReviewsPage({ params }: TPageProps) {
-  console.log('ReviewsPage', params)
+export default async function ReviewsPage({ params }: TPageProps) {
+  const { data, error } = await getCourseReviews(params.course_id as string)
 
-  return <ReviewsContent />
+  return <ReviewsContent data={data} />
 }

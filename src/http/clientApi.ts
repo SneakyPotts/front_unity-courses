@@ -14,6 +14,10 @@ export async function clientFetch<T>(url: string, init?: RequestInit & { isFile?
     },
   })
 
+  if (!response.ok) {
+    throw new Error(response.statusText)
+  }
+
   return init?.method === 'DELETE' ? undefined : response.json()
 }
 

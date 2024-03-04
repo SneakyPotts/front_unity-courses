@@ -2,7 +2,7 @@ import type { TTestResult } from '@assets/types/globals'
 import { clientAuthFetch } from '@http/clientApi'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { type TCourseDetail, TLessonContent, TSelfWorkContent, TTestContent } from './type'
+import type { TCourseDetail, TLessonContent, TReviewItem, TSelfWorkContent, TTestContent } from './type'
 
 const getCourseInfo = (course_id: string) => clientAuthFetch<TCourseDetail>(`/courses/${course_id}/`)
 
@@ -41,6 +41,12 @@ const sendTestAnswer = ({ test_id, body }: { test_id: string; body: TTestResult 
 const sendIsVisited = ({ lesson_id }: { lesson_id: string }) =>
   clientAuthFetch<any>(`/courses/student/lecture/${lesson_id}/visit/`, {
     method: 'PATCH',
+  })
+
+const sendNewReview = ({ course_id, ...data }: { course_id: string; rating: string | number; content: string }) =>
+  clientAuthFetch<TReviewItem>(`/courses/${course_id}/reviews/add/`, {
+    method: 'POST',
+    body: JSON.stringify(data),
   })
 
 export function useQueryStudentLesson({ course_id, lesson_id, test_id, self_id }: { course_id?: string; lesson_id?: string; test_id?: string; self_id?: string }) {
@@ -109,6 +115,10 @@ export function useQueryStudentLesson({ course_id, lesson_id, test_id, self_id }
     },
   })
 
+  const { mutateAsync: addReview } = useMutation({
+    mutationFn: sendNewReview,
+  })
+
   return {
     course,
     content,
@@ -120,5 +130,6 @@ export function useQueryStudentLesson({ course_id, lesson_id, test_id, self_id }
     test,
     sendTest,
     visit,
+    addReview,
   }
 }

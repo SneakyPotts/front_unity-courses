@@ -37,7 +37,7 @@ export function toastPromise<T = any>({
   handler,
   successMessage = 'Данні успішно збережені',
   successCallback,
-  errorMessage = 'Вибачте, виникла помилка обробці даних',
+  errorMessage = 'Вибачте, виникла помилка при обробці даних',
   pendingMessage = 'Зачекайте, данні обробляються',
 }: {
   handler: Promise<any>
