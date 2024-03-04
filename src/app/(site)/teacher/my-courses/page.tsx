@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 
 import { Banner } from '@/components/_ui/Banner'
 import { TeacherCardLesson } from '@components/TeacherCardLesson'
+import { lector } from '@components/TeacherCardLesson'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import { useQueryStudentCourses } from '@http/student/client'
 import { TStudentCourses } from '@http/student/types'
@@ -13,8 +14,6 @@ import { Loader } from '_ui/Loader'
 import { MyCoursesEmpty } from '_ui/MyCoursesEmpty'
 import { RequestError } from '_ui/RequestError'
 import { Tabs } from '_ui/Tabs'
-import { lector } from '@components/TeacherCardLesson' 
-
 
 export default function TeacherMyCourses() {
   const tabs = ['Активні', 'Архівні', 'Шаблони', 'Чернетка', 'Архів']

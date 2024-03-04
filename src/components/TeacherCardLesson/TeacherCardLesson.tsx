@@ -87,7 +87,7 @@ export function TeacherCardLesson({}: TeacherCardLessonProps) {
                     <span>Чекає на заповнення</span>
                   </div>
                   <div className={'teacher-case__elements--svg teacher-case__elements-element'}>
-                    <svg >
+                    <svg>
                       <use href="/img/sprite.svg#person"></use>
                     </svg>
                     <p>цільова аудиторія:</p>

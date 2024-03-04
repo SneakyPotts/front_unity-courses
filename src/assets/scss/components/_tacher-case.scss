@@ -220,7 +220,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .teacher-case {
     &__content {
       grid-template-columns: 1fr;
