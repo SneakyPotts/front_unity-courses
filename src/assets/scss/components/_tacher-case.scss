@@ -70,11 +70,6 @@
     flex-wrap: wrap;
     gap: rem(14);
 
-    &--svg {
-      fill: transparent;
-      stroke: var(--grey-3);
-    }
-
     &-element {
       @include flex-v-center;
 
@@ -101,6 +96,13 @@
 
     &--unique {
       align-items: unset;
+    }
+
+    &--svg {
+      svg {
+        fill: transparent;
+        stroke: var(--grey-3);
+      }
     }
   }
 
@@ -223,7 +225,6 @@
     &__content {
       grid-template-columns: 1fr;
     }
-    
 
     &__head {
       &-subtitle {

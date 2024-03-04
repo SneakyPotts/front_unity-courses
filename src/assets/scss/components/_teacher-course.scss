@@ -36,13 +36,11 @@
       margin-bottom: rem(73);
     }
 
-    .content-tabs__wrapper {
-      width: 100%;
-      overflow: auto;
-    }
-
     .content-tabs__list {
       flex-wrap: nowrap;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      scrollbar-width: none;
     }
 
     &__element {
@@ -58,6 +56,10 @@
       padding: rem(9);
       border: rem(1) solid var(--orange-400);
       border-radius: rem(5);
+    }
+
+    &__content {
+      overflow: hidden;
     }
   }
 }
