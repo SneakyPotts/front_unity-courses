@@ -11,13 +11,17 @@ const getCoursesCatalog = cache(async (filters: string = '') => {
   const isAuth = cookies().get('accessToken')?.value
 
   return await (isAuth ? serverFetchAuth : serverFetch)<TCatalog>(`/courses/?${filters}`, {
-    cache: 'reload',
+    next: {
+      revalidate: 3600,
+    },
   })
 })
 
 const getCoursesFilters = cache(async () => {
   const response = await serverFetch<TFiltersResponse>('/courses/filter_options/', {
-    cache: 'reload',
+    next: {
+      revalidate: 3600,
+    },
   })
 
   if (response.error) return { ...response, data: undefined }
@@ -52,14 +56,18 @@ const getCourseDetail = cache(async (id: string) => {
   const isAuth = cookies().get('accessToken')?.value
 
   return await (isAuth ? serverFetchAuth : serverFetch)<TCourseDetail>(`/courses/${id}/`, {
-    cache: 'reload',
+    next: {
+      revalidate: 3600,
+    },
   })
 })
 
 const getLessonContent = cache(
   async (lesson_id: string) =>
     await serverFetchAuth<TLessonContent>(`/courses/student/lecture/${lesson_id}/`, {
-      cache: 'reload',
+      next: {
+        revalidate: 3600,
+      },
     }),
 )
 

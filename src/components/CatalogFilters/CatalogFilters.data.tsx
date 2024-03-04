@@ -21,7 +21,7 @@ export const filtersRatings: TFilterBlock = {
         <span>{5 - 0.5 * (i + 1)} і вище</span>
       </div>
     ) as ReactNode,
-    value: (5 - 0.5 * (i + 1)).toString(),
+    value: `m${(5 - 0.5 * (i + 1)).toString().replace(/\./, '_')}`,
   })),
   extraClass: '',
 }

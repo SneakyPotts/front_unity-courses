@@ -100,8 +100,9 @@ function FilterBlock({ isRating, handler, initialActive = false, name, ...data }
                 <Checkbox
                   classWrapper={'some-wrapper-class courses-catalog__item'}
                   label={filterItem.title}
+                  value={filterItem.value.toString()}
                   onChange={() => handler(filterItem.value)}
-                  checked={!!searchParams.get(name)?.includes(filterItem.value.toString())}
+                  checked={!!searchParams.get(name)?.split(',')?.includes(filterItem.value.toString())}
                 />
               )}
             </li>

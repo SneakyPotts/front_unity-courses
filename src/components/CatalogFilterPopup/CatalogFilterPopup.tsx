@@ -145,7 +145,7 @@ export function CatalogFilterPopup({ filters, handler, reset }: CatalogFilterPop
                             classWrapper={'some-wrapper-class'}
                             label={f.title}
                             onChange={() => handleChange(v.name, f.value)}
-                            checked={!!searchParams.get(v.name)?.includes(f.value.toString())}
+                            checked={!!searchParams.get(v.name)?.split(',')?.includes(f.value.toString())}
                           />
                         </li>
                       ))}
