@@ -55,7 +55,7 @@ export type TStudentActiveCourseItem = {
   duration_in_months: number
   closest_lecture: string
   available_days: number
-  my_rating: number
+  my_rating?: number
 }
 
 export type TStatsTypes = 'visiting' | 'mark' | 'progress'

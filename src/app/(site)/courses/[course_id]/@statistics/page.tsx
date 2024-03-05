@@ -9,14 +9,14 @@ import type { TStatsTypes } from '@http/student/types'
 
 export default async function AsideRight({ params }: TPageProps) {
   const { data: stats, error } = await studentCourseStats(params.course_id as string)
-  console.log(stats)
+
   return (
-    <div className="subject__statistics-block statistics-block statistics-block--row">
+    <div className="subject__statistics-block statistics-block statistics-block--row --vertical">
       <div className="statistics-block__top">
         <h2 className="statistics-block__title">Статистика</h2>
 
         <Link
-          href="/statistics"
+          href={'/statistics'}
           className={'reviews__shop-link statistics-block__link link'}
         >
           Всі Оцінки

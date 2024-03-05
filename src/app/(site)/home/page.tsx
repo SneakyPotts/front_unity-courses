@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import { dynamicOptions } from '@assets/constants'
 import { aboutMeRequest } from '@http/profile/server'
 
-const HomeContent = dynamic(() => import('./home.content').then((mod) => mod.default), {
+const HomePageContent = dynamic(() => import('_content/HomePageContent').then((mod) => mod.HomePageContent), {
   ...dynamicOptions,
   ssr: false,
 })
@@ -23,5 +23,5 @@ export default async function HomePage() {
     parent: data?.role === 10,
   }
 
-  return <HomeContent role={role} />
+  return <HomePageContent role={role} />
 }

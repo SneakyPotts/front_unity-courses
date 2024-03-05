@@ -21,7 +21,7 @@ export default function StatisticsPage() {
   }
 
   const [currentCourse, setCurrentCourse] = useState<TSimpleCourse | undefined>(undefined)
-  console.log('currentCourse', currentCourse)
+
   const { courses, stats } = useQueryTeacher({ list: role.teacher, course_id: currentCourse?.id })
 
   useLayoutEffect(() => {
@@ -33,7 +33,6 @@ export default function StatisticsPage() {
             courses={courses?.data}
             current={currentCourse}
             handler={(course) => {
-              console.log('Im here')
               setCurrentCourse(course)
             }}
           />

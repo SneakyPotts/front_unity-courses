@@ -2,7 +2,8 @@
   &__inner {
     display: grid;
     grid-template-columns: 1fr rem(200);
-    gap: rem(30);
+    grid-template-rows: auto 1fr;
+    gap: rem(40) rem(30);
   }
 
   &__head {
@@ -158,8 +159,8 @@
     gap: rem(20);
 
     &-box {
-      width: rem(194);
-      height: rem(350);
+      //width: rem(194);
+      //height: rem(350);
     }
   }
 
@@ -387,7 +388,7 @@
     }
 
     &__banner {
-      display: none;
+      display: none !important;
     }
   }
 }

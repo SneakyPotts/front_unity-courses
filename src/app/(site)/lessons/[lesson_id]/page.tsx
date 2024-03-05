@@ -1,8 +1,9 @@
 import type { TPageProps } from '@assets/types/globals'
-import { LessonPageContent } from '@components/LessonPageContent'
 import { getLessonContent } from '@http/courses/server'
 
 import { RequestError } from '_ui/RequestError'
+
+import { LessonPageContent } from '_content/LessonPageContent'
 
 export default async function LessonPage({ params }: TPageProps) {
   const { data, error } = await getLessonContent(params.lesson_id as string)

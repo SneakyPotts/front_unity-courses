@@ -108,6 +108,10 @@
   //&[data-tab-content='Прогрес курсів'] {
   //  padding-bottom: 0;
   //}
+
+  &.--vertical {
+    flex-grow: 0;
+  }
 }
 
 @include mq('xl') {
