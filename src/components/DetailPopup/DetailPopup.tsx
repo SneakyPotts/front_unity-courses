@@ -8,7 +8,7 @@ import { TypesList } from '@components/TypesList'
 
 import type { DetailPopupProps } from './DetailPopup.props'
 
-export function DetailPopup({ type, children, title, id, data, role = 'student', forParent }: DetailPopupProps) {
+export function DetailPopup({ type, children, title, id, role = 'student', forParent }: DetailPopupProps) {
   const { width } = useWindowSize()
   const isDesktop = width > 991
 
@@ -62,7 +62,7 @@ export function DetailPopup({ type, children, title, id, data, role = 'student',
         {type === 'stats' && <div className="lesson-modal__num">{/*<span>{markData?.data?.mark}</span>— {markData?.data?.title}*/}</div>}
         <div
           className="lesson-modal__top"
-          style={{ backgroundColor: data?.subject_color }}
+          // style={{ backgroundColor: data?.subject_color }}
         >
           <div className="lesson-modal__subject">
             {/* {type === 'lesson' && <span className="lesson-modal__counter"></span>} */}
@@ -95,7 +95,7 @@ export function DetailPopup({ type, children, title, id, data, role = 'student',
         </div>
         <div className="lesson-modal__bottom">
           <div className="lesson-modal__image">
-            {type === 'lesson' && data?.avg_mark && <span className="lesson-modal__mark">{data.avg_mark}</span>}
+            {/*{type === 'lesson' && data?.avg_mark && <span className="lesson-modal__mark">{data.avg_mark}</span>}*/}
             {/*{type === 'stats'*/}
             {/*  ? markData?.data?.subject?.icon && (*/}
             {/*    <img*/}
@@ -127,9 +127,7 @@ export function DetailPopup({ type, children, title, id, data, role = 'student',
               {/*<time className="lesson-modal__time">{moment(data?.start_time).format('H:mm')}</time>-*/}
               {/*<time className="lesson-modal__time">{moment(data?.end_time).format('H:mm')}</time>*/}
             </div>
-            <div className="lesson-modal__right types">
-              <TypesList data={data?.lesson_icons} />
-            </div>
+            <div className="lesson-modal__right types">{/*<TypesList data={data?.lesson_icons} />*/}</div>
           </div>
         )}
       </div>

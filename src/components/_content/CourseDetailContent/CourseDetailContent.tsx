@@ -5,7 +5,6 @@ import React from 'react'
 
 import Link from 'next/link'
 
-import { SubjectHeader } from '@components/SubjectHeader'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 
 import { tabs } from './CourseDetailContent.data'
@@ -19,9 +18,6 @@ export function CourseDetailContent({ data }: CourseDetailContentProps) {
   useSetHeaderParams({ title: 'Про курс' })
 
   return (
-    // <div className={'archive__block'}>
-    //   <SubjectHeader data={data} />
-
     <div className={'archive__menu'}>
       <div className="content-tabs content-tabs--small">
         <div className="content-tabs__wrapper">
@@ -62,6 +58,5 @@ export function CourseDetailContent({ data }: CourseDetailContentProps) {
         </div>
       </div>
     </div>
-    // </div>
   )
 }
