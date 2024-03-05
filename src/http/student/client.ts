@@ -1,12 +1,12 @@
 import { clientAuthFetch } from '@http/clientApi'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { TCourseStats, TStudentCourses, TStudentProfileInfo } from './types'
 
 const getStudentProfileInfo = (student_id?: string) => clientAuthFetch<TStudentProfileInfo>(`/detail/student/${student_id}`)
 const getStudentCourseStatistics = (course_id?: string) => clientAuthFetch<TCourseStats>(`/courses/student/statistics/courses/?course_id=${course_id || ''}`)
 
-export function useQueryStudent({ student_id, stats, course_id }: { student_id?: string; stats?: boolean; course_id?: string }) {
+export function useQueryStudent({ student_id, stats = false, course_id }: { student_id?: string; stats?: boolean; course_id?: string }) {
   const queryClient = useQueryClient()
 
   const profile = useQuery({
