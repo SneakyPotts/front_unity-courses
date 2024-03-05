@@ -13,7 +13,7 @@ const setFinalMark = ({ course_id, student_id, mark }: { course_id: string; mark
     body: JSON.stringify([{ student_id: student_id, final_mark: mark }]),
   })
 
-export function useQueryTeacher({ teacher_id, course_id, list }: { teacher_id?: string; course_id?: string; list?: boolean }) {
+export function useQueryTeacher({ teacher_id, course_id, list = false }: { teacher_id?: string; course_id?: string; list?: boolean }) {
   const queryClient = useQueryClient()
 
   const profile = useQuery({
