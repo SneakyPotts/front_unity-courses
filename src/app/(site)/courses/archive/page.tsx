@@ -24,7 +24,9 @@ export default function CoursesArchive() {
                   <h1 className={'archive__title'}>Образотворче мистецтво для 10-11 класів</h1>
                 </div>
                 <div className={'archive__item archive__photo'}>
-                  <span className={'courses-catalog__tag'}>Підготовка</span>
+                  <ul className={'courses-catalog__tag'}>
+                    <li>Пiдготовка</li>
+                  </ul>
                   <div className={'archive__img'}>
                     <Image
                       src="https://picsum.photos/400/200"
@@ -69,7 +71,7 @@ export default function CoursesArchive() {
                       <p>10 годин</p>
                     </div>
                     <div className={'archive__duration-box'}>
-                      <svg className="nav__link-svg">
+                      <svg className="nav__link-svg nav__link-svg--element">
                         <use href="/img/sprite.svg#star"></use>
                       </svg>
                       <p>4.5</p>
@@ -100,8 +102,8 @@ export default function CoursesArchive() {
                       <p className={'archive__price-text'}>5 300 грн.</p>
                     </div>
                     <Button className={'some_button  reviews__content--btn'}>
-                      <svg className="courses-catalog__svg courses-catalog__svg-rocket ">
-                        <use href="/img/sprite.svg#rocket"></use>
+                      <svg className={'courses-catalog__icon courses-catalog__icon--element'}>
+                        <use href="/img/sprite.svg#basket-shopping"></use>
                       </svg>
                       Хочу на курс
                     </Button>

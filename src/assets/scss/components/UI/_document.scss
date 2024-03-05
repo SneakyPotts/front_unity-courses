@@ -113,7 +113,8 @@
     margin-bottom: rem(10);
     width: rem(42);
     height: rem(42);
-    fill: var(--grey-3);
+    fill: transparent;
+    stroke: var(--grey-3);
   }
 
   &__title {
