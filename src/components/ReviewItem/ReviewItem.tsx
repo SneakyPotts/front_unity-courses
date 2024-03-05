@@ -11,6 +11,7 @@ import { appContext } from '@components/Context/context'
 import { Rating } from '@smastrom/react-rating'
 
 import { Button } from '_ui/Button'
+import { RatingStars } from '_ui/RatingStars'
 import { TeacherForCourse } from '_ui/TeacherForCourse'
 
 import type { ReviewItemProps } from './ReviewItem.props'
@@ -62,8 +63,7 @@ export function ReviewItem({ ...review }: ReviewItemProps) {
           <p className={'reviews__name'}>{`${review.user.last_name} ${review.user.first_name}`}</p>
         </div>
         <div className={'reviews__ratings reviews__ratings--user'}>
-          <Rating
-            style={{ maxWidth: 100 }}
+          <RatingStars
             value={review.rating || 0}
             readOnly
           />

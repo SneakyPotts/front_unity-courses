@@ -19,7 +19,7 @@ export function ProfileInfoModal({ onClose, studentId, teacherId }: ProfileInfoM
   } = useQueryStudent({ student_id: studentId })
   const {
     profile: { data: teacher, isLoading: teacherIsLoading, isError: teacherIsError },
-  } = useQueryTeacher(teacherId)
+  } = useQueryTeacher({ teacher_id: teacherId })
 
   const data = student || teacher
   const isError = studentIsError || teacherIsError || (!studentId && !teacherId)

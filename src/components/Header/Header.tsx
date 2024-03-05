@@ -99,6 +99,7 @@ export function Header({ profile, className }: HeaderProps) {
 
         <nav className="header__nav">
           <ul className="header__list">
+            {header?.rightElement && <li className="header__item">{header.rightElement}</li>}
             <li className="header__item header__item--clock">
               <HeaderClock />
             </li>

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
+import { appContext } from '@components/Context/context'
 import { useQueryStudent, useQueryStudentCourses } from '@http/student/client'
 import type { TStatsTypes } from '@http/student/types'
 
@@ -11,15 +12,21 @@ import type { StatisticSubjectsProps } from './StatisticSubjects.props'
 import { StatisticsItem } from './StatisticsItem'
 
 export function StatisticSubjects({ studentId, isShort = false }: StatisticSubjectsProps) {
+  const { profile } = useContext(appContext)
+  const role = {
+    teacher: profile?.role === 20,
+  }
+
   const [courseId, setCourseId] = useState('')
 
+  // FIXME: change to more lighter request
   const {
     active: { data: courses, isLoading: isCoursesLoading, isError: isCoursesError },
   } = useQueryStudentCourses({ tab_id: 'active' })
 
   const {
     courseStats: { data: stats, isLoading: isStatsLoading, isError: isStatsError },
-  } = useQueryStudent({ stats: true, course_id: courseId })
+  } = useQueryStudent({ stats: !role.teacher, course_id: courseId })
 
   const isLoading = isCoursesLoading || isStatsLoading
   const isError = isCoursesError || isStatsError

@@ -229,6 +229,65 @@
       fill: var(--blue-300);
     }
   }
+
+  &__dropdown {
+    position: relative;
+
+    &-btn {
+      @include flex-v-center;
+      gap: rem(8);
+
+      height: rem(34);
+      padding-inline: rem(12);
+
+      background-color: var(--bg);
+      border-radius: rem(5);
+    }
+    &-inner {
+      z-index: 1;
+
+      width: rem(300);
+      padding: rem(16) rem(3);
+
+      border-radius: 10px;
+      background-color: var(--white);
+      box-shadow: 2px 2px 8px 0 #0000001a;
+    }
+    &-list {
+      display: flex;
+      flex-direction: column;
+      row-gap: rem(4);
+    }
+    &-item {
+      padding-inline: rem(12);
+      font-size: 13px;
+      line-height: 16px;
+
+      &.--title {
+        margin-bottom: rem(8);
+
+        font-weight: 500;
+        color: var(--grey-1);
+      }
+
+      &:not(.--title) {
+        padding-block: rem(4);
+
+        font-weight: 400;
+        color: var(--grey-3);
+
+        cursor: pointer;
+
+        &.--active {
+          background-color: var(--blue-100);
+        }
+
+        @include hover {
+          background-color: var(--blue-50);
+        }
+      }
+    }
+  }
 }
 
 @include mq('lg') {

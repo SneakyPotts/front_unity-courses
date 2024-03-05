@@ -1,7 +1,9 @@
 import { ReactNode } from 'react'
 
 import type { TFilterBlock } from '@http/courses/type'
-import { Rating } from '@smastrom/react-rating'
+import { Rating, Star } from '@smastrom/react-rating'
+
+import { RatingStars } from '_ui/RatingStars'
 
 export const filtersRatings: TFilterBlock = {
   title: 'Рейтинг',
@@ -13,8 +15,7 @@ export const filtersRatings: TFilterBlock = {
         key={i}
         style={{ display: 'flex', alignItems: 'flex-end', gap: 4 }}
       >
-        <Rating
-          style={{ maxWidth: 100 }}
+        <RatingStars
           value={5 - 0.5 * (i + 1)}
           readOnly
         />

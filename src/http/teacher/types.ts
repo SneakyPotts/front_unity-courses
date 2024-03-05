@@ -230,3 +230,25 @@ export type TComplianceColumn = {
   image_answer: string
 }
 export type TRightColumn = {}
+
+export type TSimpleCourse = {
+  id: string
+  title: string
+}
+
+export interface TTeacherCourseStats {
+  id: string
+  last_name: string
+  first_name: string
+  patronymic: string
+  avatar: string
+  marks: TMark[]
+  average_mark: number
+  final_mark: number
+}
+
+export type TMark = {
+  mark: number
+  created_at: string
+  type: string
+}

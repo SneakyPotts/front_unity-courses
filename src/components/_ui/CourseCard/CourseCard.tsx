@@ -8,6 +8,7 @@ import { formatDateInGenitive, subColor } from '@assets/utils'
 import { Rating } from '@smastrom/react-rating'
 
 import { Button } from '_ui/Button'
+import { RatingStars } from '_ui/RatingStars'
 import { TeacherForCourse } from '_ui/TeacherForCourse'
 
 import type { CourseCardProps } from './CourseCard.props'
@@ -111,8 +112,7 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
       <div className="my-catalog__ridth">
         {isArchived ? (
           course.my_rating ? (
-            <Rating
-              style={{ maxWidth: 100 }}
+            <RatingStars
               value={course.rating || 0}
               readOnly
             />
