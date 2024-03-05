@@ -226,6 +226,10 @@
       letter-spacing: 0;
     }
 
+    &-subtitle {
+      margin-bottom: rem(12);
+    }
+
     &-conditions {
       padding-bottom: rem(20);
       border-bottom: rem(1) solid var(--grey-5);
@@ -431,7 +435,7 @@
   }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .basket-model {
     .modal__body {
       padding: 0;
@@ -442,6 +446,15 @@
     }
     .modal__logo {
       display: none;
+    }
+
+    .modal__title {
+      margin-left: rem(30);
+    }
+
+    .modal__back {
+      top: rem(23);
+      left: rem(30);
     }
 
     &__block {
@@ -524,7 +537,7 @@
   }
 }
 
-@include mq('md') {
+@include mq("md") {
   .basket-model {
     &.modal.modal--open {
       background-color: rgba(var(--grey-3--rgb), 0.8);
@@ -534,13 +547,18 @@
       padding: rem(15);
     }
 
+    .modal__back {
+      top: rem(15);
+      left: rem(12);
+    }
+
     .modal__body {
       width: 95%;
       background: #fff;
     }
 
     .modal__title {
-      margin-top: rem(7);
+      // margin-top: rem(7);
     }
 
     &__sorting {

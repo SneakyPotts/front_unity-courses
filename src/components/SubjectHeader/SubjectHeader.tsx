@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useContext, useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 

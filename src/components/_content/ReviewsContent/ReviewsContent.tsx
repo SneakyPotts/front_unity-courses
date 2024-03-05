@@ -18,6 +18,7 @@ import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import type { TReviewItem } from '@http/courses/type'
 import { Rating } from '@smastrom/react-rating'
 
+import { RatingStars } from '_ui/RatingStars'
 import { TeacherForCourse } from '_ui/TeacherForCourse'
 
 import type { ReviewsContentProps } from './ReviewsContent.props'
@@ -75,8 +76,7 @@ export function ReviewsContent({ data }: ReviewsContentProps) {
           </div>
           <div className={'my-catalog__ridth'}>
             <div className={'reviews__ratings '}>
-              <Rating
-                style={{ maxWidth: 100 }}
+              <RatingStars
                 value={data?.rating || 0}
                 readOnly
               />
@@ -97,8 +97,7 @@ export function ReviewsContent({ data }: ReviewsContentProps) {
         </div>
         <div className={'reviews__top'}>
           <div className={'reviews__ratings reviews__ratings--degree'}>
-            <Rating
-              style={{ maxWidth: 100 }}
+            <RatingStars
               value={data?.rating || 0}
               readOnly
             />

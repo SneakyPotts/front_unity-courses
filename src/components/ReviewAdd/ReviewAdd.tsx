@@ -10,6 +10,7 @@ import { TReviewItem } from '@http/courses/type'
 import { Rating } from '@smastrom/react-rating'
 
 import { Button } from '_ui/Button'
+import { RatingStars } from '_ui/RatingStars'
 import { toastPromise } from '_ui/ToastUtils'
 
 import type { ReviewAddProps } from './ReviewAdd.props'
@@ -54,8 +55,7 @@ export function ReviewAdd({ courseId, handleAdd }: ReviewAddProps) {
           <p className={'reviews__name'}>{`${profile?.last_name} ${profile?.first_name}`}</p>
         </div>
         <div className={'reviews__ratings reviews__ratings--user'}>
-          <Rating
-            style={{ maxWidth: 100 }}
+          <RatingStars
             value={rating}
             onChange={setRating}
           />

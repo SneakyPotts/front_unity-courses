@@ -17,15 +17,9 @@ import { Loader } from '_ui/Loader'
 import { PageWrapper } from '_ui/PageWrapper'
 import { Tabs } from '_ui/Tabs'
 
-export interface HomeContentProps {
-  role: {
-    teacher: boolean
-    student: boolean
-    parent: boolean
-  }
-}
+import type { HomePageContentProps } from './HomePageContent.props'
 
-export default function HomeContent({ role }: HomeContentProps) {
+export function HomePageContent({ role }: HomePageContentProps) {
   const { width } = useWindowSize()
   const isDesktop = width > 991
 
@@ -71,23 +65,31 @@ export default function HomeContent({ role }: HomeContentProps) {
           )}
         </div>
       </section>
-      <section className="statistics">
-        <div className="statistics__inner">
-          {isDesktop && (
-            <StatisticSubjects
-              studentId={'childID'}
-              isShort
-            />
-          )}
-          {(isDesktop || activeTab === 3) && <CoursesProgress />}
-        </div>
-      </section>
+      {!role.teacher && (
+        <>
+          <section className="statistics">
+            <div className="statistics__inner">
+              {isDesktop && (
+                <StatisticSubjects
+                  studentId={'childID'}
+                  isShort
+                />
+              )}
+              {(isDesktop || activeTab === 3) && <CoursesProgress />}
+            </div>
+          </section>
 
-      <Recommended />
+          <Recommended />
+        </>
+      )}
 
-      {isDesktop && <TestKnowledgeList />}
+      {isDesktop && role.teacher && (
+        <>
+          <TestKnowledgeList />
 
-      <Banner isVertical={false} />
+          <Banner isVertical={false} />
+        </>
+      )}
     </PageWrapper>
   )
 }

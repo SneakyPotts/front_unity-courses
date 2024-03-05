@@ -1,8 +1,8 @@
-import { Subject } from '@assets/types/globals'
+import { TStudentActiveCourseItem } from '@http/student/types'
 
 export interface StatisticDropdownProps {
   name: string
-  list?: Subject[]
+  list?: TStudentActiveCourseItem[]
   placeholder?: string
   onChange?: (id: string) => void
 }

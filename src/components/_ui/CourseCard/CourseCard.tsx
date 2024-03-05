@@ -8,6 +8,7 @@ import { formatDateInGenitive, subColor } from '@assets/utils'
 import { Rating } from '@smastrom/react-rating'
 
 import { Button } from '_ui/Button'
+import { RatingStars } from '_ui/RatingStars'
 import { TeacherForCourse } from '_ui/TeacherForCourse'
 
 import type { CourseCardProps } from './CourseCard.props'
@@ -111,8 +112,7 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
       <div className="my-catalog__ridth">
         {isArchived ? (
           course.my_rating ? (
-            <Rating
-              style={{ maxWidth: 100 }}
+            <RatingStars
               value={course.rating || 0}
               readOnly
             />
@@ -151,113 +151,6 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
             />
           </div>
         )}
-      </div>
-    </div>
-  )
-}
-
-//Courses completed
-export function CourseReview() {
-  return (
-    <div className={'subject-card--purple my-catalog__block'}>
-      <div className="my-catalog__left">
-        <h3 className={'my-catalog__left-title'}>Введення в Штучний Інтелект та Машинне Навчання</h3>
-        <p className={'my-catalog__left-text'}>
-          Програма курсу включає в себе вивчення різноманітних аспектів образотворчого мистецтва, від традиційних технік до сучасних течій. Наші викладачі підходять до
-          навчання з креативним підходом, стимулюючи учнів думати творчо та виражати свої ідеї через мистецтво. Високоякісні відеоуроки, які покривають різні аспекти мистецтва
-          та надають можливість долучитися до творчих завдань.
-        </p>
-        <div className="my-catalog__box">
-          <div className={'my-catalog__item'}>
-            <svg className={'nav__link-svg'}>
-              <use href="/img/sprite.svg#clock"></use>{' '}
-            </svg>
-            <p>50 годин</p>
-          </div>
-          <div className={'my-catalog__item'}>
-            <div className={'courses-catalog__teacher-img'}>
-              <Image
-                src="https://loremflickr.com/640/360"
-                alt="аватарка акаунта"
-              />
-            </div>
-            <button className={'my-catalog__item-name'}>Мітрошина Г. О.</button>
-          </div>
-        </div>
-      </div>
-      <div className={'my-catalog__ridth'}>
-        <Button className={' courses-catalog__btn  some_button my-catalog__review-btn'}>
-          <svg className="courses-catalog__svg">
-            <use href="/img/sprite.svg#message"></use>
-          </svg>
-          залишити відгук
-        </Button>
-        <div className={'my-catalog__ridth-photo'}>
-          <Image
-            src="https://picsum.photos/100/100"
-            alt="фото курсу"
-          />
-        </div>
-      </div>
-    </div>
-  )
-}
-export function CourseGrade() {
-  return (
-    <div className={'subject-card--green my-catalog__block'}>
-      <div className="my-catalog__left">
-        <h3 className={'my-catalog__left-title'}>Введення в Штучний Інтелект та Машинне Навчання</h3>
-        <p className={'my-catalog__left-text'}>
-          Програма курсу включає в себе вивчення різноманітних аспектів образотворчого мистецтва, від традиційних технік до сучасних течій. Наші викладачі підходять до
-          навчання з креативним підходом, стимулюючи учнів думати творчо та виражати свої ідеї через мистецтво. Високоякісні відеоуроки, які покривають різні аспекти мистецтва
-          та надають можливість долучитися до творчих завдань.
-        </p>
-        <div className="my-catalog__box">
-          <div className={'my-catalog__item'}>
-            <svg className={'nav__link-svg'}>
-              <use href="/img/sprite.svg#clock"></use>{' '}
-            </svg>
-            <p>50 годин</p>
-          </div>
-          <div className={'my-catalog__item'}>
-            <div className={'courses-catalog__teacher-img'}>
-              <Image
-                src="https://loremflickr.com/640/360"
-                alt="аватарка акаунта"
-              />
-            </div>
-            <button className={'my-catalog__item-name'}>Мітрошина Г. О.</button>
-          </div>
-        </div>
-      </div>
-      <div className={'my-catalog__ridth'}>
-        <div className={'reviews__ratings '}>
-          <svg className="archive__reviews-svg">
-            <use href="/img/sprite.svg#star"></use>
-          </svg>
-          <svg className="archive__reviews-svg">
-            <use href="/img/sprite.svg#star"></use>
-          </svg>
-          <svg className="archive__reviews-svg">
-            <use href="/img/sprite.svg#star"></use>
-          </svg>
-          <svg className="archive__reviews-svg">
-            <use href="/img/sprite.svg#star"></use>
-          </svg>
-          <svg className={'archive__reviews-svg'}>
-            <use href="/img/sprite.svg#star-strok"></use>
-          </svg>
-          <p className={'reviews__ratings-text'}>4.5</p>
-        </div>
-        <div className={'my-catalog__ridth-photo'}>
-          <Image
-            src="https://picsum.photos/100/100"
-            alt="фото курсу"
-            width={100}
-            height={100}
-            style={{ objectFit: 'cover' }}
-          />
-        </div>
       </div>
     </div>
   )

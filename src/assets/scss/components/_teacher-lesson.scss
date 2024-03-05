@@ -81,6 +81,16 @@
   color: #1c1c1c;
 }
 
+.teacher-stats__final {
+  .dropdawn__button {
+    border-radius: 0;
+  }
+  .dropdawn__button-check {
+    height: rem(45);
+    border-radius: 0;
+  }
+}
+
 .dropdown {
   position: relative;
 }

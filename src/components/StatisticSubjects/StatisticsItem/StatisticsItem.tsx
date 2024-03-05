@@ -1,44 +1,45 @@
 import React from 'react'
 
-import { SubjectStatisticArrayItem } from '@assets/types/globals'
+import type { TStatsTypes } from '@http/student/types'
 
-type StatisticSubjectItem = {
-  title: string
-  icon: string
-}
+import type { StatisticSubjectItem, StatisticsItemProps } from './StatisticsItem.props'
 
-const data: Record<string, StatisticSubjectItem> = {
-  attendance: {
-    title: 'Відвідуваність на онлайн уроках',
+const data: Record<TStatsTypes, StatisticSubjectItem> = {
+  visiting: {
+    title: 'Відвідуваність на курсах',
     icon: 'webcam',
   },
-  forecast_estimate: {
-    title: 'Прогнозована оцінка',
+  mark: {
+    title: 'Середня оцінка',
     icon: 'statistics',
   },
-  lesson_average_estimate: {
-    title: 'Середня оцінка за урок',
+  progress: {
+    title: 'Прогрес курсу',
     icon: 'book',
   },
-  homework_average_estimate: {
-    title: 'Середня оцінка за Д/З',
-    icon: 'home',
-  },
-  test_average_estimate: {
-    title: 'Середня оцінка за К/Р',
-    icon: 'warn',
-  },
-  self_test_average_estimate: {
-    title: 'Середня оцінка за С/Р',
-    icon: 'pen',
-  },
-  other_test_average_estimate: {
-    title: 'Середня оцінка за Тести',
-    icon: 'test',
-  },
+  // lesson_average_estimate: {
+  //   title: 'Середня оцінка за урок',
+  //   icon: 'book',
+  // },
+  // homework_average_estimate: {
+  //   title: 'Середня оцінка за Д/З',
+  //   icon: 'home',
+  // },
+  // test_average_estimate: {
+  //   title: 'Середня оцінка за К/Р',
+  //   icon: 'warn',
+  // },
+  // self_test_average_estimate: {
+  //   title: 'Середня оцінка за С/Р',
+  //   icon: 'pen',
+  // },
+  // other_test_average_estimate: {
+  //   title: 'Середня оцінка за Тести',
+  //   icon: 'test',
+  // },
 }
 
-export function StatisticsItem({ type, value, max_value }: SubjectStatisticArrayItem) {
+export function StatisticsItem({ type, value, max_value, percentage, progress }: StatisticsItemProps) {
   return (
     <div className="statistics-block__item rating-block">
       <div className="rating-block__top">
@@ -51,7 +52,13 @@ export function StatisticsItem({ type, value, max_value }: SubjectStatisticArray
           </svg>
         </div>
         <div className="rating-block__right">
-          <span className="rating-block__mark">{Math.round(value)}</span>/{max_value}
+          {progress === undefined ? (
+            <>
+              <span className="rating-block__mark">{Math.round(value)}</span>/{max_value}
+            </>
+          ) : (
+            <span className="rating-block__mark">{progress}%</span>
+          )}
         </div>
       </div>
     </div>

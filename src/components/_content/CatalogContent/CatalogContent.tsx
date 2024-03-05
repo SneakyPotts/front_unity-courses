@@ -30,15 +30,19 @@ export function CatalogContent({ data, filters }: CatalogContentProps) {
       if (params.has(name)) {
         const currentValue = params.get(name)
         const valueArr = currentValue?.split(',') || []
-        const newValue = currentValue?.includes(value.toString()) ? valueArr?.filter((v) => v !== value.toString()) : [...valueArr, value.toString()]
+        const newValue = valueArr?.includes(value.toString()) ? valueArr?.filter((v) => v !== value.toString()) : [...valueArr, value.toString()]
 
         !newValue?.length ? params.delete(name) : params.set(name, newValue.join(','))
 
-        router.replace(`${pathname}?${params.toString()}`)
+        router.replace(`${pathname}?${params.toString()}`, {
+          scroll: false,
+        })
       } else {
         params.set(name, value.toString())
 
-        router.replace(`${pathname}?${params.toString()}`)
+        router.replace(`${pathname}?${params.toString()}`, {
+          scroll: false,
+        })
       }
     },
     [searchParams],

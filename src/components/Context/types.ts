@@ -17,4 +17,5 @@ export type THeader = {
   title: string
   titleBefore?: string | ReactNode
   titleAfter?: string | ReactNode
+  rightElement?: string | ReactNode
 }

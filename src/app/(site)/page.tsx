@@ -11,7 +11,14 @@ export default async function CoursesCatalog({ searchParams }: TPageProps) {
 
     for (const key in searchParams) {
       const value = searchParams[key].split(',')
-      res.push(...value.map((v) => `${key}=${v}`))
+
+      if (key === 'rating') {
+        const minRatingValue = Math.min(...value.map((v) => Number(v.replace('m', '').replace('_', '.'))))
+
+        res.push(`${key}=${minRatingValue}`)
+      } else {
+        res.push(...value.map((v) => `${key}=${v}`))
+      }
     }
 
     return res.join('&')
@@ -30,3 +37,4 @@ export default async function CoursesCatalog({ searchParams }: TPageProps) {
     />
   )
 }
+
