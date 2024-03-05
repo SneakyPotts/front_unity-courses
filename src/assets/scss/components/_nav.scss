@@ -99,6 +99,11 @@
     height: rem(20);
     fill: var(--grey-3);
     transition: 0.2s ease;
+
+    &--element {
+      fill: transparent;
+      stroke: var(--grey-3);
+    }
   }
 
   &__sublist {
