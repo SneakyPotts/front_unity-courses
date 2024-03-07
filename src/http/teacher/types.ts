@@ -1,4 +1,5 @@
 import type { File, Link, THuman, TSchedule, TTeacher } from '@assets/types/globals'
+import { TLessonContent } from '@http/student/types'
 
 export type TTeacherLesson = {
   id: string
@@ -252,3 +253,5 @@ export type TMark = {
   created_at: string
   type: string
 }
+
+export type TTeacherContent = Omit<TLessonContent, 'is_visited'>

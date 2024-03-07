@@ -38,7 +38,8 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
               <svg className={course.format === 'self' ? 'courses-catalog__svg courses-catalog__svg-stroke' : 'archive__data-svg'}>
                 <use href={`/img/sprite.svg#${course.format === 'self' ? 'learn' : 'clock'}`}></use>
               </svg>
-              <p>найближче заняття - {formatDateInGenitive(new Date(course.closest_lecture), true)}</p>
+              {/* FIXME: remove condition */}
+              {'closest_lecture' in course && <p>найближче заняття - {formatDateInGenitive(new Date(course.closest_lecture), true)}</p>}
             </div>
             {course.format !== 'self' && (
               <div className={'my-catalog__duration-item'}>
@@ -107,52 +108,19 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
             style={{ backgroundColor: subColor[course.color] }}
           >
             <ul className={'teacher-course-card__student'}>
-              <li>
-                <Image
-                  src={'https://loremflickr.com/640/360'}
-                  width={30}
-                  height={30}
-                  style={{ objectFit: 'cover', borderRadius: 25, display: 'block' }}
-                  alt=""
-                />
-              </li>
-              <li>
-                <Image
-                  src={'https://loremflickr.com/640/360'}
-                  width={30}
-                  height={30}
-                  style={{ objectFit: 'cover', borderRadius: 25, display: 'block' }}
-                  alt=""
-                />
-              </li>
-              <li>
-                <Image
-                  src={'https://loremflickr.com/640/360'}
-                  width={30}
-                  height={30}
-                  style={{ objectFit: 'cover', borderRadius: 25, display: 'block' }}
-                  alt=""
-                />
-              </li>
-              <li>
-                <Image
-                  src={'https://loremflickr.com/640/360'}
-                  width={30}
-                  height={30}
-                  style={{ objectFit: 'cover', borderRadius: 25, display: 'block' }}
-                  alt=""
-                />
-              </li>
-              <li>
-                <Image
-                  src={'https://loremflickr.com/640/360'}
-                  width={30}
-                  height={30}
-                  style={{ objectFit: 'cover', borderRadius: 25, display: 'block' }}
-                  alt=""
-                />
-              </li>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <li key={i}>
+                  <Image
+                    src={'https://loremflickr.com/640/360'}
+                    width={30}
+                    height={30}
+                    style={{ objectFit: 'cover', borderRadius: 25, display: 'block' }}
+                    alt=""
+                  />
+                </li>
+              ))}
             </ul>
+
             <Link
               href="/"
               className={'teacher-course-card__btn'}

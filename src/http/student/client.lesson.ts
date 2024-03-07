@@ -2,31 +2,25 @@ import type { TTestResult } from '@assets/types/globals'
 import { clientAuthFetch } from '@http/clientApi'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import type { TCourseDetail, TLessonContent, TReviewItem, TSelfWorkContent, TTestContent } from './type'
-
-const getCourseInfo = (course_id: string) => clientAuthFetch<TCourseDetail>(`/courses/${course_id}/`)
+import type { TLessonContent, TSelfWorkContent, TTestContent } from './types'
 
 const getLessonContent = (lesson_id: string) => clientAuthFetch<TLessonContent>(`/courses/student/lecture/${lesson_id}/`)
 const getSelfContent = (self_id: string) => clientAuthFetch<TSelfWorkContent>(`/courses/student/work/${self_id}/`)
-
 const sendTextSelfWorkAnswer = ({ self_id, ...body }: { self_id: string; student_answer: string }) =>
   clientAuthFetch<any>(`/courses/student/work/${self_id}/send_text_answer/`, {
     method: 'PATCH',
     body: JSON.stringify(body),
   })
-
 const sendSelfWorkFile = ({ self_id, body }: { self_id: string; body: FormData }) =>
   clientAuthFetch<any>(`/courses/student/work/${self_id}/file/`, {
     method: 'POST',
     body: body,
     isFile: true,
   })
-
 const deleteSelfWorkFile = ({ self_id, file_id }: { self_id: string; file_id: string }) =>
   clientAuthFetch<any>(`/courses/student/work/${self_id}/file/${file_id}`, {
     method: 'DELETE',
   })
-
 const sendSelfWorkConfirm = ({ self_id }: { self_id: string }) =>
   clientAuthFetch<TSelfWorkContent>(`/courses/student/work/${self_id}/confirm/`, {
     method: 'PATCH',
@@ -37,32 +31,13 @@ const sendTestAnswer = ({ test_id, body }: { test_id: string; body: TTestResult 
     method: 'PATCH',
     body: JSON.stringify(body),
   })
-
 const sendIsVisited = ({ lesson_id }: { lesson_id: string }) =>
   clientAuthFetch<any>(`/courses/student/lecture/${lesson_id}/visit/`, {
     method: 'PATCH',
   })
 
-const sendNewReview = ({ course_id, ...data }: { course_id: string; rating: string | number; content: string }) =>
-  clientAuthFetch<TReviewItem>(`/courses/${course_id}/reviews/add/`, {
-    method: 'POST',
-    body: JSON.stringify(data),
-  })
-
-const sendReviewReply = ({ course_id, ...data }: { course_id: string; review_id: string | number; content: string }) =>
-  clientAuthFetch<TReviewItem>(`/courses/${course_id}/reviews/reply/`, {
-    method: 'POST',
-    body: JSON.stringify(data),
-  })
-
-export function useQueryStudentLesson({ course_id, lesson_id, test_id, self_id }: { course_id?: string; lesson_id?: string; test_id?: string; self_id?: string }) {
+export function useQueryStudentLesson({ lesson_id, self_id, test_id }: { lesson_id?: string; self_id?: string; test_id?: string }) {
   const queryClient = useQueryClient()
-
-  const course = useQuery({
-    queryKey: [course_id],
-    queryFn: () => getCourseInfo(course_id!),
-    enabled: !!course_id,
-  })
 
   const content = useQuery({
     queryKey: ['lesson', lesson_id],
@@ -121,16 +96,7 @@ export function useQueryStudentLesson({ course_id, lesson_id, test_id, self_id }
     },
   })
 
-  const { mutateAsync: addReview } = useMutation({
-    mutationFn: sendNewReview,
-  })
-
-  const { mutateAsync: addReviewReply } = useMutation({
-    mutationFn: sendReviewReply,
-  })
-
   return {
-    course,
     content,
     self,
     sendTextSelfWork,
@@ -140,7 +106,5 @@ export function useQueryStudentLesson({ course_id, lesson_id, test_id, self_id }
     test,
     sendTest,
     visit,
-    addReview,
-    addReviewReply,
   }
 }

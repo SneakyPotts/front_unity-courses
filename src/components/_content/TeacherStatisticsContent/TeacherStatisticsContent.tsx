@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { DetailPopup } from '@components/DetailPopup'
 import { MarkSelect } from '@components/MarkSelect'
 import { useQueryTeacher } from '@http/teacher/client'
+import { useQueryTeacherStats } from '@http/teacher/client.statistics'
 
 import { toastPromise } from '_ui/ToastUtils'
 
@@ -14,7 +15,7 @@ import { ProfileInfoModal } from '_modals/ProfileInfoModal'
 import type { TeacherStatisticsContentProps } from './TeacherStatisticsContent.props'
 
 export function TeacherStatisticsContent({ data, courseId }: TeacherStatisticsContentProps) {
-  const { finalMark } = useQueryTeacher({})
+  const { finalMark } = useQueryTeacherStats({})
 
   const [profileModalId, setProfileModalId] = useState('')
 

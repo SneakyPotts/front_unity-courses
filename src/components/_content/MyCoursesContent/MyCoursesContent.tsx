@@ -4,8 +4,8 @@ import React, { useContext, useMemo, useState } from 'react'
 
 import { appContext } from '@components/Context/context'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
-import { useQueryStudentCourses } from '@http/student/client'
-import { useQueryTeacherCourses } from '@http/teacher/client'
+import { useQueryStudentCourses } from '@http/student/client.courses'
+import { useQueryTeacherCourses } from '@http/teacher/client.courses'
 
 import { CourseCard } from '_ui/CourseCard'
 import { Loader } from '_ui/Loader'

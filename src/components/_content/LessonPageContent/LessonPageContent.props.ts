@@ -1,22 +1,11 @@
-import type { TLessonContent, TSelfWorkContent } from '@http/courses/type'
+import type { TLessonContent } from '@http/student/types'
+import type { TTeacherContent } from '@http/teacher/types'
 
 export interface LessonPageContentProps {
-  data?: TLessonContent
-}
-
-export interface TestWorkTabProps {
-  testId: string
-}
-
-export interface IndividualWordProps {
-  selfId: string
-}
-
-export interface LessonSelfWorkContentProps {
-  selfWork?: TSelfWorkContent
-  // marks?: {
-  //   id: string
-  //   mark: number
-  //   mark_type: number
-  // }[]
+  data?: TLessonContent | TTeacherContent
+  role: {
+    teacher: boolean
+    student: boolean
+    parent: boolean
+  }
 }

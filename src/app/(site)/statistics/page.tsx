@@ -4,6 +4,7 @@ import { useContext, useEffect, useLayoutEffect, useState } from 'react'
 
 import { appContext } from '@components/Context/context'
 import { useQueryTeacher } from '@http/teacher/client'
+import { useQueryTeacherStats } from '@http/teacher/client.statistics'
 import type { TSimpleCourse } from '@http/teacher/types'
 
 import { HeaderCoursesList } from '_ui/HeaderCoursesList'
@@ -22,7 +23,8 @@ export default function StatisticsPage() {
 
   const [currentCourse, setCurrentCourse] = useState<TSimpleCourse | undefined>(undefined)
 
-  const { courses, stats } = useQueryTeacher({ list: role.teacher, course_id: currentCourse?.id })
+  const { courses } = useQueryTeacher({ list: role.teacher })
+  const { stats } = useQueryTeacherStats({ course_id: currentCourse?.id })
 
   useLayoutEffect(() => {
     currentCourse &&

@@ -3,8 +3,9 @@ import React, { type ReactNode } from 'react'
 
 import type { TLayoutProps, TTeacher } from '@assets/types/globals'
 import { SubjectHeader } from '@components/SubjectHeader'
-import { getCourseDetail, getTeacherCourseDetail } from '@http/courses/server'
+import { getCourseDetail } from '@http/courses/server'
 import { aboutMeRequest } from '@http/profile/server'
+import { getTeacherCourseDetail } from '@http/teacher/server'
 
 import { Banner } from '_ui/Banner'
 import { CourseCard } from '_ui/CourseCard'

@@ -5,7 +5,7 @@ import { cookies } from 'next/headers'
 import { serverFetch } from '@http/api'
 import { serverFetchAuth } from '@http/authApi'
 
-import { TCatalog, TCourseDetail, TCourseReview, TFilters, TFiltersResponse, TLessonContent } from './type'
+import type { TCatalog, TCourseDetail, TCourseReview, TFilters, TFiltersResponse } from './type'
 
 const getCoursesCatalog = cache(async (filters: string = '') => {
   const isAuth = cookies().get('accessToken')?.value
@@ -62,24 +62,6 @@ const getCourseDetail = cache(async (id: string) => {
   })
 })
 
-const getTeacherCourseDetail = cache(
-  async (id: string) =>
-    await serverFetchAuth<TCourseDetail>(`/courses/teacher/${id}/`, {
-      next: {
-        revalidate: 3600,
-      },
-    }),
-)
-
-const getLessonContent = cache(
-  async (lesson_id: string) =>
-    await serverFetchAuth<TLessonContent>(`/courses/student/lecture/${lesson_id}/`, {
-      next: {
-        revalidate: 3600,
-      },
-    }),
-)
-
 const getCourseReviews = async (course_id: string) => {
   const isAuth = cookies().get('accessToken')?.value
 
@@ -90,4 +72,4 @@ const getCourseReviews = async (course_id: string) => {
   })
 }
 
-export { getCoursesCatalog, getCoursesFilters, getCourseDetail, getTeacherCourseDetail, getLessonContent, getCourseReviews }
+export { getCoursesCatalog, getCoursesFilters, getCourseDetail, getCourseReviews }

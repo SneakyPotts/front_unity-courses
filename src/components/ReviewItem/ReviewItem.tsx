@@ -8,8 +8,8 @@ import Image from 'next/image'
 
 import { dynamicOptions } from '@assets/constants'
 import { appContext } from '@components/Context/context'
-import { useQueryStudentLesson } from '@http/courses/client'
 import type { TReviewItem } from '@http/courses/type'
+import { useQueryTeacher } from '@http/teacher/client'
 
 import { Button } from '_ui/Button'
 import { RatingStars } from '_ui/RatingStars'
@@ -29,7 +29,7 @@ export function ReviewItem({ courseId, ...review }: ReviewItemProps) {
     teacher: profile?.role === 20,
   }
 
-  const { addReviewReply } = useQueryStudentLesson({})
+  const { addReviewReply } = useQueryTeacher({})
 
   const content = useRef<HTMLDivElement>(null)
 

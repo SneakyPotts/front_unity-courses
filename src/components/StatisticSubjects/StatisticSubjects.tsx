@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 
-import { appContext } from '@components/Context/context'
-import { useQueryStudent, useQueryStudentCourses } from '@http/student/client'
+import { useQueryStudentCourses } from '@http/student/client.courses'
+import { useQueryStudentStats } from '@http/student/client.statistics'
 import type { TStatsTypes } from '@http/student/types'
 
 import { CustomLink } from '_ui/CustomLink'
@@ -12,11 +12,6 @@ import type { StatisticSubjectsProps } from './StatisticSubjects.props'
 import { StatisticsItem } from './StatisticsItem'
 
 export function StatisticSubjects({ studentId, isShort = false }: StatisticSubjectsProps) {
-  const { profile } = useContext(appContext)
-  const role = {
-    teacher: profile?.role === 20,
-  }
-
   const [courseId, setCourseId] = useState('')
 
   // FIXME: change to more lighter request
@@ -25,8 +20,8 @@ export function StatisticSubjects({ studentId, isShort = false }: StatisticSubje
   } = useQueryStudentCourses({ tab_id: 'active' })
 
   const {
-    courseStats: { data: stats, isLoading: isStatsLoading, isError: isStatsError },
-  } = useQueryStudent({ stats: !role.teacher, course_id: courseId })
+    stats: { data: stats, isLoading: isStatsLoading, isError: isStatsError },
+  } = useQueryStudentStats({ course_id: courseId })
 
   const isLoading = isCoursesLoading || isStatsLoading
   const isError = isCoursesError || isStatsError

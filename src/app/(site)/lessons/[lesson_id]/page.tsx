@@ -1,14 +1,28 @@
 import type { TPageProps } from '@assets/types/globals'
-import { getLessonContent } from '@http/courses/server'
+import { aboutMeRequest } from '@http/profile/server'
+import { getLessonContent } from '@http/student/server'
+import { getTeacherLessonContent } from '@http/teacher/server'
 
 import { RequestError } from '_ui/RequestError'
 
 import { LessonPageContent } from '_content/LessonPageContent'
 
 export default async function LessonPage({ params }: TPageProps) {
-  const { data, error } = await getLessonContent(params.lesson_id as string)
+  const { data: me } = await aboutMeRequest()
+  const role = {
+    teacher: me?.role === 20,
+    student: me?.role === 2,
+    parent: me?.role === 10,
+  }
 
-  if (error) return <RequestError message={error.message || 'Щось пішло не так...'} />
+  const { data, error } = await (role.teacher ? getTeacherLessonContent : getLessonContent)(params.lesson_id as string)
 
-  return <LessonPageContent data={data} />
+  if (error) return <RequestError {...error} />
+
+  return (
+    <LessonPageContent
+      data={data}
+      role={role}
+    />
+  )
 }

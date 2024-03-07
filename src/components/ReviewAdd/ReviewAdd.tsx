@@ -5,8 +5,8 @@ import Image from 'next/image'
 
 import { appContext } from '@components/Context/context'
 import { TextEditor } from '@components/TextEditor'
-import { useQueryStudentLesson } from '@http/courses/client'
-import { TReviewItem } from '@http/courses/type'
+import type { TReviewItem } from '@http/courses/type'
+import { useQueryStudent } from '@http/student/client'
 
 import { Button } from '_ui/Button'
 import { RatingStars } from '_ui/RatingStars'
@@ -17,7 +17,7 @@ import type { ReviewAddProps } from './ReviewAdd.props'
 export function ReviewAdd({ courseId, handleAdd }: ReviewAddProps) {
   const { profile } = useContext(appContext)
 
-  const { addReview } = useQueryStudentLesson({})
+  const { addReview } = useQueryStudent({})
 
   const [rating, setRating] = useState(0)
   const [text, setText] = useState('')

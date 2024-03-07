@@ -1,6 +1,7 @@
 import type { TPageProps } from '@assets/types/globals'
-import { getCourseDetail, getTeacherCourseDetail } from '@http/courses/server'
+import { getCourseDetail } from '@http/courses/server'
 import { aboutMeRequest } from '@http/profile/server'
+import { getTeacherCourseDetail } from '@http/teacher/server'
 
 import { RequestError } from '_ui/RequestError'
 
@@ -19,7 +20,7 @@ export default async function CourseDetailPage({ params, searchParams }: TPagePr
 
   const isPurchase = !!data?.purchased || role.teacher
 
-  if (error) return <RequestError message={error.message || 'Щось пішло не так...'} />
+  if (error) return <RequestError {...error} />
 
   return isPurchase ? <PurchasedCourseDetailContent data={data} /> : <CourseDetailContent data={data} />
 }

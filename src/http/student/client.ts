@@ -1,60 +1,39 @@
 import { clientAuthFetch } from '@http/clientApi'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import type { TCourseDetail, TReviewItem } from '@http/courses/type'
+import { useMutation, useQuery } from '@tanstack/react-query'
 
-import { TCourseStats, TStudentCourses, TStudentProfileInfo } from './types'
+import type { TStudentProfileInfo } from './types'
 
-const getStudentProfileInfo = (student_id?: string) => clientAuthFetch<TStudentProfileInfo>(`/detail/student/${student_id}`)
-const getStudentCourseStatistics = (course_id?: string) => clientAuthFetch<TCourseStats>(`/courses/student/statistics/courses/?course_id=${course_id || ''}`)
+const getStudentProfileInfo = async (student_id?: string) => await clientAuthFetch<TStudentProfileInfo>(`/detail/student/${student_id}`)
 
-export function useQueryStudent({ student_id, stats = false, course_id }: { student_id?: string; stats?: boolean; course_id?: string }) {
-  const queryClient = useQueryClient()
+const getCourseInfo = async (course_id: string) => await clientAuthFetch<TCourseDetail>(`/courses/${course_id}/`)
 
+const sendNewReview = async ({ course_id, ...data }: { course_id: string; rating: string | number; content: string }) =>
+  await clientAuthFetch<TReviewItem>(`/courses/${course_id}/reviews/add/`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+
+export function useQueryStudent({ student_id, course_id }: { student_id?: string; course_id?: string }) {
   const profile = useQuery({
     queryKey: [student_id],
     queryFn: () => getStudentProfileInfo(student_id),
     enabled: !!student_id,
   })
 
-  const courseStats = useQuery({
+  const course = useQuery({
     queryKey: [course_id],
-    queryFn: () => getStudentCourseStatistics(course_id),
-    enabled: stats,
+    queryFn: () => getCourseInfo(course_id!),
+    enabled: !!course_id,
   })
 
-  // const { mutateAsync: create } = useMutation({
-  //   mutationFn: createToDo,
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: ['ToDoList'] }).then()
-  //   },
-  // })
+  const { mutateAsync: addReview } = useMutation({
+    mutationFn: sendNewReview,
+  })
 
   return {
     profile,
-    courseStats,
-  }
-}
-
-const getStudentCoursesActive = ({ page = 1 }: { page?: number }) => clientAuthFetch<TStudentCourses>(`/courses/student/active/?page=${page}`)
-
-const getStudentCoursesArchived = ({ page = 1 }: { page?: number }) => clientAuthFetch<TStudentCourses>(`/courses/student/archived/?page=${page}`)
-
-export function useQueryStudentCourses({ tab_id, page }: { tab_id: string; page?: number }) {
-  const queryClient = useQueryClient()
-
-  const active = useQuery({
-    queryKey: ['active', page],
-    queryFn: () => getStudentCoursesActive({ page }),
-    enabled: tab_id === 'active',
-  })
-
-  const archived = useQuery({
-    queryKey: ['archived', page],
-    queryFn: () => getStudentCoursesArchived({ page }),
-    enabled: tab_id === 'archived',
-  })
-
-  return {
-    active,
-    archived,
+    course,
+    addReview,
   }
 }

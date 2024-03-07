@@ -1,22 +1,19 @@
 import { clientAuthFetch } from '@http/clientApi'
-import { TStudentCourses } from '@http/student/types'
-import type { TSimpleCourse, TTeacherCourseStats, TTeacherProfileInfo } from '@http/teacher/types'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import type { TReviewItem } from '@http/courses/type'
+import { useMutation, useQuery } from '@tanstack/react-query'
+
+import type { TSimpleCourse, TTeacherProfileInfo } from './types'
 
 const getTeacherProfileInfo = (teacher_id?: string) => clientAuthFetch<TTeacherProfileInfo>(`/detail/teacher/${teacher_id}`)
-
-const getTeacherCourseStats = (course_id?: string) => clientAuthFetch<TTeacherCourseStats[]>(`/courses/teacher/statistics/${course_id}/`)
 const getTeacherCoursesList = () => clientAuthFetch<TSimpleCourse[]>(`/courses/teacher/brief/`)
 
-const setFinalMark = ({ course_id, student_id, mark }: { course_id: string; mark: number; student_id: string }) =>
-  clientAuthFetch<any>(`/courses/teacher/statistics/${course_id}/set_final_mark/`, {
-    method: 'PATCH',
-    body: JSON.stringify([{ student_id: student_id, final_mark: mark }]),
+const sendReviewReply = ({ course_id, ...data }: { course_id: string; review_id: string | number; content: string }) =>
+  clientAuthFetch<TReviewItem>(`/courses/${course_id}/reviews/reply/`, {
+    method: 'POST',
+    body: JSON.stringify(data),
   })
 
-export function useQueryTeacher({ teacher_id, course_id, list = false }: { teacher_id?: string; course_id?: string; list?: boolean }) {
-  const queryClient = useQueryClient()
-
+export function useQueryTeacher({ teacher_id, list = false }: { teacher_id?: string; list?: boolean }) {
   const profile = useQuery({
     queryKey: [teacher_id],
     queryFn: () => getTeacherProfileInfo(teacher_id),
@@ -29,39 +26,13 @@ export function useQueryTeacher({ teacher_id, course_id, list = false }: { teach
     enabled: list,
   })
 
-  const stats = useQuery({
-    queryKey: ['stats', course_id],
-    queryFn: () => getTeacherCourseStats(course_id),
-    enabled: !!course_id,
-  })
-
-  const { mutateAsync: finalMark } = useMutation({
-    mutationFn: setFinalMark,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['stats'] })
-    },
+  const { mutateAsync: addReviewReply } = useMutation({
+    mutationFn: sendReviewReply,
   })
 
   return {
     profile,
     courses,
-    stats,
-    finalMark,
-  }
-}
-
-const getTeacherCoursesActive = ({ page = 1 }: { page?: number }) => clientAuthFetch<TStudentCourses>(`/courses/teacher/?page=${page}`)
-
-export function useQueryTeacherCourses({ tab_id, page }: { tab_id: string; page?: number }) {
-  const queryClient = useQueryClient()
-
-  const active = useQuery({
-    queryKey: ['active', page],
-    queryFn: () => getTeacherCoursesActive({ page }),
-    enabled: tab_id === 'active',
-  })
-
-  return {
-    active,
+    addReviewReply,
   }
 }

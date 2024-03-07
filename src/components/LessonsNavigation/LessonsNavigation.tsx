@@ -7,7 +7,7 @@ import { useParams, useRouter } from 'next/navigation'
 
 import { Portal } from '@components/Portal'
 import { useBlockScroll } from '@hooks/useBlockScroll'
-import { useQueryStudentLesson } from '@http/courses/client'
+import { useQueryStudent } from '@http/student/client'
 
 import { Loader } from '_ui/Loader'
 
@@ -72,7 +72,7 @@ function Accordion({ orderNum, onClose, ...topic }: LessonsNavigationAccordionPr
 }
 
 export function LessonsNavigation({ courseId, onClose }: LessonsNavigationProps) {
-  const { course } = useQueryStudentLesson({ course_id: courseId })
+  const { course } = useQueryStudent({ course_id: courseId })
 
   const data = course //TODO: variant for different roles
 
