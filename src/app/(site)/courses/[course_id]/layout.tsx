@@ -9,6 +9,7 @@ import { aboutMeRequest } from '@http/profile/server'
 import { Banner } from '_ui/Banner'
 import { CourseCard } from '_ui/CourseCard'
 import { PageWrapper } from '_ui/PageWrapper'
+import { RequestError } from '_ui/RequestError'
 import { TeacherCard } from '_ui/TeacherCard'
 
 interface CoursesDetailLayoutProps extends TLayoutProps {
@@ -29,10 +30,19 @@ export default async function CoursesDetailLayout({ children, aside, statistics,
 
   const isPurchase = !!data?.purchased
 
+  if (!data || error) return <RequestError {...error} />
+
   return (
     <PageWrapper>
       <section className={isPurchase || role.teacher ? 'courses-lesson__inner' : 'archive__inner'}>
-        {role.teacher ? <div>Teacher Header</div> : isPurchase ? <CourseCard {...data} /> : <SubjectHeader data={data} />}
+        {role.teacher || isPurchase ? (
+          <CourseCard
+            {...data}
+            isTeacher={role.teacher}
+          />
+        ) : (
+          <SubjectHeader data={data} />
+        )}
         {children}
         <div className={classNames('course-detail__block', { archive__banner: !isPurchase })}>
           {isPurchase || role.teacher ? (
