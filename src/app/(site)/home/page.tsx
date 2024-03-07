@@ -1,6 +1,4 @@
 import dynamic from 'next/dynamic'
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 
 import { dynamicOptions } from '@assets/constants'
 import { aboutMeRequest } from '@http/profile/server'
@@ -11,10 +9,6 @@ const HomePageContent = dynamic(() => import('_content/HomePageContent').then((m
 })
 
 export default async function HomePage() {
-  const token = cookies().get('accessToken')
-
-  if (!token) redirect('/')
-
   const { data } = await aboutMeRequest()
 
   const role = {

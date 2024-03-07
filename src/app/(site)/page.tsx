@@ -1,11 +1,18 @@
+import { redirect } from 'next/navigation'
+
 import type { TPageProps } from '@assets/types/globals'
 import { getCoursesCatalog, getCoursesFilters } from '@http/courses/server'
+import { aboutMeRequest } from '@http/profile/server'
 
 import { RequestError } from '_ui/RequestError'
 
 import { CatalogContent } from '_content/CatalogContent'
 
 export default async function CoursesCatalog({ searchParams }: TPageProps) {
+  const me = await aboutMeRequest()
+
+  if (me.data?.role === 20) redirect('/home') //redirect for teachers
+
   const reqParams = () => {
     let res = []
 
@@ -37,4 +44,3 @@ export default async function CoursesCatalog({ searchParams }: TPageProps) {
     />
   )
 }
-
