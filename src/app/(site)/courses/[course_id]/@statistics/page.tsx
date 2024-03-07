@@ -4,10 +4,20 @@ import Link from 'next/link'
 
 import type { TPageProps } from '@assets/types/globals'
 import { StatisticsItem } from '@components/StatisticSubjects/StatisticsItem'
+import { aboutMeRequest } from '@http/profile/server'
 import { studentCourseStats } from '@http/student/server'
 import type { TStatsTypes } from '@http/student/types'
 
-export default async function AsideRight({ params }: TPageProps) {
+export default async function Statistics({ params }: TPageProps) {
+  const { data: me } = await aboutMeRequest()
+  const role = {
+    teacher: me?.role === 20,
+    student: me?.role === 2,
+    parent: me?.role === 10,
+  }
+
+  if (role.teacher) return null
+
   const { data: stats, error } = await studentCourseStats(params.course_id as string)
 
   return (

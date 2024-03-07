@@ -15,8 +15,11 @@
   }
 
   &__material-text {
-    display: flex;
-    align-items: baseline;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    max-width: rem(738);
+
     gap: rem(12);
   }
 
@@ -198,7 +201,7 @@
   }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .subject {
     &__subject-card {
       .subject-card__title {

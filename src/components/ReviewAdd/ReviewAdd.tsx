@@ -7,7 +7,6 @@ import { appContext } from '@components/Context/context'
 import { TextEditor } from '@components/TextEditor'
 import { useQueryStudentLesson } from '@http/courses/client'
 import { TReviewItem } from '@http/courses/type'
-import { Rating } from '@smastrom/react-rating'
 
 import { Button } from '_ui/Button'
 import { RatingStars } from '_ui/RatingStars'

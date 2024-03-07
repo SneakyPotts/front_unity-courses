@@ -1,15 +1,22 @@
 'use client'
 
-import React from 'react'
+import React, { useContext } from 'react'
 
+import { appContext } from '@components/Context/context'
 import { UploadDocumentItem } from '@components/UploadDocument'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 
+import { ReviewsSection } from '_content/CourseDetailContent/components/ReviewsSection'
 import { ScheduleSection } from '_content/CourseDetailContent/components/ScheduleSection'
 
 import type { PurchasedCourseDetailContentProps } from './PurchasedCourseDetailContent.props'
 
 export function PurchasedCourseDetailContent({ data }: PurchasedCourseDetailContentProps) {
+  const { profile } = useContext(appContext)
+  const role = {
+    teacher: profile?.role === 20,
+  }
+
   useSetHeaderParams({ title: 'Курси' })
 
   return (
@@ -65,6 +72,12 @@ export function PurchasedCourseDetailContent({ data }: PurchasedCourseDetailCont
             ))}
           </ul>
         </div>
+      )}
+      {role.teacher && (
+        <ReviewsSection
+          courseId={data?.id}
+          reviews={data?.reviews}
+        />
       )}
     </div>
   )

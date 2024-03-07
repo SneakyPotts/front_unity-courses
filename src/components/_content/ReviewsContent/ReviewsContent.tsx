@@ -1,9 +1,6 @@
 'use client'
 
-import classNames from 'classnames'
-import { format } from 'date-fns'
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { useToggle } from 'usehooks-ts'
+import React, { useContext, useState } from 'react'
 
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
@@ -16,7 +13,6 @@ import { appContext } from '@components/Context/context'
 import { ReviewItem } from '@components/ReviewItem'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import type { TReviewItem } from '@http/courses/type'
-import { Rating } from '@smastrom/react-rating'
 
 import { RatingStars } from '_ui/RatingStars'
 import { TeacherForCourse } from '_ui/TeacherForCourse'
@@ -32,6 +28,9 @@ export function ReviewsContent({ data }: ReviewsContentProps) {
   const params = useParams()
 
   const { profile } = useContext(appContext)
+  const role = {
+    teacher: profile?.role === 20,
+  }
 
   const [reviewsList, setReviewsList] = useState<TReviewItem[]>(data?.reviews.results || [])
   const [allowAdd, setAllowAdd] = useState(!data?.my_rating)
@@ -106,7 +105,7 @@ export function ReviewsContent({ data }: ReviewsContentProps) {
           <p className={'reviews__top-text'}>Всього відгуків {data?.reviews.count}</p>
         </div>
         <div className={'reviews__block'}>
-          {profile && allowAdd && (
+          {profile && !role.teacher && allowAdd && (
             <ReviewAdd
               courseId={params.course_id as string}
               handleAdd={handleReviewAdd}
@@ -115,6 +114,7 @@ export function ReviewsContent({ data }: ReviewsContentProps) {
           {reviewsList.map((review) => (
             <ReviewItem
               key={review.id}
+              courseId={params.course_id as string}
               {...review}
             />
           ))}
