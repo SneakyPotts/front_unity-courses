@@ -1,17 +1,20 @@
 'use client'
 
 import classNames from 'classnames'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import Image from 'next/image'
 
 import { imgBlur } from '@assets/utils'
+import { appContext } from '@components/Context/context'
 
 import { ProfileInfoModal } from '_modals/ProfileInfoModal'
 
 import type { TeacherCardProps } from './TeacherCard.props'
 
 export function TeacherCard({ data, className, isStudent, isMain }: TeacherCardProps) {
+  const { profile } = useContext(appContext)
+
   const [showProfileModal, setShowProfileModal] = useState(false)
 
   return (
@@ -43,12 +46,14 @@ export function TeacherCard({ data, className, isStudent, isMain }: TeacherCardP
           {data?.qualification && <div className="teacher-card__status">{data.qualification}</div>}
         </div>
       </div>
-      <button className="teacher-card__question">
-        <svg className="teacher-card__question-svg">
-          <use xlinkHref="/img/sprite.svg#chat"></use>
-        </svg>
-        {isStudent ? 'Написати' : 'Задати питання'}
-      </button>
+      {(isStudent || profile?.id !== data.id) && (
+        <button className="teacher-card__question">
+          <svg className="teacher-card__question-svg">
+            <use xlinkHref="/img/sprite.svg#chat"></use>
+          </svg>
+          {isStudent ? 'Написати' : 'Задати питання'}
+        </button>
+      )}
 
       {showProfileModal && (
         <ProfileInfoModal

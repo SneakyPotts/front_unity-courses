@@ -49,6 +49,12 @@ const sendNewReview = ({ course_id, ...data }: { course_id: string; rating: stri
     body: JSON.stringify(data),
   })
 
+const sendReviewReply = ({ course_id, ...data }: { course_id: string; review_id: string | number; content: string }) =>
+  clientAuthFetch<TReviewItem>(`/courses/${course_id}/reviews/reply/`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+
 export function useQueryStudentLesson({ course_id, lesson_id, test_id, self_id }: { course_id?: string; lesson_id?: string; test_id?: string; self_id?: string }) {
   const queryClient = useQueryClient()
 
@@ -119,6 +125,10 @@ export function useQueryStudentLesson({ course_id, lesson_id, test_id, self_id }
     mutationFn: sendNewReview,
   })
 
+  const { mutateAsync: addReviewReply } = useMutation({
+    mutationFn: sendReviewReply,
+  })
+
   return {
     course,
     content,
@@ -131,5 +141,6 @@ export function useQueryStudentLesson({ course_id, lesson_id, test_id, self_id }
     sendTest,
     visit,
     addReview,
+    addReviewReply,
   }
 }

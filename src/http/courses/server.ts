@@ -62,6 +62,15 @@ const getCourseDetail = cache(async (id: string) => {
   })
 })
 
+const getTeacherCourseDetail = cache(
+  async (id: string) =>
+    await serverFetchAuth<TCourseDetail>(`/courses/teacher/${id}/`, {
+      next: {
+        revalidate: 3600,
+      },
+    }),
+)
+
 const getLessonContent = cache(
   async (lesson_id: string) =>
     await serverFetchAuth<TLessonContent>(`/courses/student/lecture/${lesson_id}/`, {
@@ -81,4 +90,4 @@ const getCourseReviews = async (course_id: string) => {
   })
 }
 
-export { getCoursesCatalog, getCoursesFilters, getCourseDetail, getLessonContent, getCourseReviews }
+export { getCoursesCatalog, getCoursesFilters, getCourseDetail, getTeacherCourseDetail, getLessonContent, getCourseReviews }

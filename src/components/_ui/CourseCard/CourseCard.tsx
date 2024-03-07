@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { formatDateInGenitive, subColor } from '@assets/utils'
-import { Rating } from '@smastrom/react-rating'
 
 import { Button } from '_ui/Button'
 import { RatingStars } from '_ui/RatingStars'

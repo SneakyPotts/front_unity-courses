@@ -1,4 +1,5 @@
 import { clientAuthFetch } from '@http/clientApi'
+import { TStudentCourses } from '@http/student/types'
 import type { TSimpleCourse, TTeacherCourseStats, TTeacherProfileInfo } from '@http/teacher/types'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
@@ -46,5 +47,21 @@ export function useQueryTeacher({ teacher_id, course_id, list = false }: { teach
     courses,
     stats,
     finalMark,
+  }
+}
+
+const getTeacherCoursesActive = ({ page = 1 }: { page?: number }) => clientAuthFetch<TStudentCourses>(`/courses/teacher/?page=${page}`)
+
+export function useQueryTeacherCourses({ tab_id, page }: { tab_id: string; page?: number }) {
+  const queryClient = useQueryClient()
+
+  const active = useQuery({
+    queryKey: ['active', page],
+    queryFn: () => getTeacherCoursesActive({ page }),
+    enabled: tab_id === 'active',
+  })
+
+  return {
+    active,
   }
 }

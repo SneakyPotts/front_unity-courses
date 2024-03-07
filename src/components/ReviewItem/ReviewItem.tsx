@@ -8,11 +8,13 @@ import Image from 'next/image'
 
 import { dynamicOptions } from '@assets/constants'
 import { appContext } from '@components/Context/context'
-import { Rating } from '@smastrom/react-rating'
+import { useQueryStudentLesson } from '@http/courses/client'
+import type { TReviewItem } from '@http/courses/type'
 
 import { Button } from '_ui/Button'
 import { RatingStars } from '_ui/RatingStars'
 import { TeacherForCourse } from '_ui/TeacherForCourse'
+import { toastPromise } from '_ui/ToastUtils'
 
 import type { ReviewItemProps } from './ReviewItem.props'
 
@@ -21,11 +23,13 @@ const TextEditor = dynamic(() => import('@components/TextEditor').then((mod) => 
   ssr: false,
 })
 
-export function ReviewItem({ ...review }: ReviewItemProps) {
+export function ReviewItem({ courseId, ...review }: ReviewItemProps) {
   const { profile } = useContext(appContext)
   const role = {
     teacher: profile?.role === 20,
   }
+
+  const { addReviewReply } = useQueryStudentLesson({})
 
   const content = useRef<HTMLDivElement>(null)
 
@@ -35,15 +39,27 @@ export function ReviewItem({ ...review }: ReviewItemProps) {
 
   const [text, setText] = useState('')
   const [replies, setReplies] = useState(review?.replies || [])
+  const [isAllowAddReply, setIsAllowAddReply] = useState(false)
 
   const handleSendReviewComment = () => {
-    // setReplies()
+    toastPromise<TReviewItem>({
+      handler: addReviewReply({ course_id: courseId, review_id: review.id, content: text }),
+      successCallback: (newReply) => {
+        setReplies([...(newReply?.data.replies || [])])
+        setIsAllowAddReply(false)
+      },
+      successMessage: 'Коментар успішно збережений',
+    })
   }
 
   useEffect(() => {
     const contentHeight = content?.current?.scrollHeight
     Number(contentHeight) < 63 && setIsLargeContent(false)
   }, [])
+
+  useEffect(() => {
+    setIsAllowAddReply(!replies.find((reply) => reply.user.id === profile?.id))
+  }, [profile])
 
   return (
     <div
@@ -125,7 +141,7 @@ export function ReviewItem({ ...review }: ReviewItemProps) {
                 </>
               ))}
             </div>
-            {role.teacher && (
+            {isAllowAddReply && (
               <>
                 <div className={'reviews__callback reviews__comments--open'}>
                   <TextEditor
