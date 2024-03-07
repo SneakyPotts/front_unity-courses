@@ -2,12 +2,12 @@ import React from 'react'
 
 import Image from 'next/image'
 
-import { TTeacher } from '@/assets/types/globals'
-import { subColor } from '@/assets/utils'
+import type { TTeacher } from '@assets/types/globals'
+import { subColor } from '@assets/utils'
 
 import { TeacherForCourse } from '_ui/TeacherForCourse'
 
-import type { TeacherCardLessonProps } from './TeacherCardLesson.props'
+import type { CourseTemplateCardProps } from './CourseTemplateCard.props'
 
 export const lector: TTeacher = {
   first_name: 'Марія',
@@ -17,9 +17,12 @@ export const lector: TTeacher = {
   id: 'asd',
 }
 
-export function TeacherCardLesson({}: TeacherCardLessonProps) {
+export function CourseTemplateCard({}: CourseTemplateCardProps) {
   return (
-    <div className={'teacher-case'}>
+    <div
+      className={'teacher-case'}
+      style={{ backgroundColor: '#E8E0FF' }}
+    >
       <div className={'teacher-case__head'}>
         <h3 className={'teacher-case__head-subtitle'}>
           <span>1.</span>
