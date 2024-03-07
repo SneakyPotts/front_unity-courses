@@ -1,7 +1,16 @@
 import { cache } from 'react'
 
 import { serverFetchAuth } from '@http/authApi'
-import type { TCourseStats } from '@http/student/types'
+import type { TCourseStats, TLessonContent } from '@http/student/types'
+
+const getLessonContent = cache(
+  async (lesson_id: string) =>
+    await serverFetchAuth<TLessonContent>(`/courses/student/lecture/${lesson_id}/`, {
+      next: {
+        revalidate: 3600,
+      },
+    }),
+)
 
 const studentCourseStats = cache(
   async (course_id: string) =>
@@ -12,4 +21,4 @@ const studentCourseStats = cache(
     }),
 )
 
-export { studentCourseStats }
+export { getLessonContent, studentCourseStats }

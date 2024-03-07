@@ -12,7 +12,7 @@ import { TeacherForCourse } from '_ui/TeacherForCourse'
 
 import type { CourseCardProps } from './CourseCard.props'
 
-export function CourseCard({ isArchived, ...course }: CourseCardProps) {
+export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps) {
   return (
     <div
       className="my-catalog__block"
@@ -38,7 +38,8 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
               <svg className={course.format === 'self' ? 'courses-catalog__svg courses-catalog__svg-stroke' : 'archive__data-svg'}>
                 <use href={`/img/sprite.svg#${course.format === 'self' ? 'learn' : 'clock'}`}></use>
               </svg>
-              <p>найближче заняття - {formatDateInGenitive(new Date(course.closest_lecture), true)}</p>
+              {/* FIXME: remove condition */}
+              {'closest_lecture' in course && <p>найближче заняття - {formatDateInGenitive(new Date(course.closest_lecture), true)}</p>}
             </div>
             {course.format !== 'self' && (
               <div className={'my-catalog__duration-item'}>
@@ -93,13 +94,44 @@ export function CourseCard({ isArchived, ...course }: CourseCardProps) {
             </>
           )}
 
-          {course.lectors.map((lecturer) => (
-            <TeacherForCourse
-              key={lecturer.id}
-              lecturer={lecturer}
-            />
-          ))}
+          {!isTeacher ??
+            course.lectors.map((lecturer) => (
+              <TeacherForCourse
+                key={lecturer.id}
+                lecturer={lecturer}
+              />
+            ))}
         </div>
+        {isTeacher && (
+          <div
+            className={'teacher-course-card__box'}
+            style={{ backgroundColor: subColor[course.color] }}
+          >
+            <ul className={'teacher-course-card__student'}>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <li key={i}>
+                  <Image
+                    src={'https://loremflickr.com/640/360'}
+                    width={30}
+                    height={30}
+                    style={{ objectFit: 'cover', borderRadius: 25, display: 'block' }}
+                    alt=""
+                  />
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              href="/"
+              className={'teacher-course-card__btn'}
+            >
+              Всі учасники
+              <svg>
+                <use href="/img/sprite.svg#arrow-ridth"></use>
+              </svg>
+            </Link>
+          </div>
+        )}
         <div className="my-catalog__contact close">
           <button className="my-catalog__contact-btn">
             <svg className="my-catalog__contact-svg">

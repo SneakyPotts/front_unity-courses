@@ -78,7 +78,7 @@
       svg {
         width: rem(20);
         height: rem(20);
-        fill: var(--grey-4);
+        fill: var(--grey-3);
       }
 
       p {
@@ -91,11 +91,20 @@
 
       span {
         padding: rem(2) rem(4);
+        font-size: rem(13);
+        font-weight: 400;
+        line-height: rem(16);
+        letter-spacing: 0em;
+        border-radius: rem(2);
+        color: var(--black);
       }
     }
 
     &--unique {
-      align-items: unset;
+      align-items: flex-start;
+       p {
+        line-height: 1.5;
+       }
     }
 
     &--svg {
@@ -125,7 +134,7 @@
       font-size: rem(14);
       font-weight: 400;
       line-height: rem(17);
-      color: var(--grey-4);
+      color: var(--grey-3);
     }
   }
 
@@ -151,7 +160,7 @@
     svg {
       width: rem(18);
       height: rem(20);
-      fill: var(--grey-4);
+      fill: var(--grey-3);
     }
 
     &-text {
@@ -168,6 +177,8 @@
     border-radius: rem(2);
 
     &-limited {
+      padding: rem(4) rem(2);
+      border-radius: rem(2);
       font-size: rem(13);
       font-weight: 400;
       line-height: rem(16);
@@ -176,6 +187,8 @@
 
     &-unlimited {
       svg {
+        border-radius: rem(2);
+        padding: rem(4) rem(2);
         width: rem(16);
         height: rem(16);
         stroke: var(--black);

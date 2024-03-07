@@ -33,6 +33,8 @@ export const formattedPrice = (price: number) =>
   })
 
 export function formatDateInGenitive(date: Date, withTime?: boolean): string {
+  if (!date) return ''
+
   const genitiveMonths = ['січня', 'лютого', 'березня', 'квітня', 'травня', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня']
 
   const formattedTime = format(date, withTime ? 'dd LLLL, HH:mm' : 'dd LLLL yyyy', { locale: uk })

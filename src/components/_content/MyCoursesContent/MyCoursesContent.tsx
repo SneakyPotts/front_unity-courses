@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useContext, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
-import { appContext } from '@components/Context/context'
+import { CourseTemplateCard } from '@components/CourseTemplateCard'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
-import { useQueryStudentCourses } from '@http/student/client'
-import { useQueryTeacherCourses } from '@http/teacher/client'
+import { useQueryStudentCourses } from '@http/student/client.courses'
+import { useQueryTeacherCourses } from '@http/teacher/client.courses'
 
 import { CourseCard } from '_ui/CourseCard'
 import { Loader } from '_ui/Loader'
@@ -15,14 +15,7 @@ import { Tabs } from '_ui/Tabs'
 
 import type { MyCoursesContentProps, TabContentProps } from './MyCoursesContent.props'
 
-export function MyCoursesContent({}: MyCoursesContentProps) {
-  const { profile } = useContext(appContext)
-  const role = {
-    teacher: profile?.role === 20,
-    student: profile?.role === 2,
-    parent: profile?.role === 10,
-  }
-
+export function MyCoursesContent({ role }: MyCoursesContentProps) {
   const tabs = useMemo(() => ['Активні', ...(role.teacher ? ['На модерації', 'Шаблони', 'Чернетка'] : []), 'Архівні'], [role.teacher])
 
   const is = useMemo(
@@ -40,8 +33,6 @@ export function MyCoursesContent({}: MyCoursesContentProps) {
 
   useSetHeaderParams({ title: 'Мої курси' })
 
-  if (!profile) return <Loader />
-
   return (
     <div className={'my-catalog__courses'}>
       <Tabs
@@ -52,6 +43,7 @@ export function MyCoursesContent({}: MyCoursesContentProps) {
       />
       <div className={'my-catalog__active'}>
         {activeTab === is.active && <ActiveCoursesTab role={role} />}
+        {activeTab === is.moderate && <OnModerateCoursesTab />}
         {activeTab === is.archive && <ArchivedCoursesTab role={role} />}
       </div>
     </div>
@@ -67,6 +59,10 @@ function ActiveCoursesTab({ role }: { role: { teacher: boolean; student: boolean
   return <TabContent {...active} />
 }
 
+function OnModerateCoursesTab() {
+  return <CourseTemplateCard />
+}
+
 function ArchivedCoursesTab({ role }: { role: { teacher: boolean; student: boolean; parent: boolean } }) {
   const { archived } = useQueryStudentCourses({ tab_id: role.student ? 'archived' : '' })
 
@@ -77,7 +73,6 @@ function ArchivedCoursesTab({ role }: { role: { teacher: boolean; student: boole
     />
   )
 }
-
 function TabContent({ data, isLoading, isError, isArchived }: TabContentProps) {
   return (
     <>

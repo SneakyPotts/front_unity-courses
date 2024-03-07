@@ -2,11 +2,12 @@ import React from 'react'
 
 import Image from 'next/image'
 
-import { TTeacher } from '@/assets/types/globals'
+import type { TTeacher } from '@assets/types/globals'
+import { subColor } from '@assets/utils'
 
 import { TeacherForCourse } from '_ui/TeacherForCourse'
 
-import type { TeacherCardLessonProps } from './TeacherCardLesson.props'
+import type { CourseTemplateCardProps } from './CourseTemplateCard.props'
 
 export const lector: TTeacher = {
   first_name: 'Марія',
@@ -16,9 +17,12 @@ export const lector: TTeacher = {
   id: 'asd',
 }
 
-export function TeacherCardLesson({}: TeacherCardLessonProps) {
+export function CourseTemplateCard({}: CourseTemplateCardProps) {
   return (
-    <div className={'teacher-case'}>
+    <div
+      className={'teacher-case'}
+      style={{ backgroundColor: '#E8E0FF' }}
+    >
       <div className={'teacher-case__head'}>
         <h3 className={'teacher-case__head-subtitle'}>
           <span>1.</span>
@@ -54,7 +58,7 @@ export function TeacherCardLesson({}: TeacherCardLessonProps) {
                   </div>
                   <div className={'teacher-case__elements-element teacher-case__elements--unique'}>
                     <svg>
-                      <use href="/img/sprite.svg#clock"></use>
+                      <use href="/img/sprite.svg#book-reading"></use>
                     </svg>
                     <p>Заняття проводяться самостійно</p>
                   </div>
@@ -62,38 +66,38 @@ export function TeacherCardLesson({}: TeacherCardLessonProps) {
               </li>
               <li>
                 <div className={'teacher-case__elements'}>
-                  <div className={'teacher-case__elements-element'}>
+                  <div className={'teacher-case__elements--svg teacher-case__elements-element'}>
                     <svg>
-                      <use href="/img/sprite.svg#clock"></use>
+                      <use href="/img/sprite.svg#person"></use>
                     </svg>
                     <p>курс дійсний:</p>
-                    <span>Чекає на заповнення</span>
+                    <span style={{ background: subColor['#E8E0FF'] }}>Чекає на заповнення</span>
                   </div>
                   <div className={'teacher-case__elements-element'}>
                     <svg>
                       <use href="/img/sprite.svg#clock"></use>
                     </svg>
                     <p>курс дійсний:</p>
-                    <span>Чекає на заповнення</span>
+                    <span style={{ background: subColor['#E8E0FF'] }}>Чекає на заповнення</span>
                   </div>
                 </div>
               </li>
               <li>
                 <div className={'teacher-case__elements'}>
-                  <div className={'teacher-case__elements-element'}>
+                  <div className={'teacher-case__elements--svg teacher-case__elements-element'}>
                     <svg>
-                      <use href="/img/sprite.svg#clock"></use>
+                      <use href="/img/sprite.svg#person"></use>
                     </svg>
                     <p>курс дійсний:</p>
-                    <span>Чекає на заповнення</span>
+                    <span style={{ background: subColor['#E8E0FF'] }}>Чекає на заповнення</span>
                   </div>
                   <div className={'teacher-case__elements--svg teacher-case__elements-element'}>
                     <svg>
                       <use href="/img/sprite.svg#person"></use>
                     </svg>
                     <p>цільова аудиторія:</p>
-                    <span>6-8 клас</span>
-                    <span>9-11 клас</span>
+                    <span style={{ background: subColor['#E8E0FF'] }}>6-8 клас</span>
+                    <span style={{ background: subColor['#E8E0FF'] }}>9-11 клас</span>
                   </div>
                 </div>
               </li>
@@ -101,15 +105,15 @@ export function TeacherCardLesson({}: TeacherCardLessonProps) {
                 <div className={'teacher-case__elements'}>
                   <div className={'teacher-case__elements-element'}>
                     <svg>
-                      <use href="/img/sprite.svg#list"></use>
+                      <use href="/img/sprite.svg#cours"></use>
                     </svg>
-                    <span>5 тем</span>
+                    <span style={{ background: subColor['#E8E0FF'] }}>5 тем</span>
                   </div>
                   <div className={'teacher-case__elements-element'}>
                     <svg>
                       <use href="/img/sprite.svg#list"></use>
                     </svg>
-                    <span>5 тем</span>
+                    <span style={{ background: subColor['#E8E0FF'] }}>5 тем</span>
                   </div>
                   <TeacherForCourse lecturer={lector} />
                   <TeacherForCourse lecturer={lector} />
@@ -138,10 +142,15 @@ export function TeacherCardLesson({}: TeacherCardLessonProps) {
               </svg>
               <p className={'teacher-case__participants-text'}>кількість учнів:</p>
               <div className={'teacher-case__counter'}>
-                <span className={'teacher-case__counter-limited close'}>30</span>
+                <span
+                  style={{ background: subColor['#E8E0FF'] }}
+                  className={'teacher-case__counter-limited close'}
+                >
+                  30
+                </span>
 
                 <span className={'teacher-case__counter-unlimited '}>
-                  <svg>
+                  <svg style={{ background: subColor['#E8E0FF'] }}>
                     <use href="/img/sprite.svg#infinity"></use>
                   </svg>
                 </span>

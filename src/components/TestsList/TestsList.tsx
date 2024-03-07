@@ -13,7 +13,7 @@ import { Portal } from '@components/Portal'
 import { Single, TestWrapper, descMatcher } from '@components/Test'
 import { ComplianceGridMatrix } from '@components/Test/ComplianceGridMatrix'
 import { TextEditor } from '@components/TextEditor'
-import { useQueryStudentLesson } from '@http/courses/client'
+import { useQueryStudentLesson } from '@http/student/client.lesson'
 
 import { Button } from '_ui/Button'
 import { toastPromise } from '_ui/ToastUtils'
