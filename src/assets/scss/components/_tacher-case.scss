@@ -220,8 +220,10 @@
   }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .teacher-case {
+    padding: rem(16);
+
     &__content {
       grid-template-columns: 1fr;
     }
@@ -259,6 +261,14 @@
 
     &__img {
       display: none;
+    }
+  }
+}
+
+@include mq("md") {
+  .teacher-case {
+    .teacher-case__buttons .btn.btn--trans {
+      width: auto;
     }
   }
 }
