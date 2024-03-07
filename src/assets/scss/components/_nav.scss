@@ -134,7 +134,7 @@
   height: rem(16);
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .nav {
     border-radius: rem(20) rem(20) 0 0;
     padding: rem(4) rem(15);
