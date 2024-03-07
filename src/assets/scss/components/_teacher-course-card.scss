@@ -5,7 +5,6 @@
   display: grid;
   grid-template-columns: 1fr rem(100);
   grid-auto-rows: auto;
-  // gap: rem(16);
 
   &__title {
     margin-bottom: rem(16);
@@ -16,6 +15,7 @@
 
   &__content {
     li {
+      flex-wrap: wrap;
       display: flex;
       align-items: baseline;
       gap: rem(24);
@@ -60,6 +60,10 @@
       &:not(:first-child) {
         margin-left: rem(-10);
       }
+
+      img {
+        border: rem(1) solid var(--blue-200);
+      }
     }
   }
 
@@ -84,5 +88,56 @@
     width: rem(100);
     height: rem(100);
     grid-column: 2 / 3;
+  }
+}
+
+@include mq("lg") {
+  .teacher-course-card {
+    grid-template-columns: 1fr;
+    gap: rem(16);
+    margin-bottom: rem(90);
+    padding: rem(16);
+
+    &__title {
+      margin-bottom: rem(12);
+      font-size: rem(20);
+      font-weight: 500;
+      line-height: rem(24);
+    }
+
+    &__box {
+      padding: rem(16) rem(12);
+    }
+
+    &__desc {
+      font-size: rem(14);
+      font-weight: 400;
+      line-height: rem(17);
+    }
+
+    &__img {
+      display: none;
+    }
+  }
+}
+
+@include mq("md") {
+  .teacher-course-card {
+    &__box {
+      width: 100%;
+      justify-content: space-between;
+      padding: rem(12);
+      gap: rem(1);
+    }
+
+    &__btn {
+      gap: rem(5);
+    }
+
+    &__content {
+      li {
+        gap: rem(12);
+      }
+    }
   }
 }

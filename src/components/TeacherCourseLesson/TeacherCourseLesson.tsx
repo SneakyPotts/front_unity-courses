@@ -108,14 +108,15 @@ export function TeacherCourseLesson({}: TeacherCourseLessonProps) {
           </svg>
         </button>
       </div>
-      <Image
-        className={'teacher-course-card__img'}
-        src={'https://loremflickr.com/640/360'}
-        width={100}
-        height={100}
-        style={{ objectFit: 'cover', borderRadius: 5 }}
-        alt=""
-      />
+      <div className={'teacher-course-card__img'}>
+        <Image
+          src={'https://loremflickr.com/640/360'}
+          width={100}
+          height={100}
+          style={{ objectFit: 'cover', borderRadius: 5 }}
+          alt=""
+        />
+      </div>
     </div>
   )
 }
