@@ -107,6 +107,7 @@
   &__box {
     display: flex;
     align-items: flex-start;
+    flex-wrap: wrap;
     gap: rem(22);
     margin-top: auto;
   }
@@ -207,6 +208,7 @@
 
 @include mq("lg") {
   .my-catalog {
+    gap: 0;
     &__inner {
       grid-template-columns: 1fr;
     }
@@ -220,8 +222,9 @@
     }
 
     &__box {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
+      display: flex;
+
+      flex-wrap: wrap;
     }
 
     &__contact {
