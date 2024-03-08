@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { dynamicOptions } from '@assets/constants'
 import { aboutMeRequest } from '@http/profile/server'
 
-const HomePageContent = dynamic(() => import('_content/HomePageContent').then((mod) => mod.HomePageContent), {
+const HomePageContent = dynamic(() => import('_content/HomePageContent').then((mod) => mod.default), {
   ...dynamicOptions,
   ssr: false,
 })
