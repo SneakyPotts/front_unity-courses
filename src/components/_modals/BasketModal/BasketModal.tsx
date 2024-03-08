@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 import Cookies from 'universal-cookie'
 import { useLocalStorage, useWindowSize } from 'usehooks-ts'
@@ -141,8 +141,13 @@ function AuthInfo({ role, showChildBoughtModal, onClose }: AuthInfoProps) {
 
   const payForm = useRef<HTMLFormElement>(null)
 
-  const totalPrice = basket?.reduce((acc, item) => acc + (item.discount || item.price), 0)
-  const hasFree = basket?.find((v) => v.price === 0)
+  const info = useMemo(
+    () => ({
+      total: basket?.reduce((acc, item) => acc + (item.discount || item.price), 0),
+      free: basket?.find((v) => v.price === 0),
+    }),
+    [basket],
+  )
 
   const [isPayCreating, setIsPayCreating] = useState(false)
   const [liqPayKeys, setLiqPayKeys] = useState<{ data?: string; signature?: string }>({
@@ -195,7 +200,7 @@ function AuthInfo({ role, showChildBoughtModal, onClose }: AuthInfoProps) {
     <div className="basket-model__card">
       <div className="basket-model__card-title">Придбати курс (и)</div>
 
-      {(role.parent || role.teacher) && (
+      {!role.student && (
         <div className="basket-model__promo">
           <p className={'basket-model__card-subtitle'}>На одне замовлення можна застосувати лише один код знижки</p>
           <div className={'basket-model__field'}>
@@ -214,7 +219,7 @@ function AuthInfo({ role, showChildBoughtModal, onClose }: AuthInfoProps) {
       )}
 
       <ul className={'basket-model__card-conditions'}>
-        {hasFree && <li>Ви будете додані до безкоштовного курсу (курсів)</li>}
+        {info.free && <li>Ви будете додані до безкоштовного курсу (курсів)</li>}
         {role.student && <li>Батькам буде відправлено запрос на покупку курсу (курсів).</li>}
       </ul>
       <ul className={'basket-model__card-quantity'}>
@@ -238,11 +243,11 @@ function AuthInfo({ role, showChildBoughtModal, onClose }: AuthInfoProps) {
       {/*  </li>*/}
       {/*</ul>*/}
 
-      {(role.parent || role.teacher) && (
+      {!role.student && (
         <>
           <div className={'basket-model__result'}>
             <p className={'basket-model__result-text'}>Всього:</p>
-            <p className={'basket-model__result-sum'}>{formattedPrice(totalPrice ?? 0)} грн.</p>
+            <p className={'basket-model__result-sum'}>{formattedPrice(info.total ?? 0)} грн.</p>
           </div>
           <div className={'basket-model__button'}>
             <Button
