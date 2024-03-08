@@ -2,23 +2,16 @@ import React from 'react'
 
 import Link from 'next/link'
 
-import type { TPageProps } from '@assets/types/globals'
 import { StatisticsItem } from '@components/StatisticSubjects/StatisticsItem'
-import { aboutMeRequest } from '@http/profile/server'
 import { studentCourseStats } from '@http/student/server'
 import type { TStatsTypes } from '@http/student/types'
 
-export default async function Statistics({ params }: TPageProps) {
-  const { data: me } = await aboutMeRequest()
-  const role = {
-    teacher: me?.role === 20,
-    student: me?.role === 2,
-    parent: me?.role === 10,
-  }
+import type { StudentCourseStatsContentProps } from './StudentCourseStatsContent.props'
 
+export async function StudentCourseStatsContent({ course_id, role }: StudentCourseStatsContentProps) {
   if (role.teacher) return null
 
-  const { data: stats, error } = await studentCourseStats(params.course_id as string)
+  const { data: stats, error } = await studentCourseStats(course_id)
 
   return (
     <div className="subject__statistics-block statistics-block statistics-block--row --vertical">

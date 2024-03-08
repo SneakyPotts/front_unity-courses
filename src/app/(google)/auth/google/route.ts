@@ -33,7 +33,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
     redirect('/home')
   } else {
-    console.log('authResponse', authResponse)
+    console.log('domain', domain)
+    console.log('authResponse', authResponse.error?.extra)
     console.log(searchParams)
 
     return Response.json({ code, domain, response: authResponse })

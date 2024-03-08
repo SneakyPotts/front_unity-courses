@@ -19,7 +19,7 @@ import { Tabs } from '_ui/Tabs'
 
 import type { HomePageContentProps } from './HomePageContent.props'
 
-export function HomePageContent({ role }: HomePageContentProps) {
+export default function HomePageContent({ role }: HomePageContentProps) {
   const { width } = useWindowSize()
   const isDesktop = width > 991
 
