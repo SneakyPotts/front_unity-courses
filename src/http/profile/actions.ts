@@ -108,3 +108,8 @@ export async function buyByLiqPay() {
     status: string
   }>(`/courses/cart/liqpay/init/`)
 }
+
+export async function revalidateCourses() {
+  revalidateTag('catalog')
+  revalidateTag('courseDetail')
+}

@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 import { formattedPrice, imgBlur } from '@assets/utils'
 import { appContext } from '@components/Context/context'
-import { buyByLiqPay, removeFromBasketAction } from '@http/profile/actions'
+import { buyByLiqPay, removeFromBasketAction, revalidateCourses } from '@http/profile/actions'
 import { TBasketCourse } from '@http/profile/type'
 
 import { Button } from '_ui/Button'
@@ -177,6 +177,8 @@ function AuthInfo({ role, showChildBoughtModal, onClose }: AuthInfoProps) {
 
         if (!!status && !reqData.data && !reqData.signature) {
           setBasket([])
+
+          revalidateCourses()
 
           toast.success('Ви успішно отримали безкоштовний курс', successIcon)
           onClose()

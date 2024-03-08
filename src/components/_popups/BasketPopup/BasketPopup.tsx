@@ -69,7 +69,7 @@ export function BasketPopup({ showCheckoutModal, onClose }: BasketPopupProps) {
           className={'some_button'}
           onClick={showCheckoutModal}
         >
-          оформити замовленя
+          оформити замовлення
         </Button>
       </div>
     </div>
