@@ -51,7 +51,7 @@ export function MyCoursesContent({ role }: MyCoursesContentProps) {
 }
 
 function ActiveCoursesTab({ role }: { role: { teacher: boolean; student: boolean; parent: boolean } }) {
-  const { active: activeStudent } = useQueryStudentCourses({ tab_id: role.student ? 'active' : '' })
+  const { active: activeStudent } = useQueryStudentCourses({ tab_id: !role.teacher ? 'active' : '' })
   const { active: activeTeacher } = useQueryTeacherCourses({ tab_id: role.teacher ? 'active' : '' })
 
   const active = role.teacher ? activeTeacher : activeStudent
@@ -64,7 +64,7 @@ function OnModerateCoursesTab() {
 }
 
 function ArchivedCoursesTab({ role }: { role: { teacher: boolean; student: boolean; parent: boolean } }) {
-  const { archived } = useQueryStudentCourses({ tab_id: role.student ? 'archived' : '' })
+  const { archived } = useQueryStudentCourses({ tab_id: !role.teacher ? 'archived' : '' })
 
   return (
     <TabContent
