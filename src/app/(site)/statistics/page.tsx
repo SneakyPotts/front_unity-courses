@@ -43,7 +43,11 @@ export default function StatisticsPage() {
   }, [currentCourse])
 
   useEffect(() => {
-    courses.data && !currentCourse && setCurrentCourse(courses.data[0])
+    if (courses.data && !currentCourse) {
+      const courseId = localStorage.getItem('course_stats')
+
+      setCurrentCourse(courseId ? courses.data.find((v) => v.id === courseId) : courses.data[0])
+    }
   }, [courses])
 
   if (!profile || courses.isLoading || stats.isLoading) return <Loader />

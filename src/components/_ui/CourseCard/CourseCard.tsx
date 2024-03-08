@@ -1,8 +1,11 @@
+'use client'
+
 import { isAfter } from 'date-fns'
 import React from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import { formatDateInGenitive, subColor } from '@assets/utils'
 
@@ -13,6 +16,13 @@ import { TeacherForCourse } from '_ui/TeacherForCourse'
 import type { CourseCardProps } from './CourseCard.props'
 
 export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps) {
+  const router = useRouter()
+
+  const handleRouteStats = () => {
+    localStorage.setItem('course_stats', course.id)
+    router.push(`/statistics`)
+  }
+
   return (
     <div
       className="my-catalog__block"
@@ -121,15 +131,15 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
               ))}
             </ul>
 
-            <Link
-              href="/"
+            <button
               className={'teacher-course-card__btn'}
+              onClick={handleRouteStats}
             >
               Всі учасники
               <svg>
                 <use href="/img/sprite.svg#arrow-ridth"></use>
               </svg>
-            </Link>
+            </button>
           </div>
         )}
         <div className="my-catalog__contact close">

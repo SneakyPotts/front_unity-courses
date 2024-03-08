@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
-import { IQuiz, TDocument, THuman, TTeacher } from '@assets/types/globals'
-import { TBasketCourse } from '@http/profile/type'
+import type { TDocument, THuman, TTeacher } from '@assets/types/globals'
+import type { TBasketCourse } from '@http/profile/type'
 
 export type TCatalog = {
   count: number
@@ -55,6 +55,7 @@ export type TCourseDetail = TBasketCourse & {
   number_of_lectures: number
   rating: number
   lectors: TTeacher[]
+  students: TTeacher[]
   start_date: string
   closest_lecture: string
   number_of_students: number
