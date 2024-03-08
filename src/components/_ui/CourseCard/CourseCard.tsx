@@ -177,7 +177,7 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
               src={course.cover}
               width={100}
               height={100}
-              style={{ objectFit: 'contain' }}
+              style={{ objectFit: 'cover' }}
               alt={course.title}
             />
           </div>
