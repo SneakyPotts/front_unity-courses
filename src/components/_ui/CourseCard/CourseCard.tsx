@@ -102,20 +102,20 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
               />
             ))}
         </div>
-        {isTeacher && (
+        {isTeacher && course?.students && (
           <div
             className={'teacher-course-card__box'}
             style={{ backgroundColor: subColor[course.color] }}
           >
             <ul className={'teacher-course-card__student'}>
-              {Array.from({ length: 5 }).map((_, i) => (
-                <li key={i}>
+              {course.students.map((v) => (
+                <li key={v.id}>
                   <Image
-                    src={'https://loremflickr.com/640/360'}
+                    src={v.avatar || '/img/static/default-avatar.png'}
                     width={30}
                     height={30}
-                    style={{ objectFit: 'cover', borderRadius: 25, display: 'block' }}
-                    alt=""
+                    style={{ borderRadius: '50%', display: 'block' }}
+                    alt={`${v.last_name} ${v.first_name}`}
                   />
                 </li>
               ))}
