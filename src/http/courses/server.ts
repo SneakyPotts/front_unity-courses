@@ -12,7 +12,7 @@ const getCoursesCatalog = cache(async (filters: string = '') => {
 
   return await (isAuth ? serverFetchAuth : serverFetch)<TCatalog>(`/courses/?${filters}`, {
     next: {
-      revalidate: 3600,
+      revalidate: 30,
     },
   })
 })
@@ -20,7 +20,7 @@ const getCoursesCatalog = cache(async (filters: string = '') => {
 const getCoursesFilters = cache(async () => {
   const response = await serverFetch<TFiltersResponse>('/courses/filter_options/', {
     next: {
-      revalidate: 3600,
+      revalidate: 30,
     },
   })
 
@@ -57,7 +57,7 @@ const getCourseDetail = cache(async (id: string) => {
 
   return await (isAuth ? serverFetchAuth : serverFetch)<TCourseDetail>(`/courses/${id}/`, {
     next: {
-      revalidate: 3600,
+      revalidate: 30,
     },
   })
 })

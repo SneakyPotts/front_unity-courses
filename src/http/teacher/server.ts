@@ -9,7 +9,7 @@ const getTeacherCourseDetail = cache(
   async (id: string) =>
     await serverFetchAuth<TCourseDetail>(`/courses/teacher/${id}/`, {
       next: {
-        revalidate: 3600,
+        revalidate: 30,
       },
     }),
 )
@@ -18,7 +18,7 @@ const getTeacherLessonContent = cache(
   async (lesson_id: string) =>
     await serverFetchAuth<TTeacherContent>(`/courses/teacher/lecture/${lesson_id}/`, {
       next: {
-        revalidate: 3600,
+        revalidate: 30,
       },
     }),
 )
