@@ -255,3 +255,30 @@ export type TMark = {
 }
 
 export type TTeacherContent = Omit<TLessonContent, 'is_visited'>
+
+export type TTeacherSelfWork = {
+  id: string
+  topic_id: string
+  topic_title: string
+  course_id: string
+  course_title: string
+  course_color: string
+  course_icon: string
+  content: string
+  progress_type: number
+  deadline: string
+  progress: TStudentsProgress[]
+}
+
+export interface TStudentsProgress {
+  id: string
+  first_name: string
+  last_name: string
+  patronymic: string
+  avatar: string
+  work_progress: {
+    id: string
+    status: number
+  }
+  mark: number
+}

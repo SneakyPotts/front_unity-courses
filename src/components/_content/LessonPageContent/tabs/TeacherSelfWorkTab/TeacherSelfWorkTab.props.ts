@@ -1,3 +1,3 @@
 export interface TeacherSelfWorkTabProps {
-  selfId: string
+  selfId?: string
 }

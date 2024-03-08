@@ -2,9 +2,8 @@ import type { TTestResult } from '@assets/types/globals'
 import { clientAuthFetch } from '@http/clientApi'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import type { TLessonContent, TSelfWorkContent, TTestContent } from './types'
+import type { TSelfWorkContent, TTestContent } from './types'
 
-const getLessonContent = (lesson_id: string) => clientAuthFetch<TLessonContent>(`/courses/student/lecture/${lesson_id}/`)
 const getSelfContent = (self_id: string) => clientAuthFetch<TSelfWorkContent>(`/courses/student/work/${self_id}/`)
 const sendTextSelfWorkAnswer = ({ self_id, ...body }: { self_id: string; student_answer: string }) =>
   clientAuthFetch<any>(`/courses/student/work/${self_id}/send_text_answer/`, {
@@ -36,14 +35,8 @@ const sendIsVisited = ({ lesson_id }: { lesson_id: string }) =>
     method: 'PATCH',
   })
 
-export function useQueryStudentLesson({ lesson_id, self_id, test_id }: { lesson_id?: string; self_id?: string; test_id?: string }) {
+export function useQueryStudentLesson({ self_id, test_id }: { self_id?: string; test_id?: string }) {
   const queryClient = useQueryClient()
-
-  const content = useQuery({
-    queryKey: ['lesson', lesson_id],
-    queryFn: () => getLessonContent(lesson_id!),
-    enabled: !!lesson_id,
-  })
 
   const self = useQuery({
     queryKey: ['selfWork', self_id],
@@ -97,7 +90,6 @@ export function useQueryStudentLesson({ lesson_id, self_id, test_id }: { lesson_
   })
 
   return {
-    content,
     self,
     sendTextSelfWork,
     sendFileSelfWork,

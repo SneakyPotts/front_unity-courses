@@ -103,39 +103,43 @@ export function Header({ profile, className }: HeaderProps) {
             <li className="header__item header__item--clock">
               <HeaderClock />
             </li>
-            <li
-              ref={basketRef}
-              className="header__item"
-            >
-              <button
-                className={classNames({ 'header__item-btn': !!basket?.length })}
-                onClick={() => !!basket?.length && setIsShowBasketPopup(true)}
-              >
-                <svg className="header__item-svg header__item--basket">
-                  <use href="/img/sprite.svg#basket-course"></use>
-                </svg>
-              </button>
-              {isShowBasketPopup && (
-                <BasketPopup
-                  onClose={() => setIsShowBasketPopup(false)}
-                  showCheckoutModal={handleShowCheckout}
-                />
-              )}
-              {isShowBasketModal && (
-                <BasketModal
-                  onClose={() => setIsShowBasketModal(false)}
-                  showChildBoughtModal={handleChildBought}
-                />
-              )}
-              {isShowChildBought && <ChildBoughtModal onClose={() => setIsShowChildBought(false)} />}
-            </li>
-            <li className="header__item">
-              <button className="header__item-btn">
-                <svg className="header__item-svg">
-                  <use href="/img/sprite.svg#like-courses"></use>
-                </svg>
-              </button>
-            </li>
+            {!role.teacher && (
+              <>
+                <li
+                  ref={basketRef}
+                  className="header__item"
+                >
+                  <button
+                    className={classNames({ 'header__item-btn': !!basket?.length })}
+                    onClick={() => !!basket?.length && setIsShowBasketPopup(true)}
+                  >
+                    <svg className="header__item-svg header__item--basket">
+                      <use href="/img/sprite.svg#basket-course"></use>
+                    </svg>
+                  </button>
+                  {isShowBasketPopup && (
+                    <BasketPopup
+                      onClose={() => setIsShowBasketPopup(false)}
+                      showCheckoutModal={handleShowCheckout}
+                    />
+                  )}
+                  {isShowBasketModal && (
+                    <BasketModal
+                      onClose={() => setIsShowBasketModal(false)}
+                      showChildBoughtModal={handleChildBought}
+                    />
+                  )}
+                  {isShowChildBought && <ChildBoughtModal onClose={() => setIsShowChildBought(false)} />}
+                </li>
+                <li className="header__item">
+                  <button className="header__item-btn">
+                    <svg className="header__item-svg">
+                      <use href="/img/sprite.svg#like-courses"></use>
+                    </svg>
+                  </button>
+                </li>
+              </>
+            )}
             <li className="header__item">
               <button className="header__item-btn">
                 <svg className="header__item-svg">
