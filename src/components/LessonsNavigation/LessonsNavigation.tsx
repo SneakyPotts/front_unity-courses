@@ -7,6 +7,7 @@ import { useParams, useRouter } from 'next/navigation'
 
 import { Portal } from '@components/Portal'
 import { useBlockScroll } from '@hooks/useBlockScroll'
+import { useQueryCourses } from '@http/courses/client'
 import { useQueryStudent } from '@http/student/client'
 
 import { Loader } from '_ui/Loader'
@@ -72,9 +73,9 @@ function Accordion({ orderNum, onClose, ...topic }: LessonsNavigationAccordionPr
 }
 
 export function LessonsNavigation({ courseId, onClose }: LessonsNavigationProps) {
-  const { course } = useQueryStudent({ course_id: courseId })
-
-  const data = course //TODO: variant for different roles
+  const {
+    program: { data, isLoading, isError },
+  } = useQueryCourses({ course_id: courseId })
 
   useBlockScroll()
 
@@ -89,7 +90,7 @@ export function LessonsNavigation({ courseId, onClose }: LessonsNavigationProps)
           onClick={(ev) => ev.stopPropagation()}
         >
           <div className="maintenance__top">
-            <h2 className="maintenance__title">{data?.isLoading ? 'Завантаження...' : data?.data?.title}</h2>
+            <h2 className="maintenance__title">{isLoading ? 'Завантаження...' : data?.title}</h2>
             <button
               className="maintenance__close"
               aria-label="Закрити зміст"
@@ -105,11 +106,11 @@ export function LessonsNavigation({ courseId, onClose }: LessonsNavigationProps)
             className="maintenance__bottom"
             style={{ maxHeight: 'calc(100vh - 85px)' }}
           >
-            {data?.isLoading && <Loader />}
-            {data?.error && <p className="text-center">Щось пішло не так...</p>}
-            {!!data?.data?.topics?.length && (
+            {isLoading && <Loader />}
+            {isError && <p className="text-center">Щось пішло не так...</p>}
+            {!!data?.topics?.length && (
               <ol className="maintenance__list">
-                {data.data.topics.map((v, i) => (
+                {data.topics.map((v, i) => (
                   <Accordion
                     key={v.id}
                     orderNum={i + 1}

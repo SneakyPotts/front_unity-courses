@@ -16,7 +16,6 @@ import { Tabs } from '_ui/Tabs'
 import { LessonPageContentProps } from './LessonPageContent.props'
 
 const LessonsNavigation = dynamic(() => import('@components/LessonsNavigation').then((mod) => mod.LessonsNavigation), {
-  ...dynamicOptions,
   ssr: false,
 })
 const SelfWorkTab = dynamic(() => import('./tabs/SelfWorkTab').then((mod) => mod.SelfWorkTab), {
@@ -28,6 +27,10 @@ const TeacherSelfWorkTab = dynamic(() => import('./tabs/TeacherSelfWorkTab').the
   ssr: false,
 })
 const TestWorkTab = dynamic(() => import('./tabs/TestWorkTab').then((mod) => mod.TestWorkTab), {
+  ...dynamicOptions,
+  ssr: false,
+})
+const TeacherTestWorkTab = dynamic(() => import('./tabs/TeacherTestWorkTab').then((mod) => mod.TeacherTestWorkTab), {
   ...dynamicOptions,
   ssr: false,
 })
@@ -105,7 +108,7 @@ export function LessonPageContent({ data, role }: LessonPageContentProps) {
 
       {activeTab === is.self && (role.teacher ? <TeacherSelfWorkTab selfId={data?.self_education_work} /> : <SelfWorkTab selfId={data?.self_education_work} />)}
 
-      {activeTab === is.test && data?.test && <TestWorkTab testId={data.test} />}
+      {activeTab === is.test && (role.teacher ? <TeacherTestWorkTab testId={data?.test} /> : <TestWorkTab testId={data?.test} />)}
 
       {isShowSubjectNav && data?.course_id && (
         <LessonsNavigation

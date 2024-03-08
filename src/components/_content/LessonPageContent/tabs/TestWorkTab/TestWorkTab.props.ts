@@ -1,3 +1,3 @@
 export interface TestWorkTabProps {
-  testId: string
+  testId?: string
 }

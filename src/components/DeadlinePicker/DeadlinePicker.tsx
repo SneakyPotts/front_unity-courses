@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { addDays, getDate, isSameDay } from 'date-fns'
+import { addDays, formatISO, getDate, isSameDay } from 'date-fns'
 import { uk } from 'date-fns/locale'
 import React, { useRef, useState } from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
@@ -27,12 +27,12 @@ export function DeadlinePicker({ deadline, handler, onSave, onClear, customInput
   const [isShowTimeInput, setIsShowTimeInput] = useState(false)
 
   const handleSend = () => {
-    // handler &&
-    //   toastPromise({
-    //     handler: handler(formatISO(new Date(startDate))),
-    //     successCallback: () => calendarRef.current?.setOpen(false),
-    //     successMessage: 'Дата і час дедлайну успішно збережені',
-    //   })
+    handler &&
+      toastPromise({
+        handler: handler(formatISO(new Date(startDate), { representation: 'date' })),
+        successCallback: () => calendarRef.current?.setOpen(false),
+        successMessage: 'Дата і час дедлайну успішно збережені',
+      })
     onSave && onSave(startDate)
 
     calendarRef?.current?.setOpen(false)
