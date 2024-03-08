@@ -282,3 +282,37 @@ export interface TStudentsProgress {
   }
   mark: number
 }
+
+export type TTeacherTestWork = {
+  id: string
+  topic_id: string
+  topic_title: string
+  course_id: string
+  course_title: string
+  course_color: string
+  course_icon: string
+  test_type: string
+  external_link: string
+  quiz: string
+  progress_type: number
+  deadline: string
+  progress: TStudentTestProgress[]
+}
+
+export type TStudentTestProgress = {
+  id: string
+  first_name: string
+  last_name: string
+  patronymic: string
+  avatar: string
+  test_progress: {
+    id: string
+    answer_timestamp: string
+    is_completed: boolean
+    teacher_reply: string
+    teacher_reply_timestamp: string
+    status: number
+    mark: number
+  }
+  mark: number
+}

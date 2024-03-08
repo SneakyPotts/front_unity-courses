@@ -1,6 +1,8 @@
 import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 
+import Image from 'next/image'
+
 import { DeadlinePicker } from '@components/DeadlinePicker'
 import { useQueryTeacherLesson } from '@http/teacher/client.lesson'
 import type { TStudentsProgress } from '@http/teacher/types'
@@ -16,16 +18,11 @@ const onlineFilterControls = ['Очікує на перевірку', 'Пере�
 export function TeacherSelfWorkTab({ selfId }: TeacherSelfWorkTabProps) {
   const {
     self: { data, isLoading, isError },
+    editSelf,
   } = useQueryTeacherLesson({ self_id: selfId })
 
   const [activeTab, setActiveTab] = useState(1)
   const [filteredStudents, setFilteredStudents] = useState<TStudentsProgress[]>([])
-
-  const handleSetDeadline = (date: string): Promise<any> =>
-    new Promise((resolve) => {
-      setActiveTab(1)
-      resolve(date)
-    })
 
   const handleAllowRetake = (student_id: string) => {}
 
@@ -56,7 +53,7 @@ export function TeacherSelfWorkTab({ selfId }: TeacherSelfWorkTabProps) {
           <p>Дедлайн</p>
           <DeadlinePicker
             deadline={data?.deadline}
-            handler={(date) => handleSetDeadline(date)}
+            handler={(date) => editSelf({ self_id: selfId!, deadline: date })}
           />
         </div>
 
@@ -96,10 +93,12 @@ export function TeacherSelfWorkTab({ selfId }: TeacherSelfWorkTabProps) {
                       className="lesson-section__content__nav-list-item"
                     >
                       <div className="lesson__section__expectation-profil">
-                        <img
+                        <Image
                           className="lesson-section__expectation-img"
                           src={v.avatar || '/img/static/default-avatar.png'}
-                          alt="аватар профiлю"
+                          width={50}
+                          height={50}
+                          alt={`${v.last_name} ${v.first_name}`}
                         />
                         <p>{`${v.last_name} ${v.first_name}`}</p>
                       </div>

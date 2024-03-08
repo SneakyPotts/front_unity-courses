@@ -85,7 +85,7 @@ export function TestWorkTab({ testId }: TestWorkTabProps) {
         (!test?.progress?.is_completed || isEditing ? (
           <TestsList
             {...test.quiz}
-            test_id={testId}
+            test_id={testId!}
             setNotEditing={() => setIsEditing(false)}
           />
         ) : (
@@ -129,7 +129,7 @@ export function TestWorkTab({ testId }: TestWorkTabProps) {
             <div className="lesson-section__case">
               <Button
                 variant={test?.progress?.is_completed ? 'gray' : 'accent'}
-                onClick={() => confirmTest({ id: testId })}
+                onClick={() => confirmTest({ id: testId! })}
               >
                 <svg className="btn__icon">
                   <use href="/img/sprite.svg#check"></use>

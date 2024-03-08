@@ -136,3 +136,20 @@ export type TReviewReply = {
   content: string
   created_at: string
 }
+
+export type TCourseProgramLight = {
+  id: string
+  title: string
+  topics: TTopicLight[]
+}
+
+export type TTopicLight = {
+  id: string
+  title: string
+  lectures: TLectureLight[]
+}
+
+export type TLectureLight = {
+  id: string
+  title: string
+}
