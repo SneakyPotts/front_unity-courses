@@ -223,8 +223,11 @@
 
     &__box {
       display: flex;
-
       flex-wrap: wrap;
+    }
+
+    &__active {
+      margin-bottom: rem(66);
     }
 
     &__contact {
