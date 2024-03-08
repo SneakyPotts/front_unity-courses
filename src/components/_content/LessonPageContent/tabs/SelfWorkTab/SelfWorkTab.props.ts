@@ -1,3 +1,3 @@
 export interface SelfWorkTabProps {
-  selfId: string
+  selfId?: string
 }

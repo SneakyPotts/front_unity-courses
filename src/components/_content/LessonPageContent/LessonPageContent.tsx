@@ -13,20 +13,20 @@ import { useQueryStudentLesson } from '@http/student/client.lesson'
 import { Button } from '_ui/Button'
 import { Tabs } from '_ui/Tabs'
 
-import { TeacherSelfWorkTab } from '_content/LessonPageContent/tabs/TeacherSelfWorkTab'
-
 import { LessonPageContentProps } from './LessonPageContent.props'
 
 const LessonsNavigation = dynamic(() => import('@components/LessonsNavigation').then((mod) => mod.LessonsNavigation), {
   ...dynamicOptions,
   ssr: false,
 })
-
 const SelfWorkTab = dynamic(() => import('./tabs/SelfWorkTab').then((mod) => mod.SelfWorkTab), {
   ...dynamicOptions,
   ssr: false,
 })
-
+const TeacherSelfWorkTab = dynamic(() => import('./tabs/TeacherSelfWorkTab').then((mod) => mod.TeacherSelfWorkTab), {
+  ...dynamicOptions,
+  ssr: false,
+})
 const TestWorkTab = dynamic(() => import('./tabs/TestWorkTab').then((mod) => mod.TestWorkTab), {
   ...dynamicOptions,
   ssr: false,
@@ -103,9 +103,7 @@ export function LessonPageContent({ data, role }: LessonPageContentProps) {
         </div>
       )}
 
-      {activeTab === is.self &&
-        data?.self_education_work &&
-        (role.teacher ? <TeacherSelfWorkTab selfId={data.self_education_work} /> : <SelfWorkTab selfId={data.self_education_work} />)}
+      {activeTab === is.self && (role.teacher ? <TeacherSelfWorkTab selfId={data?.self_education_work} /> : <SelfWorkTab selfId={data?.self_education_work} />)}
 
       {activeTab === is.test && data?.test && <TestWorkTab testId={data.test} />}
 
