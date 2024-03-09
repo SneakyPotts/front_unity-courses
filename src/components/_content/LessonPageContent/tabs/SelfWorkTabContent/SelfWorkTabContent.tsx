@@ -1,5 +1,5 @@
 import { MathJax } from 'better-react-mathjax'
-import { differenceInSeconds, parseISO } from 'date-fns'
+import { differenceInSeconds, format, parseISO } from 'date-fns'
 import React, { useLayoutEffect, useState } from 'react'
 
 import dynamic from 'next/dynamic'
@@ -60,7 +60,6 @@ export function SelfWorkTabContent({ selfWork }: SelfWorkTabContentProps) {
     useLayoutEffect(() => {
       const updateTimer = () => {
         if (selfWork?.progress?.block_timestamp) {
-          // const timeForEdit = moment(new Date(timestamp)).add(15, 'm')
           const timeForEdit = parseISO(selfWork?.progress?.block_timestamp)
           const difference = differenceInSeconds(timeForEdit, new Date())
 
@@ -166,27 +165,27 @@ export function SelfWorkTabContent({ selfWork }: SelfWorkTabContentProps) {
         </div>
       )}
 
-      {/*/!* Teacher reply *!/*/}
-      {/*{!!homework?.homework_progress?.teacher_reply && (*/}
-      {/*  <div className="lesson-section__reply">*/}
-      {/*    <div className="lesson-section__reply-flex">*/}
-      {/*      <div className="lesson-section__reply-date">{moment(homework.homework_progress.teacher_reply_timestamp).format('DD.MM.YYYY H:mm')}</div>*/}
-      {/*      {hwMark && (*/}
-      {/*        <div className="lesson-section__reply-mark-wrapper">*/}
-      {/*          <span className="lesson-section__reply-title">Оцінка:</span>*/}
-      {/*          <span className="lesson-section__reply-mark">{hwMark}</span>*/}
-      {/*        </div>*/}
-      {/*      )}*/}
-      {/*    </div>*/}
-      {/*    <p className="lesson-section__reply-title">Коментар до роботи:</p>*/}
-      {/*    <MathJax>*/}
-      {/*      <div*/}
-      {/*        className="lesson-section__reply-text"*/}
-      {/*        dangerouslySetInnerHTML={{ __html: homework.homework_progress.teacher_reply }}*/}
-      {/*      />*/}
-      {/*    </MathJax>*/}
-      {/*  </div>*/}
-      {/*)}*/}
+      {/* Teacher reply */}
+      {!!selfWork?.progress?.teacher_reply && (
+        <div className="lesson-section__reply">
+          <div className="lesson-section__reply-flex">
+            <div className="lesson-section__reply-date">{format(new Date(selfWork.progress?.teacher_reply_timestamp), 'dd.MM.yyyy HH:mm')}</div>
+            {selfWork?.progress?.mark && (
+              <div className="lesson-section__reply-mark-wrapper">
+                <span className="lesson-section__reply-title">Оцінка:</span>
+                <span className="lesson-section__reply-mark">{selfWork.progress.mark}</span>
+              </div>
+            )}
+          </div>
+          <p className="lesson-section__reply-title">Коментар до роботи:</p>
+          <MathJax>
+            <div
+              className="lesson-section__reply-text"
+              dangerouslySetInnerHTML={{ __html: selfWork.progress.teacher_reply }}
+            />
+          </MathJax>
+        </div>
+      )}
     </div>
   )
 }

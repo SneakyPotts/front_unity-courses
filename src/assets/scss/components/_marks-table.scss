@@ -34,6 +34,9 @@
   &__table.table {
     border: none;
   }
+
+  &.--short {
+  }
 }
 
 @include mq('lg') {

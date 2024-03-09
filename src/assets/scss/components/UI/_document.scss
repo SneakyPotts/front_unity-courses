@@ -89,6 +89,7 @@
     height: 100%;
 
     position: relative;
+    overflow: hidden;
 
     &--pdf {
       width: rem(200);

@@ -1,7 +1,9 @@
 import classNames from 'classnames'
 import React, { memo, useEffect, useMemo, useState } from 'react'
 
-import { nameFromUrl } from '@assets/utils'
+import Image from 'next/image'
+
+import { imgBlur, nameFromUrl } from '@assets/utils'
 
 import { UploadDocumentPdfPreview } from '../UploadDocumentPdfPreview'
 import type { UploadDocumentItemProps } from './UploadDocumentItem.props'
@@ -75,8 +77,11 @@ export const UploadDocumentItem = memo(function UploadDocumentItem({ name, type,
         )}
         <div className="document__preview">
           {itFile === 'image' && (
-            <img
+            <Image
               src={link ?? name}
+              fill
+              sizes={'25vw'}
+              {...imgBlur}
               alt={nameFromUrl(link ?? name)}
             />
           )}
