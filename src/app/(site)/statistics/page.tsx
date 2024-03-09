@@ -67,29 +67,38 @@ export default function StatisticsPage() {
     }
   }, [courses])
 
-  if (!profile || courses.isLoading || teacherStats.isLoading || active.isLoading || archived.isLoading) return <Loader />
+  if (!profile) return <Loader />
 
   return (
     <PageWrapper>
-      <Tabs
-        list={['Активні', 'Архів']}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        isStatic
-      />
-      {role.teacher && (
-        <TeacherStatisticsContent
-          data={teacherStats.data}
-          courseId={currentCourse?.id}
+      {!role.teacher && (
+        <Tabs
+          list={['Активні', 'Архів']}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          isStatic
         />
       )}
-      {!role.teacher && activeTab === 1 && (
-        <TeacherStatisticsContent
-          data={active.data}
-          isStudent={!role.teacher}
-        />
-      )}
-      {!role.teacher && activeTab === 2 && <ArchivedStatistics data={archived.data} />}
+      {role.teacher &&
+        (courses.isLoading || teacherStats.isLoading ? (
+          <Loader />
+        ) : (
+          <TeacherStatisticsContent
+            data={teacherStats.data}
+            courseId={currentCourse?.id}
+          />
+        ))}
+      {!role.teacher &&
+        activeTab === 1 &&
+        (active.isLoading ? (
+          <Loader />
+        ) : (
+          <TeacherStatisticsContent
+            data={active.data}
+            isStudent={!role.teacher}
+          />
+        ))}
+      {!role.teacher && activeTab === 2 && (archived.isLoading ? <Loader /> : <ArchivedStatistics data={archived.data} />)}
       {!role.teacher && <StatisticSubjects />}
     </PageWrapper>
   )
