@@ -21,7 +21,7 @@ export function StatisticSubjects({ studentId, isShort = false }: StatisticSubje
 
   const {
     stats: { data: stats, isLoading: isStatsLoading, isError: isStatsError },
-  } = useQueryStudentStats({ course_id: courseId })
+  } = useQueryStudentStats({ course_id: courseId, tab_id: 'common' })
 
   const isLoading = isCoursesLoading || isStatsLoading
   const isError = isCoursesError || isStatsError

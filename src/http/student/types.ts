@@ -1,4 +1,5 @@
 import { IQuiz, TDocument, THuman, TSchedule, TTeacher } from '@assets/types/globals'
+import { TMark } from '@http/teacher/types'
 
 export type TStudentSchedule = TSchedule & {
   teacher: TTeacher
@@ -138,4 +139,22 @@ export interface SelfProgress {
   teacher_reply: string
   teacher_reply_timestamp: string
   mark: number
+}
+
+export type TMarksCoursesStats = {
+  id: string
+  title: string
+  color: string
+  cover: string
+  marks: TMark[]
+  average_mark: number
+  final_mark: number
+}
+
+export type TArchivedCoursesStats = {
+  id: string
+  title: string
+  color: string
+  cover: string
+  final_mark: number
 }

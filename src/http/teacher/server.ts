@@ -3,7 +3,7 @@ import { cache } from 'react'
 import { serverFetchAuth } from '@http/authApi'
 import type { TCourseDetail } from '@http/courses/type'
 
-import type { TSelfProgress, TTeacherContent } from './types'
+import { TSelfProgress, TTeacherContent, TTestProgress } from './types'
 
 const getTeacherCourseDetail = cache(
   async (id: string) =>
@@ -35,7 +35,7 @@ const getTeacherSelfProgress = cache(
 
 const getTeacherTestProgress = cache(
   async (progress_id: string) =>
-    await serverFetchAuth<TSelfProgress>(`/courses/teacher/test/progress/${progress_id}/`, {
+    await serverFetchAuth<TTestProgress>(`/courses/teacher/test/progress/${progress_id}/`, {
       next: {
         revalidate: 30,
       },

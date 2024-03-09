@@ -13,6 +13,7 @@ import { TStudentTestProgress } from '@http/teacher/types'
 import { Button } from '_ui/Button'
 import { Loader } from '_ui/Loader'
 import { RequestError } from '_ui/RequestError'
+import { toastPromise } from '_ui/ToastUtils'
 
 import type { TeacherTestWorkTabProps } from './TeacherTestWorkTab.props'
 
@@ -28,6 +29,20 @@ export function TeacherTestWorkTab({ testId }: TeacherTestWorkTabProps) {
 
   const [activeTab, setActiveTab] = useState(1)
   const [filteredStudents, setFilteredStudents] = useState<TStudentTestProgress[]>([])
+
+  const handleAllowRetake = (id: string) => {
+    toastPromise({
+      handler: retakeTest({ test_id: testId!, student_id: id }),
+      successMessage: 'Надано дозвіл на перевиконання',
+    })
+  }
+
+  const handleSetMark = ({ user_id, mark }: { user_id: string; mark: number }) => {
+    toastPromise({
+      handler: testMark({ test_id: testId!, user_id, mark }),
+      successMessage: 'Оцінка успішно збережена',
+    })
+  }
 
   useEffect(() => {
     data?.progress &&
@@ -126,14 +141,14 @@ export function TeacherTestWorkTab({ testId }: TeacherTestWorkTabProps) {
                             Перевірити
                           </Button>
                         ) : (
-                          <MarkSelect handler={(mark: number) => testMark({ test_id: testId!, user_id: v.id, mark })} />
+                          <MarkSelect handler={(mark: number) => handleSetMark({ user_id: v.id, mark })} />
                         ))}
                       {activeTab === 2 && (
                         <>
                           {v.mark && <p className={'lesson-section__nav-grade'}>{v.mark}</p>}
                           <Button
                             variant={'border'}
-                            onClick={() => retakeTest({ test_id: testId!, student_id: v.id })}
+                            onClick={() => handleAllowRetake(v.id)}
                           >
                             Дозволити перездати
                           </Button>

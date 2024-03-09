@@ -14,6 +14,7 @@ import { Portal } from '@components/Portal'
 import { UploadDocumentItem } from '@components/UploadDocument'
 import { useAnimate } from '@hooks/useAnimate'
 import { useBlockScroll } from '@hooks/useBlockScroll'
+import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import { revalidateSelfWork } from '@http/teacher/actions'
 import { useQueryTeacherLesson } from '@http/teacher/client.lesson'
 // @ts-ignore
@@ -57,6 +58,8 @@ export function CheckSelfWorkContent({ data }: CheckSelfWorkContentProps) {
       successMessage: 'Надано дозвіл на перевиконання',
     })
   }
+
+  useSetHeaderParams({ title: 'Самостійна робота' })
 
   return (
     <div className={'lesson-section__block'}>

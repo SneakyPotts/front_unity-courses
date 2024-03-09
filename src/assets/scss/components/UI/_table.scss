@@ -300,6 +300,21 @@
       }
     }
   }
+
+  &.--short {
+    opacity: 0.75;
+    pointer-events: none;
+
+    .table {
+      &__row {
+        grid-template-columns: 1fr 0 rem(132);
+      }
+      &__total {
+        color: var(--grey-4);
+        background-color: var(--grey-5);
+      }
+    }
+  }
 }
 
 @include mq('lg') {
