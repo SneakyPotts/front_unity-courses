@@ -316,3 +316,27 @@ export type TStudentTestProgress = {
   }
   mark: number
 }
+
+export type TSelfProgress = {
+  id: string
+  lecture_id: string
+  work_id: string
+  title: string
+  topic_id: string
+  topic_title: string
+  course_id: string
+  course_title: string
+  course_color: string
+  course_icon: string
+  student_answer: string
+  answer_timestamp: string
+  block_timestamp: string
+  teacher_reply: string
+  teacher_reply_timestamp: string
+  status: number
+  mark: number
+  deadline: string
+  student: TTeacher
+  progress_type: number
+  files: File[]
+}

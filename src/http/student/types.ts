@@ -135,4 +135,7 @@ export interface SelfProgress {
   answer_timestamp: string
   block_timestamp: string
   files: TDocument[]
+  teacher_reply: string
+  teacher_reply_timestamp: string
+  mark: number
 }

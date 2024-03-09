@@ -1,6 +1,11 @@
-import type { TLessonContent } from '@http/student/types'
-import type { TTeacherContent } from '@http/teacher/types'
-
 export interface LessonHeaderProps {
-  data?: TTeacherContent | TLessonContent
+  data?: {
+    title: string
+    topic_title: string
+    course_title: string
+    course_color: string
+    course_icon?: string
+    start_time?: string
+  }
+  isCheckWork?: boolean
 }

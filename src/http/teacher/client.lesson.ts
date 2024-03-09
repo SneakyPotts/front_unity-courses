@@ -1,13 +1,22 @@
 import { clientAuthFetch } from '@http/clientApi'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { TTeacherSelfWork, TTeacherTestWork } from './types'
+import type { TTeacherSelfWork, TTeacherTestWork } from './types'
 
 const getSelfContent = (self_id: string) => clientAuthFetch<TTeacherSelfWork>(`/courses/teacher/work/${self_id}/`)
 const patchSelfWork = ({ self_id, ...body }: { self_id: string; deadline: string }) =>
   clientAuthFetch<TTeacherSelfWork>(`/courses/teacher/work/${self_id}/`, {
     method: 'PATCH',
     body: JSON.stringify(body),
+  })
+const setSelfMark = ({ self_id, ...body }: { self_id: string; user_id: string; mark: number; reply?: string }) =>
+  clientAuthFetch<any>(`/courses/teacher/work/${self_id}/set_mark/`, {
+    method: 'POST',
+    body: JSON.stringify([body]),
+  })
+const allowRetakeSelf = ({ self_id, student_id }: { self_id: string; student_id: string }) =>
+  clientAuthFetch<any>(`/courses/teacher/work/${self_id}/allow_retake/?student_id=${student_id}`, {
+    method: 'PATCH',
   })
 
 const getTestContent = (test_id: string) => clientAuthFetch<TTeacherTestWork>(`/courses/teacher/test/${test_id}/`)
@@ -19,13 +28,13 @@ const patchTestWork = ({ test_id, ...body }: { test_id: string; deadline?: strin
   })
 
 const setTestMark = ({ test_id, ...body }: { test_id: string; user_id: string; mark: number; reply?: string }) =>
-  clientAuthFetch<TTeacherTestWork>(`/courses/teacher/test/${test_id}/set_mark/`, {
+  clientAuthFetch<any>(`/courses/teacher/test/${test_id}/set_mark/`, {
     method: 'POST',
     body: JSON.stringify([body]),
   })
 
 const allowRetakeTest = ({ test_id, student_id }: { test_id: string; student_id: string }) =>
-  clientAuthFetch<TTeacherTestWork>(`/courses/teacher/test/${test_id}/allow_retake/?student_id=${student_id}`, {
+  clientAuthFetch<any>(`/courses/teacher/test/${test_id}/allow_retake/?student_id=${student_id}`, {
     method: 'PATCH',
   })
 
@@ -37,9 +46,20 @@ export function useQueryTeacherLesson({ self_id, test_id }: { self_id?: string; 
     queryFn: () => getSelfContent(self_id!),
     enabled: !!self_id,
   })
-
   const { mutateAsync: editSelf } = useMutation({
     mutationFn: patchSelfWork,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['teacher_self'] })
+    },
+  })
+  const { mutateAsync: selfMark } = useMutation({
+    mutationFn: setSelfMark,
+    onSuccess: () => {
+      // queryClient.invalidateQueries({ queryKey: ['teacher_self-progress'] })
+    },
+  })
+  const { mutateAsync: retakeSelf } = useMutation({
+    mutationFn: allowRetakeSelf,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['teacher_self'] })
     },
@@ -50,7 +70,6 @@ export function useQueryTeacherLesson({ self_id, test_id }: { self_id?: string; 
     queryFn: () => getTestContent(test_id!),
     enabled: !!test_id,
   })
-
   const { mutateAsync: editTest } = useMutation({
     mutationFn: patchTestWork,
     onSuccess: () => {
@@ -73,6 +92,8 @@ export function useQueryTeacherLesson({ self_id, test_id }: { self_id?: string; 
   return {
     self,
     editSelf,
+    selfMark,
+    retakeSelf,
     test,
     editTest,
     testMark,

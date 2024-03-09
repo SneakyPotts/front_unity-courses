@@ -120,7 +120,7 @@ export function TeacherTestWorkTab({ testId }: TeacherTestWorkTabProps) {
                         (data?.test_type === 'INT' ? (
                           <Button
                             variant="border"
-                            href={`#`}
+                            href={`/check/test/${v.test_progress?.id}`}
                             target="_blank"
                           >
                             Перевірити

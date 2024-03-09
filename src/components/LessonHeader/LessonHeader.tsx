@@ -6,7 +6,7 @@ import { formatDateInGenitive, imgBlur, subColor } from '@assets/utils'
 
 import type { LessonHeaderProps } from './LessonHeader.props'
 
-export function LessonHeader({ data }: LessonHeaderProps) {
+export function LessonHeader({ data, isCheckWork }: LessonHeaderProps) {
   return (
     <div
       className={'theme-card lesson-section__theme'}
@@ -15,7 +15,7 @@ export function LessonHeader({ data }: LessonHeaderProps) {
       <div className={'theme-card__inner courses-lesson__block--element'}>
         <div className={'theme-card__top'}>{data?.topic_title}</div>
         <h1 className={'theme-card__title courses-lesson__title--element'}>{data?.title}</h1>
-        {!!data?.start_time && (
+        {!!data?.start_time && !isCheckWork && (
           <div
             className={'courses-lesson__data my-catalog__condition--violet'}
             style={{ backgroundColor: subColor[data?.course_color || ''] }}
@@ -45,7 +45,7 @@ export function LessonHeader({ data }: LessonHeaderProps) {
         aria-label="Відкрити інформацію про предмет"
       >
         <svg className="theme-card__more-svg">
-          <use xlinkHref="/img/sprite.svg#arrow-down-mini" />
+          <use href="/img/sprite.svg#arrow-down-mini" />
         </svg>
       </button>
       <div className="theme-card__info" />
