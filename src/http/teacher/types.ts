@@ -343,6 +343,7 @@ export type TSelfProgress = {
 
 export type TTestProgress = {
   id: string
+  test_id: string
   lecture_id: string
   title: string
   topic_id: string

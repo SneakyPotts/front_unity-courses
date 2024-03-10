@@ -1,7 +1,7 @@
 import type { TClass, TDocument, THuman } from '@assets/types/globals'
 
 /*profile*/
-export type TRole = 1 | 2 | 10 | 20 | 30 | 31 | 100
+export type TRole = 1 | 2 | 3 | 10 | 20 | 30 | 31 | 100
 
 export type TAboutMe = THuman & {
   id: string
@@ -87,5 +87,6 @@ export interface TBasketCourse {
   cover: string
   price: number
   discount: number
+  users: string[]
 }
 /*basket*/
