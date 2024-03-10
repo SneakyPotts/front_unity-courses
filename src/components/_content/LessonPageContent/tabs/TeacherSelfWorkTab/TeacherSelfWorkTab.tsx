@@ -22,7 +22,7 @@ export function TeacherSelfWorkTab({ selfId }: TeacherSelfWorkTabProps) {
     editSelf,
     retakeSelf,
   } = useQueryTeacherLesson({ self_id: selfId })
-
+  console.log(data)
   const [activeTab, setActiveTab] = useState(1)
   const [filteredStudents, setFilteredStudents] = useState<TStudentsProgress[]>([])
 
