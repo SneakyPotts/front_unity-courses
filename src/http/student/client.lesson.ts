@@ -67,6 +67,9 @@ export function useQueryStudentLesson({ self_id, test_id }: { self_id?: string; 
 
   const { mutateAsync: sendSelfConfirm } = useMutation({
     mutationFn: sendSelfWorkConfirm,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['selfWork'] })
+    },
   })
 
   const test = useQuery({

@@ -10,6 +10,7 @@ import type { TStudentsProgress } from '@http/teacher/types'
 import { Button } from '_ui/Button'
 import { Loader } from '_ui/Loader'
 import { RequestError } from '_ui/RequestError'
+import { toastPromise } from '_ui/ToastUtils'
 
 import type { TeacherSelfWorkTabProps } from './TeacherSelfWorkTab.props'
 
@@ -19,12 +20,18 @@ export function TeacherSelfWorkTab({ selfId }: TeacherSelfWorkTabProps) {
   const {
     self: { data, isLoading, isError },
     editSelf,
+    retakeSelf,
   } = useQueryTeacherLesson({ self_id: selfId })
 
   const [activeTab, setActiveTab] = useState(1)
   const [filteredStudents, setFilteredStudents] = useState<TStudentsProgress[]>([])
 
-  const handleAllowRetake = (student_id: string) => {}
+  const handleAllowRetake = (id: string) => {
+    toastPromise({
+      handler: retakeSelf({ self_id: selfId!, student_id: id }),
+      successMessage: 'Надано дозвіл на перевиконання',
+    })
+  }
 
   useEffect(() => {
     !!data?.progress &&
@@ -106,7 +113,7 @@ export function TeacherSelfWorkTab({ selfId }: TeacherSelfWorkTabProps) {
                         {activeTab === 1 && (
                           <Button
                             variant="border"
-                            href={`/`}
+                            href={`/check/self/${v.work_progress.id}`}
                             target="_blank"
                           >
                             Перевірити

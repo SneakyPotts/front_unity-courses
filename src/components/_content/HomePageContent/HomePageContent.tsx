@@ -71,7 +71,7 @@ export default function HomePageContent({ role }: HomePageContentProps) {
             <div className="statistics__inner">
               {isDesktop && (
                 <StatisticSubjects
-                  studentId={'childID'}
+                  // studentId={'childID'}
                   isShort
                 />
               )}
