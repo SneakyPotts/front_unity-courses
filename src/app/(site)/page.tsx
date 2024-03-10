@@ -9,9 +9,9 @@ import { RequestError } from '_ui/RequestError'
 import { CatalogContent } from '_content/CatalogContent'
 
 export default async function CoursesCatalog({ searchParams }: TPageProps) {
-  const me = await aboutMeRequest()
+  const { data: me } = await aboutMeRequest()
 
-  if (me.data?.role === 20) redirect('/home') //redirect for teachers
+  if (me?.role === 20) redirect('/home') //redirect for teachers
 
   const reqParams = () => {
     let res = []
