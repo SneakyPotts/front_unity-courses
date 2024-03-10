@@ -85,13 +85,21 @@
   }
 }
 
+@include mq("xl") {
+  .courses-lesson {
+    &__inner {
+      grid-template-columns: 1fr auto;
+    }
+  }
+}
+
 @include mq("lg") {
   .courses-lesson {
     &__inner {
       display: flex;
       flex-direction: column;
       margin-bottom: rem(80);
-    
+
       .my-catalog__block {
         order: 1;
       }

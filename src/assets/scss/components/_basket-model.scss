@@ -154,6 +154,10 @@
       line-height: rem(17);
     }
 
+    &-person {
+      border: rem(1) solid var(--orange-400);
+    }
+
     &-img {
       img {
         &:not(:last-of-type) {

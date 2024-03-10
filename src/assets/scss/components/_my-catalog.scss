@@ -14,6 +14,22 @@
     gap: rem(12);
   }
 
+  &__add {
+    @include flex-v-center;
+
+    gap: rem(5);
+    text-transform: uppercase;
+    font-size: rem(14);
+    font-weight: 500;
+    line-height: rem(16);
+    color: var(--grey-3);
+
+    svg {
+      width: rem(12);
+      height: rem(12);
+    }
+  }
+
   &__title {
     margin-bottom: rem(20);
     padding-bottom: rem(8);
@@ -195,6 +211,10 @@
       }
     }
 
+    &__banner {
+      display: none;
+    }
+
     &__left {
       order: 2;
 
@@ -211,6 +231,22 @@
     gap: 0;
     &__inner {
       grid-template-columns: 1fr;
+    }
+
+    &__add {
+      @include flex-h-center;
+
+      width: 100%;
+      position: absolute;
+      top: rem(60);
+      padding: rem(8) rem(16);
+      color: var(--black);
+      border: rem(1) solid var(--orange-400);
+      border-radius: rem(5);
+    }
+
+    &__active {
+      margin-top: rem(70);
     }
   }
 }

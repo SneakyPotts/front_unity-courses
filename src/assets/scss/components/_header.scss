@@ -5,6 +5,7 @@
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
+
   }
 
   &__head {
@@ -308,6 +309,23 @@
       right: 0;
       height: 100%;
       z-index: var(--ui-index-5);
+    }
+
+    &__container {
+      &--lesson {
+        .header__nav {
+          display: none;
+        }
+  
+        .header__lesson {
+          display: grid;
+          grid-template-columns: rem(32) auto;
+        }
+        .btn.btn--grey {
+          grid-column: 2 span;
+          margin-top: rem(16);
+        }
+      }
     }
 
     &__school {

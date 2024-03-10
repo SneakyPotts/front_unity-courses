@@ -306,6 +306,7 @@
   }
 
   &__container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: rem(20);
@@ -597,7 +598,7 @@
     justify-content: space-between;
     border: rem(1) solid #c8d9fd;
     border-radius: rem(5);
-    padding: rem(16) rem(62) rem(16) rem(16);
+    padding: rem(16);
   }
 
   &__class-room-svg {
@@ -1483,9 +1484,13 @@
 }
 
 .lesson-section__text-tabs {
-  display: flex;
-  align-items: center;
+  @include flex-v-center;
+
   gap: rem(12);
+
+  scrollbar-width: none;
+  overflow: auto hidden;
+  white-space: nowrap;
 }
 
 .tab {
@@ -1609,12 +1614,7 @@
   width: 100%;
 }
 
-@include mq("xl") {
-  .content-tabs__edit__btn {
-    position: absolute;
-    right: rem(25);
-    top: rem(80);
-  }
+@include mq("xxl") {
   .lesson-section {
     &__text__box {
       &-tab {
@@ -1623,6 +1623,22 @@
         gap: rem(20);
       }
     }
+  }
+}
+
+@include mq("xl") {
+  .lesson-section {
+    &__ridth {
+      .banner {
+        display: none;
+      }
+    }
+  }
+
+  .content-tabs__edit__btn {
+    position: absolute;
+    right: rem(25);
+    top: rem(80);
   }
 }
 
@@ -1638,6 +1654,12 @@
 
     &__lable {
       margin-top: rem(20);
+    }
+
+    &__text {
+      &-tabs {
+        width: 100%;
+      }
     }
 
     &__change {
@@ -1822,6 +1844,10 @@
     .content-tabs__list {
       margin-bottom: rem(20);
     }
+
+    .banner {
+      display: none;
+    }
   }
 
   .lesson-test__adap {
@@ -1844,6 +1870,12 @@
         grid-template-columns: 1fr 1fr;
         gap: rem(20);
       }
+    }
+  }
+
+  .lesson__section {
+    &-nav-content {
+      margin-left: auto;
     }
   }
 
