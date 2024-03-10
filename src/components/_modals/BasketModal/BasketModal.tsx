@@ -1,19 +1,22 @@
+import classNames from 'classnames'
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { usePopper } from 'react-popper'
 import { toast } from 'react-toastify'
 import Cookies from 'universal-cookie'
-import { useLocalStorage, useWindowSize } from 'usehooks-ts'
+import { useLocalStorage, useOnClickOutside, useWindowSize } from 'usehooks-ts'
 
 import Image from 'next/image'
 import Link from 'next/link'
 
 import { formattedPrice, imgBlur } from '@assets/utils'
 import { appContext } from '@components/Context/context'
-import { buyByLiqPay, removeFromBasketAction, revalidateCourses } from '@http/profile/actions'
-import { TBasketCourse } from '@http/profile/type'
+import { buyByLiqPay, patchParentBasket, removeFromBasketAction, revalidateCourses } from '@http/profile/actions'
+import { TBasketCourse, TParentRegistration } from '@http/profile/type'
 
 import { Button } from '_ui/Button'
+import { Checkbox } from '_ui/Checkbox'
 import { Modal } from '_ui/Modal'
-import { successIcon, toastPromise } from '_ui/ToastUtils'
+import { errorIcon, successIcon, toastPromise } from '_ui/ToastUtils'
 
 import { AuthForm } from '_modals/AuthModal'
 
@@ -117,14 +120,19 @@ export function BasketModal({ onClose, showChildBoughtModal }: BasketModalProps)
                   </svg>
                 </button>
               </div>
+
+              <ChildList
+                profile={profile?.parent_profile}
+                course={v}
+              />
             </div>
           ))}
-
-          {/*TODO: add childList for parents (commented bellow)*/}
         </div>
         {!!profile ? (
           <AuthInfo
+            profile={profile}
             role={role}
+            basket={basket}
             showChildBoughtModal={showChildBoughtModal}
             onClose={onClose}
           />
@@ -136,14 +144,12 @@ export function BasketModal({ onClose, showChildBoughtModal }: BasketModalProps)
   )
 }
 
-function AuthInfo({ role, showChildBoughtModal, onClose }: AuthInfoProps) {
-  const { basket, setBasket } = useContext(appContext)
-
+function AuthInfo({ profile, role, basket, showChildBoughtModal, onClose }: AuthInfoProps) {
   const payForm = useRef<HTMLFormElement>(null)
 
   const info = useMemo(
     () => ({
-      total: basket?.reduce((acc, item) => acc + (item.discount || item.price), 0),
+      total: basket?.reduce((acc, item) => acc + (item.discount || item.price) * item.users.length, 0),
       free: basket?.find((v) => v.price === 0),
     }),
     [basket],
@@ -154,10 +160,6 @@ function AuthInfo({ role, showChildBoughtModal, onClose }: AuthInfoProps) {
     data: undefined,
     signature: undefined,
   })
-
-  const handleApprove = () => {
-    showChildBoughtModal()
-  }
 
   const handlePaying = async () => {
     setIsPayCreating(true)
@@ -176,15 +178,20 @@ function AuthInfo({ role, showChildBoughtModal, onClose }: AuthInfoProps) {
         const { status, ...reqData } = data
 
         if (!!status && !reqData.data && !reqData.signature) {
-          setBasket([])
+          if (role.student) {
+            showChildBoughtModal()
+          } else {
+            revalidateCourses()
 
-          revalidateCourses()
+            toast.success('Ви успішно отримали безкоштовний курс', successIcon)
+          }
 
-          toast.success('Ви успішно отримали безкоштовний курс', successIcon)
           onClose()
         } else {
           setLiqPayKeys(reqData)
         }
+      } else {
+        toast.error('Щось пішло не так...', errorIcon)
       }
     })
   }
@@ -227,7 +234,7 @@ function AuthInfo({ role, showChildBoughtModal, onClose }: AuthInfoProps) {
       <ul className={'basket-model__card-quantity'}>
         {basket?.map((v, i) => (
           <li key={`${v.id}_${i}`}>
-            <span>x1</span> <p>{v.title}</p>
+            <span>x{v.users.length}</span> <p>{v.title}</p>
             <div className="basket-model__card-price">{!!v.price ? `${formattedPrice(v.discount || v.price)} ₴` : 'Безкоштовно'}</div>
           </li>
         ))}
@@ -292,7 +299,7 @@ function AuthInfo({ role, showChildBoughtModal, onClose }: AuthInfoProps) {
           </Button>
           <Button
             className={'basket-model__buttons-btn'}
-            onClick={handleApprove}
+            onClick={handlePaying}
           >
             підтвердити
           </Button>
@@ -309,6 +316,121 @@ function NotAuthInfo() {
       <p className={'basket-model__card-subtitle'}>Замовлення готове до оформлення! Будь ласка, увійдіть або зареєструйтеся щоб продовжити.</p>
 
       <AuthForm isBasket />
+    </div>
+  )
+}
+
+function ChildList({ profile, course }: { profile?: TParentRegistration; course: TBasketCourse }) {
+  const container = useRef<HTMLDivElement | null>(null)
+
+  const [isShow, setIsShow] = useState(false)
+  const [activeId, setActiveId] = useState<string[]>(course.users || [])
+
+  const [referenceElement, setReferenceElement] = useState<any>(null)
+  const [popperElement, setPopperElement] = useState<any>(null)
+
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    placement: 'bottom-start',
+    modifiers: [{ name: 'offset', options: { offset: [0, 8] } }],
+  })
+
+  const handleEdit = async (user_id: string) => {
+    const newArrId = activeId.includes(user_id) ? activeId.filter((id) => id !== user_id) : [...activeId, user_id]
+
+    setActiveId(newArrId)
+    await patchParentBasket({ course_id: course.id, user_ids: newArrId })
+  }
+
+  useOnClickOutside(container, () => setIsShow(false))
+
+  if (!profile) return null
+
+  return (
+    <div
+      ref={(ref) => {
+        container.current = ref
+        setReferenceElement(ref)
+      }}
+      className={'basket-model__sorting'}
+    >
+      <div className={'basket-model__container'}>
+        <p className={'basket-model__container-text'}>Оберіть для кого:</p>
+        <div className={'basket-model__container-img'}>
+          <Image
+            src={profile?.avatar || '/img/static/default-avatar.png'}
+            width={24}
+            height={24}
+            style={{ objectFit: 'cover' }}
+            alt={`${profile?.last_name} ${profile?.first_name}`}
+          />
+          {profile?.childs?.map((child) => (
+            <Image
+              key={child.id}
+              src={child?.avatar || '/img/static/default-avatar.png'}
+              width={24}
+              height={24}
+              style={{ objectFit: 'cover' }}
+              alt={`${child?.last_name} ${child?.first_name}`}
+            />
+          ))}
+        </div>
+        <button
+          className={'basket-model__container-btn'}
+          onClick={() => setIsShow((p) => !p)}
+        >
+          <svg>
+            <use href="/img/sprite.svg#basket-modal__arrow"></use>
+          </svg>
+        </button>
+        {isShow && (
+          <ul
+            ref={setPopperElement}
+            className={'basket-model__catalog'}
+            {...attributes.popper}
+            style={styles.popper}
+          >
+            <li className={'basket-model__catalog-item'}>
+              <Checkbox
+                classWrapper={'some-wrapper-class'}
+                defaultChecked={activeId.includes(profile.id)}
+                onChange={() => handleEdit(profile.id)}
+              />
+              <div className={'basket-model__catalog-block'}>
+                <Image
+                  src={profile?.avatar || '/img/static/default-avatar.png'}
+                  width={24}
+                  height={24}
+                  style={{ objectFit: 'cover' }}
+                  alt={`${profile?.last_name} ${profile?.first_name}`}
+                />
+                <p>{profile.first_name}</p>
+              </div>
+            </li>
+            {profile.childs?.map((child) => (
+              <li
+                key={child.id}
+                className={'basket-model__catalog-item'}
+              >
+                <Checkbox
+                  classWrapper={'some-wrapper-class'}
+                  defaultChecked={activeId.includes(child.id)}
+                  onChange={() => handleEdit(child.id)}
+                />
+                <div className={'basket-model__catalog-block'}>
+                  <Image
+                    src={child?.avatar || '/img/static/default-avatar.png'}
+                    width={24}
+                    height={24}
+                    style={{ objectFit: 'cover' }}
+                    alt={`${child?.last_name} ${child?.first_name}`}
+                  />
+                  <p>Дмитро</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   )
 }

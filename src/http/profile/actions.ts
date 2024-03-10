@@ -76,6 +76,17 @@ export async function addToBasketAction(course_id: string) {
   })
 }
 
+export async function patchParentBasket(data: { course_id: string; user_ids: string[] }) {
+  const response = await serverFetchAuth<any>(`/courses/cart/edit/`, {
+    method: 'PATCH',
+    body: JSON.stringify(data),
+  })
+
+  revalidateTag('basket')
+
+  return response
+}
+
 export async function removeFromBasketAction(course_id: string) {
   return await serverFetchAuth<TBasket>(`/courses/cart/remove/`, {
     method: 'POST',
