@@ -1,4 +1,4 @@
-import { File, IQuiz, Link, THuman, TSchedule, TTeacher } from '@assets/types/globals'
+import { File, Link, THuman, TSchedule, TTeacher } from '@assets/types/globals'
 import { TLessonContent } from '@http/student/types'
 
 export type TTeacherLesson = {
@@ -353,8 +353,16 @@ export type TTestProgress = {
   course_color: string
   course_icon: string
   test_type: string
+  progress_type: number
   external_link: string
-  quiz: IQuiz
+  quiz: {
+    id: string
+    all_tasks_number: number
+    checked_by_service: number
+    students_correct_answers: number
+    estimate_mark: number
+    result: TResult[]
+  }
   answer_timestamp: string
   is_completed: boolean
   teacher_reply: string
