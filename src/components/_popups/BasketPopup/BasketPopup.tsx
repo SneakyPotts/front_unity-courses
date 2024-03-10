@@ -13,7 +13,7 @@ import type { BasketPopupProps } from './BasketPopup.props'
 export function BasketPopup({ showCheckoutModal, onClose }: BasketPopupProps) {
   const { basket } = useContext(appContext)
 
-  const totalPrice = basket?.reduce((acc, item) => acc + (item.discount || item.price), 0)
+  const totalPrice = basket?.reduce((acc, item) => acc + (item.discount || item.price) * item.users.length, 0)
 
   return (
     <div className="notification">
