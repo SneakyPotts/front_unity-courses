@@ -60,12 +60,12 @@ export function CheckSelfWorkContent({ data }: CheckSelfWorkContentProps) {
   }
 
   useSetHeaderParams({ title: 'Самостійна робота' })
-
+  console.log(data)
   return (
     <div className={'lesson-section__block'}>
       {data.progress_type !== 2 && <div className={'lesson-section__deadline'}>{format(new Date(data.answer_timestamp), 'dd.MM.yyyy HH:mm')}</div>}
 
-      {data?.progress_type === 2 ? (
+      {data?.status === 2 ? (
         <div className="tests__retake">
           <p>Учню відправлено завдання на перездачу. Очікуйте на сповіщення про виконання роботи.</p>
         </div>

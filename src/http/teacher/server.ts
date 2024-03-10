@@ -38,6 +38,7 @@ const getTeacherTestProgress = cache(
     await serverFetchAuth<TTestProgress>(`/courses/teacher/test/progress/${progress_id}/`, {
       next: {
         revalidate: 30,
+        tags: ['testProgress'],
       },
     }),
 )
