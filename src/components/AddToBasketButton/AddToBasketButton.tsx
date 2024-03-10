@@ -41,6 +41,7 @@ export function AddToBasketButton({ callback, course }: AddToBasketButtonProps) 
         description: course.description,
         price: course.price,
         discount: course.discount,
+        users: [profile!.id],
       }
 
       if (cookies.get('basket')) {
