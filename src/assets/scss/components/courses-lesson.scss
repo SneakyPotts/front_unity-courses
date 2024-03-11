@@ -83,6 +83,10 @@
       border-radius: rem(10);
     }
   }
+
+  &__state--open {
+    display: block;
+  }
 }
 
 @include mq("xl") {
@@ -113,7 +117,7 @@
       }
 
       // grid-template-columns: 1fr;
-      padding-top: rem(20);
+      // padding-top: rem(20);
       gap: 0;
 
       &--active {
@@ -132,6 +136,10 @@
         .lesson-section__theme::after {
           opacity: 1;
         }
+      }
+
+      .lesson-section__container {
+        display: none;
       }
     }
 

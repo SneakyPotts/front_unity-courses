@@ -91,7 +91,7 @@
 
     .content-tabs {
       &__list {
-        flex-wrap: wrap;
+        // flex-wrap: wrap;
         padding: 0;
       }
 
@@ -158,10 +158,21 @@
       display: none;
     }
 
+    &__list {
+      width: 100%;
+      overflow-x: scroll;
+      scrollbar-width: none;
+
+    }
+
     &--static {
       .content-tabs__btn {
         font-weight: 500;
         font-size: rem(14);
+      }
+
+      &__list {
+        flex-wrap: nowrap;
       }
     }
 

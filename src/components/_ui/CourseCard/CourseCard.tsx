@@ -1,7 +1,7 @@
 'use client'
 
 import { isAfter } from 'date-fns'
-import React from 'react'
+import React, { useState } from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -21,6 +21,14 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
   const handleRouteStats = () => {
     localStorage.setItem('course_stats', course.id)
     router.push(`/statistics`)
+  }
+
+  const [isOpenTeachers, setIsOpenTeachers] = useState(false)
+
+  const changeStateTeacherBlock = () => {
+    setIsOpenTeachers(!isOpenTeachers)
+
+    console.log(isOpenTeachers)
   }
 
   return (
@@ -143,7 +151,10 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
           </div>
         )}
         <div className="my-catalog__contact close">
-          <button className="my-catalog__contact-btn">
+          <button
+            className="my-catalog__contact-btn"
+            onClick={changeStateTeacherBlock}
+          >
             <svg className="my-catalog__contact-svg">
               <use href="/img/sprite.svg#arrow-bottom"></use>
             </svg>

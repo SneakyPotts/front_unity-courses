@@ -245,6 +245,10 @@
       border-radius: rem(5);
     }
 
+    &__courses {
+      overflow-x: hidden;
+    }
+
     // &__active {
     //   margin-top: rem(70);
     // }
