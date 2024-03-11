@@ -356,22 +356,27 @@ function ChildList({ profile, course }: { profile?: TParentRegistration; course:
       <div className={'basket-model__container'}>
         <p className={'basket-model__container-text'}>Оберіть для кого:</p>
         <div className={'basket-model__container-img'}>
-          <Image
-            src={profile?.avatar || '/img/static/default-avatar.png'}
-            width={24}
-            height={24}
-            style={{ objectFit: 'cover' }}
-            alt={`${profile?.last_name} ${profile?.first_name}`}
-          />
-          {profile?.childs?.map((child) => (
+          <div className={classNames('basket-model__container-avatar', { 'basket-model__container--person': activeId.includes(profile.id) })}>
             <Image
-              key={child.id}
-              src={child?.avatar || '/img/static/default-avatar.png'}
+              src={profile?.avatar || '/img/static/default-avatar.png'}
               width={24}
               height={24}
               style={{ objectFit: 'cover' }}
-              alt={`${child?.last_name} ${child?.first_name}`}
+              alt={`${profile?.last_name} ${profile?.first_name}`}
             />
+          </div>
+
+          {profile?.childs?.map((child) => (
+            <div className={classNames('basket-model__container-avatar', { 'basket-model__container--person': activeId.includes(profile.id) })}>
+              <Image
+                key={child.id}
+                src={child?.avatar || '/img/static/default-avatar.png'}
+                width={24}
+                height={24}
+                style={{ objectFit: 'cover' }}
+                alt={`${child?.last_name} ${child?.first_name}`}
+              />
+            </div>
           ))}
         </div>
         <button

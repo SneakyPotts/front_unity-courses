@@ -83,6 +83,18 @@
       border-radius: rem(10);
     }
   }
+
+  &__state--open {
+    display: block;
+  }
+}
+
+@include mq("xl") {
+  .courses-lesson {
+    &__inner {
+      grid-template-columns: 1fr auto;
+    }
+  }
 }
 
 @include mq("lg") {
@@ -91,7 +103,7 @@
       display: flex;
       flex-direction: column;
       margin-bottom: rem(80);
-    
+
       .my-catalog__block {
         order: 1;
       }
@@ -105,7 +117,7 @@
       }
 
       // grid-template-columns: 1fr;
-      padding-top: rem(20);
+      // padding-top: rem(20);
       gap: 0;
 
       &--active {
@@ -124,6 +136,10 @@
         .lesson-section__theme::after {
           opacity: 1;
         }
+      }
+
+      .lesson-section__container {
+        display: none;
       }
     }
 

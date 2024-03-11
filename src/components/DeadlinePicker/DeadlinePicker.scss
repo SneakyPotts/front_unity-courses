@@ -1,5 +1,5 @@
-@import 'src/assets/scss/abstracts/functions';
-@import 'src/assets/scss/abstracts/mixins';
+@import "src/assets/scss/abstracts/functions";
+@import "src/assets/scss/abstracts/mixins";
 
 #deadline {
   * {
@@ -233,14 +233,13 @@ input.react-datepicker-time__input {
   transition: background-color 0.1s var(--ease-out);
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     right: rem(16);
-
-    width: 24px;
-    height: 24px;
-
-    background: url('/assets/img/sprite.svg#calendar-field-icon') center/cover no-repeat;
+    width: rem(24);
+    height: rem(24);
+    background: url("/img/sprite.svg#calendar-field-icon") center/cover no-repeat;
+    filter: opacity(0.3);
   }
 
   @include hover() {
