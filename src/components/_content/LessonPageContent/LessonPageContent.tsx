@@ -90,6 +90,7 @@ export function LessonPageContent({ data, role }: LessonPageContentProps) {
           </Button>
         )
       })(),
+    headerClassName: role.teacher ? 'header__container--lesson' : '',
   })
 
   return (

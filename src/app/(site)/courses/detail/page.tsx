@@ -57,7 +57,7 @@ export default function CourseDetail() {
                   <div className={'my-catalog__contact close'}>
                     <button
                       className={'my-catalog__contact-btn'}
-                      onClick={changeStateTeacherBlock}
+                      // onClick={changeStateTeacherBlock}
                     >
                       <svg className={'my-catalog__contact-svg'}>
                         <use href="/img/sprite.svg#arrow-top"></use>

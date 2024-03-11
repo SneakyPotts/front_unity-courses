@@ -367,9 +367,11 @@ function ChildList({ profile, course }: { profile?: TParentRegistration; course:
           </div>
 
           {profile?.childs?.map((child) => (
-            <div className={classNames('basket-model__container-avatar', { 'basket-model__container--person': activeId.includes(profile.id) })}>
+            <div
+              key={child.id}
+              className={classNames('basket-model__container-avatar', { 'basket-model__container--person': activeId.includes(child.id) })}
+            >
               <Image
-                key={child.id}
                 src={child?.avatar || '/img/static/default-avatar.png'}
                 width={24}
                 height={24}
@@ -429,7 +431,7 @@ function ChildList({ profile, course }: { profile?: TParentRegistration; course:
                     style={{ objectFit: 'cover' }}
                     alt={`${child?.last_name} ${child?.first_name}`}
                   />
-                  <p>Дмитро</p>
+                  <p>{child?.first_name}</p>
                 </div>
               </li>
             ))}
