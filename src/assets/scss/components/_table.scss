@@ -90,3 +90,10 @@
     color: #333;
   }
 }
+
+
+@include mq('lg') {
+  .table {
+    width: unset;
+  }
+}

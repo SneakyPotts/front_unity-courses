@@ -91,6 +91,7 @@
   .document-block {
     &__list {
       grid-template-columns: 1fr;
+      gap: rem(5);
     }
   }
 }
