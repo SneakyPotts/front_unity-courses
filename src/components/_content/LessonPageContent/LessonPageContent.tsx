@@ -1,5 +1,6 @@
 'use client'
 
+import { MathJax } from 'better-react-mathjax'
 import { addMinutes, isAfter } from 'date-fns'
 import React, { useMemo, useState } from 'react'
 
@@ -102,7 +103,9 @@ export function LessonPageContent({ data, role }: LessonPageContentProps) {
       />
       {activeTab === is.content && (
         <div className={'courses-lesson__body'}>
-          <div className="lesson-section__text">{formattedContent}</div>
+          <MathJax>
+            <div className="lesson-section__text">{formattedContent}</div>
+          </MathJax>
         </div>
       )}
 
