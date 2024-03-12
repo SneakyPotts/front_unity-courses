@@ -86,7 +86,7 @@ export function Header({ profile, className }: HeaderProps) {
 
   return (
     <header className={classNames('header', className)}>
-      <div className="header__container container">
+      <div className={classNames('header__container container', header?.headerClassName)}>
         {header ? (
           <div className="header__lesson">
             {header.titleBefore}

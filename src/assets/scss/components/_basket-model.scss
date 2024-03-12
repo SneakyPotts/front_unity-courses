@@ -157,13 +157,23 @@
     }
 
     &-img {
+      @include flex-v-center;
+
+      gap: rem(8);
+    }
+
+    &-avatar {
+     border-radius: rem(25);
       img {
-        &:not(:last-of-type) {
-          margin-right: rem(8);
-        }
-        border: rem(1) solid var(--orange-400);
-        border-radius: 50%;
+        border-radius: rem(25);
+        display: block;
       }
+    }
+
+    &--person {
+      border: rem(1) solid var(--orange-400);
+
+      display: block;
     }
 
     &-btn {
@@ -438,7 +448,7 @@
   }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .basket-model {
     .modal__body {
       padding: 0;
@@ -540,7 +550,7 @@
   }
 }
 
-@include mq('md') {
+@include mq("md") {
   .basket-model {
     &.modal.modal--open {
       background-color: rgba(var(--grey-3--rgb), 0.8);

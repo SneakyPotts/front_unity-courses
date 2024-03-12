@@ -18,4 +18,5 @@ export type THeader = {
   titleBefore?: string | ReactNode
   titleAfter?: string | ReactNode
   rightElement?: string | ReactNode
+  headerClassName?: string
 }

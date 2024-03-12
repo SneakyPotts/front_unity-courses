@@ -484,6 +484,12 @@
       line-height: 120%;
     }
 
+    &__content {
+      &--btn {
+        width: auto;
+      }
+    }
+
     &__ridth {
       position: relative;
     }
@@ -505,6 +511,13 @@
         align-items: center;
         z-index: 1;
       }
+    }
+  }
+  .archive__result.--in-basket {
+    padding-top: rem(63);
+
+    .btn.btn--trans:not(.fulfill) {
+      width: auto;
     }
   }
 }
