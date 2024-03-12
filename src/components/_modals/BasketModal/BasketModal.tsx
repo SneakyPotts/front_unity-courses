@@ -149,7 +149,7 @@ function AuthInfo({ profile, role, basket, showChildBoughtModal, onClose }: Auth
 
   const info = useMemo(
     () => ({
-      total: basket?.reduce((acc, item) => acc + (item.discount || item.price) * item.users.length, 0),
+      total: basket?.reduce((acc, item) => acc + (item.discount || item.price) * (item.users?.length || 1), 0),
       free: basket?.find((v) => v.price === 0),
     }),
     [basket],
@@ -234,7 +234,7 @@ function AuthInfo({ profile, role, basket, showChildBoughtModal, onClose }: Auth
       <ul className={'basket-model__card-quantity'}>
         {basket?.map((v, i) => (
           <li key={`${v.id}_${i}`}>
-            <span>x{v.users.length}</span> <p>{v.title}</p>
+            <span>x{v.users?.length || 1}</span> <p>{v.title}</p>
             <div className="basket-model__card-price">{!!v.price ? `${formattedPrice(v.discount || v.price)} ₴` : 'Безкоштовно'}</div>
           </li>
         ))}
