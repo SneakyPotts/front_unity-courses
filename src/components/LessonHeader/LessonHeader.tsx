@@ -1,4 +1,8 @@
+'use client'
+
+import classNames from 'classnames'
 import React from 'react'
+import { useToggle } from 'usehooks-ts'
 
 import Image from 'next/image'
 
@@ -7,9 +11,11 @@ import { formatDateInGenitive, imgBlur, subColor } from '@assets/utils'
 import type { LessonHeaderProps } from './LessonHeader.props'
 
 export function LessonHeader({ data, isCheckWork }: LessonHeaderProps) {
+  const [isOpenMobile, setIsOpenMobile] = useToggle(false)
+
   return (
     <div
-      className={'theme-card lesson-section__theme'}
+      className={classNames('theme-card lesson-section__theme', { 'theme-card--active': isOpenMobile })}
       style={{ backgroundColor: data?.course_color }}
     >
       <div className={'theme-card__inner courses-lesson__block--element'}>
@@ -41,6 +47,7 @@ export function LessonHeader({ data, isCheckWork }: LessonHeaderProps) {
       </div>
       <button
         className="theme-card__more"
+        onClick={setIsOpenMobile}
         aria-expanded="false"
         aria-label="Відкрити інформацію про предмет"
       >

@@ -70,7 +70,7 @@ export default async function CourseDetailPage({ params, searchParams }: TPagePr
 
 function AsideTeacherList({ lectors }: { lectors: TTeacher[] }) {
   return (
-    <div className="lesson-section__container">
+    <div className="lesson-section__container lesson--teachers">
       {lectors.map((v, i) => (
         <TeacherCard
           key={v.id}

@@ -44,7 +44,7 @@ function Aside({ lectors, isTeacher }: { lectors?: TTeacher[]; isTeacher?: boole
   return (
     <div className="lesson-section__right courses-lesson__right--element">
       {!!lectors?.length && (
-        <div className="lesson-section__container">
+        <div className="lesson-section__container lesson--teachers">
           {lectors?.map((v, i) => (
             <TeacherCard
               key={v.id}

@@ -1,5 +1,6 @@
 'use client'
 
+import classNames from 'classnames'
 import { isAfter } from 'date-fns'
 import React, { useContext } from 'react'
 import { useToggle } from 'usehooks-ts'
@@ -13,6 +14,7 @@ import { appContext } from '@components/Context/context'
 
 import { Button } from '_ui/Button'
 import { RatingStars } from '_ui/RatingStars'
+import { TeacherCard } from '_ui/TeacherCard'
 import { TeacherForCourse } from '_ui/TeacherForCourse'
 
 import type { CourseCardProps } from './CourseCard.props'
@@ -35,8 +37,9 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
   const [isOpenMobile, setIsOpenMobile] = useToggle(false)
 
   return (
+    // TODO для страницы урока добавить вот класс my-catalog__block--lesson убирает нижнее скругление для карточки
     <div
-      className="my-catalog__block"
+      className={classNames('my-catalog__block', { 'my-catalog__block--lesson': isOpenMobile })}
       style={{ backgroundColor: isArchived ? '#f2f2f2' : course.color }}
     >
       <div className="my-catalog__left">
@@ -164,7 +167,7 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
           </button>
         </div>
         {/*FIXME: make real markup*/}
-        {isOpenMobile && <div className="some-div">isOpenMobile = true</div>}
+        {isOpenMobile && <div className="some-div"></div>}
         {role.teacher && <div className="some-div">For teacher</div>}
       </div>
       <div className="my-catalog__ridth">

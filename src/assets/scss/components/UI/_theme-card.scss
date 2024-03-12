@@ -93,9 +93,15 @@
       fill: #f6b77d;
     }
   }
+
+  &--active {
+    + .lesson-section__right .lesson-section__container {
+      display: block;
+    }
+  }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .theme-card {
     padding: rem(16);
 
