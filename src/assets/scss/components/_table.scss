@@ -91,9 +91,20 @@
   }
 }
 
-
-@include mq('lg') {
+@include mq("lg") {
   .table {
     width: unset;
+
+    &__row {
+      display: grid;
+      grid-template-columns: 1fr minmax(rem(50), auto);
+    }
+    &__marks + .from-group {
+      .dropdown,
+      .dropdown__nav,
+      .dropdawn__button-check {
+        height: rem(50);
+      }
+    }
   }
 }

@@ -45,16 +45,19 @@ export function LessonHeader({ data, isCheckWork }: LessonHeaderProps) {
           </div>
         )}
       </div>
-      <button
-        className="theme-card__more"
-        onClick={setIsOpenMobile}
-        aria-expanded="false"
-        aria-label="Відкрити інформацію про предмет"
-      >
-        <svg className="theme-card__more-svg">
-          <use href="/img/sprite.svg#arrow-down-mini" />
-        </svg>
-      </button>
+      <div className="theme-card__block">
+        <button
+          className="theme-card__more"
+          onClick={setIsOpenMobile}
+          aria-expanded="false"
+          aria-label="Відкрити інформацію про предмет"
+        >
+          <svg className="theme-card__more-svg">
+            <use href="/img/sprite.svg#arrow-down-mini" />
+          </svg>
+        </button>
+      </div>
+
       <div className="theme-card__info" />
     </div>
   )
