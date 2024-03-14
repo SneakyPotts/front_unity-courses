@@ -41,7 +41,7 @@ export async function StudentCourseStatsContent({ course_id, role }: StudentCour
             ))}
           <StatisticsItem
             type={'progress'}
-            progress={stats?.visiting.percentage}
+            progress={stats?.visiting.percentage || 0}
             value={0}
             max_value={0}
             percentage={0}
