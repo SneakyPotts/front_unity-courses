@@ -164,12 +164,13 @@
       scrollbar-width: none;
     }
     // TODO стилизация табов которые отображают контент для урока курса
-    &__wrapper {
-      margin-top: rem(40);
-      background: var(--grey-6);
-      padding: rem(12) rem(16);
-      border-radius: rem(10);
-    }
+    // &__wrapper {
+    //  &--element {
+    //   margin-top: rem(40);
+    //   background: var(--grey-6);
+    //   padding: rem(12) rem(16);
+    //   border-radius: rem(10);
+    // }
 
     &--static {
       .content-tabs__btn {

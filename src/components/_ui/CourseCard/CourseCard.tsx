@@ -37,7 +37,6 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
   const [isOpenMobile, setIsOpenMobile] = useToggle(false)
 
   return (
-    // TODO для страницы урока добавить вот класс my-catalog__block--lesson убирает нижнее скругление для карточки
     <div
       className={classNames('my-catalog__block', { 'my-catalog__block--lesson': isOpenMobile })}
       style={{ backgroundColor: isArchived ? '#f2f2f2' : course.color }}
@@ -156,19 +155,23 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
             </button>
           </div>
         )}
-        <div className="my-catalog__contact close">
-          <button
-            className="my-catalog__contact-btn"
-            onClick={setIsOpenMobile}
-          >
-            <svg className="my-catalog__contact-svg">
-              <use href="/img/sprite.svg#arrow-bottom"></use>
-            </svg>
-          </button>
-        </div>
+        {/* && !role.student */}
+        {!role.teacher && !role.parent && (
+          <div className="my-catalog__contact close">
+            <div className="some-div">
+              <button
+                className="my-catalog__contact-btn"
+                onClick={setIsOpenMobile}
+              >
+                <svg className="my-catalog__contact-svg">
+                  <use href="/img/sprite.svg#arrow-bottom"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
         {/*FIXME: make real markup*/}
         {isOpenMobile && <div className="some-div"></div>}
-        {role.teacher && <div className="some-div">For teacher</div>}
       </div>
       <div className="my-catalog__ridth">
         {isArchived ? (
