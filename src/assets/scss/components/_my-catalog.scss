@@ -233,6 +233,13 @@
       grid-template-columns: 1fr;
     }
 
+    &__block {
+      padding: rem(16);
+      &--lesson {
+        border-radius: rem(10) rem(10) 0 0;
+      }
+    }
+
     &__add {
       @include flex-h-center;
 
@@ -247,27 +254,6 @@
 
     &__courses {
       overflow-x: hidden;
-    }
-
-    // &__active {
-    //   margin-top: rem(70);
-    // }
-  }
-}
-
-@include mq("md") {
-  .my-catalog {
-    &__teacher {
-      display: none;
-    }
-
-    &__box {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    &__active {
-      margin-bottom: rem(66);
     }
 
     &__contact {
@@ -285,6 +271,42 @@
         height: rem(16);
         fill: #bdbdbd;
       }
+    }
+
+    // &__active {
+    //   margin-top: rem(70);
+    // }
+  }
+
+  .my-catalog__block--lesson {
+    padding-bottom: 0;
+    & ~ .course-detail__block {
+      .lesson-section__container.lesson--teachers {
+        display: block;
+
+        .teacher-card {
+          &:not(:last-child) {
+            margin-bottom: rem(8);
+          }
+        }
+      }
+    }
+  }
+}
+
+@include mq("md") {
+  .my-catalog {
+    &__teacher {
+      display: none;
+    }
+
+    &__box {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &__active {
+      margin-bottom: rem(66);
     }
   }
 }

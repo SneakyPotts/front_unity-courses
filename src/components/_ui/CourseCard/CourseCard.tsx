@@ -1,16 +1,20 @@
 'use client'
 
+import classNames from 'classnames'
 import { isAfter } from 'date-fns'
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
+import { useToggle } from 'usehooks-ts'
 
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { formatDateInGenitive, subColor } from '@assets/utils'
+import { appContext } from '@components/Context/context'
 
 import { Button } from '_ui/Button'
 import { RatingStars } from '_ui/RatingStars'
+import { TeacherCard } from '_ui/TeacherCard'
 import { TeacherForCourse } from '_ui/TeacherForCourse'
 
 import type { CourseCardProps } from './CourseCard.props'
@@ -18,22 +22,23 @@ import type { CourseCardProps } from './CourseCard.props'
 export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps) {
   const router = useRouter()
 
+  const { profile } = useContext(appContext)
+  const role = {
+    teacher: profile?.role === 20,
+    student: profile?.role === 2,
+    parent: profile?.role === 10,
+  }
+
   const handleRouteStats = () => {
     localStorage.setItem('course_stats', course.id)
     router.push(`/statistics`)
   }
 
-  const [isOpenTeachers, setIsOpenTeachers] = useState(false)
-
-  const changeStateTeacherBlock = () => {
-    setIsOpenTeachers(!isOpenTeachers)
-
-    console.log(isOpenTeachers)
-  }
+  const [isOpenMobile, setIsOpenMobile] = useToggle(false)
 
   return (
     <div
-      className="my-catalog__block"
+      className={classNames('my-catalog__block', { 'my-catalog__block--lesson': isOpenMobile })}
       style={{ backgroundColor: isArchived ? '#f2f2f2' : course.color }}
     >
       <div className="my-catalog__left">
@@ -112,7 +117,7 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
             </>
           )}
 
-          {!isTeacher ??
+          {!isTeacher &&
             course.lectors.map((lecturer) => (
               <TeacherForCourse
                 key={lecturer.id}
@@ -150,16 +155,23 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
             </button>
           </div>
         )}
-        <div className="my-catalog__contact close">
-          <button
-            className="my-catalog__contact-btn"
-            onClick={changeStateTeacherBlock}
-          >
-            <svg className="my-catalog__contact-svg">
-              <use href="/img/sprite.svg#arrow-bottom"></use>
-            </svg>
-          </button>
-        </div>
+        {/* && !role.student */}
+        {!role.teacher && !role.parent && (
+          <div className="my-catalog__contact close">
+            <div className="some-div">
+              <button
+                className="my-catalog__contact-btn"
+                onClick={setIsOpenMobile}
+              >
+                <svg className="my-catalog__contact-svg">
+                  <use href="/img/sprite.svg#arrow-bottom"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
+        {/*FIXME: make real markup*/}
+        {isOpenMobile && <div className="some-div"></div>}
       </div>
       <div className="my-catalog__ridth">
         {isArchived ? (

@@ -13,7 +13,7 @@
   }
 
   &__title {
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-weight: 600;
     font-style: normal;
     font-size: rem(24);
@@ -39,7 +39,7 @@
   }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .marks-table {
     &__overlay {
       position: fixed;
@@ -76,16 +76,12 @@
       margin-bottom: rem(0);
     }
 
+    &__table {
+      margin-bottom: rem(60);
+    }
+
     &__title {
       display: none;
-    }
-  }
-}
-
-@include mq('lg') {
-  .marks-table {
-    &__bottom {
-      margin-bottom: rem(0);
     }
   }
 }
