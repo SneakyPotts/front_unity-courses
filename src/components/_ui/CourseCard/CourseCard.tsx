@@ -14,7 +14,6 @@ import { appContext } from '@components/Context/context'
 
 import { Button } from '_ui/Button'
 import { RatingStars } from '_ui/RatingStars'
-import { TeacherCard } from '_ui/TeacherCard'
 import { TeacherForCourse } from '_ui/TeacherForCourse'
 
 import type { CourseCardProps } from './CourseCard.props'
@@ -155,8 +154,7 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
             </button>
           </div>
         )}
-        {/* && !role.student */}
-        {!role.teacher && !role.parent && (
+        {!role.teacher && (
           <div className="my-catalog__contact close">
             <div className="some-div">
               <button
@@ -170,8 +168,6 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
             </div>
           </div>
         )}
-        {/*FIXME: make real markup*/}
-        {isOpenMobile && <div className="some-div"></div>}
       </div>
       <div className="my-catalog__ridth">
         {isArchived ? (

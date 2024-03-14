@@ -1,26 +1,18 @@
 import classNames from 'classnames'
-import React, { useContext } from 'react'
+import React from 'react'
 
 import Image from 'next/image'
 
-import { appContext } from '@components/Context/context'
 import { DetailPopup } from '@components/DetailPopup'
 
 import type { ArchivedStatisticsProps } from './ArchivedStatistics.props'
 
 export function ArchivedStatistics({ data }: ArchivedStatisticsProps) {
-  const { profile } = useContext(appContext)
-
-  const role = {
-    teacher: profile?.role === 20,
-    student: profile?.role === 2,
-    parent: profile?.role === 10,
-  }
   return (
     <div className="marks-table">
       <div className="marks-table__inner">
         <div className="marks-table__bottom">
-          <div className={classNames('marks-table__table table', { '--short': !role.parent })}>
+          <div className={classNames('marks-table__table table', '--short')}>
             <div className="table__wrapper">
               <div className="table__head">
                 <div className="table__row">

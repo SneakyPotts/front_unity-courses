@@ -31,6 +31,7 @@ export default async function LessonPage({ params }: TPageProps) {
       <Aside
         lectors={data?.lectors}
         isTeacher={role.teacher}
+        color={data?.course_color}
       />
       <LessonPageContent
         data={data}
@@ -40,11 +41,14 @@ export default async function LessonPage({ params }: TPageProps) {
   )
 }
 
-function Aside({ lectors, isTeacher }: { lectors?: TTeacher[]; isTeacher?: boolean }) {
+function Aside({ lectors, isTeacher, color }: { lectors?: TTeacher[]; isTeacher?: boolean; color?: string }) {
   return (
     <div className="lesson-section__right courses-lesson__right--element">
       {!!lectors?.length && (
-        <div className="lesson-section__container lesson--teachers">
+        <div
+          className="lesson-section__container lesson--teachers"
+          style={{ backgroundColor: color }}
+        >
           {lectors?.map((v, i) => (
             <TeacherCard
               key={v.id}
