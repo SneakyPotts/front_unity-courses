@@ -1,7 +1,7 @@
 'use client'
 
 import { MathJaxContext } from 'better-react-mathjax'
-import React, { type PropsWithChildren, createContext, useState } from 'react'
+import React, { type PropsWithChildren, createContext, useEffect, useState } from 'react'
 import { ToastContainer } from 'react-toastify'
 
 import type { IContext, THeader } from '@components/Context/types'
@@ -49,6 +49,20 @@ function AppProvider({ children }: PropsWithChildren) {
     basket,
     setBasket,
   }
+
+  useEffect(() => {
+    const handleCopy = (event: ClipboardEvent) => {
+      const clipboardData = event.clipboardData
+      clipboardData?.setData('text/plain', 'Копіювання заборонено. Із повагою Unity! <3')
+      event.preventDefault()
+    }
+
+    document.addEventListener('copy', handleCopy)
+
+    return () => {
+      document.removeEventListener('copy', handleCopy)
+    }
+  }, [])
 
   return (
     <appContext.Provider value={state}>
