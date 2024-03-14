@@ -76,20 +76,12 @@
       margin-bottom: rem(0);
     }
 
-    &__title {
-      display: none;
-    }
-  }
-}
-
-@include mq("lg") {
-  .marks-table {
     &__table {
       margin-bottom: rem(60);
     }
 
-    &__bottom {
-      margin-bottom: rem(0);
+    &__title {
+      display: none;
     }
   }
 }

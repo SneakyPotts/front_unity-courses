@@ -410,6 +410,12 @@
           display: block;
         }
       }
+
+      &--element {
+        padding: rem(16) rem(12);
+        border-radius: rem(10);
+        background: #fff;
+      }
     }
 
     &__reviews {
