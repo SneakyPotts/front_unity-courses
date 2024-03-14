@@ -103,7 +103,10 @@ export function LessonPageContent({ data, role }: LessonPageContentProps) {
         isSmall
       />
       {activeTab === is.content && (
-        <div className={'courses-lesson__body'}>
+        <div
+          className={'courses-lesson__body'}
+          style={{ userSelect: 'none' }}
+        >
           <MathJax>
             <div className="lesson-section__text">{formattedContent}</div>
           </MathJax>
