@@ -93,9 +93,19 @@
       fill: #f6b77d;
     }
   }
+
+  &--active {
+    + .lesson-section__right .lesson-section__container {
+      display: block;
+    }
+  }
+
+  &--active {
+    border-radius: rem(10) rem(10) 0 0;
+  }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .theme-card {
     padding: rem(16);
 
@@ -103,6 +113,12 @@
       grid-template-columns: 1fr rem(30);
       margin-bottom: rem(8);
       gap: rem(4);
+    }
+
+    &__block {
+      margin-top: rem(16);
+      border-top: rem(1) solid var(--grey-4);
+      padding-top: rem(20);
     }
 
     &__top {
@@ -128,6 +144,12 @@
 
     &__more {
       display: block;
+    }
+
+    .theme-card--active {
+      .content-tabs__wrapper {
+        margin-top: 0;
+      }
     }
   }
 }

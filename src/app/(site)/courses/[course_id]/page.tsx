@@ -17,7 +17,7 @@ import { CourseDetailContent } from '_content/CourseDetailContent'
 import { PurchasedCourseDetailContent } from '_content/PurchasedCourseDetailContent'
 import { StudentCourseStatsContent } from '_content/StudentCourseStatsContent'
 
-export default async function CourseDetailPage({ params, searchParams }: TPageProps) {
+export default async function CourseDetailPage({ params }: TPageProps) {
   const { data: me } = await aboutMeRequest()
   const role = {
     teacher: me?.role === 20,
@@ -49,7 +49,10 @@ export default async function CourseDetailPage({ params, searchParams }: TPagePr
           <div className={classNames('course-detail__block', { archive__banner: !isPurchase })}>
             {isPurchase || role.teacher ? (
               <>
-                <AsideTeacherList lectors={data!.lectors} />
+                <AsideTeacherList
+                  lectors={data!.lectors}
+                  color={data?.color}
+                />
                 {role.teacher ? (
                   <Banner />
                 ) : (
@@ -68,9 +71,12 @@ export default async function CourseDetailPage({ params, searchParams }: TPagePr
     )
 }
 
-function AsideTeacherList({ lectors }: { lectors: TTeacher[] }) {
+function AsideTeacherList({ lectors, color }: { lectors: TTeacher[]; color?: string }) {
   return (
-    <div className="lesson-section__container">
+    <div
+      className="lesson-section__container lesson--teachers"
+      style={{ backgroundColor: color }}
+    >
       {lectors.map((v, i) => (
         <TeacherCard
           key={v.id}

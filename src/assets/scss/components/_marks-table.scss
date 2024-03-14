@@ -34,9 +34,6 @@
   &__table.table {
     border: none;
   }
-
-  &.--short {
-  }
 }
 
 @include mq('lg') {
@@ -76,16 +73,12 @@
       margin-bottom: rem(0);
     }
 
+    &__table {
+      margin-bottom: rem(60);
+    }
+
     &__title {
       display: none;
-    }
-  }
-}
-
-@include mq('lg') {
-  .marks-table {
-    &__bottom {
-      margin-bottom: rem(0);
     }
   }
 }

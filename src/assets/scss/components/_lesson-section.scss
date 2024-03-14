@@ -797,7 +797,7 @@
     gap: rem(12);
 
     &-text {
-      font-family: "Roboto", sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-weight: 400;
       font-size: rem(16);
       line-height: 130%;
@@ -945,7 +945,7 @@
 
     .definition {
       padding: rem(20);
-      font-family: "Inter", sans-serif;
+      font-family: 'Inter', sans-serif;
       font-style: normal;
       font-size: rem(18);
       line-height: normal;
@@ -1042,13 +1042,13 @@
   background: #bdbdbd;
 }
 
-@include mq("xxxl") {
+@include mq('xxxl') {
   .lesson-section__content-nav {
     grid-template-columns: 15fr 4% 11%;
   }
 }
 
-@include mq("xm") {
+@include mq('xm') {
   .lesson-section__content-adap {
     display: flex;
     flex-direction: column;
@@ -1062,7 +1062,7 @@
   }
 }
 
-@include mq("xz") {
+@include mq('xz') {
   .lesson-section__content__nav-list-item {
     display: grid;
     grid-template-columns: 9fr 11fr;
@@ -1075,7 +1075,7 @@
   }
 }
 
-@include mq("sm") {
+@include mq('sm') {
   .lesson-section__text__box-tab {
     display: flex;
     flex-direction: column;
@@ -1614,7 +1614,7 @@
   width: 100%;
 }
 
-@include mq("xxl") {
+@include mq('xxl') {
   .lesson-section {
     &__text__box {
       &-tab {
@@ -1626,7 +1626,7 @@
   }
 }
 
-@include mq("xl") {
+@include mq('xl') {
   .lesson-section {
     &__ridth {
       .banner {
@@ -1642,7 +1642,13 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg', min) {
+  .lesson--teachers {
+    background-color: transparent !important  ;
+  }
+}
+
+@include mq('lg') {
   .lesson-section {
     &__edit {
       width: 100%;
@@ -1660,6 +1666,12 @@
       &-tabs {
         width: 100%;
       }
+    }
+
+    &__container {
+      display: none;
+      background: #defaf1;
+      border-radius: 0 0 rem(10) rem(10);
     }
 
     &__change {
@@ -1764,6 +1776,13 @@
 
     &__container {
       display: flex;
+
+      &.lesson--teachers {
+        display: none;
+        .teacher-card:not(:last-child) {
+          margin-bottom: rem(16);
+        }
+      }
     }
 
     &__teacher {
@@ -1779,7 +1798,7 @@
       z-index: var(--ui-index-1);
 
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         left: rem(15);
         right: rem(15);
@@ -1824,15 +1843,18 @@
     &__right {
       grid-column: unset;
       grid-row: unset;
-      overflow: hidden;
+      // overflow: hidden;
       margin-bottom: rem(20);
       border-bottom-right-radius: rem(10);
       border-bottom-left-radius: rem(10);
-      max-height: 0;
+      // max-height: 0;
       transform: translateY(rem(-8));
       transition: max-height 0.3s var(--ease-in-out);
     }
 
+    &__deadline {
+      margin-top: rem(28);
+    }
     &__todo {
       grid-row: 1/2;
     }
@@ -1859,7 +1881,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .lesson-section {
     &__next.btn.btn--trans {
       width: 100%;

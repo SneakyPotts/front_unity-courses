@@ -100,7 +100,7 @@ export function LessonPageContent({ data, role }: LessonPageContentProps) {
         list={tabs}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        isSmall
+        isBig
       />
       {activeTab === is.content && (
         <div

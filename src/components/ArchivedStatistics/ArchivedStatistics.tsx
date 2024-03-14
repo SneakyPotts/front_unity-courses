@@ -12,7 +12,7 @@ export function ArchivedStatistics({ data }: ArchivedStatisticsProps) {
     <div className="marks-table">
       <div className="marks-table__inner">
         <div className="marks-table__bottom">
-          <div className="marks-table__table table --short">
+          <div className={classNames('marks-table__table table', '--short')}>
             <div className="table__wrapper">
               <div className="table__head">
                 <div className="table__row">

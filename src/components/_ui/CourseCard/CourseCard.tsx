@@ -1,5 +1,6 @@
 'use client'
 
+import classNames from 'classnames'
 import { isAfter } from 'date-fns'
 import React, { useContext } from 'react'
 import { useToggle } from 'usehooks-ts'
@@ -36,7 +37,7 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
 
   return (
     <div
-      className="my-catalog__block"
+      className={classNames('my-catalog__block', { 'my-catalog__block--lesson': isOpenMobile })}
       style={{ backgroundColor: isArchived ? '#f2f2f2' : course.color }}
     >
       <div className="my-catalog__left">
@@ -153,19 +154,20 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
             </button>
           </div>
         )}
-        <div className="my-catalog__contact close">
-          <button
-            className="my-catalog__contact-btn"
-            onClick={setIsOpenMobile}
-          >
-            <svg className="my-catalog__contact-svg">
-              <use href="/img/sprite.svg#arrow-bottom"></use>
-            </svg>
-          </button>
-        </div>
-        {/*FIXME: make real markup*/}
-        {isOpenMobile && <div className="some-div">isOpenMobile = true</div>}
-        {role.teacher && <div className="some-div">For teacher</div>}
+        {!role.teacher && (
+          <div className="my-catalog__contact close">
+            <div className="some-div">
+              <button
+                className="my-catalog__contact-btn"
+                onClick={setIsOpenMobile}
+              >
+                <svg className="my-catalog__contact-svg">
+                  <use href="/img/sprite.svg#arrow-bottom"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
       <div className="my-catalog__ridth">
         {isArchived ? (
