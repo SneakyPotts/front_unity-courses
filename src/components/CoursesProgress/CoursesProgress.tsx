@@ -84,7 +84,7 @@ export function CoursesProgress({ listCourses }: CoursesProgressProps) {
         {/*>*/}
         {/*  До моїх курсів*/}
         {/*  <svg>*/}
-        {/*    <use xlinkHref="img/sprite.svg#arrow-right"></use>*/}
+        {/*    <use href="/img/sprite.svg#arrow-right"></use>*/}
         {/*  </svg>*/}
         {/*</CustomLink>*/}
       </div>
@@ -110,7 +110,7 @@ export function CoursesProgress({ listCourses }: CoursesProgressProps) {
               >
                 До бази курсів
                 <svg>
-                  <use xlinkHref="img/sprite.svg#arrow-right"></use>
+                  <use href="/img/sprite.svg#arrow-right"></use>
                 </svg>
               </Button>
             </div>

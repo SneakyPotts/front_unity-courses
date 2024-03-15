@@ -5,7 +5,6 @@ import React, { useRef, useState } from 'react'
 import DatePicker, { registerLocale } from 'react-datepicker'
 import type ReactDatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { useWindowSize } from 'usehooks-ts'
 
 import { TimePicker } from '@components/TimePicker'
 

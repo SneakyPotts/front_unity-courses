@@ -10,7 +10,7 @@ import type { TCatalog, TCourseDetail, TCourseReview, TFilters, TFiltersResponse
 const getCoursesCatalog = cache(async (filters: string = '') => {
   const isAuth = cookies().get('accessToken')?.value
 
-  return await (isAuth ? serverFetchAuth : serverFetch)<TCatalog>(`/courses/?${filters}`, {
+  return await (isAuth ? serverFetchAuth : serverFetch)<TCatalog>(`/courses/?page_size=12&${filters}`, {
     next: {
       revalidate: 30,
       tags: ['catalog'],
@@ -64,10 +64,10 @@ const getCourseDetail = cache(async (id: string) => {
   })
 })
 
-const getCourseReviews = async (course_id: string) => {
+const getCourseReviews = async ({ course_id, page = '1' }: { course_id: string; page?: string }) => {
   const isAuth = cookies().get('accessToken')?.value
 
-  return await (isAuth ? serverFetchAuth : serverFetch)<TCourseReview>(`/courses/${course_id}/reviews/`, {
+  return await (isAuth ? serverFetchAuth : serverFetch)<TCourseReview>(`/courses/${course_id}/reviews/?page_size=5&page=${page}`, {
     next: {
       revalidate: 0,
     },

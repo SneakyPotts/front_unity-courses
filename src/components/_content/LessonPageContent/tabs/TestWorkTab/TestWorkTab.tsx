@@ -115,7 +115,7 @@ export function TestWorkTab({ testId }: TestWorkTabProps) {
                 target="_blank"
               >
                 <svg className="btn__icon">
-                  <use xlinkHref="/img/sprite.svg#pen"></use>
+                  <use href="/img/sprite.svg#pen"></use>
                 </svg>
                 Перейти до тесту
               </Button>

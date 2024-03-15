@@ -317,7 +317,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .table {
     margin-right: rem(-15);
     margin-left: rem(-15);

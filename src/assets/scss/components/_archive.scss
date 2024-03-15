@@ -369,7 +369,7 @@
   }
 }
 
-@include mq("xxl") {
+@include mq('xxl') {
   .archive {
     &__reviews {
       &-content {
@@ -381,7 +381,7 @@
   }
 }
 
-@include mq("xl") {
+@include mq('xl') {
   .archive {
     &__inner {
       display: flex;
@@ -394,7 +394,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .archive {
     &__head {
       grid-template-columns: 1fr;
@@ -470,7 +470,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .archive {
     &__reviews {
       &-content {
@@ -484,7 +484,7 @@
   }
 }
 
-@include mq("sm") {
+@include mq('sm') {
   .archive {
     &__title {
       font-size: rem(18);

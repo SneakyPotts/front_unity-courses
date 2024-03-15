@@ -94,7 +94,7 @@
         font-size: rem(13);
         font-weight: 400;
         line-height: rem(16);
-        letter-spacing: 0em;
+        letter-spacing: 0;
         border-radius: rem(2);
         color: var(--black);
       }
@@ -102,9 +102,9 @@
 
     &--unique {
       align-items: flex-start;
-       p {
+      p {
         line-height: 1.5;
-       }
+      }
     }
 
     &--svg {
@@ -233,7 +233,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .teacher-case {
     padding: rem(16);
 
@@ -278,7 +278,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .teacher-case {
     .teacher-case__buttons .btn.btn--trans {
       width: auto;

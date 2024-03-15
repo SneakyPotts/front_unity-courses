@@ -8,7 +8,6 @@ import { useParams, useRouter } from 'next/navigation'
 import { Portal } from '@components/Portal'
 import { useBlockScroll } from '@hooks/useBlockScroll'
 import { useQueryCourses } from '@http/courses/client'
-import { useQueryStudent } from '@http/student/client'
 
 import { Loader } from '_ui/Loader'
 
@@ -37,7 +36,7 @@ function Accordion({ orderNum, onClose, ...topic }: LessonsNavigationAccordionPr
         {orderNum} {topic.title}
         <div className="maintenance__icon">
           <svg className="maintenance__icon-svg">
-            <use xlinkHref="/img/sprite.svg#arrow-down-mini"></use>
+            <use href="/img/sprite.svg#arrow-down-mini"></use>
           </svg>
         </div>
       </button>
@@ -97,7 +96,7 @@ export function LessonsNavigation({ courseId, onClose }: LessonsNavigationProps)
               onClick={onClose}
             >
               <svg className="maintenance__close-svg">
-                <use xlinkHref="/img/sprite.svg#close"></use>
+                <use href="/img/sprite.svg#close"></use>
               </svg>
             </button>
           </div>
