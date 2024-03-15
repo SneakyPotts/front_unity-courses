@@ -36,7 +36,7 @@
   }
 }
 
-@include mq('xl') {
+@include mq("xl") {
   .statistics {
     &__inner {
       gap: rem(15);
@@ -55,12 +55,16 @@
   }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .statistics {
     // DON'T UNCOMMENT
     // &__block {
     //   display: none;
     // }
+
+    &__block {
+      margin-bottom: rem(90);
+    }
 
     &__mobile-tabs.content-tabs {
       display: block;

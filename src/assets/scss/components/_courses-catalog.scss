@@ -1,11 +1,13 @@
 .courses-catalog {
   padding: 0 0 rem(75);
+  height: 100%;
 
   &__wrapper {
     display: flex;
     //display: grid;
     //grid-template-columns: rem(310) auto;
     gap: rem(30);
+    height: 100%;
   }
 
   &__body {
@@ -845,4 +847,3 @@
   text-overflow: ellipsis;
   color: var(--grey-2);
 }
-
