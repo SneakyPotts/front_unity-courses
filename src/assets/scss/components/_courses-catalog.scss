@@ -329,7 +329,7 @@
     gap: rem(40);
     padding: rem(76) rem(60);
     border-radius: rem(10);
-    background: url("/img/static/offer-bg.png") no-repeat center / cover;
+    background: url('/img/static/offer-bg.png') no-repeat center / cover;
 
     &-text {
       font-size: rem(32);
@@ -368,7 +368,7 @@
       fill: transparent;
     }
 
-    use[href$="#basket-course"] {
+    use[href$='#basket-course'] {
       fill: transparent;
       stroke: #fff;
     }
@@ -638,13 +638,9 @@
   }
 
   &__paginations {
-    padding-top: rem(32);
-    border-top: rem(2) solid var(--grey-5);
-    margin-top: auto;
-
     &-list {
       @include flex-v-center;
-      gap: rem(12);
+      gap: rem(4);
     }
 
     &-item {
@@ -652,6 +648,19 @@
       font-weight: 500;
       line-height: 120%;
       color: #bdbdbd;
+    }
+
+    &-btn {
+      @include flex-all-center;
+
+      width: 100%;
+      height: 100%;
+    }
+
+    &-svg {
+      width: rem(16);
+      height: rem(16);
+      fill: var(--grey-4);
     }
     &--active {
       padding: rem(11) rem(16);
@@ -662,7 +671,7 @@
   }
 }
 
-@include mq("xxl") {
+@include mq('xxl') {
   .courses-catalog {
     &__cards {
       grid-template-columns: repeat(2, 1fr);
@@ -670,7 +679,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .courses-catalog {
     &__catalog {
       min-width: 0;
@@ -804,7 +813,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .courses-catalog {
     &__cards {
       grid-template-columns: 1fr;
@@ -845,4 +854,3 @@
   text-overflow: ellipsis;
   color: var(--grey-2);
 }
-

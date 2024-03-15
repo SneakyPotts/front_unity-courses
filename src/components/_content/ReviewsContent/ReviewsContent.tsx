@@ -14,6 +14,7 @@ import { ReviewItem } from '@components/ReviewItem'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import type { TReviewItem } from '@http/courses/type'
 
+import { AppPagination } from '_ui/AppPagination'
 import { RatingStars } from '_ui/RatingStars'
 import { TeacherForCourse } from '_ui/TeacherForCourse'
 
@@ -119,28 +120,10 @@ export function ReviewsContent({ data }: ReviewsContentProps) {
             />
           ))}
 
-          {/*TODO: add pagination*/}
-          <div className={'reviews__paginations'}>
-            <button className={'reviews__btn'}>
-              <svg className="reviews__arrow-svg">
-                <use href="/img/sprite.svg#arrow-left"></use>
-              </svg>
-            </button>
-            <ul className={'courses-catalog__paginations-list'}>
-              <li className={'courses-catalog__paginations-item courses-catalog__paginations--active'}>1</li>
-              <li className={'courses-catalog__paginations-item'}>2</li>
-              <li className={'courses-catalog__paginations-item'}>3</li>
-              <li className={'courses-catalog__paginations-item'}>4</li>
-              <li className={'courses-catalog__paginations-item'}>5</li>
-              <li className={'courses-catalog__paginations-item'}>...</li>
-              <li className={'courses-catalog__paginations-item'}>11</li>
-            </ul>
-            <button className={'reviews__btn'}>
-              <svg className="reviews__arrow-svg reviews__arrow--active">
-                <use href="/img/sprite.svg#arrow-ridth"></use>
-              </svg>
-            </button>
-          </div>
+          <AppPagination
+            total={data?.reviews.count}
+            pageSize={5}
+          />
 
           {/*TODO: add recommendation*/}
           <div className={'reviews__shop'}>
