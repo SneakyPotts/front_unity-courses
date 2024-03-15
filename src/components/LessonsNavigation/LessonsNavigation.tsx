@@ -8,7 +8,6 @@ import { useParams, useRouter } from 'next/navigation'
 import { Portal } from '@components/Portal'
 import { useBlockScroll } from '@hooks/useBlockScroll'
 import { useQueryCourses } from '@http/courses/client'
-import { useQueryStudent } from '@http/student/client'
 
 import { Loader } from '_ui/Loader'
 

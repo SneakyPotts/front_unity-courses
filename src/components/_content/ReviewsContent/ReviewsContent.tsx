@@ -66,7 +66,7 @@ export function ReviewsContent({ data }: ReviewsContentProps) {
               dangerouslySetInnerHTML={{ __html: data?.description || '' }}
             />
             <div className="my-catalog__box">
-              {data?.lectors?.map((lecturer, i) => (
+              {data?.lectors?.map((lecturer) => (
                 <TeacherForCourse
                   key={lecturer.id}
                   lecturer={lecturer}

@@ -5,7 +5,6 @@ import Image from 'next/image'
 
 import { DetailPopup } from '@components/DetailPopup'
 import { MarkSelect } from '@components/MarkSelect'
-import { useQueryTeacher } from '@http/teacher/client'
 import { useQueryTeacherStats } from '@http/teacher/client.statistics'
 
 import { Loader } from '_ui/Loader'

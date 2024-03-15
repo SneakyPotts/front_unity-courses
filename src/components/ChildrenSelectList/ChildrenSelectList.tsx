@@ -2,6 +2,8 @@ import classNames from 'classnames'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useOnClickOutside, useSessionStorage } from 'usehooks-ts'
 
+import Image from 'next/image'
+
 import { appContext } from '@components/Context/context'
 import type { Child } from '@http/profile/type'
 
@@ -60,8 +62,10 @@ export function ChildrenSelectList({ mobile }: ChildrenSelectListProps) {
               className="visually-hidden"
             />
             <div className="header__children-img">
-              <img
+              <Image
                 src={v.avatar || '/img/static/default-avatar.png'}
+                width={24}
+                height={24}
                 alt={`${v.first_name} ${v.last_name}`}
               />
             </div>
@@ -80,9 +84,11 @@ export function ChildrenSelectList({ mobile }: ChildrenSelectListProps) {
         className="select__top"
         onClick={handleShowShowList}
       >
-        <img
+        <Image
           className="select__image"
           src={currentChild?.avatar || '/img/static/default-avatar.png'}
+          width={24}
+          height={24}
           alt={`${currentChild?.first_name} ${currentChild?.last_name}`}
         />
         <span className="select__value">{currentChild?.first_name}</span>

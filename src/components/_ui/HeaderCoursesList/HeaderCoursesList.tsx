@@ -4,7 +4,6 @@ import { usePopper } from 'react-popper'
 import SimpleBar from 'simplebar-react'
 import { useOnClickOutside } from 'usehooks-ts'
 
-import { Portal } from '@components/Portal'
 import type { TSimpleCourse } from '@http/teacher/types'
 
 import type { HeaderCoursesListProps } from './HeaderCoursesList.props'

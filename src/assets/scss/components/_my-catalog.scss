@@ -185,7 +185,7 @@
   }
 }
 
-@include mq("xxl") {
+@include mq('xxl') {
   .my-catalog {
     &__left {
       &-title {
@@ -195,7 +195,7 @@
   }
 }
 
-@include mq("xl") {
+@include mq('xl') {
   .my-catalog {
     &__block {
       grid-template-columns: 1fr;
@@ -226,7 +226,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .my-catalog {
     gap: 0;
     &__inner {
@@ -294,7 +294,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .my-catalog {
     &__teacher {
       display: none;
@@ -311,7 +311,7 @@
   }
 }
 
-@include mq("sm") {
+@include mq('sm') {
   .my-catalog {
     &__duration {
       flex-wrap: wrap;
