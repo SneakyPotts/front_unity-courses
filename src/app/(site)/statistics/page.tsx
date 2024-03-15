@@ -3,6 +3,7 @@
 import { useContext, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 
 import { ArchivedStatistics } from '@components/ArchivedStatistics'
+import { ChildrenSelectList } from '@components/ChildrenSelectList'
 import { appContext } from '@components/Context/context'
 import { StatisticSubjects } from '@components/StatisticSubjects'
 import { useQueryStudentStats } from '@http/student/client.statistics'
@@ -39,24 +40,31 @@ export default function StatisticsPage() {
 
   const { active, archived } = useQueryStudentStats({ tab_id: !role.teacher ? (activeTab === 1 ? 'active' : 'archived') : '' })
 
+  /*parent*/
+
   useLayoutEffect(() => {
     if (!profile) return
 
-    role.teacher
-      ? currentCourse &&
-        setHeader({
-          title: `Оцінки по курсу - ${currentCourse?.title}`,
-          rightElement: (
-            <HeaderCoursesList
-              courses={courses?.data}
-              current={currentCourse}
-              handler={(course) => {
-                setCurrentCourse(course)
-              }}
-            />
-          ),
-        })
-      : setHeader({ title: 'Статистика успішності' })
+    role.teacher &&
+      currentCourse &&
+      setHeader({
+        title: `Оцінки по курсу - ${currentCourse?.title}`,
+        rightElement: (
+          <HeaderCoursesList
+            courses={courses?.data}
+            current={currentCourse}
+            handler={(course) => {
+              setCurrentCourse(course)
+            }}
+          />
+        ),
+      })
+
+    !role.teacher &&
+      setHeader({
+        title: 'Статистика успішності',
+        rightElement: role.parent ? <ChildrenSelectList /> : null,
+      })
   }, [currentCourse, profile])
 
   useEffect(() => {
@@ -71,35 +79,31 @@ export default function StatisticsPage() {
 
   return (
     <PageWrapper>
-      {!role.teacher && (
-        <Tabs
-          list={['Активні', 'Архів']}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          isStatic
+      {role.teacher ? (
+        <TeacherStatisticsContent
+          data={teacherStats.data}
+          isLoading={courses.isLoading || teacherStats.isLoading}
+          isError={courses.isError || teacherStats.isError}
+          courseId={currentCourse?.id}
         />
+      ) : (
+        <>
+          <Tabs
+            list={['Активні', 'Архів']}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            isStatic
+          />
+          {activeTab === 1 && (
+            <TeacherStatisticsContent
+              {...active}
+              isStudent={!role.teacher}
+            />
+          )}
+          {activeTab === 2 && <ArchivedStatistics {...archived} />}
+          <StatisticSubjects />
+        </>
       )}
-      {role.teacher &&
-        (courses.isLoading || teacherStats.isLoading ? (
-          <Loader />
-        ) : (
-          <TeacherStatisticsContent
-            data={teacherStats.data}
-            courseId={currentCourse?.id}
-          />
-        ))}
-      {!role.teacher &&
-        activeTab === 1 &&
-        (active.isLoading ? (
-          <Loader />
-        ) : (
-          <TeacherStatisticsContent
-            data={active.data}
-            isStudent={!role.teacher}
-          />
-        ))}
-      {!role.teacher && activeTab === 2 && (archived.isLoading ? <Loader /> : <ArchivedStatistics data={archived.data} />)}
-      {!role.teacher && <StatisticSubjects />}
     </PageWrapper>
   )
 }
