@@ -49,7 +49,7 @@ export function TeacherCard({ data, className, isStudent, isMain }: TeacherCardP
       {(isStudent || profile?.id !== data.id) && (
         <button className="teacher-card__question">
           <svg className="teacher-card__question-svg">
-            <use xlinkHref="/img/sprite.svg#chat"></use>
+            <use href="/img/sprite.svg#chat"></use>
           </svg>
           {isStudent ? 'Написати' : 'Задати питання'}
         </button>

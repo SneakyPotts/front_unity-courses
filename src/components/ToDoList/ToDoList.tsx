@@ -63,7 +63,7 @@ export function ToDoList({}: ToDoListProps) {
               aria-label="Додати задачу"
             >
               <svg className="todo__add-svg">
-                <use href="img/sprite.svg#plus"></use>
+                <use href="/img/sprite.svg#plus"></use>
               </svg>
             </button>
           )}
@@ -80,16 +80,16 @@ export function ToDoList({}: ToDoListProps) {
               {isError && <p className="text-center">Щось пішло не так</p>}
               {!!unCompletedToDo.length
                 ? unCompletedToDo?.map((toDo) => (
-                  <ToDoItem
-                    key={toDo.id}
-                    {...toDo}
-                    edit={{
-                      show: isCreating === toDo.id,
-                      setShow: () => setIsCreating(toDo.id),
-                      setClose: () => setIsCreating(''),
-                    }}
-                  />
-                ))
+                    <ToDoItem
+                      key={toDo.id}
+                      {...toDo}
+                      edit={{
+                        show: isCreating === toDo.id,
+                        setShow: () => setIsCreating(toDo.id),
+                        setClose: () => setIsCreating(''),
+                      }}
+                    />
+                  ))
                 : !isLoading && !isCreating.length && <li className="text-center">Список задач пустий...</li>}
             </ul>
           </SimpleBar>
@@ -110,7 +110,7 @@ export function ToDoList({}: ToDoListProps) {
               aria-label="Відкрити виконані завдання"
             >
               <svg className="todo__add-svg">
-                <use href="img/sprite.svg#arrow-down-mini"></use>
+                <use href="/img/sprite.svg#arrow-down-mini"></use>
               </svg>
             </button>
           </div>
@@ -329,7 +329,7 @@ function ToDoItemCreate({ data, onClose }: ToDoItemCreateProps) {
               aria-label="Вiдкрити календар"
             >
               <svg className="checkbox__calendar-svg">
-                <use href="img/sprite.svg#calendar"></use>
+                <use href="/img/sprite.svg#calendar"></use>
               </svg>
             </button>
           }

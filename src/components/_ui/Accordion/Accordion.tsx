@@ -33,7 +33,7 @@ export function Accordion({ order, title, children, onActive }: AccordionProps) 
         </div>
         <div className="plan__arrow">
           <svg className="plan__arrow-svg">
-            <use xlinkHref="/img/sprite.svg#arrow-down-mini"></use>
+            <use href="/img/sprite.svg#arrow-down-mini"></use>
           </svg>
         </div>
       </button>
