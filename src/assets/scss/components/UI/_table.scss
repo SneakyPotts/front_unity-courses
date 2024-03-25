@@ -503,5 +503,13 @@
         background-color: unset;
       }
     }
+
+    &.--short {
+      .table {
+        &__row {
+          grid-template-columns: 1fr rem(50);
+        }
+      }
+    }
   }
 }
