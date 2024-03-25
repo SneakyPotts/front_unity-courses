@@ -7,6 +7,7 @@ import { useOnClickOutside } from 'usehooks-ts'
 
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 import { imgBlur } from '@assets/utils'
 import { appContext } from '@components/Context/context'
@@ -19,7 +20,6 @@ import type { HeaderProps } from './Header.props'
 const HeaderClock = dynamic(() => import('_ui/HeaderClock').then((m) => m.HeaderClock))
 
 const ProfilePopup = dynamic(() => import('_popups/ProfilePopup').then((m) => m.ProfilePopup))
-const ProfileInfoModal = dynamic(() => import('_modals/ProfileInfoModal').then((m) => m.ProfileInfoModal))
 
 const BasketPopup = dynamic(() => import('_popups/BasketPopup').then((m) => m.BasketPopup))
 const BasketModal = dynamic(() => import('_modals/BasketModal').then((m) => m.BasketModal))
@@ -34,6 +34,8 @@ export function Header({ profile, className }: HeaderProps) {
     parent: profile?.role === 10,
   }
 
+  const router = useRouter()
+
   const profileRef = useRef(null)
   const basketRef = useRef(null)
 
@@ -41,7 +43,6 @@ export function Header({ profile, className }: HeaderProps) {
   const [isShowRegisterModal, setIsShowRegisterModal] = useState(false)
 
   const [isShowProfilePopup, setIsShowProfilePopup] = useState(false)
-  const [isShowProfileModal, setIsShowProfileModal] = useState(false)
 
   const [isShowBasketPopup, setIsShowBasketPopup] = useState(false)
   const [isShowBasketModal, setIsShowBasketModal] = useState(false)
@@ -55,11 +56,6 @@ export function Header({ profile, className }: HeaderProps) {
   const handleChildBought = () => {
     setIsShowBasketModal(false)
     setIsShowChildBought(true)
-  }
-
-  const handleShowProfile = () => {
-    setIsShowProfilePopup(false)
-    setIsShowProfileModal(true)
   }
 
   const handleProfileClick = () => {
@@ -181,15 +177,8 @@ export function Header({ profile, className }: HeaderProps) {
               {isShowProfilePopup && (
                 <ProfilePopup
                   profile={profile}
-                  showProfileModal={handleShowProfile}
+                  showProfileModal={() => router.push('/profile')}
                   onClose={() => setIsShowProfilePopup(false)}
-                />
-              )}
-              {isShowProfileModal && (
-                <ProfileInfoModal
-                  teacherId={role.teacher ? profile?.id : undefined}
-                  studentId={role.student ? profile?.id : undefined}
-                  onClose={() => setIsShowProfileModal(false)}
                 />
               )}
             </li>

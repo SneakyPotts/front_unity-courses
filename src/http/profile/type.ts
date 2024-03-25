@@ -1,4 +1,4 @@
-import type { TClass, TDocument, THuman } from '@assets/types/globals'
+import type { TClass, TDocument, THuman, TTeacher } from '@assets/types/globals'
 
 /*profile*/
 export type TRole = 1 | 2 | 3 | 10 | 20 | 30 | 31 | 100
@@ -90,3 +90,22 @@ export interface TBasketCourse {
   users: string[]
 }
 /*basket*/
+
+/*certificates*/
+export type TCertificates = {
+  count: number
+  next: string
+  previous: string
+  results: TCertificate[]
+}
+
+export type TCertificate = {
+  id: string
+  course_title: string
+  student: TTeacher
+  lectors: TTeacher[]
+  end_date: string
+  final_mark: number
+  certificate: string
+}
+/*certificates*/
