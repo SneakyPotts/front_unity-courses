@@ -1,0 +1,143 @@
+.profile {
+  &__head {
+    margin-bottom: rem(40);
+  }
+
+  &__title {
+    padding-bottom: rem(8);
+    margin-bottom: rem(12);
+    border-bottom: rem(1) solid var(--grey-5);
+    font-size: rem(20);
+    font-weight: 500;
+    line-height: rem(24);
+  }
+
+  &__content {
+    @include flex-all-sb;
+
+    gap: rem(30);
+    margin-bottom: rem(60);
+  }
+
+  &__form {
+    max-width: rem(560);
+    width: 100%;
+  }
+
+  &__list {
+    max-width: rem(560);
+    width: 100%;
+
+    border: rem(1) solid var(--blue-50);
+    border-radius: rem(5);
+    padding: rem(16);
+  }
+
+  &__item {
+    @include flex-v-center;
+
+    gap: rem(20);
+    &:not(:last-child) {
+      margin-bottom: rem(4);
+    }
+  }
+
+  &__wrapper {
+    @include flex-all-sb;
+
+    padding: rem(10) 0;
+    width: 100%;
+
+    &-info {
+      font-size: rem(16);
+      font-weight: 500;
+      line-height: rem(19);
+      color: var(--grey-4);
+    }
+
+    &--active {
+      padding: rem(10) rem(16);
+      border-radius: rem(10);
+      background: var(--blue-50);
+    }
+
+    &-box {
+      border-bottom: 0.0625rem dashed rgba(var(--grey-3--rgb), 0.3);
+      align-self: flex-end;
+      flex: 1 1 auto;
+    }
+
+    &-value {
+      // font-family: Inter;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 19.36px;
+    }
+
+    &-btn {
+      @include flex-all-center;
+
+      background: var(--orange-100);
+      border-radius: rem(10);
+      width: rem(40);
+      height: rem(40);
+
+      svg {
+        width: rem(18);
+        height: rem(17);
+        fill: var(--orange-500);
+      }
+    }
+  }
+
+  &__contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: rem(30);
+  }
+
+  &__links {
+    border: rem(1) solid var(--blue-50);
+    padding: rem(16);
+    max-width: 560px;
+    width: 100%;
+
+    &-title {
+      margin-bottom: rem(12);
+      padding-bottom: rem(8);
+      border-bottom: rem(1) solid var(--grey-5);
+      font-size: rem(20);
+      font-weight: 500;
+      line-height: rem(24);
+      text-align: left;
+      color: var(--black);
+    }
+
+    &-list {
+      li {
+        &:not(:last-child) {
+          margin-bottom: rem(8);
+        }
+      }
+    }
+  }
+
+  &__about {
+    border: rem(1) solid var(--blue-50);
+    padding: rem(16);
+    max-width: 560px;
+    width: 100%;
+
+    &-title {
+      margin-bottom: rem(12);
+      padding-bottom: rem(8);
+      border-bottom: rem(1) solid var(--grey-5);
+      font-size: rem(20);
+      font-weight: 500;
+      line-height: rem(24);
+      text-align: left;
+      color: var(--black);
+    }
+  }
+}
