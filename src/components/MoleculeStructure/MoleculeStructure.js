@@ -105,12 +105,12 @@ class MoleculeStructure extends Component {
       const subStructHighlightDetails = JSON.parse(mol.get_substruct_matches(qmol))
       const subStructHighlightDetailsMerged = !_.isEmpty(subStructHighlightDetails)
         ? subStructHighlightDetails.reduce(
-          (acc, { atoms, bonds }) => ({
-            atoms: [...acc.atoms, ...atoms],
-            bonds: [...acc.bonds, ...bonds],
-          }),
-          { bonds: [], atoms: [] },
-        )
+            (acc, { atoms, bonds }) => ({
+              atoms: [...acc.atoms, ...atoms],
+              bonds: [...acc.bonds, ...bonds],
+            }),
+            { bonds: [], atoms: [] },
+          )
         : subStructHighlightDetails
       return JSON.stringify({
         ...this.MOL_DETAILS,

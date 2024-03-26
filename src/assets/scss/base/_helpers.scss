@@ -11,7 +11,7 @@
   width: 100%;
   max-width: rem(940);
 
-  @include mq("lg") {
+  @include mq('lg') {
     max-width: 100%;
   }
 }
@@ -22,7 +22,7 @@
   width: 100%;
   height: 100%;
 
-  @include mq("xl") {
+  @include mq('xl') {
     padding: 0 rem(15);
   }
 }

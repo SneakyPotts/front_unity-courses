@@ -29,12 +29,12 @@ export function UrgentTasks({ list: { data, isLoading, isError }, isStudent }: U
             <ul className="todo__list">
               {!!data?.length
                 ? data?.map((v) => (
-                  <UrgentTask
-                    key={v.id}
-                    {...v}
-                    isStudent={isStudent}
-                  />
-                ))
+                    <UrgentTask
+                      key={v.id}
+                      {...v}
+                      isStudent={isStudent}
+                    />
+                  ))
                 : !isLoading && <li className="text-center">Список задач пустий...</li>}
             </ul>
           </div>

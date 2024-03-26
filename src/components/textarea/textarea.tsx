@@ -1,18 +1,16 @@
-import React from 'react'
+import classNames from 'classnames'
+import React, { forwardRef } from 'react'
 
 import type { TextareaProps } from './Textarea.props'
 
-export function Textarea({}: TextareaProps) {
-  return (
-    <div className={'textarea'}>
-      {/* <div>export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(props, ref) {
-  const { label, className, ...otherProps } = props */}
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(props, ref) {
+  const { label, className, ...otherProps } = props
 
   return (
-    <div className="document-block document-block--comment">
-      <div className="document-block__top">
+    <div className="">
+      {/* <div className="document-block__top">
         <h3 className="document-block__title">{label}</h3>
-      </div>
+      </div> */}
 
       <textarea
         ref={ref}
@@ -23,7 +21,3 @@ export function Textarea({}: TextareaProps) {
     </div>
   )
 })
-</div>
-    </div>
-  )
-}

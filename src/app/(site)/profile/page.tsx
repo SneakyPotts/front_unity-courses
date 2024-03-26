@@ -5,6 +5,7 @@ import { useContext, useState } from 'react'
 import Image from 'next/image'
 
 import { appContext } from '@/components/Context/context'
+import { Textarea } from '@/components/textarea'
 import { useQueryCertificates } from '@http/profile/client.certificates'
 
 import { PageWrapper } from '_ui/PageWrapper'
@@ -20,8 +21,16 @@ export default function ProfilePage() {
 
   return (
     <PageWrapper>
-      <div className="profile">
-        <div className="profile__inner">
+      <div className={'profile'}>
+        <div className={'profile__inner'}>
+          <div className={'profile__element'}>
+            <button className={'profile__element-btn'}>
+              <svg>
+                <use href="/img/sprite.svg#arrow-left"></use>
+              </svg>
+            </button>
+            Особистий кабінет
+          </div>
           <div className={'profile__head'}>{/* TODO тут будет картинка профиля */}</div>
           <div className={'profile__info'}>
             <h2 className={'profile__title'}>Профіль</h2>
@@ -33,14 +42,14 @@ export default function ProfilePage() {
               <div className="profile__links">
                 <h2 className={'profile__links-title'}>Посилання</h2>
                 <ul className={'profile__links-list'}>
-                  <li >
+                  <li>
                     <input
                       type="text"
                       className={'input'}
                       placeholder="Вкажіть посилання"
                     />
                   </li>
-                  <li >
+                  <li>
                     <input
                       type="text"
                       className={'input'}
@@ -54,19 +63,70 @@ export default function ProfilePage() {
                       placeholder="Введіть ваш ID LinkedIn"
                     />
                   </li>
-                  <li >
+                  <li>
                     <input
                       type="text"
                       className={'input'}
                       placeholder="Введіть ім’я користувача Telegram"
                     />
                   </li>
-
                 </ul>
               </div>
-              <div className="profile__about">
+              <div className={'profile__about'}>
                 <h2 className={'profile__about-title'}>Напишіть коротко про себе</h2>
+                <Textarea placeholder="наприклад: “Світ цікавий, і я завжди в пошуках нових вражень та вивчення нових навичок. Моя філософія - розвиватися кожен день та допомагати іншим робити те ж саме.”" />
               </div>
+            </div>
+            <div className={'profile__block'}>
+              <h2 className={'profile__block-title'}>Ваші сертифікати</h2>
+              <ul className={'profile__certificate'}>
+                <li className={'profile__certificate-item'}>
+                  <div className={'profile__certificate-img'}>
+                    <Image
+                      src={'/img/static/certificate.png'}
+                      width={265}
+                      height={375}
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+                  <p>Medium рівень програмування на JavaScript</p>
+                </li>
+                <li className={'profile__certificate-item'}>
+                  <div className={'profile__certificate-img'}>
+                    <Image
+                      src={'/img/static/certificate.png'}
+                      width={265}
+                      height={375}
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+                  <p>Medium рівень програмування на JavaScript</p>
+                </li>
+                <li className={'profile__certificate-item'}>
+                  <div className={'profile__certificate-img'}>
+                    <Image
+                      src={'/img/static/certificate.png'}
+                      width={265}
+                      height={375}
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+                  <p>Medium рівень програмування на JavaScript</p>
+                </li>
+                <li className={'profile__certificate-item'}>
+                  <div className={'profile__certificate-img'}>
+                    <Image
+                      src={'/img/static/certificate.png'}
+                      width={265}
+                      height={375}
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+                  <p>Medium рівень програмування на JavaScript</p>
+                </li>
+              </ul>
+              {/* TODO пагинация */}
+              1,2,3
             </div>
           </div>
         </div>
@@ -133,5 +193,3 @@ function ProfileForm() {
     </form>
   )
 }
-
-
