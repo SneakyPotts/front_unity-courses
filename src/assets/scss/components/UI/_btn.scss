@@ -102,7 +102,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .btn {
     min-height: rem(40);
 

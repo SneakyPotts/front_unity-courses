@@ -206,14 +206,12 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .profile {
     margin-bottom: rem(40);
 
     &__element {
       @include flex-v-center;
-
-
     }
 
     &__content {

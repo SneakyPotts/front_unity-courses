@@ -5,7 +5,7 @@ import { useContext, useState } from 'react'
 import Image from 'next/image'
 
 import { appContext } from '@/components/Context/context'
-import { Textarea } from '@/components/textarea'
+import { Textarea } from '@/components/Textarea'
 import { useQueryCertificates } from '@http/profile/client.certificates'
 
 import { PageWrapper } from '_ui/PageWrapper'
@@ -74,7 +74,7 @@ export default function ProfilePage() {
               </div>
               <div className={'profile__about'}>
                 <h2 className={'profile__about-title'}>Напишіть коротко про себе</h2>
-                <Textarea placeholder="наприклад: “Світ цікавий, і я завжди в пошуках нових вражень та вивчення нових навичок. Моя філософія - розвиватися кожен день та допомагати іншим робити те ж саме.”" />
+                <Textarea placeholder="Напишіть коротко про себе" />
               </div>
             </div>
             <div className={'profile__block'}>
@@ -87,6 +87,7 @@ export default function ProfilePage() {
                       width={265}
                       height={375}
                       style={{ objectFit: 'cover' }}
+                      alt="фото сертифікату"
                     />
                   </div>
                   <p>Medium рівень програмування на JavaScript</p>
@@ -98,6 +99,7 @@ export default function ProfilePage() {
                       width={265}
                       height={375}
                       style={{ objectFit: 'cover' }}
+                      alt="фото сертифікату"
                     />
                   </div>
                   <p>Medium рівень програмування на JavaScript</p>
@@ -109,6 +111,7 @@ export default function ProfilePage() {
                       width={265}
                       height={375}
                       style={{ objectFit: 'cover' }}
+                      alt="фото сертифікату"
                     />
                   </div>
                   <p>Medium рівень програмування на JavaScript</p>
@@ -120,6 +123,7 @@ export default function ProfilePage() {
                       width={265}
                       height={375}
                       style={{ objectFit: 'cover' }}
+                      alt="фото сертифікату"
                     />
                   </div>
                   <p>Medium рівень програмування на JavaScript</p>

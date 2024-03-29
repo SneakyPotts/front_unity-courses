@@ -22,15 +22,13 @@ export default function Certificates() {
                     width={60}
                     height={60}
                     src={'https://loremflickr.com/640/360'}
+                    alt="фото профили"
                   />
                 </div>
                 <div className={'certificates__student-name'}>Овчаренко Олександра</div>
               </div>
             </div>
-            <div className={'certificates__card'}>
-              {/* TODO карточка курса */}
-              1
-              </div>
+            <div className={'certificates__card'}>{/* TODO карточка курса */}</div>
           </div>
           <div className={'certificates__content'}>
             <div className="certificates__content-img">
@@ -39,6 +37,7 @@ export default function Certificates() {
                 width={850}
                 height={1200}
                 style={{ objectFit: 'cover' }}
+                alt="фото сертифікату"
               />
             </div>
             <div className="certificates__content-btn">

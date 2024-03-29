@@ -70,7 +70,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .certificates {
     &__inner {
       flex-direction: column;
@@ -79,11 +79,10 @@
     }
 
     &__content {
-
       &-btn {
         width: 100%;
         flex-direction: column;
-        
+
         .btn.btn--trans:not(.fulfill) {
           width: 100%;
         }
