@@ -93,6 +93,9 @@
     img {
       display: block;
     }
+
+    &-btn {
+    }
   }
 }
 
@@ -117,6 +120,10 @@
 
     &__info {
       margin-bottom: rem(32);
+    }
+
+    &__share-btn {
+      width: 100%;
     }
   }
 }

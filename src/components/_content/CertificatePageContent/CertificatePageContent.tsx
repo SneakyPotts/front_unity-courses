@@ -31,7 +31,7 @@ export function CertificatePageContent({ data }: CertificatePageContentProps) {
     toastPromise({
       handler: navigator.clipboard.writeText(window.location.href),
       successCallback: () => setIsShowShare(false),
-      successMessage: 'Посилання на сертифікат успішно скопіqjdfyj',
+      successMessage: 'Посилання на сертифікат успішно скопійовано',
     })
   }
 
@@ -72,10 +72,7 @@ export function CertificatePageContent({ data }: CertificatePageContentProps) {
               alt={data.course.title}
             />
           </div>
-          <div
-            ref={setReferenceElement}
-            className="certificates__content-btn"
-          >
+          <div className="certificates__content-btn">
             <Button
               variant="border"
               href={data.certificate_pdf}
@@ -87,15 +84,20 @@ export function CertificatePageContent({ data }: CertificatePageContentProps) {
               завантажити
             </Button>
 
-            <Button
-              variant="border"
-              onClick={() => setIsShowShare((p) => !p)}
+            <div
+              ref={setReferenceElement}
+              className="certificates__share-btn"
             >
-              <svg>
-                <use href="/img/sprite.svg#course-share"></use>
-              </svg>
-              поділитися
-            </Button>
+              <Button
+                variant="border"
+                onClick={() => setIsShowShare((p) => !p)}
+              >
+                <svg>
+                  <use href="/img/sprite.svg#course-share"></use>
+                </svg>
+                поділитися
+              </Button>
+            </div>
           </div>
         </div>
       </div>
