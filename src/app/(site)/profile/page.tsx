@@ -5,6 +5,7 @@ import React, { useContext, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { imgBlur } from '@assets/utils'
 import { appContext } from '@components/Context/context'
 import { ProfileRow } from '@components/ProfileRow'
 import { Textarea } from '@components/Textarea'
@@ -35,15 +36,6 @@ export default function ProfilePage() {
 
   return (
     <PageWrapper>
-      {/*<div className="profile__element">*/}
-      {/*  <button className="profile__element-btn">*/}
-      {/*    <svg>*/}
-      {/*      <use href="/img/sprite.svg#arrow-left"></use>*/}
-      {/*    </svg>*/}
-      {/*  </button>*/}
-      {/*  Особистий кабінет*/}
-      {/*</div>*/}
-
       <UploadAvatar
         className="profile__head"
         avatar={profile?.avatar}
@@ -110,6 +102,7 @@ export default function ProfilePage() {
                       src={certificate.certificate_image}
                       width={265}
                       height={375}
+                      {...imgBlur}
                       style={{ objectFit: 'cover' }}
                       alt={certificate.course_title}
                     />

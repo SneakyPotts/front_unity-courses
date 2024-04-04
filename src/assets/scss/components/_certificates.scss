@@ -78,6 +78,18 @@
       }
     }
   }
+
+  &__share {
+    @include flex;
+    gap: rem(8);
+
+    padding: rem(10);
+
+    background-color: #fff;
+    box-shadow: 2px 2px 8px 0 #0000001a;
+    border: rem(1) solid var(--orange-300);
+    border-radius: rem(5);
+  }
 }
 
 @include mq('lg') {

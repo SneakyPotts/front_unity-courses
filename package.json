@@ -34,6 +34,7 @@
     "react-loading-skeleton": "^3.4.0",
     "react-pdf": "^7.7.1",
     "react-popper": "^2.3.0",
+    "react-share": "^5.1.0",
     "react-toastify": "^10.0.4",
     "sharp": "^0.33.2",
     "simplebar-react": "^3.2.4",
