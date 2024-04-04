@@ -87,6 +87,10 @@
     }
   }
 
+  &__btn {
+    margin-top: rem(16);
+  }
+
   &__duration {
     display: flex;
     align-items: baseline;

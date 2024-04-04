@@ -14,7 +14,7 @@ import { TeacherForCourse } from '_ui/TeacherForCourse'
 
 import type { CourseCatalogItemProps } from './CourseCatalogItem.props'
 
-export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
+export function CourseCatalogItem({ isCertified, ...props }: CourseCatalogItemProps) {
   const { basket } = useContext(appContext)
 
   const [inBasket, setInBasket] = useState(false)
@@ -22,6 +22,32 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
   useEffect(() => {
     setInBasket(!!basket?.find((v) => v.id === props.id))
   }, [basket])
+
+  const PriceBlock = () => (
+    <div className={'courses-catalog__price'}>
+      <div className={'courses-catalog__cost'}>
+        {!!props.discount && (
+          <s className={'courses-catalog__cost-discount'}>
+            <span>{formattedPrice(props.price)} грн.</span>
+          </s>
+        )}
+        <p>{!!props.price ? `${formattedPrice(props.discount || props.price)} грн.` : 'Безкоштовно'}</p>
+      </div>
+      {!isCertified ? (
+        <AddToBasketButton
+          course={props}
+          callback={() => setInBasket(true)}
+        />
+      ) : (
+        <Button href={`/courses/${props.id}`}>
+          перейти до курсу
+          <svg className="btn__icon">
+            <use href="/img/sprite.svg#arrow-right"></use>
+          </svg>
+        </Button>
+      )}
+    </div>
+  )
 
   return (
     <div className={'courses-catalog__element'}>
@@ -115,33 +141,24 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
           />
         </div>
       ) : inBasket || props.purchased ? (
-        <div className="courses-catalog__price --in-basket">
-          <Button
-            variant="border"
-            className={'some_button courses-catalog__btn'}
-            disabled
-          >
-            <svg className="btn__icon">
-              <use href={`/img/sprite.svg#check`}></use>
-            </svg>
-            {inBasket ? 'В кошику' : 'Придбано'}
-          </Button>
-        </div>
-      ) : (
-        <div className={'courses-catalog__price'}>
-          <div className={'courses-catalog__cost'}>
-            {!!props.discount && (
-              <s className={'courses-catalog__cost-discount'}>
-                <span>{formattedPrice(props.price)} грн.</span>
-              </s>
-            )}
-            <p>{!!props.price ? `${formattedPrice(props.discount || props.price)} грн.` : 'Безкоштовно'}</p>
+        isCertified ? (
+          <PriceBlock />
+        ) : (
+          <div className="courses-catalog__price --in-basket">
+            <Button
+              variant="border"
+              className={'some_button courses-catalog__btn'}
+              disabled
+            >
+              <svg className="btn__icon">
+                <use href={`/img/sprite.svg#check`}></use>
+              </svg>
+              {inBasket ? 'В кошику' : 'Придбано'}
+            </Button>
           </div>
-          <AddToBasketButton
-            course={props}
-            callback={() => setInBasket(true)}
-          />
-        </div>
+        )
+      ) : (
+        <PriceBlock />
       )}
     </div>
   )

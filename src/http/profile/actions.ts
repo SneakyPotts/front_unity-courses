@@ -124,3 +124,7 @@ export async function revalidateCourses() {
   revalidateTag('catalog')
   revalidateTag('courseDetail')
 }
+
+export async function revalidateProfile() {
+  revalidateTag('aboutMe')
+}

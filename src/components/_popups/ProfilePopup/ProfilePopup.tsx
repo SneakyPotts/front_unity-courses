@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import React, { useState } from 'react'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { signOutAction } from '@http/profile/actions'
@@ -44,15 +45,15 @@ export function ProfilePopup({ onClose, showProfileModal, profile }: ProfilePopu
       </div>
       <ul className="header__block">
         <li className="header__block-item">
-          <button
+          <Link
+            href={'/profile'}
             className="header__block-link"
-            onClick={showProfileModal}
           >
             <svg className="header__block-svg">
               <use href="/img/sprite.svg#account"></use>
             </svg>
             Особистий профіль
-          </button>
+          </Link>
         </li>
         <li className="header__block-item">
           <a
