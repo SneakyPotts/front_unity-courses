@@ -124,13 +124,18 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
               />
             ))}
         </div>
-        {/* TODO добавление кнопки, где она нужна добавить класс my-catalog__btn   */}
-        <button className={'btn btn--light  my-catalog__btn'}>
-          <svg className={'btn__icon'}>
-            <use href="/img/sprite.svg#course-file"></use>
-          </svg>
-          отримати сертифікат
-        </button>
+        {isArchived && (
+          <Button
+            variant="border"
+            className={'btn--light my-catalog__btn'}
+            href={`/certificates/UnityCer-${course.id}`}
+          >
+            <svg className={'btn__icon'}>
+              <use href="/img/sprite.svg#course-file"></use>
+            </svg>
+            отримати сертифікат
+          </Button>
+        )}
         {isTeacher && course?.students && (
           <div
             className={'teacher-course-card__box'}

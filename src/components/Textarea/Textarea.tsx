@@ -7,7 +7,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
   const { label, className, ...otherProps } = props
 
   return (
-    <div className="">
+    <div className={'wrapper'}>
       {/* <div className="document-block__top">
         <h3 className="document-block__title">{label}</h3>
       </div> */}

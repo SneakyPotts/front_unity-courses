@@ -1,4 +1,5 @@
-import type { TClass, TDocument, THuman, TTeacher } from '@assets/types/globals'
+import type { PartialBy, TClass, TDocument, THuman, TTeacher } from '@assets/types/globals'
+import type { TCourse } from '@http/courses/type'
 
 /*profile*/
 export type TRole = 1 | 2 | 3 | 10 | 20 | 30 | 31 | 100
@@ -12,6 +13,15 @@ export type TAboutMe = THuman & {
   teacher_profile: TTeacherRegistration
   student_profile: any
   parent_profile: TParentRegistration
+}
+
+export type TProfile = Omit<THuman, 'avatar'> & {
+  date_of_birth: string
+  gender: string
+  phone: string
+  email: string
+  city: string
+  address: string
 }
 /*profile*/
 
@@ -101,11 +111,38 @@ export type TCertificates = {
 
 export type TCertificate = {
   id: string
+  certificate_image: string
+  certificate_pdf: string
+  course_id: string
   course_title: string
   student: TTeacher
-  lectors: TTeacher[]
-  end_date: string
-  final_mark: number
-  certificate: string
 }
+
+export type TCertificateById = {
+  id: string
+  student: TTeacher
+  certificate_pdf: string
+  certificate_image: string
+  course: TCourse
+}
+
+export interface Course {
+  id: string
+  title: string
+  format: string
+  color: string
+  cover: string
+  categories_repr: string[]
+  number_of_lectures: number
+  duration_in_months: number
+  available_days: number
+  lectures_hours: number
+  rating: number
+  lectors: TTeacher[]
+  start_date: string
+  number_of_students: number
+  max_number_of_students: number
+  purchased: boolean
+}
+
 /*certificates*/

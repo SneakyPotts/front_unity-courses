@@ -8,6 +8,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    max-width: rem(360);
   }
 
   &__title {
@@ -44,13 +46,21 @@
   }
 
   &__content {
+    width: min(100%, rem(850));
+
     &-img {
       max-width: rem(850);
       width: 100%;
-      img {
-        width: 100%;
-        height: 100%;
-      }
+      height: auto;
+      aspect-ratio: 850 / 1200;
+      margin-bottom: rem(12);
+
+      box-shadow: 2px 2px 8px 0 #0000001a;
+      border: 1px solid var(--orange-300);
+      border-radius: rem(5);
+      overflow: hidden;
+
+      position: relative;
     }
 
     &-btn {

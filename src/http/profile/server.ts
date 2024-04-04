@@ -1,8 +1,9 @@
 import { cache } from 'react'
 
+import { serverFetch } from '@http/api'
 import { serverFetchAuth } from '@http/authApi'
 
-import type { TAboutMe, TBasket } from './type'
+import type { TAboutMe, TBasket, TCertificateById } from './type'
 
 const aboutMeRequest = cache(
   async () =>
@@ -24,4 +25,13 @@ const myBasketRequest = cache(
     }),
 )
 
-export { aboutMeRequest, myBasketRequest }
+const getCertificateById = cache(
+  async (id: string) =>
+    await serverFetch<TCertificateById>(`/courses/certificate/${id}/`, {
+      next: {
+        revalidate: 30,
+      },
+    }),
+)
+
+export { aboutMeRequest, myBasketRequest, getCertificateById }

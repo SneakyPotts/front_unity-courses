@@ -15,7 +15,8 @@ export async function clientFetch<T>(url: string, init?: RequestInit & { isFile?
   })
 
   if (!response.ok) {
-    throw new Error(response.statusText)
+    const errorData = await response.json()
+    throw new Error(errorData.extra.fields[0], { cause: response })
   }
 
   return init?.method === 'DELETE' ? undefined : response.json()
@@ -26,13 +27,11 @@ export async function clientAuthFetch<T>(url: string, init?: RequestInit & { isF
 
   if (!cookies.get('accessToken')) return undefined
 
-  const response = await clientFetch<T>(url, {
+  return await clientFetch<T>(url, {
     ...init,
     headers: {
       Authorization: `Bearer ${cookies.get('accessToken')}`,
       ...init?.headers,
     },
   })
-
-  return response
 }

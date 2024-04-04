@@ -95,6 +95,8 @@
     }
 
     &-btn {
+      flex-shrink: 0;
+
       @include flex-all-center;
 
       background: var(--orange-100);
@@ -107,13 +109,29 @@
         height: rem(17);
         fill: var(--orange-500);
       }
+
+      @include hover {
+        background: var(--orange-200);
+      }
+
+      &.--save {
+        background-color: var(--orange-200);
+      }
+    }
+
+    &-field {
+      width: 100%;
     }
   }
 
   &__contact {
-    display: flex;
-    gap: rem(30);
     margin-bottom: rem(60);
+
+    &-inner {
+      display: flex;
+      gap: rem(30);
+      margin-bottom: rem(30);
+    }
   }
 
   &__links {
@@ -135,10 +153,8 @@
     }
 
     &-list {
-      li {
-        &:not(:last-child) {
-          margin-bottom: rem(8);
-        }
+      & > * {
+        @include mb(rem(8));
       }
     }
   }
@@ -183,13 +199,15 @@
     overflow: scroll;
 
     &-img {
+      display: block;
       max-width: rem(264);
       width: 100%;
       margin-bottom: rem(8);
 
-      img {
-        display: block;
-      }
+      box-shadow: 2px 2px 8px 0 #0000001a;
+      border: 1px solid var(--orange-300);
+      border-radius: rem(5);
+      overflow: hidden;
     }
 
     p {
