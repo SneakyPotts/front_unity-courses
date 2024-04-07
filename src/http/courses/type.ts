@@ -68,6 +68,8 @@ export type TCourseDetail = TBasketCourse & {
   lectures_hours: number
   purchased: boolean
   reviews: TReviewPreview[]
+  certificate?: string
+  certificate_done: boolean
 }
 
 export interface TReviewPreview {

@@ -21,8 +21,6 @@ import { Loader } from '_ui/Loader'
 import { PageWrapper } from '_ui/PageWrapper'
 import { RequestError } from '_ui/RequestError'
 
-import { ChangePasswordModal } from '_modals/ChangePasswordModal'
-
 export default function ProfilePage() {
   const { profile } = useContext(appContext)
 

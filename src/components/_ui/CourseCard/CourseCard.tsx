@@ -124,11 +124,11 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
               />
             ))}
         </div>
-        {isArchived && (
+        {course.certificate && (
           <Button
             variant="border"
             className={'btn--light my-catalog__btn'}
-            href={`/certificates/UnityCer-${course.id}`}
+            href={`/certificates/UnityCer-${course.certificate}`}
           >
             <svg className={'btn__icon'}>
               <use href="/img/sprite.svg#course-file"></use>

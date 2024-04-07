@@ -57,6 +57,8 @@ export type TStudentActiveCourseItem = {
   closest_lecture: string
   available_days: number
   my_rating?: number
+  certificate?: string
+  certificate_done: boolean
 }
 
 export type TStatsTypes = 'visiting' | 'mark' | 'progress'
