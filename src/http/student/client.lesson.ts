@@ -42,8 +42,6 @@ const sendIsVisited = ({ lesson_id }: { lesson_id: string }) =>
 export function useQueryStudentLesson({ self_id, test_id }: { self_id?: string; test_id?: string }) {
   const queryClient = useQueryClient()
 
-  queryClient.invalidateQueries({ queryKey: ['selfWork'] })
-
   const self = useQuery({
     queryKey: ['selfWork', self_id],
     queryFn: () => getSelfContent(self_id!),
@@ -52,6 +50,9 @@ export function useQueryStudentLesson({ self_id, test_id }: { self_id?: string; 
 
   const { mutateAsync: sendTextSelfWork } = useMutation({
     mutationFn: sendTextSelfWorkAnswer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['selfWork'] }).catch(console.error)
+    },
   })
 
   const { mutateAsync: sendFileSelfWork } = useMutation({
