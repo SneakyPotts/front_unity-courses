@@ -30,6 +30,10 @@ const sendTestAnswer = ({ test_id, body }: { test_id: string; body: TTestResult 
     method: 'PATCH',
     body: JSON.stringify(body),
   })
+const confirmExternalTest = ({ test_id }: { test_id: string }) =>
+  clientAuthFetch<any>(`/courses/student/test/${test_id}/confirm/`, {
+    method: 'PATCH',
+  })
 const sendIsVisited = ({ lesson_id }: { lesson_id: string }) =>
   clientAuthFetch<any>(`/courses/student/lecture/${lesson_id}/visit/`, {
     method: 'PATCH',
@@ -47,28 +51,32 @@ export function useQueryStudentLesson({ self_id, test_id }: { self_id?: string; 
   const { mutateAsync: sendTextSelfWork } = useMutation({
     mutationFn: sendTextSelfWorkAnswer,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['selfWork'] })
+      queryClient
+        .invalidateQueries({
+          queryKey: ['selfWork'],
+        })
+        .catch(console.error)
     },
   })
 
   const { mutateAsync: sendFileSelfWork } = useMutation({
     mutationFn: sendSelfWorkFile,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['selfWork'] })
+      queryClient.invalidateQueries({ queryKey: ['selfWork'] }).catch(console.error)
     },
   })
 
   const { mutateAsync: deleteFileSelfWork } = useMutation({
     mutationFn: deleteSelfWorkFile,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['selfWork'] })
+      queryClient.invalidateQueries({ queryKey: ['selfWork'] }).catch(console.error)
     },
   })
 
   const { mutateAsync: sendSelfConfirm } = useMutation({
     mutationFn: sendSelfWorkConfirm,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['selfWork'] })
+      queryClient.invalidateQueries({ queryKey: ['selfWork'] }).catch(console.error)
     },
   })
 
@@ -81,14 +89,21 @@ export function useQueryStudentLesson({ self_id, test_id }: { self_id?: string; 
   const { mutateAsync: sendTest } = useMutation({
     mutationFn: sendTestAnswer,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['test'] })
+      queryClient.invalidateQueries({ queryKey: ['test'] }).catch(console.error)
+    },
+  })
+
+  const { mutateAsync: confirmTest } = useMutation({
+    mutationFn: confirmExternalTest,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['test'] }).catch(console.error)
     },
   })
 
   const { mutateAsync: visit } = useMutation({
     mutationFn: sendIsVisited,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['lesson'] })
+      queryClient.invalidateQueries({ queryKey: ['lesson'] }).catch(console.error)
     },
   })
 
@@ -100,6 +115,7 @@ export function useQueryStudentLesson({ self_id, test_id }: { self_id?: string; 
     sendSelfConfirm,
     test,
     sendTest,
+    confirmTest,
     visit,
   }
 }

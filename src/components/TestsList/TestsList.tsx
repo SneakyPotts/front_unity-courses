@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import parse, { type Element, type HTMLReactParserOptions } from 'html-react-parser'
+import parse, { Element, type HTMLReactParserOptions } from 'html-react-parser'
 import React, { type ChangeEventHandler, Fragment, useMemo, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { usePopper } from 'react-popper'
@@ -20,7 +20,7 @@ import { toastPromise } from '_ui/ToastUtils'
 
 import type { ComplianceQuestionProps, FillInputProps, FillQuestionProps, FreeQuestionProps, SingleQuestionProps, TestsListProps } from './TestsList.props'
 
-export function TestsList({ questions, test_id, setNotEditing }: TestsListProps) {
+export function TestsList({ questions, test_id, setNotEditing, extraHandler }: TestsListProps) {
   const { sendTest: sendAnswers } = useQueryStudentLesson({})
 
   const { handleSubmit, setValue } = useForm<any>()
@@ -41,7 +41,7 @@ export function TestsList({ questions, test_id, setNotEditing }: TestsListProps)
     let body = assemblyRequestBody(data)
 
     toastPromise({
-      handler: sendAnswers({ test_id, body }),
+      handler: (extraHandler ?? sendAnswers)({ test_id, body }),
       successCallback: setNotEditing,
       successMessage: 'Ваші відповіді успішно надіслано на перевірку',
     })

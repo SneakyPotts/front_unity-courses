@@ -1,10 +1,12 @@
 import type { UseFormSetValue } from 'react-hook-form'
 
-import type { IQuiz, TAnswerCheck, TAnswerFill, TQuestion } from '@assets/types/globals'
+import type { IQuiz, TAnswerCheck, TAnswerFill, TQuestion, TTestResult } from '@assets/types/globals'
+import type { UseMutateAsyncFunction } from '@tanstack/react-query'
 
 export interface TestsListProps extends IQuiz {
   test_id: string
   setNotEditing: () => void
+  extraHandler?: UseMutateAsyncFunction<any, Error, { test_id: string; body: TTestResult }, unknown>
 }
 
 type QuestionProps = TQuestion & {

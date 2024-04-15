@@ -64,6 +64,11 @@ export type TCourseDetail = TBasketCourse & {
   materials: TDocument[]
   links: ExtraLink[]
   duration_in_months: number
+  final_test: {
+    id: string
+    deadline: string
+    title: string
+  }
   available_days: number
   lectures_hours: number
   purchased: boolean
