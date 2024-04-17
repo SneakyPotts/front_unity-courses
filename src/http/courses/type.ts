@@ -74,6 +74,7 @@ export type TCourseDetail = TBasketCourse & {
   purchased: boolean
   reviews: TReviewPreview[]
   certificate?: string
+  certificate_is_available: boolean
   certificate_done: boolean
 }
 
