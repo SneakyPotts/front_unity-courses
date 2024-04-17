@@ -372,3 +372,103 @@ export type TTestProgress = {
   deadline: string
   student: TTeacher
 }
+
+export type TExamTotal = {
+  id: string
+  course_id: string
+  course_title: string
+  course_color: string
+  course_icon: string
+  title: string
+  lectors: TTeacher[]
+  content: string
+  test_type: string
+  external_link: string
+  quiz: string
+  deadline: string
+  progress_type: number
+  progress: TExamTotalProgress[]
+}
+
+export interface TExamTotalProgress {
+  id: string
+  first_name: string
+  last_name: string
+  patronymic: string
+  avatar: string
+  test_progress: TExamTotalTestProgress
+  mark: number
+}
+
+export interface TExamTotalTestProgress {
+  id: string
+  answer: string
+  answer_timestamp: string
+  files: Array<{
+    id: string
+    name: string
+    file: string
+  }>
+  is_completed: boolean
+  teacher_reply: string
+  teacher_reply_timestamp: string
+  status: number
+  mark: number
+}
+
+export interface IExamPatch {
+  exam_id: string
+  content?: string
+  test_type?: 'INT' | 'EXT' | 'TXT'
+  external_link?: string
+  deadline?: string
+  progress_type?: number
+}
+
+export type TTeacherExamProgress = {
+  id: string
+  test_id: string
+  course_id: string
+  course_title: string
+  course_color: string
+  course_icon: string
+  test_type: string
+  progress_type: string
+  external_link: string
+  quiz: {
+    id: string
+    all_tasks_number: number
+    checked_by_service: number
+    students_correct_answers: number
+    estimate_mark: number
+    result: TResult[]
+  }
+  answer_timestamp: string
+  is_completed: boolean
+  teacher_reply: string
+  teacher_reply_timestamp: string
+  mark: number
+  status: number
+  deadline: string
+  student: THuman & {
+    id: string
+    test_progress: ExamProgress
+    mark: number
+  }
+}
+
+export interface ExamProgress {
+  id: string
+  answer: string
+  answer_timestamp: string
+  files: Array<{
+    id: string
+    name: string
+    file: string
+  }>
+  is_completed: boolean
+  teacher_reply: string
+  teacher_reply_timestamp: string
+  status: number
+  mark: number
+}

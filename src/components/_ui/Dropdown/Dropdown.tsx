@@ -8,7 +8,7 @@ export function Dropdown({ initValue, valuesList, value, onChange }: DropdownPro
   const dropdown = useRef<HTMLDivElement>(null)
 
   const [show, setShow] = useState(false)
-  const [currVal, setCurrVal] = useState<string | number>(value || initValue || '')
+  const [currVal, setCurrVal] = useState<string | number>(value ?? initValue ?? '')
 
   const handleHideDropdown = () => setShow(false)
 
@@ -21,7 +21,7 @@ export function Dropdown({ initValue, valuesList, value, onChange }: DropdownPro
   }
 
   useEffect(() => {
-    setCurrVal(value || initValue || '')
+    setCurrVal(value ?? initValue ?? '')
   }, [initValue, value])
 
   useOnClickOutside(dropdown, handleHideDropdown)

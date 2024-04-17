@@ -83,7 +83,7 @@ export function TeacherStatisticsContent({ data, isLoading, isError, courseId, i
                             key={j.mark_id}
                             className={classNames('table__mark', {
                               'table__mark--control-work': false,
-                              'table__mark--thematic': false,
+                              'table__mark--thematic': j.type === 'coursefinaltest',
                             })}
                           >
                             {j.mark}

@@ -19,11 +19,11 @@ registerLocale('uk', uk)
 
 const months = ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень']
 
-export function DeadlinePicker({ deadline, handler, onSave, onClear, customInput }: DeadlinePickerProps) {
+export function DeadlinePicker({ deadline, handler, onSave, onClear, customInput, isShowTime = false }: DeadlinePickerProps) {
   const calendarRef = useRef<ReactDatePicker>(null)
 
   const [startDate, setStartDate] = useState(deadline ? new Date(deadline) : new Date())
-  const [isShowTimeInput, setIsShowTimeInput] = useState(false)
+  const [isShowTimeInput, setIsShowTimeInput] = useState(isShowTime)
 
   const handleSend = () => {
     handler &&

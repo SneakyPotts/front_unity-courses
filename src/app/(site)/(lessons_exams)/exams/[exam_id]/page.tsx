@@ -3,6 +3,7 @@ import React from 'react'
 import type { TPageProps } from '@assets/types/globals'
 import { aboutMeRequest } from '@http/profile/server'
 import { getExamContent } from '@http/student/server'
+import { getTeacherExam } from '@http/teacher/server'
 
 import { LessonWrapper } from '_ui/LessonWrapper'
 import { RequestError } from '_ui/RequestError'
@@ -17,9 +18,7 @@ export default async function ExamPage({ params }: TPageProps) {
     parent: me?.role === 10,
   }
 
-  const { data, error } = await getExamContent(params.exam_id as string)
-
-  console.log('ExamPage', data)
+  const { data, error } = await (role.teacher ? getTeacherExam : getExamContent)(params.exam_id as string)
 
   if (error) return <RequestError {...error} />
 
@@ -38,7 +37,10 @@ export default async function ExamPage({ params }: TPageProps) {
           isTeacher: role.teacher,
         }}
       >
-        <ExamPageContent exam={data} />
+        <ExamPageContent
+          exam={data}
+          role={role}
+        />
       </LessonWrapper>
     )
 }

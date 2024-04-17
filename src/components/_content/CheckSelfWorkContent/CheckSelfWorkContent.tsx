@@ -1,30 +1,22 @@
 'use client'
 
 import { MathJax } from 'better-react-mathjax'
-import classNames from 'classnames'
 import { format } from 'date-fns'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 
 import dynamic from 'next/dynamic'
-import Image from 'next/image'
 
 import { dynamicOptions } from '@assets/constants'
-import { imgBlur } from '@assets/utils'
-import { Portal } from '@components/Portal'
 import { UploadDocumentItem } from '@components/UploadDocument'
-import { useAnimate } from '@hooks/useAnimate'
-import { useBlockScroll } from '@hooks/useBlockScroll'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import { revalidateSelfWork } from '@http/teacher/actions'
 import { useQueryTeacherLesson } from '@http/teacher/client.lesson'
-// @ts-ignore
-import { Options, Splide, SplideSlide } from '@splidejs/react-splide'
 
 import { Button } from '_ui/Button'
 import { Dropdown } from '_ui/Dropdown'
 import { toastPromise } from '_ui/ToastUtils'
 
-import type { CheckSelfWorkContentProps, TeacherHomeWorkListProps, TeacherHomeWorkSliderProps } from './CheckSelfWorkContent.props'
+import type { CheckSelfWorkContentProps, TeacherHomeWorkListProps } from './CheckSelfWorkContent.props'
 
 const TextEditor = dynamic(() => import('@components/TextEditor').then((mod) => mod.TextEditor), {
   ...dynamicOptions,
@@ -60,7 +52,7 @@ export function CheckSelfWorkContent({ data }: CheckSelfWorkContentProps) {
   }
 
   useSetHeaderParams({ title: 'Самостійна робота' })
-  console.log(data)
+
   return (
     <div className={'lesson-section__block'}>
       {data.progress_type !== 2 && <div className={'lesson-section__deadline'}>{format(new Date(data.answer_timestamp), 'dd.MM.yyyy HH:mm')}</div>}
@@ -168,107 +160,6 @@ export function CheckSelfWorkContent({ data }: CheckSelfWorkContentProps) {
   )
 }
 
-function SliderPopup({ data, activeSlide, onClose }: TeacherHomeWorkSliderProps) {
-  const mainRef = useRef<any>(null)
-  const thumbsRef = useRef<any>(null)
-
-  const [isAnimate, handleClose] = useAnimate(onClose)
-
-  useEffect(() => {
-    if (mainRef.current && thumbsRef.current && thumbsRef.current.splide) {
-      mainRef.current.sync(thumbsRef.current.splide)
-    }
-  }, [])
-
-  useBlockScroll()
-
-  const mainOptions: Options = {
-    type: 'fade',
-    rewind: true,
-    perPage: 1,
-    perMove: 1,
-    pagination: false,
-    arrows: true,
-    height: '60vh',
-    width: '80vw',
-    drag: false,
-    start: activeSlide,
-  }
-
-  const thumbsOptions: Options = {
-    type: 'slide',
-    rewind: true,
-    gap: '20px',
-    pagination: false,
-    fixedWidth: 160,
-    fixedHeight: 93,
-    cover: true,
-    isNavigation: true,
-    direction: 'ltr',
-    height: '93px',
-    arrows: false,
-    start: activeSlide,
-  }
-
-  return (
-    <Portal>
-      <div className={classNames('slider-popup', { 'slider-popup--hide': isAnimate })}>
-        <div
-          className="slider-popup__close"
-          onClick={handleClose}
-        >
-          <svg>
-            <use href="/img/sprite.svg#cross"></use>
-          </svg>
-        </div>
-
-        <div>
-          <Splide
-            options={mainOptions}
-            ref={mainRef}
-          >
-            {data.map((slide) => (
-              <SplideSlide
-                key={slide.id}
-                style={{ position: 'relative' }}
-              >
-                <Image
-                  src={slide.file}
-                  fill
-                  {...imgBlur}
-                  alt={slide.name}
-                />
-              </SplideSlide>
-            ))}
-          </Splide>
-
-          <Splide
-            options={thumbsOptions}
-            ref={thumbsRef}
-            className="slider-popup__thumbs"
-          >
-            {data.map((slide) => (
-              <SplideSlide
-                key={slide.id}
-                className="slider-popup__thumb-slide"
-                style={{ position: 'relative' }}
-              >
-                <Image
-                  src={slide.file}
-                  fill
-                  {...imgBlur}
-                  alt={slide.name}
-                />
-                <span className="slider-popup__thumb-overlay" />
-              </SplideSlide>
-            ))}
-          </Splide>
-        </div>
-      </div>
-    </Portal>
-  )
-}
-
 function FilesList({ data }: TeacherHomeWorkListProps) {
   const [showSlider, setShowSlider] = useState<boolean>(false)
   const [activeSlide, setActiveSlide] = useState<number>(0)
@@ -294,13 +185,15 @@ function FilesList({ data }: TeacherHomeWorkListProps) {
         </div>
       ))}
 
-      {showSlider && (
-        <SliderPopup
-          data={data}
-          activeSlide={activeSlide}
-          onClose={() => setShowSlider(false)}
-        />
-      )}
+      {/*TODO: create slider modal*/}
+
+      {/*{showSlider && (*/}
+      {/*  <SliderPopup*/}
+      {/*    data={data}*/}
+      {/*    activeSlide={activeSlide}*/}
+      {/*    onClose={() => setShowSlider(false)}*/}
+      {/*  />*/}
+      {/*)}*/}
     </div>
   )
 }

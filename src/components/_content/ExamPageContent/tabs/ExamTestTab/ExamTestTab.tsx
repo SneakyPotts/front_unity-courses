@@ -29,7 +29,7 @@ export function ExamTestTab({ ...exam }: ExamTestTabProps) {
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
-  console.log(exam)
+
   const isUpload = !exam.progress?.answer_timestamp || isEditing
   const formattedContent = useAssemblyContent(exam.content)
 
