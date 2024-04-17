@@ -83,7 +83,9 @@ export function ToDoList({}: ToDoListProps) {
                   <ToDoItem
                     key={toDo.id}
                     {...toDo}
-                    edit={{ show: isCreating === toDo.id, setShow: () => setIsCreating(toDo.id), setClose: () => setIsCreating('') }}/>))
+                    edit={{ show: isCreating === toDo.id, setShow: () => setIsCreating(toDo.id), setClose: () => setIsCreating('') }}
+                  />
+                ))
                 : !isLoading && !isCreating.length && <li className="text-center">Список задач пустий...</li>}
             </ul>
           </SimpleBar>
