@@ -78,7 +78,7 @@ export function CertificatePageContent({ data }: CertificatePageContentProps) {
               href={data.certificate_pdf}
               target="_blank"
             >
-              <svg>
+              <svg className={'btn__icon'}>
                 <use href="/img/sprite.svg#course-download"></use>
               </svg>
               завантажити
@@ -92,7 +92,7 @@ export function CertificatePageContent({ data }: CertificatePageContentProps) {
                 variant="border"
                 onClick={() => setIsShowShare((p) => !p)}
               >
-                <svg>
+                <svg className={'btn__icon'}>
                   <use href="/img/sprite.svg#course-share"></use>
                 </svg>
                 поділитися
