@@ -3,6 +3,7 @@
 import classNames from 'classnames'
 import React, { MouseEventHandler } from 'react'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import type { ButtonProps } from './Button.props'
@@ -17,6 +18,23 @@ export function Button({ variant = 'accent', href, target, type = 'button', onCl
     }
   }
 
+  if (href)
+    return (
+      <Link
+        className={classNames('btn', className, {
+          'btn--accent': variant === 'accent',
+          'btn--grey': variant === 'gray',
+          'btn--trans': variant === 'border',
+          fulfill: fulFill,
+        })}
+        href={href}
+        target={target}
+        rel="noopener noreferrer"
+      >
+        {children}
+      </Link>
+    )
+
   return (
     <button
       type={type}
@@ -27,7 +45,7 @@ export function Button({ variant = 'accent', href, target, type = 'button', onCl
         fulfill: fulFill,
       })}
       disabled={variant === 'gray' || disabled}
-      onClick={handleClick}
+      onClick={onClick}
       {...props}
     >
       {children}

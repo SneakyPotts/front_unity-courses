@@ -34,7 +34,7 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
   }
 
   const [isOpenMobile, setIsOpenMobile] = useToggle(false)
-
+  console.log(course)
   return (
     <div
       className={classNames('my-catalog__block', { 'my-catalog__block--lesson': isOpenMobile })}
@@ -124,7 +124,7 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
               />
             ))}
         </div>
-        {course.certificate && (
+        {course.certificate_is_available && (
           <Button
             variant="border"
             className={'btn--light my-catalog__btn'}
@@ -133,7 +133,7 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
             <svg className={'btn__icon'}>
               <use href="/img/sprite.svg#course-file"></use>
             </svg>
-            отримати сертифікат
+            {course.certificate_done ? 'переглянути сертифікат' : 'отримати сертифікат'}
           </Button>
         )}
         {isTeacher && course?.students && (

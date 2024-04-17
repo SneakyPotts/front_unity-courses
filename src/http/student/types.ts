@@ -58,6 +58,7 @@ export type TStudentActiveCourseItem = {
   available_days: number
   my_rating?: number
   certificate?: string
+  certificate_is_available: boolean
   certificate_done: boolean
 }
 
