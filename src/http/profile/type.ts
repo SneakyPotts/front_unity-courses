@@ -1,4 +1,4 @@
-import type { PartialBy, TClass, TDocument, THuman, TTeacher } from '@assets/types/globals'
+import type { TClass, TDocument, THuman, TTeacher } from '@assets/types/globals'
 import type { TCourse } from '@http/courses/type'
 
 /*profile*/
@@ -10,29 +10,35 @@ export type TAboutMe = THuman & {
   status: number
   avatar_uploaded_at: string
   avatar_can_be_updated: string
+  personal_site: string
+  facebook_profile: string
+  linkedin_profile: string
+  telegram_profile: string
+  about_me: string
   teacher_profile: TTeacherRegistration
-  student_profile: any
+  student_profile: TProfile
   parent_profile: TParentRegistration
+  ext_student_profile: TProfile
 }
 
 export type TProfile = Omit<THuman, 'avatar'> & {
-  date_of_birth: string
-  gender: string
-  phone: string
-  email: string
-  city: string
   address: string
+  city: string
+  date_of_birth: string
+  email: string
+  phone: string
+  gender: string
 }
 /*profile*/
 
 /*common*/
 export type TExtendHuman = THuman & {
-  date_of_birth: string
-  gender: string
-  phone: string
-  email: string
-  city: string
   address: string
+  city: string
+  date_of_birth: string
+  email: string
+  phone: string
+  gender: string
 }
 /*common*/
 

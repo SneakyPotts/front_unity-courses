@@ -14,6 +14,7 @@ import type { ProfileRowProps } from './ProfileRow.props'
 
 const extractProfileFields = (profile: TProfile) => {
   const { first_name, last_name, patronymic, date_of_birth, gender, phone, email, city, address } = profile
+
   return { first_name, last_name, patronymic, date_of_birth, gender, phone, email, city, address }
 }
 
@@ -26,8 +27,10 @@ export function ProfileRow({ name, label, editable = true }: ProfileRowProps) {
     external: profile?.role === 3,
   }
 
-  const data: TProfile = useMemo(() => {
-    switch (profile?.role) {
+  const data: TProfile | undefined = useMemo(() => {
+    if (!profile) return undefined
+
+    switch (profile.role) {
       case 20:
         return extractProfileFields(profile.teacher_profile)
       case 2:
@@ -35,17 +38,7 @@ export function ProfileRow({ name, label, editable = true }: ProfileRowProps) {
       case 10:
         return extractProfileFields(profile.parent_profile)
       default:
-        return {
-          first_name: profile?.first_name || '',
-          last_name: profile?.last_name || '',
-          patronymic: profile?.patronymic || '',
-          date_of_birth: '',
-          gender: '',
-          phone: '',
-          email: '',
-          city: '',
-          address: '',
-        }
+        return extractProfileFields(profile.ext_student_profile)
     }
   }, [profile])
 
@@ -54,13 +47,13 @@ export function ProfileRow({ name, label, editable = true }: ProfileRowProps) {
       case 'password':
         return undefined
       case 'date_of_birth':
-        return !!data[name].length ? format(new Date(data[name]), 'dd.MM.yyyy') : ''
+        return !!data?.[name]?.length ? format(new Date(data[name]), 'dd.MM.yyyy') : ''
       default:
-        return data[name]
+        return data?.[name]
     }
   }, [data])
 
-  const { setParentProfile, setTeacherProfile } = useQueryProfile()
+  const { setParentProfile, setTeacherProfile, setExternalProfile } = useQueryProfile()
 
   const [isEdit, setIsEdit] = useState(false)
   const [value, setValue] = useState('')
@@ -70,20 +63,12 @@ export function ProfileRow({ name, label, editable = true }: ProfileRowProps) {
     name === 'password' ? setIsShowChangePassModal(true) : setIsEdit(true)
   }
   const handleSave = () => {
-    const updatedData = { ...data, id: profile?.id!, [name]: value }
+    const updatedData = { id: profile?.id!, [name]: value }
+    const handler = role.parent ? setParentProfile : role.teacher ? setTeacherProfile : setExternalProfile
 
-    role.parent &&
-      setParentProfile(updatedData)
-        .then(() => setIsEdit(false))
-        .catch(console.error)
-
-    role.teacher &&
-      setTeacherProfile({
-        ...updatedData,
-        qualification: profile?.teacher_profile.qualification || '',
-      })
-        .then(() => setIsEdit(false))
-        .catch(console.error)
+    handler(updatedData)
+      .then(() => setIsEdit(false))
+      .catch(console.error)
   }
 
   useEffect(() => {

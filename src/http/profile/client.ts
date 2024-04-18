@@ -1,7 +1,6 @@
 import { clientAuthFetch } from '@http/clientApi'
 import { revalidateProfile } from '@http/profile/actions'
-import type { TProfile } from '@http/profile/type'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 
 const setAvatar = ({ user_id, body }: { user_id: string; body: FormData }) =>
   clientAuthFetch<any>(`/users/${user_id}/avatar/`, {
@@ -10,14 +9,20 @@ const setAvatar = ({ user_id, body }: { user_id: string; body: FormData }) =>
     isFile: true,
   })
 
-const updateParentProfile = ({ id, ...body }: TProfile & { id: string }) =>
+const updateParentProfile = ({ id, ...body }: { id: string } & Record<string, string>) =>
   clientAuthFetch<any>(`/users/parent/profile/${id}/`, {
     method: 'PATCH',
     body: JSON.stringify(body),
   })
 
-const updateTeacherProfile = ({ id, ...body }: TProfile & { id: string; qualification: string }) =>
+const updateTeacherProfile = ({ id, ...body }: { id: string } & Record<string, string>) =>
   clientAuthFetch<any>(`/users/teacher/profile/${id}/`, {
+    method: 'PATCH',
+    body: JSON.stringify(body),
+  })
+
+const updateExternalProfile = ({ id, ...body }: { id: string } & Record<string, string>) =>
+  clientAuthFetch<any>(`/users/update_external_student_profile/`, {
     method: 'PATCH',
     body: JSON.stringify(body),
   })
@@ -29,13 +34,6 @@ const updatePassword = (body: { old_password: string; new_password: string }) =>
   })
 
 export function useQueryProfile() {
-  const queryClient = useQueryClient()
-
-  // const get = useQuery({
-  //   queryKey: ['ToDoList'],
-  //   queryFn: getToDoList,
-  // })
-
   const { mutateAsync: avatar } = useMutation({
     mutationFn: setAvatar,
     onSuccess: () => {
@@ -57,6 +55,13 @@ export function useQueryProfile() {
     },
   })
 
+  const { mutateAsync: setExternalProfile } = useMutation({
+    mutationFn: updateExternalProfile,
+    onSuccess: () => {
+      revalidateProfile()
+    },
+  })
+
   const changePassword = useMutation({
     mutationFn: updatePassword,
   })
@@ -66,6 +71,7 @@ export function useQueryProfile() {
     avatar,
     setParentProfile,
     setTeacherProfile,
+    setExternalProfile,
     changePassword,
   }
 }
