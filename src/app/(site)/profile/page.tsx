@@ -64,7 +64,7 @@ export default function ProfilePage() {
 
     const handler = role.parent ? setParentProfile : role.teacher ? setTeacherProfile : setExternalProfile
 
-    handler(reqData)
+    handler({ ...(!role.external ? { id: profile?.id } : {}), ...reqData })
       .then(() => {})
       .catch(console.error)
   }
