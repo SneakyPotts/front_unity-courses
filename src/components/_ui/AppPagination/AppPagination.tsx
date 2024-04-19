@@ -13,6 +13,7 @@ export function AppPagination({ ...props }: AppPaginationProps) {
 
   const handleOnChange = (page: number) => {
     const params = new URLSearchParams(searchParams.toString())
+
     if (page === 1) {
       params.delete('page')
       router.push(`${pathname}?${params.toString()}`, { scroll: true })
@@ -53,8 +54,8 @@ export function AppPagination({ ...props }: AppPaginationProps) {
           </svg>
         </button>
       }
-      current={Number(searchParams.get('page') || 1)}
-      onChange={handleOnChange}
+      current={props.current ?? Number(searchParams.get('page') || 1)}
+      onChange={props.onChange ?? handleOnChange}
     />
   )
 }

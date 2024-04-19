@@ -4,6 +4,10 @@
   gap: rem(30);
 
   &__active {
+    justify-content: space-between;
+
+    height: 100%;
+
     margin-bottom: rem(40);
   }
 

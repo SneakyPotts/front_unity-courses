@@ -7,6 +7,7 @@ import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import { useQueryStudentCourses } from '@http/student/client.courses'
 import { useQueryTeacherCourses } from '@http/teacher/client.courses'
 
+import { AppPagination } from '_ui/AppPagination'
 import { CourseCard } from '_ui/CourseCard'
 import { Loader } from '_ui/Loader'
 import { MyCoursesEmpty } from '_ui/MyCoursesEmpty'
@@ -51,12 +52,24 @@ export function MyCoursesContent({ role }: MyCoursesContentProps) {
 }
 
 function ActiveCoursesTab({ role }: { role: { teacher: boolean; student: boolean; parent: boolean } }) {
-  const { active: activeStudent } = useQueryStudentCourses({ tab_id: !role.teacher ? 'active' : '' })
-  const { active: activeTeacher } = useQueryTeacherCourses({ tab_id: role.teacher ? 'active' : '' })
+  const [page, setPage] = useState(1)
+
+  const { active: activeStudent } = useQueryStudentCourses({ tab_id: !role.teacher ? 'active' : '', page })
+  const { active: activeTeacher } = useQueryTeacherCourses({ tab_id: role.teacher ? 'active' : '', page })
 
   const active = role.teacher ? activeTeacher : activeStudent
 
-  return <TabContent {...active} />
+  return (
+    <>
+      <TabContent {...active} />
+      <AppPagination
+        total={active.data?.count}
+        pageSize={5}
+        current={page}
+        onChange={setPage}
+      />
+    </>
+  )
 }
 
 function OnModerateCoursesTab() {
@@ -64,13 +77,23 @@ function OnModerateCoursesTab() {
 }
 
 function ArchivedCoursesTab({ role }: { role: { teacher: boolean; student: boolean; parent: boolean } }) {
-  const { archived } = useQueryStudentCourses({ tab_id: !role.teacher ? 'archived' : '' })
+  const [page, setPage] = useState(1)
+
+  const { archived } = useQueryStudentCourses({ tab_id: !role.teacher ? 'archived' : '', page })
 
   return (
-    <TabContent
-      {...archived}
-      isArchived
-    />
+    <>
+      <TabContent
+        {...archived}
+        isArchived
+      />
+      <AppPagination
+        total={archived.data?.count}
+        pageSize={5}
+        current={page}
+        onChange={setPage}
+      />
+    </>
   )
 }
 function TabContent({ data, isLoading, isError, isArchived }: TabContentProps) {
