@@ -396,6 +396,7 @@ function FreeQuestion({ id, answer_type, answer_type_str, question, indexNumber,
     <TestWrapper
       indexNumber={indexNumber}
       description={descMatcher[answer_type]}
+      question={question}
     >
       <TextEditor
         version={4}

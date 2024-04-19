@@ -69,7 +69,9 @@ export function CheckExamContent({ exam }: CheckExamContentProps) {
         ) : (
           <div className="tests">
             <div className="tests__inner">
-              <h2 className="tests__title">Студент Шевченко Іван</h2>
+              <h2 className="tests__title">
+                {exam.student.last_name} {exam.student.first_name}
+              </h2>
               {exam.quiz?.result.map((answer, index) => (
                 <Fragment key={answer.question_id}>
                   {(answer.answer_type === 1 || answer.answer_type === 2) && (
