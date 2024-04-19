@@ -33,7 +33,7 @@ export function CheckExamContent({ exam }: CheckExamContentProps) {
   const { setMark: setExamMark, allowRetake: allowRetakeExam } = useQueryTeacherExam()
 
   const [mark, setMark] = useState(exam.mark || exam.quiz?.estimate_mark || 0)
-  const [text, setText] = useState(exam.teacher_reply || '')
+  const [text, setText] = useState(exam.teacher_reply || undefined)
   const [isEditing, setIsEditing] = useState(exam.mark === null)
 
   const handleAllowRetake = () => {
@@ -219,7 +219,7 @@ export function CheckExamContent({ exam }: CheckExamContentProps) {
             {isEditing ? (
               <TextEditor
                 version={4}
-                initData={text}
+                initData={text || ''}
                 onChange={setText}
               />
             ) : (

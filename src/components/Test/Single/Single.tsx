@@ -48,6 +48,7 @@ export function Single({ id, type, question, description, options, indexNumber, 
               name={type === 'radio' ? id : `${id}_${i}`}
               checked={v.student_checked_as_correct}
               icon={isShowIcon(v.is_correct, v.student_checked_as_correct)}
+              readOnly
             />
           ))}
         </ul>
