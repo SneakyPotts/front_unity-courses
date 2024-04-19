@@ -54,6 +54,7 @@ export type TStudentActiveCourseItem = {
   lectors: TTeacher[]
   start_date: string
   duration_in_months: number
+  end_date?: string
   closest_lecture: string
   available_days: number
   my_rating?: number

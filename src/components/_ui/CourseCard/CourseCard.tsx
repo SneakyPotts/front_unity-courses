@@ -1,7 +1,7 @@
 'use client'
 
 import classNames from 'classnames'
-import { isAfter } from 'date-fns'
+import { isAfter, isPast, parseISO } from 'date-fns'
 import React, { useContext } from 'react'
 import { useToggle } from 'usehooks-ts'
 
@@ -34,19 +34,23 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
   }
 
   const [isOpenMobile, setIsOpenMobile] = useToggle(false)
-  console.log(course)
+
   return (
     <div
       className={classNames('my-catalog__block', { 'my-catalog__block--lesson': isOpenMobile })}
       style={{ backgroundColor: isArchived ? '#f2f2f2' : course.color }}
     >
       <div className="my-catalog__left">
-        <Link
-          href={`/courses/${course.id}`}
-          className="my-catalog__left-title"
-        >
-          {course.title}
-        </Link>
+        {course.end_date && isPast(parseISO(course.end_date)) ? (
+          <span className="my-catalog__left-title">{course.title}</span>
+        ) : (
+          <Link
+            href={`/courses/${course.id}`}
+            className="my-catalog__left-title"
+          >
+            {course.title}
+          </Link>
+        )}
         <div
           className="my-catalog__left-text"
           dangerouslySetInnerHTML={{ __html: course.description || '' }}
