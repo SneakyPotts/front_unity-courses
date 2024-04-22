@@ -301,7 +301,7 @@ function FillQuestion({ id, answer_type, answer_type_str, answers, question, ind
   )
 }
 
-function FillInput({ answer: { options, id }, handleChange }: FillInputProps) {
+function FillInput({ answer, handleChange }: FillInputProps) {
   const listOptions = useRef<HTMLDivElement | null>(null)
 
   const [isShowOptions, setIsShowOptions] = useState(false)
@@ -327,7 +327,7 @@ function FillInput({ answer: { options, id }, handleChange }: FillInputProps) {
 
   useOnClickOutside(listOptions, () => setIsShowOptions(false))
 
-  if (!options)
+  if (!answer?.options)
     return (
       <input
         className="tests__info-input"
@@ -337,9 +337,9 @@ function FillInput({ answer: { options, id }, handleChange }: FillInputProps) {
     )
 
   const maxContentWidth = () => {
-    const longest = options.reduce((a, b) => (a.length > b.length ? a : b))
+    const longest = answer?.options?.reduce((a, b) => (a.length > b.length ? a : b))
 
-    return `${longest.length * 11 + 8}px`
+    return !!longest ? `${longest.length * 11 + 8}px` : 'auto'
   }
 
   return (
@@ -367,7 +367,7 @@ function FillInput({ answer: { options, id }, handleChange }: FillInputProps) {
             {...attributes.popper}
           >
             <div className="tests__fill-scroll">
-              {options.map((v) => (
+              {answer?.options?.map((v) => (
                 <span
                   key={v}
                   className="tests__fill-item"
