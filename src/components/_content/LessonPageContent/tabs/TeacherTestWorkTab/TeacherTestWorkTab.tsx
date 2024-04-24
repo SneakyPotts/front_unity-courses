@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { useEffect, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import Image from 'next/image'
 
@@ -8,7 +8,6 @@ import { DeadlinePicker } from '@components/DeadlinePicker'
 import { ExternalLinkEditor } from '@components/ExternalLinkEditor'
 import { MarkSelect } from '@components/MarkSelect'
 import { useQueryTeacherLesson } from '@http/teacher/client.lesson'
-import { TStudentTestProgress } from '@http/teacher/types'
 
 import { Button } from '_ui/Button'
 import { Loader } from '_ui/Loader'
@@ -28,7 +27,6 @@ export function TeacherTestWorkTab({ testId }: TeacherTestWorkTabProps) {
   } = useQueryTeacherLesson({ test_id: testId })
 
   const [activeTab, setActiveTab] = useState(1)
-  const [filteredStudents, setFilteredStudents] = useState<TStudentTestProgress[]>([])
 
   const handleAllowRetake = (id: string) => {
     toastPromise({
@@ -44,20 +42,21 @@ export function TeacherTestWorkTab({ testId }: TeacherTestWorkTabProps) {
     })
   }
 
-  useEffect(() => {
-    data?.progress &&
-      setFilteredStudents(
-        data.progress.filter((v) => {
-          switch (activeTab) {
-            case 1:
-              return v.test_progress?.status === 1
-            case 2:
-              return v.test_progress?.status === 3
-            default:
-              return v.test_progress?.status === 2 || !v.test_progress?.status
-          }
-        }),
-      )
+  const filteredStudents = useMemo(() => {
+    if (!!data?.progress) {
+      return data?.progress.filter((v) => {
+        switch (activeTab) {
+          case 1:
+            return v.test_progress?.status === 1
+          case 2:
+            return v.test_progress?.status === 3
+          default:
+            return v.test_progress?.status === 2 || !v.test_progress?.status
+        }
+      })
+    }
+
+    return []
   }, [activeTab, data?.progress])
 
   if (isLoading) return <Loader />
