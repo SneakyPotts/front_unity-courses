@@ -137,13 +137,9 @@ export function Header({ profile, className }: HeaderProps) {
                 </li>
               </>
             )}
-            <li className="header__item">
-              <button className="header__item-btn">
-                <svg className="header__item-svg">
-                  <use href="/img/sprite.svg#notification-courses"></use>
-                </svg>
-              </button>
-            </li>
+
+            <Notifications />
+
             <li
               ref={profileRef}
               className="header__item"
@@ -186,5 +182,17 @@ export function Header({ profile, className }: HeaderProps) {
         </nav>
       </div>
     </header>
+  )
+}
+
+function Notifications() {
+  return (
+    <li className="header__item">
+      <button className="header__item-btn">
+        <svg className="header__item-svg">
+          <use href="/img/sprite.svg#notification-courses"></use>
+        </svg>
+      </button>
+    </li>
   )
 }

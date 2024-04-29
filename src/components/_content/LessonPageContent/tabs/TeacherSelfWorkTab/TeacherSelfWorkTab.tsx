@@ -5,6 +5,7 @@ import Image from 'next/image'
 
 import { DeadlinePicker } from '@components/DeadlinePicker'
 import { useQueryTeacherLesson } from '@http/teacher/client.lesson'
+import { useTeacherNotifications } from '@http/teacher/client.notifications'
 
 import { Button } from '_ui/Button'
 import { Loader } from '_ui/Loader'
@@ -22,12 +23,23 @@ export function TeacherSelfWorkTab({ selfId }: TeacherSelfWorkTabProps) {
     retakeSelf,
   } = useQueryTeacherLesson({ self_id: selfId })
 
+  const {
+    remind: { mutateAsync: remind },
+  } = useTeacherNotifications()
+
   const [activeTab, setActiveTab] = useState(1)
 
   const handleAllowRetake = (id: string) => {
     toastPromise({
       handler: retakeSelf({ self_id: selfId!, student_id: id }),
       successMessage: 'Надано дозвіл на перевиконання',
+    })
+  }
+
+  const handleRemind = (id: string) => {
+    toastPromise({
+      handler: remind({ object_id: selfId!, student_id: id, work_type: 'self_work' }),
+      successMessage: 'Нагадування успішно надіслано',
     })
   }
 
@@ -130,7 +142,10 @@ export function TeacherSelfWorkTab({ selfId }: TeacherSelfWorkTabProps) {
                           </>
                         )}
                         {activeTab === 3 && (
-                          <Button variant={!v.work_progress?.status ? 'border' : v.work_progress?.status === 2 ? 'gray' : undefined}>
+                          <Button
+                            variant={!v.work_progress?.status ? 'border' : v.work_progress?.status === 2 ? 'gray' : undefined}
+                            onClick={!v.work_progress?.status ? () => handleRemind(v.id) : undefined}
+                          >
                             {v.work_progress?.status === 2 && 'Домашню роботу відправлено на перездачу'}
                             {!v.work_progress?.status && 'Нагадати'}
                           </Button>

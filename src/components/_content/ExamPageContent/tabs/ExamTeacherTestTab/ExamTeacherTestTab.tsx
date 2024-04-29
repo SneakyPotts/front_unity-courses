@@ -9,6 +9,7 @@ import { ExternalLinkEditor } from '@components/ExternalLinkEditor'
 import { MarkSelect } from '@components/MarkSelect'
 import { useAssemblyContent } from '@hooks/useAssemblyContent'
 import { useQueryTeacherExam } from '@http/teacher/client.exam'
+import { useTeacherNotifications } from '@http/teacher/client.notifications'
 
 import { Button } from '_ui/Button'
 import { toastPromise } from '_ui/ToastUtils'
@@ -24,6 +25,10 @@ export function ExamTeacherTestTab({ progress, ...exam }: ExamTeacherTestTabProp
 
   const { patch, setMark, allowRetake } = useQueryTeacherExam()
 
+  const {
+    remind: { mutateAsync: remind },
+  } = useTeacherNotifications()
+
   const handleSetMark = ({ user_id, mark }: { user_id: string; mark: number }) => {
     toastPromise({
       handler: setMark({ exam_id: exam.id, user_id, mark }),
@@ -35,6 +40,13 @@ export function ExamTeacherTestTab({ progress, ...exam }: ExamTeacherTestTabProp
     toastPromise({
       handler: allowRetake({ exam_id: exam.id, student_id: id }),
       successMessage: 'Надано дозвіл на перевиконання',
+    })
+  }
+
+  const handleRemind = (id: string) => {
+    toastPromise({
+      handler: remind({ object_id: exam.id, student_id: id, work_type: 'final_test' }),
+      successMessage: 'Нагадування успішно надіслано',
     })
   }
 
@@ -150,7 +162,10 @@ export function ExamTeacherTestTab({ progress, ...exam }: ExamTeacherTestTabProp
                         </>
                       )}
                       {activeTab === 3 && (
-                        <Button variant={!v.test_progress?.status ? 'border' : v.test_progress?.status === 2 ? 'gray' : undefined}>
+                        <Button
+                          variant={!v.test_progress?.status ? 'border' : v.test_progress?.status === 2 ? 'gray' : undefined}
+                          onClick={!v.test_progress?.status ? () => handleRemind(v.id) : undefined}
+                        >
                           {v.test_progress?.status === 2 && 'Домашню роботу відправлено на перездачу'}
                           {!v.test_progress?.status && 'Нагадати'}
                         </Button>

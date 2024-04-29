@@ -472,3 +472,13 @@ export interface ExamProgress {
   status: number
   mark: number
 }
+
+/*notifications*/
+export interface IRemindAboutTaskDTO {
+  student_id: string
+  work_type: TWorkType
+  object_id: string
+}
+
+export type TWorkType = 'self_work' | 'final_test' | 'test'
+/*notifications*/
