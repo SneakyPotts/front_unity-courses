@@ -14,6 +14,12 @@
   transform: translateX(rem(30));
   transition: 0.2s ease;
 
+  &.header__ntf {
+    opacity: 1;
+    visibility: unset;
+    transform: translate(0);
+  }
+
   &__close {
     display: none;
     flex-shrink: 0;
@@ -123,6 +129,33 @@
 
     &--orange {
       border-color: var(--orange-500);
+    }
+  }
+
+  &__list {
+    max-height: rem(250);
+    padding-right: rem(4);
+
+    overflow-y: auto;
+
+    /* width */
+    &::-webkit-scrollbar {
+      width: rem(3);
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: var(--blue-200);
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
     }
   }
 }

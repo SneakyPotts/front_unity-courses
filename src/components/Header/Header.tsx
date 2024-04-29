@@ -1,7 +1,8 @@
 'use client'
 
 import classNames from 'classnames'
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
 import Skeleton from 'react-loading-skeleton'
 import { useOnClickOutside } from 'usehooks-ts'
 
@@ -11,6 +12,10 @@ import { useRouter } from 'next/navigation'
 
 import { imgBlur } from '@assets/utils'
 import { appContext } from '@components/Context/context'
+import { useNotifications } from '@http/common/notifications.client'
+
+import { Loader } from '_ui/Loader'
+import { NotificationItem } from '_ui/NotificationItem'
 
 import { AuthModal } from '_modals/AuthModal'
 import { RegisterModal } from '_modals/RegisterModal'
@@ -186,13 +191,103 @@ export function Header({ profile, className }: HeaderProps) {
 }
 
 function Notifications() {
+  const wrapper = useRef(null)
+
+  const page_size = 5
+  const [page, setPage] = useState(1)
+  const [isShow, setIsShow] = useState(false)
+
+  const {
+    notifications: { data, isLoading, isError, isPending },
+    hasUnread: { data: hasUnread },
+    readAll: { mutateAsync: readAll },
+  } = useNotifications({ page_size: page_size * page })
+
+  const { ref } = useInView({
+    onChange: (inView) => {
+      if (inView) {
+        setPage((p) => p + 1)
+      }
+    },
+    threshold: 1.0,
+    skip: !data || page_size * page >= data.count,
+  })
+
+  useEffect(() => {
+    if (isShow && hasUnread && !!data) {
+      readAll().then().catch(console.error)
+    }
+  }, [data, hasUnread, isShow])
+
+  useOnClickOutside(wrapper, () => setIsShow(false))
+
   return (
-    <li className="header__item">
-      <button className="header__item-btn">
+    <li
+      ref={wrapper}
+      className="header__item"
+      style={{ position: 'relative' }}
+    >
+      <button
+        className={classNames({ 'header__item-btn': hasUnread })}
+        onClick={() => setIsShow((p) => !p)}
+      >
         <svg className="header__item-svg">
           <use href="/img/sprite.svg#notification-courses"></use>
         </svg>
       </button>
+      {isShow && (
+        <div className="header__wrapper header__wrapper--active">
+          <div className="notifications header__ntf">
+            <div className="notifications__top">
+              <button
+                className="notifications__close"
+                onClick={() => setIsShow(false)}
+                id="notifications-close"
+              >
+                <svg className="notifications__close-svg">
+                  <use href="/img/sprite.svg#arrow-right"></use>
+                </svg>
+              </button>
+              <span className="notifications__top-name">Сповіщення</span>
+            </div>
+            <div className="notifications__inner">
+              <div className="notifications__block">
+                {isLoading && <Loader />}
+                {isError && <p className="text-center">Щось пішло не так...</p>}
+                {data?.results.length ? (
+                  <ul className="notifications__list">
+                    {/*<li className="notifications__item notifications__item--orange">*/}
+                    {/*  <svg className="notifications__item-icon">*/}
+                    {/*    <use href="/img/sprite.svg#cours"></use>*/}
+                    {/*  </svg>*/}
+                    {/*  <div className="notifications__item-text">*/}
+                    {/*    <span>ДLorem ipsum dolor sit amet consectetur adipisicing elit. Est iusto nihil dolore non ab minima vero eius suscipit eos laborum.</span>*/}
+                    {/*  </div>*/}
+                    {/*  <time className="notifications__item-time">15.04.23 — 10:52</time>*/}
+                    {/*</li>*/}
+                    {data.results.map((v) => (
+                      <NotificationItem
+                        key={v.id}
+                        {...v}
+                      />
+                    ))}
+                    {isPending ? (
+                      <Loader />
+                    ) : (
+                      <li
+                        ref={ref}
+                        style={{ width: '100%', height: 1 }}
+                      />
+                    )}
+                  </ul>
+                ) : (
+                  <p className="text-center">Список пустий...</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </li>
   )
 }

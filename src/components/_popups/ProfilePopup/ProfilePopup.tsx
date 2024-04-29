@@ -6,15 +6,19 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { signOutAction } from '@http/profile/actions'
+import { useQueryClient } from '@tanstack/react-query'
 
 import type { ProfilePopupProps } from './ProfilePopup.props'
 
 export function ProfilePopup({ onClose, showProfileModal, profile }: ProfilePopupProps) {
   const router = useRouter()
+  const queryClient = useQueryClient()
 
   const [lang, setLang] = useState('uk')
 
   const handleExit = () => {
+    queryClient.clear() // clear client cache
+
     signOutAction()
       .then(() => {
         onClose()
