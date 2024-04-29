@@ -16,7 +16,8 @@ export async function clientFetch<T>(url: string, init?: RequestInit & { isFile?
 
   if (!response.ok) {
     const errorData = await response.json()
-    throw new Error(errorData.extra.fields[0], { cause: response })
+
+    throw new Error(JSON.stringify(errorData.extra.fields), { cause: response })
   }
 
   return init?.method === 'DELETE' ? undefined : response.json()

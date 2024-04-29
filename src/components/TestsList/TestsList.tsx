@@ -3,6 +3,7 @@ import parse, { Element, type HTMLReactParserOptions } from 'html-react-parser'
 import React, { type ChangeEventHandler, Fragment, useMemo, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { usePopper } from 'react-popper'
+import { toast } from 'react-toastify'
 import { useOnClickOutside } from 'usehooks-ts'
 
 import Image from 'next/image'
@@ -16,7 +17,7 @@ import { TextEditor } from '@components/TextEditor'
 import { useQueryStudentLesson } from '@http/student/client.lesson'
 
 import { Button } from '_ui/Button'
-import { toastPromise } from '_ui/ToastUtils'
+import { errorIcon, successIcon } from '_ui/ToastUtils'
 
 import type { ComplianceQuestionProps, FillInputProps, FillQuestionProps, FreeQuestionProps, SingleQuestionProps, TestsListProps } from './TestsList.props'
 
@@ -38,13 +39,36 @@ export function TestsList({ questions, test_id, setNotEditing, extraHandler }: T
   }
 
   const onSubmit = (data: any) => {
-    let body = assemblyRequestBody(data)
+    const body = assemblyRequestBody(data)
+    const promise = (extraHandler ?? sendAnswers)({ test_id, body })
 
-    toastPromise({
-      handler: (extraHandler ?? sendAnswers)({ test_id, body }),
-      successCallback: setNotEditing,
-      successMessage: 'Ваші відповіді успішно надіслано на перевірку',
-    })
+    promise
+      .then(() => {
+        toast.success('Ваші відповіді успішно надіслано на перевірку', { ...successIcon })
+        setNotEditing()
+      })
+      .catch((err) => {
+        const error = JSON.parse(err.message) as Array<{
+          answers: Record<string, string[]>
+        }>
+
+        let errorText = ''
+
+        if (error.length) {
+          error.forEach(({ answers }, index) => {
+            for (const key in answers) {
+              if (!answers[key].length) continue
+
+              errorText += `Запитання ${index + 1}. `
+              errorText += `Помилка: ${answers[key]}`
+
+              break
+            }
+          })
+        }
+
+        toast.error(errorText, { ...errorIcon })
+      })
   }
 
   return (

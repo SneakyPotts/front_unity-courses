@@ -267,7 +267,7 @@ export function ExamTestTab({ ...exam }: ExamTestTabProps) {
               Тест пройшов (-ла)
             </Button>
 
-            {!exam?.progress.mark && <SubmitBtn />}
+            <SubmitBtn />
           </div>
         ))}
 
