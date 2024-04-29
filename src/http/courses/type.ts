@@ -18,6 +18,7 @@ export type TCourse = TBasketCourse & {
   number_of_lectures: number
   lectors: TTeacher[]
   start_date: string
+  end_date?: string
   number_of_students: number
   max_number_of_students: number
   purchased: boolean

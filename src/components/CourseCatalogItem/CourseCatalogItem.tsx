@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import { format, isPast, parseISO } from 'date-fns'
 import React, { useContext, useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 
@@ -18,6 +18,8 @@ export function CourseCatalogItem({ isCertified, ...props }: CourseCatalogItemPr
   const { basket } = useContext(appContext)
 
   const [inBasket, setInBasket] = useState(false)
+
+  const unavailable = !!props.end_date && isPast(parseISO(props.end_date))
 
   useEffect(() => {
     setInBasket(!!basket?.find((v) => v.id === props.id))
@@ -39,7 +41,7 @@ export function CourseCatalogItem({ isCertified, ...props }: CourseCatalogItemPr
           callback={() => setInBasket(true)}
         />
       ) : (
-        <Button href={`/courses/${props.id}`}>
+        <Button href={unavailable ? '/' : `/courses/${props.id}`}>
           перейти до курсу
           <svg className="btn__icon">
             <use href="/img/sprite.svg#arrow-right"></use>
@@ -77,7 +79,7 @@ export function CourseCatalogItem({ isCertified, ...props }: CourseCatalogItemPr
           </svg>
         </button>
         <div className={'courses-catalog__photo'}>
-          <Link href={`/courses/${props.id}`}>
+          <Link href={unavailable ? '/' : `/courses/${props.id}`}>
             <Image
               src={props.cover}
               width={640}
@@ -95,7 +97,7 @@ export function CourseCatalogItem({ isCertified, ...props }: CourseCatalogItemPr
       >
         <Link
           className={'courses-catalog__info-title'}
-          href={`/courses/${props.id}`}
+          href={unavailable ? '/' : `/courses/${props.id}`}
         >
           {props.title}
         </Link>
