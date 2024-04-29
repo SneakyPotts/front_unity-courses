@@ -123,6 +123,7 @@ export function Header({ profile, className }: HeaderProps) {
                     <BasketModal
                       onClose={() => setIsShowBasketModal(false)}
                       showChildBoughtModal={handleChildBought}
+                      showRegisterBasket={handleShowRegisterBasketModal}
                     />
                   )}
                   {isShowChildBought && <ChildBoughtModal onClose={() => setIsShowChildBought(false)} />}
@@ -165,7 +166,6 @@ export function Header({ profile, className }: HeaderProps) {
                 <AuthModal
                   onClose={() => setIsShowAuthModal(false)}
                   showRegister={handleShowRegisterModal}
-                  showRegisterBasket={handleShowRegisterBasketModal}
                 />
               )}
               {isShowRegisterModal && (

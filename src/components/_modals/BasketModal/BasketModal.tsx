@@ -20,9 +20,9 @@ import { errorIcon, successIcon, toastPromise } from '_ui/ToastUtils'
 
 import { AuthForm } from '_modals/AuthModal'
 
-import type { AuthInfoProps, BasketModalProps } from './BasketModal.props'
+import type { AuthInfoProps, BasketModalProps, NotAuthInfoProps } from './BasketModal.props'
 
-export function BasketModal({ onClose, showChildBoughtModal }: BasketModalProps) {
+export function BasketModal({ onClose, showRegisterBasket, showChildBoughtModal }: BasketModalProps) {
   const { profile, basket, setBasket } = useContext(appContext)
   const role = {
     teacher: profile?.role === 20,
@@ -137,7 +137,7 @@ export function BasketModal({ onClose, showChildBoughtModal }: BasketModalProps)
             onClose={onClose}
           />
         ) : (
-          <NotAuthInfo />
+          <NotAuthInfo showRegisterBasket={showRegisterBasket} />
         )}
       </div>
     </Modal>
@@ -309,13 +309,16 @@ function AuthInfo({ profile, role, basket, showChildBoughtModal, onClose }: Auth
   )
 }
 
-function NotAuthInfo() {
+function NotAuthInfo({ showRegisterBasket }: NotAuthInfoProps) {
   return (
     <div className="basket-model__card">
       <div className="basket-model__card-title">Оформлення замовлення</div>
       <p className={'basket-model__card-subtitle'}>Замовлення готове до оформлення! Будь ласка, увійдіть або зареєструйтеся щоб продовжити.</p>
 
-      <AuthForm isBasket />
+      <AuthForm
+        showRegisterBasket={showRegisterBasket}
+        isBasket
+      />
     </div>
   )
 }
