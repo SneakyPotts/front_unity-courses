@@ -4,6 +4,6 @@ export interface AuthModalProps {
 }
 
 export interface AuthFormProps extends Partial<AuthModalProps> {
-  showRegisterBasket: () => void
+  showRegisterBasket?: () => void
   isBasket?: boolean
 }
