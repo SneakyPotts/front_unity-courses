@@ -160,14 +160,14 @@
   }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .notifications {
-    position: static;
+    position: absolute;
     display: flex;
     flex-direction: column;
     border-radius: 0;
     padding: rem(28) rem(15) 0;
-    width: 80%;
+    // width: 80%;
 
     &__close {
       display: block;
@@ -213,8 +213,9 @@
   }
 }
 
-@include mq('md') {
+@include mq("md") {
   .notifications {
-    width: 97%;
+    // width: 97%;
+    width: calc(100vw - 100px);
   }
 }
