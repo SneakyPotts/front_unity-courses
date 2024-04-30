@@ -91,7 +91,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .teacher-course-card {
     grid-template-columns: 1fr;
     gap: rem(16);
@@ -121,7 +121,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .teacher-course-card {
     &__box {
       width: 100%;

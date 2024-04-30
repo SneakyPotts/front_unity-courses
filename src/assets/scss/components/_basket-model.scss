@@ -163,7 +163,7 @@
     }
 
     &-avatar {
-     border-radius: rem(25);
+      border-radius: rem(25);
       img {
         border-radius: rem(25);
         display: block;
@@ -448,7 +448,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .basket-model {
     .modal__body {
       padding: 0;
@@ -550,7 +550,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .basket-model {
     &.modal.modal--open {
       background-color: rgba(var(--grey-3--rgb), 0.8);

@@ -13,11 +13,8 @@ import type { TestWorkTabProps } from './TestWorkTab.props'
 export function TestWorkTab({ testId }: TestWorkTabProps) {
   const {
     test: { data: test, isLoading, isError },
+    confirmTest,
   } = useQueryStudentLesson({ test_id: testId })
-
-  const confirmTest = ({ id }: { id: string }) => {
-    console.log('confirmTest', id)
-  }
 
   const [isEditing, setIsEditing] = useState(false)
 
@@ -115,7 +112,7 @@ export function TestWorkTab({ testId }: TestWorkTabProps) {
                 target="_blank"
               >
                 <svg className="btn__icon">
-                  <use xlinkHref="/img/sprite.svg#pen"></use>
+                  <use href="/img/sprite.svg#pen"></use>
                 </svg>
                 Перейти до тесту
               </Button>
@@ -129,7 +126,7 @@ export function TestWorkTab({ testId }: TestWorkTabProps) {
             <div className="lesson-section__case">
               <Button
                 variant={test?.progress?.is_completed ? 'gray' : 'accent'}
-                onClick={() => confirmTest({ id: testId! })}
+                onClick={() => confirmTest({ test_id: testId! })}
               >
                 <svg className="btn__icon">
                   <use href="/img/sprite.svg#check"></use>

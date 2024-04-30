@@ -201,7 +201,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .subject {
     &__subject-card {
       .subject-card__title {

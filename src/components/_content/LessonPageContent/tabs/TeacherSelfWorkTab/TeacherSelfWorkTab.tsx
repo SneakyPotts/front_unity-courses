@@ -1,11 +1,11 @@
 import classNames from 'classnames'
-import React, { useEffect, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import Image from 'next/image'
 
 import { DeadlinePicker } from '@components/DeadlinePicker'
 import { useQueryTeacherLesson } from '@http/teacher/client.lesson'
-import type { TStudentsProgress } from '@http/teacher/types'
+import { useTeacherNotifications } from '@http/teacher/client.notifications'
 
 import { Button } from '_ui/Button'
 import { Loader } from '_ui/Loader'
@@ -22,9 +22,12 @@ export function TeacherSelfWorkTab({ selfId }: TeacherSelfWorkTabProps) {
     editSelf,
     retakeSelf,
   } = useQueryTeacherLesson({ self_id: selfId })
-  console.log(data)
+
+  const {
+    remind: { mutateAsync: remind },
+  } = useTeacherNotifications()
+
   const [activeTab, setActiveTab] = useState(1)
-  const [filteredStudents, setFilteredStudents] = useState<TStudentsProgress[]>([])
 
   const handleAllowRetake = (id: string) => {
     toastPromise({
@@ -33,21 +36,29 @@ export function TeacherSelfWorkTab({ selfId }: TeacherSelfWorkTabProps) {
     })
   }
 
-  useEffect(() => {
-    !!data?.progress &&
-      setFilteredStudents(
-        data?.progress.filter((v) => {
-          switch (activeTab) {
-            case 1:
-              return v.work_progress?.status === 1
-            case 2:
-              return v.work_progress?.status === 3
-            default:
-              return v.work_progress?.status === 2 || !v.work_progress?.status
-          }
-        }),
-      )
-  }, [activeTab, data])
+  const handleRemind = (id: string) => {
+    toastPromise({
+      handler: remind({ object_id: selfId!, student_id: id, work_type: 'self_work' }),
+      successMessage: 'Нагадування успішно надіслано',
+    })
+  }
+
+  const filteredStudents = useMemo(() => {
+    if (!!data?.progress) {
+      return data?.progress.filter((v) => {
+        switch (activeTab) {
+          case 1:
+            return v.work_progress?.status === 1
+          case 2:
+            return v.work_progress?.status === 3
+          default:
+            return v.work_progress?.status === 2 || !v.work_progress?.status
+        }
+      })
+    }
+
+    return []
+  }, [activeTab, data?.progress])
 
   if (isLoading) return <Loader />
 
@@ -113,7 +124,7 @@ export function TeacherSelfWorkTab({ selfId }: TeacherSelfWorkTabProps) {
                         {activeTab === 1 && (
                           <Button
                             variant="border"
-                            href={`/check/self/${v.work_progress.id}`}
+                            href={`/check/self/${v.work_progress?.id}`}
                             target="_blank"
                           >
                             Перевірити
@@ -131,7 +142,10 @@ export function TeacherSelfWorkTab({ selfId }: TeacherSelfWorkTabProps) {
                           </>
                         )}
                         {activeTab === 3 && (
-                          <Button variant={!v.work_progress?.status ? 'border' : v.work_progress?.status === 2 ? 'gray' : undefined}>
+                          <Button
+                            variant={!v.work_progress?.status ? 'border' : v.work_progress?.status === 2 ? 'gray' : undefined}
+                            onClick={!v.work_progress?.status ? () => handleRemind(v.id) : undefined}
+                          >
                             {v.work_progress?.status === 2 && 'Домашню роботу відправлено на перездачу'}
                             {!v.work_progress?.status && 'Нагадати'}
                           </Button>

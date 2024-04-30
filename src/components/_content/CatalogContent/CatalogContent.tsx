@@ -10,6 +10,7 @@ import { appContext } from '@components/Context/context'
 import { CourseCatalogItem } from '@components/CourseCatalogItem'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 
+import { AppPagination } from '_ui/AppPagination'
 import { PageWrapper } from '_ui/PageWrapper'
 
 import type { CatalogContentProps } from './CatalogContent.props'
@@ -34,13 +35,13 @@ export function CatalogContent({ data, filters }: CatalogContentProps) {
 
         !newValue?.length ? params.delete(name) : params.set(name, newValue.join(','))
 
-        router.replace(`${pathname}?${params.toString()}`, {
+        router.push(`${pathname}?${params.toString()}`, {
           scroll: false,
         })
       } else {
         params.set(name, value.toString())
 
-        router.replace(`${pathname}?${params.toString()}`, {
+        router.push(`${pathname}?${params.toString()}`, {
           scroll: false,
         })
       }
@@ -85,15 +86,6 @@ export function CatalogContent({ data, filters }: CatalogContentProps) {
                     {...v}
                   />
                 ))}
-                {/*{courseMockData.map((v) => (*/}
-                {/*  <CourseCatalogItem*/}
-                {/*    key={v.id}*/}
-                {/*    {...v}*/}
-                {/*  />*/}
-                {/*))}*/}
-                {/*<CourseCardPaid />*/}
-                {/*<CourseCardPaidPromotion />*/}
-                {/*<CourseCardFree />*/}
               </div>
             ) : (
               <div className={'courses-catalog__empty close'}>
@@ -106,14 +98,12 @@ export function CatalogContent({ data, filters }: CatalogContentProps) {
               </div>
             )}
 
-            <div className={'courses-catalog__paginations'}>
-              <ul className={'courses-catalog__paginations-list'}>
-                <li className={'courses-catalog__paginations-item courses-catalog__paginations--active'}>1</li>
-                <li className={'courses-catalog__paginations-item'}>2</li>
-                <li className={'courses-catalog__paginations-item'}>3</li>
-                <li className={'courses-catalog__paginations-item'}>4</li>
-              </ul>
-            </div>
+            {data?.count && (
+              <AppPagination
+                pageSize={12}
+                total={data.count}
+              />
+            )}
           </div>
         </div>
       </section>

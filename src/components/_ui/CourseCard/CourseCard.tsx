@@ -1,7 +1,7 @@
 'use client'
 
 import classNames from 'classnames'
-import { isAfter } from 'date-fns'
+import { isAfter, isPast, parseISO } from 'date-fns'
 import React, { useContext } from 'react'
 import { useToggle } from 'usehooks-ts'
 
@@ -14,7 +14,6 @@ import { appContext } from '@components/Context/context'
 
 import { Button } from '_ui/Button'
 import { RatingStars } from '_ui/RatingStars'
-import { TeacherCard } from '_ui/TeacherCard'
 import { TeacherForCourse } from '_ui/TeacherForCourse'
 
 import type { CourseCardProps } from './CourseCard.props'
@@ -42,12 +41,16 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
       style={{ backgroundColor: isArchived ? '#f2f2f2' : course.color }}
     >
       <div className="my-catalog__left">
-        <Link
-          href={`/courses/${course.id}`}
-          className="my-catalog__left-title"
-        >
-          {course.title}
-        </Link>
+        {course.end_date && isPast(parseISO(course.end_date)) ? (
+          <span className="my-catalog__left-title">{course.title}</span>
+        ) : (
+          <Link
+            href={`/courses/${course.id}`}
+            className="my-catalog__left-title"
+          >
+            {course.title}
+          </Link>
+        )}
         <div
           className="my-catalog__left-text"
           dangerouslySetInnerHTML={{ __html: course.description || '' }}
@@ -125,6 +128,18 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
               />
             ))}
         </div>
+        {course.certificate_is_available && (
+          <Button
+            variant="border"
+            className={'btn--light my-catalog__btn'}
+            href={`/certificates/UnityCer-${course.certificate}`}
+          >
+            <svg className={'btn__icon'}>
+              <use href="/img/sprite.svg#course-file"></use>
+            </svg>
+            {course.certificate_done ? 'переглянути сертифікат' : 'отримати сертифікат'}
+          </Button>
+        )}
         {isTeacher && course?.students && (
           <div
             className={'teacher-course-card__box'}
@@ -155,8 +170,7 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
             </button>
           </div>
         )}
-        {/* && !role.student */}
-        {!role.teacher && !role.parent && (
+        {!role.teacher && (
           <div className="my-catalog__contact close">
             <div className="some-div">
               <button
@@ -170,8 +184,6 @@ export function CourseCard({ isArchived, isTeacher, ...course }: CourseCardProps
             </div>
           </div>
         )}
-        {/*FIXME: make real markup*/}
-        {isOpenMobile && <div className="some-div"></div>}
       </div>
       <div className="my-catalog__ridth">
         {isArchived ? (

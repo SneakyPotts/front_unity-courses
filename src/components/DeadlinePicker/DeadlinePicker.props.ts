@@ -6,4 +6,5 @@ export interface DeadlinePickerProps {
   onSave?: (date: Date) => void
   onClear?: () => void
   customInput?: ReactNode
+  isShowTime?: boolean
 }

@@ -8,6 +8,7 @@ import { getLessonContent } from '@http/student/server'
 import { getTeacherLessonContent } from '@http/teacher/server'
 
 import { Banner } from '_ui/Banner'
+import { Button } from '_ui/Button'
 import { RequestError } from '_ui/RequestError'
 import { TeacherCard } from '_ui/TeacherCard'
 
@@ -31,6 +32,8 @@ export default async function LessonPage({ params }: TPageProps) {
       <Aside
         lectors={data?.lectors}
         isTeacher={role.teacher}
+        color={data?.course_color}
+        videoUrl={data?.video_url}
       />
       <LessonPageContent
         data={data}
@@ -40,11 +43,14 @@ export default async function LessonPage({ params }: TPageProps) {
   )
 }
 
-function Aside({ lectors, isTeacher }: { lectors?: TTeacher[]; isTeacher?: boolean }) {
+function Aside({ lectors, isTeacher, color, videoUrl }: { lectors?: TTeacher[]; isTeacher?: boolean; color?: string; videoUrl?: string }) {
   return (
     <div className="lesson-section__right courses-lesson__right--element">
       {!!lectors?.length && (
-        <div className="lesson-section__container lesson--teachers">
+        <div
+          className="lesson-section__container lesson--teachers"
+          style={{ backgroundColor: color }}
+        >
           {lectors?.map((v, i) => (
             <TeacherCard
               key={v.id}
@@ -53,6 +59,20 @@ function Aside({ lectors, isTeacher }: { lectors?: TTeacher[]; isTeacher?: boole
               isMain={!i}
             />
           ))}
+
+          {videoUrl && (
+            <Button
+              variant="border"
+              fulFill
+              href={videoUrl}
+              target="_blank"
+            >
+              <svg className="btn__icon">
+                <use href="/img/sprite.svg#webcam"></use>
+              </svg>
+              запис уроку
+            </Button>
+          )}
         </div>
       )}
       {isTeacher && (

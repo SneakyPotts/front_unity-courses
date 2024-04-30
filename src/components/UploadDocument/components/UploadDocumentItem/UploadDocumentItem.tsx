@@ -71,7 +71,7 @@ export const UploadDocumentItem = memo(function UploadDocumentItem({ name, type,
             rel="noreferrer"
           >
             <svg className="document__remove-svg">
-              <use xlinkHref="/img/sprite.svg#download-file"></use>
+              <use href="/img/sprite.svg#download-file"></use>
             </svg>
           </a>
         )}

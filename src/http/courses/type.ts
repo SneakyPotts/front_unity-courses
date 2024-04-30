@@ -18,6 +18,7 @@ export type TCourse = TBasketCourse & {
   number_of_lectures: number
   lectors: TTeacher[]
   start_date: string
+  end_date?: string
   number_of_students: number
   max_number_of_students: number
   purchased: boolean
@@ -64,10 +65,18 @@ export type TCourseDetail = TBasketCourse & {
   materials: TDocument[]
   links: ExtraLink[]
   duration_in_months: number
+  final_test: {
+    id: string
+    deadline: string
+    title: string
+  }
   available_days: number
   lectures_hours: number
   purchased: boolean
   reviews: TReviewPreview[]
+  certificate?: string
+  certificate_is_available: boolean
+  certificate_done: boolean
 }
 
 export interface TReviewPreview {

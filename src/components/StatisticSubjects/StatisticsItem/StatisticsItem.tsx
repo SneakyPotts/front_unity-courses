@@ -48,7 +48,7 @@ export function StatisticsItem({ type, value, max_value, percentage, progress }:
       <div className="rating-block__bottom">
         <div className="rating-block__left">
           <svg className="rating-block__icon">
-            <use xlinkHref={`/img/sprite.svg#${data[type]?.icon || 'check'}`}></use>
+            <use href={`/img/sprite.svg#${data[type]?.icon || 'check'}`}></use>
           </svg>
         </div>
         <div className="rating-block__right">

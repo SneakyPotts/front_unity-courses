@@ -82,7 +82,7 @@ export function CatalogFilterPopup({ filters, handler, reset }: CatalogFilterPop
           onClick={() => setIsOpen((p) => !p)}
         >
           <svg className="courses-catalog__menu-svg">
-            <use href="img/sprite.svg#filter-course"></use>
+            <use href="/img/sprite.svg#filter-course"></use>
           </svg>
           <span> фільтр</span>
         </Button>

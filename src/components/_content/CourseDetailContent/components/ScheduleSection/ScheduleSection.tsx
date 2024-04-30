@@ -10,7 +10,7 @@ import { Accordion } from '_ui/Accordion'
 
 import type { ScheduleSectionProps } from './ScheduleSection.props'
 
-export function ScheduleSection({ courseId, courseFree, topics, titleClass, wrapperClass }: ScheduleSectionProps) {
+export function ScheduleSection({ courseId, courseFree, topics, exam, titleClass, wrapperClass }: ScheduleSectionProps) {
   return (
     <div
       id="program"
@@ -72,6 +72,22 @@ export function ScheduleSection({ courseId, courseFree, topics, titleClass, wrap
           </ol>
         </Accordion>
       ))}
+      {exam && (
+        <div className="subject__plan plan">
+          <Link
+            href={`/exams/${exam.id}`}
+            className="plan__top"
+          >
+            <div className="plan__left">
+              <span className="plan__number">{(topics?.length || 0) + 1}</span>
+              {exam.title}
+            </div>
+            <div className="plan__wrapper">
+              <time className="plan__date">{exam.deadline && formatDateInGenitive(new Date(exam.deadline))}</time>
+            </div>
+          </Link>
+        </div>
+      )}
     </div>
   )
 }

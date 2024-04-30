@@ -62,6 +62,10 @@
     //   display: none;
     // }
 
+    &__block {
+      margin-bottom: rem(90);
+    }
+
     &__mobile-tabs.content-tabs {
       display: block;
     }

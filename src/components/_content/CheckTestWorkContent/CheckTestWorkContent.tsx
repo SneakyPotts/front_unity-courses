@@ -145,7 +145,7 @@ export function CheckTestWorkContent({ data }: CheckTestWorkContentProps) {
   )
 }
 
-function TextAnswer({ answer_type, question, text, indexNumber }: TextAnswerProps) {
+export function TextAnswer({ answer_type, question, text, indexNumber }: TextAnswerProps) {
   return (
     <TestWrapper
       indexNumber={indexNumber}
@@ -166,7 +166,7 @@ function TextAnswer({ answer_type, question, text, indexNumber }: TextAnswerProp
   )
 }
 
-function StrictComplianceAnswer({ answer_type, question_id, question, pairs, student_pairs, is_correct, indexNumber }: StrictComplianceAnswerProps) {
+export function StrictComplianceAnswer({ answer_type, question_id, question, pairs, student_pairs, is_correct, indexNumber }: StrictComplianceAnswerProps) {
   const imgLeft = pairs.every((v) => !!v.left_column.image_answer)
   const imgRight = pairs.every((v) => !!v.right_column.image_answer)
 
@@ -235,7 +235,7 @@ function StrictComplianceAnswer({ answer_type, question_id, question, pairs, stu
   )
 }
 
-function NotStrictComplianceAnswer({ answer_type, question_id, question, left_column, right_column, is_correct, indexNumber }: NotStrictComplianceAnswerProps) {
+export function NotStrictComplianceAnswer({ answer_type, question_id, question, left_column, right_column, is_correct, indexNumber }: NotStrictComplianceAnswerProps) {
   const imgLeft = left_column.every((v) => !!v.image_answer)
   const imgRight = right_column.every((v) => !!v.image_answer)
 

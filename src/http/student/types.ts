@@ -1,5 +1,5 @@
-import { IQuiz, TDocument, THuman, TSchedule, TTeacher } from '@assets/types/globals'
-import { TMark } from '@http/teacher/types'
+import type { File, IQuiz, TDocument, THuman, TSchedule, TTeacher } from '@assets/types/globals'
+import type { TMark } from '@http/teacher/types'
 
 export type TStudentSchedule = TSchedule & {
   teacher: TTeacher
@@ -54,9 +54,13 @@ export type TStudentActiveCourseItem = {
   lectors: TTeacher[]
   start_date: string
   duration_in_months: number
+  end_date?: string
   closest_lecture: string
   available_days: number
   my_rating?: number
+  certificate?: string
+  certificate_is_available: boolean
+  certificate_done: boolean
 }
 
 export type TStatsTypes = 'visiting' | 'mark' | 'progress'
@@ -157,4 +161,33 @@ export type TArchivedCoursesStats = {
   color: string
   cover: string
   final_mark: number
+}
+
+export type TCourseExam = {
+  id: string
+  course_id: string
+  title: string
+  course_icon: string
+  course_title: string
+  course_color: string
+  content: string
+  test_type: string
+  lectors: TTeacher[]
+  external_link: string
+  quiz: IQuiz
+  deadline: string
+  progress_type: number
+  progress: TExamProgress
+}
+
+export type TExamProgress = {
+  id: string
+  answer: string
+  answer_timestamp: string
+  files: File[]
+  is_completed: boolean
+  teacher_reply: string
+  teacher_reply_timestamp: string
+  status: number
+  mark: number
 }

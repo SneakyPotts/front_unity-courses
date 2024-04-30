@@ -317,7 +317,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .table {
     margin-right: rem(-15);
     margin-left: rem(-15);
@@ -501,6 +501,14 @@
         border: 0;
         height: rem(40);
         background-color: unset;
+      }
+    }
+
+    &.--short {
+      .table {
+        &__row {
+          grid-template-columns: 1fr rem(50);
+        }
       }
     }
   }

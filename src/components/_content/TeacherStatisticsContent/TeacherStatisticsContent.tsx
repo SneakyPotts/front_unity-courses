@@ -5,16 +5,17 @@ import Image from 'next/image'
 
 import { DetailPopup } from '@components/DetailPopup'
 import { MarkSelect } from '@components/MarkSelect'
-import { useQueryTeacher } from '@http/teacher/client'
 import { useQueryTeacherStats } from '@http/teacher/client.statistics'
 
+import { Loader } from '_ui/Loader'
+import { RequestError } from '_ui/RequestError'
 import { toastPromise } from '_ui/ToastUtils'
 
 import { ProfileInfoModal } from '_modals/ProfileInfoModal'
 
 import type { TeacherStatisticsContentProps } from './TeacherStatisticsContent.props'
 
-export function TeacherStatisticsContent({ data, courseId, isStudent }: TeacherStatisticsContentProps) {
+export function TeacherStatisticsContent({ data, isLoading, isError, courseId, isStudent }: TeacherStatisticsContentProps) {
   const { finalMark } = useQueryTeacherStats({})
 
   const [profileModalId, setProfileModalId] = useState('')
@@ -41,67 +42,71 @@ export function TeacherStatisticsContent({ data, courseId, isStudent }: TeacherS
                 </div>
               </div>
               <div className="table__body">
-                {data?.map((i) => (
-                  <div
-                    key={i.id}
-                    className="table__row"
-                  >
+                {isLoading && <Loader />}
+                {isError && <RequestError />}
+                {!isLoading &&
+                  !isError &&
+                  data?.map((i) => (
                     <div
-                      className="table__subject student-name"
-                      onClick={() => setProfileModalId(i.id)}
+                      key={i.id}
+                      className="table__row"
                     >
-                      <Image
-                        src={('avatar' in i && i.avatar) || ('cover' in i && i.cover) || '/img/static/default-avatar.png'}
-                        width={30}
-                        height={30}
-                        style={{ objectFit: 'cover' }}
-                        alt={('first_name' in i && `${i.first_name} ${i.last_name}`) || ('title' in i && `${i.title}`) || 'avatar'}
-                      />
-                      <p>{('first_name' in i && `${i.first_name} ${i.last_name}`) || ('title' in i && `${i.title}`)}</p>
-
-                      {/*{profileModalId === i.id && (*/}
-                      {/*  <ProfileInfoModal*/}
-                      {/*    onClose={() => setProfileModalId('')}*/}
-                      {/*    studentId={i.id}*/}
-                      {/*  />*/}
-                      {/*)}*/}
-                    </div>
-
-                    <ul className="table__marks">
-                      {i.marks.map((j: any) => (
-                        // <DetailPopup
-                        //   key={j.mark_id}
-                        //   type="stats"
-                        //   id={j.mark_id}
-                        // >
-                        <li
-                          key={j.mark_id}
-                          className={classNames('table__mark', {
-                            'table__mark--control-work': false,
-                            'table__mark--thematic': false,
-                          })}
-                        >
-                          {j.mark}
-                        </li>
-                        // </DetailPopup>
-                      ))}
-                    </ul>
-
-                    {i.final_mark || isStudent ? (
-                      <DetailPopup
-                        type="string"
-                        title="Фінальна оцінка за курс"
+                      <div
+                        className="table__subject student-name"
+                        onClick={() => setProfileModalId(i.id)}
                       >
-                        <div className={classNames('table__total', { 'table__total--forecast': false })}>{i.final_mark}</div>
-                      </DetailPopup>
-                    ) : (
-                      <MarkSelect
-                        className="teacher-stats__final table__total"
-                        handler={(mark) => handleSetFinalMark({ mark, student_id: i.id })}
-                      />
-                    )}
-                  </div>
-                ))}
+                        <Image
+                          src={('avatar' in i && i.avatar) || ('cover' in i && i.cover) || '/img/static/default-avatar.png'}
+                          width={30}
+                          height={30}
+                          style={{ objectFit: 'cover' }}
+                          alt={('first_name' in i && `${i.first_name} ${i.last_name}`) || ('title' in i && `${i.title}`) || 'avatar'}
+                        />
+                        <p>{('first_name' in i && `${i.first_name} ${i.last_name}`) || ('title' in i && `${i.title}`)}</p>
+
+                        {/*{profileModalId === i.id && (*/}
+                        {/*  <ProfileInfoModal*/}
+                        {/*    onClose={() => setProfileModalId('')}*/}
+                        {/*    studentId={i.id}*/}
+                        {/*  />*/}
+                        {/*)}*/}
+                      </div>
+
+                      <ul className="table__marks">
+                        {i.marks.map((j: any) => (
+                          // <DetailPopup
+                          //   key={j.mark_id}
+                          //   type="stats"
+                          //   id={j.mark_id}
+                          // >
+                          <li
+                            key={j.mark_id}
+                            className={classNames('table__mark', {
+                              'table__mark--control-work': false,
+                              'table__mark--thematic': j.type === 'coursefinaltest',
+                            })}
+                          >
+                            {j.mark}
+                          </li>
+                          // </DetailPopup>
+                        ))}
+                      </ul>
+
+                      {i.final_mark || isStudent ? (
+                        <DetailPopup
+                          type="string"
+                          title="Фінальна оцінка за курс"
+                        >
+                          <div className={classNames('table__total', { 'table__total--forecast': false })}>{i.final_mark}</div>
+                        </DetailPopup>
+                      ) : (
+                        <MarkSelect
+                          className="teacher-stats__final table__total"
+                          handler={(mark) => handleSetFinalMark({ mark, student_id: i.id })}
+                        />
+                      )}
+                    </div>
+                  ))}
               </div>
             </div>
             <div className="table__legend">

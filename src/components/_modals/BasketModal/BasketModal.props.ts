@@ -1,8 +1,13 @@
 import type { TAboutMe, TBasketCourse } from '@http/profile/type'
 
 export interface BasketModalProps {
+  showRegisterBasket: () => void
   showChildBoughtModal: () => void
   onClose: () => void
+}
+
+export interface NotAuthInfoProps {
+  showRegisterBasket: () => void
 }
 
 export interface AuthInfoProps {

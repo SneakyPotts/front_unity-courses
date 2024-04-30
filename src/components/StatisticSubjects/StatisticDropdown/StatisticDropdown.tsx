@@ -40,7 +40,7 @@ export function StatisticDropdown({ list, placeholder = '', onChange }: Statisti
       >
         <span className="select__value">{title}</span>
         <svg className="select__top-svg">
-          <use xlinkHref="/img/sprite.svg#arrow-up"></use>
+          <use href="/img/sprite.svg#arrow-up"></use>
         </svg>
       </div>
 

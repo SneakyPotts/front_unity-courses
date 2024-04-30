@@ -5,7 +5,6 @@
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
-
   }
 
   &__head {
@@ -55,7 +54,7 @@
 
     &-btn {
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: 0;
@@ -113,7 +112,7 @@
   &__hours,
   &__minutes {
     &::after {
-      content: ":";
+      content: ':';
     }
   }
 
@@ -291,7 +290,7 @@
   }
 }
 
-@include mq("xl") {
+@include mq('xl') {
   .header {
     &__lesson {
       .btn.btn--accent {
@@ -301,7 +300,7 @@
   }
 }
 
-@include mq("lg") {
+@include mq('lg') {
   .header {
     &__submenu {
       width: 45%;
@@ -316,7 +315,7 @@
         .header__nav {
           display: none;
         }
-  
+
         .header__lesson {
           display: grid;
           grid-template-columns: rem(32) auto;
@@ -364,7 +363,7 @@
   }
 }
 
-@include mq("md") {
+@include mq('md') {
   .header {
     &__time {
       display: none;

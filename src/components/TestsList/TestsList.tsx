@@ -1,8 +1,9 @@
 import classNames from 'classnames'
-import parse, { type Element, type HTMLReactParserOptions } from 'html-react-parser'
+import parse, { Element, type HTMLReactParserOptions } from 'html-react-parser'
 import React, { type ChangeEventHandler, Fragment, useMemo, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { usePopper } from 'react-popper'
+import { toast } from 'react-toastify'
 import { useOnClickOutside } from 'usehooks-ts'
 
 import Image from 'next/image'
@@ -16,11 +17,11 @@ import { TextEditor } from '@components/TextEditor'
 import { useQueryStudentLesson } from '@http/student/client.lesson'
 
 import { Button } from '_ui/Button'
-import { toastPromise } from '_ui/ToastUtils'
+import { errorIcon, successIcon } from '_ui/ToastUtils'
 
 import type { ComplianceQuestionProps, FillInputProps, FillQuestionProps, FreeQuestionProps, SingleQuestionProps, TestsListProps } from './TestsList.props'
 
-export function TestsList({ questions, test_id, setNotEditing }: TestsListProps) {
+export function TestsList({ questions, test_id, setNotEditing, extraHandler }: TestsListProps) {
   const { sendTest: sendAnswers } = useQueryStudentLesson({})
 
   const { handleSubmit, setValue } = useForm<any>()
@@ -38,13 +39,36 @@ export function TestsList({ questions, test_id, setNotEditing }: TestsListProps)
   }
 
   const onSubmit = (data: any) => {
-    let body = assemblyRequestBody(data)
+    const body = assemblyRequestBody(data)
+    const promise = (extraHandler ?? sendAnswers)({ test_id, body })
 
-    toastPromise({
-      handler: sendAnswers({ test_id, body }),
-      successCallback: setNotEditing,
-      successMessage: 'Ваші відповіді успішно надіслано на перевірку',
-    })
+    promise
+      .then(() => {
+        toast.success('Ваші відповіді успішно надіслано на перевірку', { ...successIcon })
+        setNotEditing()
+      })
+      .catch((err) => {
+        const error = JSON.parse(err.message) as Array<{
+          answers: Record<string, string[]>
+        }>
+
+        let errorText = ''
+
+        if (error.length) {
+          error.forEach(({ answers }, index) => {
+            for (const key in answers) {
+              if (!answers[key].length) continue
+
+              errorText += `Запитання ${index + 1}. `
+              errorText += `Помилка: ${answers[key]}`
+
+              break
+            }
+          })
+        }
+
+        toast.error(errorText, { ...errorIcon })
+      })
   }
 
   return (
@@ -301,7 +325,7 @@ function FillQuestion({ id, answer_type, answer_type_str, answers, question, ind
   )
 }
 
-function FillInput({ answer: { options, id }, handleChange }: FillInputProps) {
+function FillInput({ answer, handleChange }: FillInputProps) {
   const listOptions = useRef<HTMLDivElement | null>(null)
 
   const [isShowOptions, setIsShowOptions] = useState(false)
@@ -327,7 +351,7 @@ function FillInput({ answer: { options, id }, handleChange }: FillInputProps) {
 
   useOnClickOutside(listOptions, () => setIsShowOptions(false))
 
-  if (!options)
+  if (!answer?.options)
     return (
       <input
         className="tests__info-input"
@@ -337,9 +361,9 @@ function FillInput({ answer: { options, id }, handleChange }: FillInputProps) {
     )
 
   const maxContentWidth = () => {
-    const longest = options.reduce((a, b) => (a.length > b.length ? a : b))
+    const longest = answer?.options?.reduce((a, b) => (a.length > b.length ? a : b))
 
-    return `${longest.length * 11 + 8}px`
+    return !!longest ? `${longest.length * 11 + 8}px` : 'auto'
   }
 
   return (
@@ -367,7 +391,7 @@ function FillInput({ answer: { options, id }, handleChange }: FillInputProps) {
             {...attributes.popper}
           >
             <div className="tests__fill-scroll">
-              {options.map((v) => (
+              {answer?.options?.map((v) => (
                 <span
                   key={v}
                   className="tests__fill-item"
@@ -396,6 +420,7 @@ function FreeQuestion({ id, answer_type, answer_type_str, question, indexNumber,
     <TestWrapper
       indexNumber={indexNumber}
       description={descMatcher[answer_type]}
+      question={question}
     >
       <TextEditor
         version={4}

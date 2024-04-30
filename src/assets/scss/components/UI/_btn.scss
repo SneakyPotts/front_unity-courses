@@ -87,6 +87,19 @@
       }
     }
   }
+
+  &.btn--light {
+    border: rem(1) solid var(--orange-400);
+    text-transform: uppercase;
+    font-size: rem(14);
+    font-weight: 500;
+    line-height: rem(16);
+    background: var(--white);
+
+    .btn__icon {
+      fill: var(--grey-3);
+    }
+  }
 }
 
 @include mq('lg') {

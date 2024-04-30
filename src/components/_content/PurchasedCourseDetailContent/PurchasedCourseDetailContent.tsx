@@ -26,6 +26,7 @@ export function PurchasedCourseDetailContent({ data }: PurchasedCourseDetailCont
           titleClass="lesson-section__title"
           courseId={data?.id}
           topics={data?.topics}
+          exam={data?.final_test}
           courseFree
         />
       </div>

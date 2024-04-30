@@ -9,3 +9,11 @@ export async function revalidateSelfWork() {
 export async function revalidateTestWork() {
   revalidateTag('testProgress')
 }
+
+export async function revalidateExamInfo() {
+  revalidateTag('teacherExam')
+}
+
+export async function revalidateExamCheckInfo() {
+  revalidateTag('examProgress')
+}

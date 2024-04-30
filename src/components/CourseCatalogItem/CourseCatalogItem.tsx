@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import { format, isPast, parseISO } from 'date-fns'
 import React, { useContext, useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 
@@ -14,14 +14,42 @@ import { TeacherForCourse } from '_ui/TeacherForCourse'
 
 import type { CourseCatalogItemProps } from './CourseCatalogItem.props'
 
-export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
+export function CourseCatalogItem({ isCertified, ...props }: CourseCatalogItemProps) {
   const { basket } = useContext(appContext)
 
   const [inBasket, setInBasket] = useState(false)
 
+  const unavailable = !!props.end_date && isPast(parseISO(props.end_date))
+
   useEffect(() => {
     setInBasket(!!basket?.find((v) => v.id === props.id))
   }, [basket])
+
+  const PriceBlock = () => (
+    <div className={'courses-catalog__price'}>
+      <div className={'courses-catalog__cost'}>
+        {!!props.discount && (
+          <s className={'courses-catalog__cost-discount'}>
+            <span>{formattedPrice(props.price)} грн.</span>
+          </s>
+        )}
+        <p>{!!props.price ? `${formattedPrice(props.discount || props.price)} грн.` : 'Безкоштовно'}</p>
+      </div>
+      {!isCertified ? (
+        <AddToBasketButton
+          course={props}
+          callback={() => setInBasket(true)}
+        />
+      ) : (
+        <Button href={unavailable ? '/' : `/courses/${props.id}`}>
+          перейти до курсу
+          <svg className="btn__icon">
+            <use href="/img/sprite.svg#arrow-right"></use>
+          </svg>
+        </Button>
+      )}
+    </div>
+  )
 
   return (
     <div className={'courses-catalog__element'}>
@@ -51,7 +79,7 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
           </svg>
         </button>
         <div className={'courses-catalog__photo'}>
-          <Link href={`/courses/${props.id}`}>
+          <Link href={unavailable ? '/' : `/courses/${props.id}`}>
             <Image
               src={props.cover}
               width={640}
@@ -69,7 +97,7 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
       >
         <Link
           className={'courses-catalog__info-title'}
-          href={`/courses/${props.id}`}
+          href={unavailable ? '/' : `/courses/${props.id}`}
         >
           {props.title}
         </Link>
@@ -115,33 +143,24 @@ export function CourseCatalogItem({ ...props }: CourseCatalogItemProps) {
           />
         </div>
       ) : inBasket || props.purchased ? (
-        <div className="courses-catalog__price --in-basket">
-          <Button
-            variant="border"
-            className={'some_button courses-catalog__btn'}
-            disabled
-          >
-            <svg className="btn__icon">
-              <use href={`/img/sprite.svg#check`}></use>
-            </svg>
-            {inBasket ? 'В кошику' : 'Придбано'}
-          </Button>
-        </div>
-      ) : (
-        <div className={'courses-catalog__price'}>
-          <div className={'courses-catalog__cost'}>
-            {!!props.discount && (
-              <s className={'courses-catalog__cost-discount'}>
-                <span>{formattedPrice(props.price)} грн.</span>
-              </s>
-            )}
-            <p>{!!props.price ? `${formattedPrice(props.discount || props.price)} грн.` : 'Безкоштовно'}</p>
+        isCertified ? (
+          <PriceBlock />
+        ) : (
+          <div className="courses-catalog__price --in-basket">
+            <Button
+              variant="border"
+              className={'some_button courses-catalog__btn'}
+              disabled
+            >
+              <svg className="btn__icon">
+                <use href={`/img/sprite.svg#check`}></use>
+              </svg>
+              {inBasket ? 'В кошику' : 'Придбано'}
+            </Button>
           </div>
-          <AddToBasketButton
-            course={props}
-            callback={() => setInBasket(true)}
-          />
-        </div>
+        )
+      ) : (
+        <PriceBlock />
       )}
     </div>
   )

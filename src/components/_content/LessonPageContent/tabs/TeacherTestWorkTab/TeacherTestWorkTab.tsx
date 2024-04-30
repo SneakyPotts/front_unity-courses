@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { useEffect, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import Image from 'next/image'
 
@@ -8,7 +8,7 @@ import { DeadlinePicker } from '@components/DeadlinePicker'
 import { ExternalLinkEditor } from '@components/ExternalLinkEditor'
 import { MarkSelect } from '@components/MarkSelect'
 import { useQueryTeacherLesson } from '@http/teacher/client.lesson'
-import { TStudentTestProgress } from '@http/teacher/types'
+import { useTeacherNotifications } from '@http/teacher/client.notifications'
 
 import { Button } from '_ui/Button'
 import { Loader } from '_ui/Loader'
@@ -27,8 +27,11 @@ export function TeacherTestWorkTab({ testId }: TeacherTestWorkTabProps) {
     retakeTest,
   } = useQueryTeacherLesson({ test_id: testId })
 
+  const {
+    remind: { mutateAsync: remind },
+  } = useTeacherNotifications()
+
   const [activeTab, setActiveTab] = useState(1)
-  const [filteredStudents, setFilteredStudents] = useState<TStudentTestProgress[]>([])
 
   const handleAllowRetake = (id: string) => {
     toastPromise({
@@ -44,20 +47,28 @@ export function TeacherTestWorkTab({ testId }: TeacherTestWorkTabProps) {
     })
   }
 
-  useEffect(() => {
-    data?.progress &&
-      setFilteredStudents(
-        data.progress.filter((v) => {
-          switch (activeTab) {
-            case 1:
-              return v.test_progress?.status === 1
-            case 2:
-              return v.test_progress?.status === 3
-            default:
-              return v.test_progress?.status === 2 || !v.test_progress?.status
-          }
-        }),
-      )
+  const handleRemind = (id: string) => {
+    toastPromise({
+      handler: remind({ object_id: testId!, student_id: id, work_type: 'test' }),
+      successMessage: 'Нагадування успішно надіслано',
+    })
+  }
+
+  const filteredStudents = useMemo(() => {
+    if (!!data?.progress) {
+      return data?.progress.filter((v) => {
+        switch (activeTab) {
+          case 1:
+            return v.test_progress?.status === 1
+          case 2:
+            return v.test_progress?.status === 3
+          default:
+            return v.test_progress?.status === 2 || !v.test_progress?.status
+        }
+      })
+    }
+
+    return []
   }, [activeTab, data?.progress])
 
   if (isLoading) return <Loader />
@@ -155,7 +166,10 @@ export function TeacherTestWorkTab({ testId }: TeacherTestWorkTabProps) {
                         </>
                       )}
                       {activeTab === 3 && (
-                        <Button variant={!v.test_progress?.status ? 'border' : v.test_progress?.status === 2 ? 'gray' : undefined}>
+                        <Button
+                          variant={!v.test_progress?.status ? 'border' : v.test_progress?.status === 2 ? 'gray' : undefined}
+                          onClick={!v.test_progress?.status ? () => handleRemind(v.id) : undefined}
+                        >
                           {v.test_progress?.status === 2 && 'Домашню роботу відправлено на перездачу'}
                           {!v.test_progress?.status && 'Нагадати'}
                         </Button>

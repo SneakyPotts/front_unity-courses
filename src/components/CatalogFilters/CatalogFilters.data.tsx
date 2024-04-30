@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 
 import type { TFilterBlock } from '@http/courses/type'
-import { Rating, Star } from '@smastrom/react-rating'
 
 import { RatingStars } from '_ui/RatingStars'
 
