@@ -101,6 +101,7 @@ export type TTestContent = {
   course_title: string
   course_color: string
   course_icon: string
+  content: string
   test_type: string
   external_link: string
   progress_type: number

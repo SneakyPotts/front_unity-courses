@@ -231,8 +231,9 @@
     &-photo {
       overflow: hidden;
       border-radius: rem(10);
-      width: 100%;
+      width: rem(150);
       max-width: rem(150);
+      height: rem(100);
       position: relative;
     }
 
