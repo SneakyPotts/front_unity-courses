@@ -70,10 +70,14 @@ export async function signUpServerAction(data: SignUpSchema) {
 }
 
 export async function addToBasketAction(course_id: string) {
-  return await serverFetchAuth<TBasket>(`/courses/cart/add/`, {
+  const response = await serverFetchAuth<TBasket>(`/courses/cart/add/`, {
     method: 'POST',
     body: JSON.stringify({ id: course_id }),
   })
+
+  if (!response.error) {
+    revalidateTag('wishlist')
+  }
 }
 
 export async function patchParentBasket(data: { course_id: string; user_ids: string[] }) {

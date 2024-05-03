@@ -8,6 +8,7 @@ import { useOnClickOutside } from 'usehooks-ts'
 
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { imgBlur } from '@assets/utils'
@@ -31,7 +32,7 @@ const BasketModal = dynamic(() => import('_modals/BasketModal').then((m) => m.Ba
 const ChildBoughtModal = dynamic(() => import('_modals/ChildBoughtModal').then((m) => m.ChildBoughtModal))
 
 export function Header({ profile, className }: HeaderProps) {
-  const { header, basket } = useContext(appContext)
+  const { header, basket, wish } = useContext(appContext)
 
   const role = {
     teacher: profile?.role === 20,
@@ -134,11 +135,14 @@ export function Header({ profile, className }: HeaderProps) {
                   {isShowChildBought && <ChildBoughtModal onClose={() => setIsShowChildBought(false)} />}
                 </li>
                 <li className="header__item">
-                  <button className="header__item-btn">
+                  <Link
+                    href={'/wishlist'}
+                    className={classNames({ 'header__item-btn': !!wish?.length })}
+                  >
                     <svg className="header__item-svg">
                       <use href="/img/sprite.svg#like-courses"></use>
                     </svg>
-                  </button>
+                  </Link>
                 </li>
               </>
             )}

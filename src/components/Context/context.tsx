@@ -27,6 +27,7 @@ const appContext = createContext<IContext>({
   setHeader: () => {},
   setProfile: () => {},
   setBasket: () => {},
+  setWish: () => {},
 })
 
 function AppProvider({ children }: PropsWithChildren) {
@@ -34,6 +35,7 @@ function AppProvider({ children }: PropsWithChildren) {
   const [header, setHeader] = useState<THeader | undefined>(undefined)
   const [profile, setProfile] = useState<TAboutMe | undefined>(undefined)
   const [basket, setBasket] = useState<TBasketCourse[] | undefined>(undefined)
+  const [wish, setWish] = useState<string[] | undefined>(undefined)
 
   const handleSetAsideIsOpen = () => setAsideIsOpen((p) => !p)
 
@@ -48,6 +50,8 @@ function AppProvider({ children }: PropsWithChildren) {
     setProfile,
     basket,
     setBasket,
+    wish,
+    setWish,
   }
 
   useEffect(() => {

@@ -5,7 +5,7 @@ import { cookies } from 'next/headers'
 import { serverFetch } from '@http/api'
 import { serverFetchAuth } from '@http/authApi'
 
-import type { TCourseExam, TCourseStats, TLessonContent } from './types'
+import { TCourseExam, TCourseStats, TLessonContent, TWishList } from './types'
 
 const getLessonContent = cache(async (lesson_id: string) => {
   const isAuth = cookies().get('accessToken')?.value
@@ -37,4 +37,14 @@ const getExamContent = cache(async (exam_id: string) => {
   })
 })
 
-export { getLessonContent, studentCourseStats, getExamContent }
+const getWishList = cache(
+  async () =>
+    await serverFetchAuth<TWishList>('/courses/favorites/me/', {
+      next: {
+        revalidate: 0,
+        tags: ['wishlist'],
+      },
+    }),
+)
+
+export { getLessonContent, studentCourseStats, getExamContent, getWishList }

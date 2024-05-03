@@ -1,10 +1,12 @@
 import classNames from 'classnames'
 import React, { useState } from 'react'
+import { useWindowSize } from 'usehooks-ts'
 
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
+import { ChildrenSelectList } from '@components/ChildrenSelectList'
 import { signOutAction } from '@http/profile/actions'
 import { useQueryClient } from '@tanstack/react-query'
 
@@ -13,6 +15,8 @@ import type { ProfilePopupProps } from './ProfilePopup.props'
 export function ProfilePopup({ onClose, showProfileModal, profile }: ProfilePopupProps) {
   const router = useRouter()
   const queryClient = useQueryClient()
+
+  const { width } = useWindowSize()
 
   const [lang, setLang] = useState('uk')
 
@@ -30,23 +34,29 @@ export function ProfilePopup({ onClose, showProfileModal, profile }: ProfilePopu
   return (
     <div className="header__submenu">
       <div className="header__head">
-        <button className="header__head-close">
+        <button
+          className="header__head-close"
+          onClick={onClose}
+        >
           <svg className="header__head-svg">
             <use href="/img/sprite.svg#arrow-right"></use>
           </svg>
         </button>
         <Image
-          src="https://loremflickr.com/640/360"
+          src={profile?.avatar || '/img/static/default-avatar.png'}
           width={50}
           height={50}
-          alt="alt"
+          alt={`${profile?.last_name} ${profile?.first_name}`}
           className="header__head-img"
-          objectFit="cover"
+          style={{ objectFit: 'cover' }}
         />
         <div className="header__submenu-name">
           <p>{`${profile?.last_name} ${profile?.first_name}`}</p>
         </div>
       </div>
+
+      {profile && profile.role === 10 && width < 992 && <ChildrenSelectList mobile />}
+
       <ul className="header__block">
         <li className="header__block-item">
           <Link

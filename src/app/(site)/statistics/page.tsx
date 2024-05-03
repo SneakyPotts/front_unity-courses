@@ -1,6 +1,7 @@
 'use client'
 
 import { useContext, useEffect, useLayoutEffect, useMemo, useState } from 'react'
+import { useSessionStorage, useWindowSize } from 'usehooks-ts'
 
 import { ArchivedStatistics } from '@components/ArchivedStatistics'
 import { ChildrenSelectList } from '@components/ChildrenSelectList'
@@ -29,6 +30,10 @@ export default function StatisticsPage() {
     [profile],
   )
 
+  const { width } = useWindowSize()
+
+  const [childID] = useSessionStorage('childID', '')
+
   /* teacher */
   const [currentCourse, setCurrentCourse] = useState<TSimpleCourse | undefined>(undefined)
 
@@ -38,7 +43,7 @@ export default function StatisticsPage() {
   /* student */
   const [activeTab, setActiveTab] = useState(1)
 
-  const { active, archived } = useQueryStudentStats({ tab_id: !role.teacher ? (activeTab === 1 ? 'active' : 'archived') : '' })
+  const { active, archived } = useQueryStudentStats({ tab_id: !role.teacher ? (activeTab === 1 ? 'active' : 'archived') : '', student_id: childID })
 
   /*parent*/
 
@@ -63,9 +68,9 @@ export default function StatisticsPage() {
     !role.teacher &&
       setHeader({
         title: 'Статистика успішності',
-        rightElement: role.parent ? <ChildrenSelectList /> : null,
+        rightElement: role.parent && width > 991 ? <ChildrenSelectList /> : null,
       })
-  }, [currentCourse, profile])
+  }, [currentCourse, profile, width])
 
   useEffect(() => {
     if (courses.data && !currentCourse) {

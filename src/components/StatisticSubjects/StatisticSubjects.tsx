@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSessionStorage } from 'usehooks-ts'
 
 import { useQueryStudentCourses } from '@http/student/client.courses'
 import { useQueryStudentStats } from '@http/student/client.statistics'
@@ -14,6 +15,8 @@ import { StatisticsItem } from './StatisticsItem'
 export function StatisticSubjects({ studentId, isShort = false }: StatisticSubjectsProps) {
   const [courseId, setCourseId] = useState('')
 
+  const [childID] = useSessionStorage('childID', '')
+
   // FIXME: change to more lighter request
   const {
     active: { data: courses, isLoading: isCoursesLoading, isError: isCoursesError },
@@ -21,7 +24,7 @@ export function StatisticSubjects({ studentId, isShort = false }: StatisticSubje
 
   const {
     stats: { data: stats, isLoading: isStatsLoading, isError: isStatsError },
-  } = useQueryStudentStats({ course_id: courseId, tab_id: 'common' })
+  } = useQueryStudentStats({ course_id: courseId, student_id: childID, tab_id: 'common' })
 
   const isLoading = isCoursesLoading || isStatsLoading
   const isError = isCoursesError || isStatsError

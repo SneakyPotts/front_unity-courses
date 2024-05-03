@@ -11,6 +11,8 @@ export interface IContext {
   setProfile: (profile?: TAboutMe) => void
   basket?: TBasketCourse[]
   setBasket: Dispatch<SetStateAction<TBasketCourse[] | undefined>>
+  wish?: string[]
+  setWish: Dispatch<SetStateAction<string[] | undefined>>
 }
 
 export type THeader = {

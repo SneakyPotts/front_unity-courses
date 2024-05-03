@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { formattedPrice, imgBlur } from '@assets/utils'
 import { AddToBasketButton } from '@components/AddToBasketButton'
 import { appContext } from '@components/Context/context'
+import { addToWishlist, removeFromWishlist } from '@http/student/actions'
 
 import { Button } from '_ui/Button'
 import { TeacherForCourse } from '_ui/TeacherForCourse'
@@ -15,15 +16,17 @@ import { TeacherForCourse } from '_ui/TeacherForCourse'
 import type { CourseCatalogItemProps } from './CourseCatalogItem.props'
 
 export function CourseCatalogItem({ isCertified, ...props }: CourseCatalogItemProps) {
-  const { basket } = useContext(appContext)
+  const { basket, wish } = useContext(appContext)
 
   const [inBasket, setInBasket] = useState(false)
+  const [inWish, setInWish] = useState(false)
 
   const unavailable = !!props.end_date && isPast(parseISO(props.end_date))
 
   useEffect(() => {
     setInBasket(!!basket?.find((v) => v.id === props.id))
-  }, [basket])
+    setInWish(!!wish?.find((v) => v === props.id))
+  }, [wish, basket])
 
   const PriceBlock = () => (
     <div className={'courses-catalog__price'}>
@@ -73,11 +76,16 @@ export function CourseCatalogItem({ isCertified, ...props }: CourseCatalogItemPr
           </svg>
           {props.rating}
         </span>
-        <button className={'courses-catalog__like courses-catalog__like--chosen'}>
-          <svg>
-            <use href="/img/sprite.svg#course-catalog-like"></use>
-          </svg>
-        </button>
+        {!(inBasket || props.purchased) && (
+          <button
+            className={'courses-catalog__like'}
+            onClick={() => (inWish ? removeFromWishlist : addToWishlist)(props.id)}
+          >
+            <svg>
+              <use href={`/img/sprite.svg#${inWish ? 'course-catalog-like-fill' : 'course-catalog-like'}`}></use>
+            </svg>
+          </button>
+        )}
         <div className={'courses-catalog__photo'}>
           <Link href={unavailable ? '/' : `/courses/${props.id}`}>
             <Image

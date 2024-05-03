@@ -4,6 +4,8 @@ import classNames from 'classnames'
 import { format } from 'date-fns'
 import React, { Fragment, useState } from 'react'
 
+import Image from 'next/image'
+
 import { MarkSelect } from '@components/MarkSelect'
 import { Single, TestWrapper, descMatcher } from '@components/Test'
 import { ComplianceGridMatrix } from '@components/Test/ComplianceGridMatrix'
@@ -19,7 +21,7 @@ import type { CheckTestWorkContentProps, NotStrictComplianceAnswerProps, StrictC
 export function CheckTestWorkContent({ data }: CheckTestWorkContentProps) {
   const { testMark, retakeTest } = useQueryTeacherLesson({})
 
-  const [mark, setMark] = useState(data.mark || data.quiz.estimate_mark || 0)
+  const [mark, setMark] = useState(data.mark || data.quiz?.estimate_mark || 0)
   const [isEditing, setIsEditing] = useState(!data.mark)
 
   const handleAllowRetake = () => {
@@ -193,8 +195,10 @@ export function StrictComplianceAnswer({ answer_type, question_id, question, pai
             >
               {imgLeft ? (
                 <div className="tests__alternative-photo">
-                  <img
+                  <Image
                     src={v.left_column.image_answer}
+                    fill
+                    sizes="10vw"
                     alt={question}
                   />
                 </div>
@@ -212,8 +216,10 @@ export function StrictComplianceAnswer({ answer_type, question_id, question, pai
             >
               {imgRight ? (
                 <div className="tests__alternative-photo">
-                  <img
+                  <Image
                     src={v.right_column.image_answer}
+                    fill
+                    sizes="10vw"
                     alt={question}
                   />
                 </div>
