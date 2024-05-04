@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useSessionStorage } from 'usehooks-ts'
 
-import { useQueryStudentCourses } from '@http/student/client.courses'
 import { useQueryStudentStats } from '@http/student/client.statistics'
 import type { TStatsTypes } from '@http/student/types'
 
@@ -12,22 +11,18 @@ import { StatisticDropdown } from './StatisticDropdown'
 import type { StatisticSubjectsProps } from './StatisticSubjects.props'
 import { StatisticsItem } from './StatisticsItem'
 
-export function StatisticSubjects({ studentId, isShort = false }: StatisticSubjectsProps) {
+export function StatisticSubjects({ isShort = false }: StatisticSubjectsProps) {
   const [courseId, setCourseId] = useState('')
 
   const [childID] = useSessionStorage('childID', '')
 
-  // FIXME: change to more lighter request
-  const {
-    active: { data: courses, isLoading: isCoursesLoading, isError: isCoursesError },
-  } = useQueryStudentCourses({ tab_id: 'active' })
-
   const {
     stats: { data: stats, isLoading: isStatsLoading, isError: isStatsError },
+    brief: { data: brief, isLoading: isBriefLoading, isError: isBriefError },
   } = useQueryStudentStats({ course_id: courseId, student_id: childID, tab_id: 'common' })
 
-  const isLoading = isCoursesLoading || isStatsLoading
-  const isError = isCoursesError || isStatsError
+  const isLoading = isBriefLoading || isStatsLoading
+  const isError = isBriefError || isStatsError
 
   return (
     <div className="statistics__block statistics-block">
@@ -37,7 +32,7 @@ export function StatisticSubjects({ studentId, isShort = false }: StatisticSubje
 
           <StatisticDropdown
             name="dropdown"
-            list={courses?.results}
+            list={brief}
             onChange={(id) => setCourseId(id)}
           />
         </div>
@@ -58,16 +53,18 @@ export function StatisticSubjects({ studentId, isShort = false }: StatisticSubje
       <div className="statistics-block__bottom">
         {isLoading && <Loader />}
         {isError && <p className="text-center">Щось пішло не так...</p>}
-        <div className="statistics-block__list">
-          {stats &&
-            Object.keys(stats)?.map((key, i) => (
-              <StatisticsItem
-                key={`${key}-${i}`}
-                type={key as TStatsTypes}
-                {...stats[key as TStatsTypes]}
-              />
-            ))}
-        </div>
+        {!isLoading && !isError && stats && (
+          <div className="statistics-block__list">
+            {stats &&
+              Object.keys(stats)?.map((key, i) => (
+                <StatisticsItem
+                  key={`${key}-${i}`}
+                  type={key as TStatsTypes}
+                  {...stats[key as TStatsTypes]}
+                />
+              ))}
+          </div>
+        )}
       </div>
     </div>
   )

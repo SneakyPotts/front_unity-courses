@@ -1,8 +1,10 @@
-import { TStudentActiveCourseItem } from '@http/student/types'
-
 export interface StatisticDropdownProps {
   name: string
-  list?: TStudentActiveCourseItem[]
+  list?: Array<{
+    id: string
+    title: string
+  }>
+
   placeholder?: string
   onChange?: (id: string) => void
 }
