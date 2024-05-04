@@ -55,7 +55,7 @@ export type TCourseDetail = TBasketCourse & {
   categories_repr: string[]
   number_of_lectures: number
   rating: number
-  lectors: TTeacher[]
+  lectors: Array<TTeacher & { about_me: string }>
   students: TTeacher[]
   start_date: string
   closest_lecture: string
