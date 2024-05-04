@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { ReviewsCard } from '@components/ReviewsCard'
 
 import { Button } from '_ui/Button'
@@ -22,6 +24,14 @@ export function ReviewsSection({ courseId, reviews }: ReviewsSectionProps) {
           </svg>
           Всі відгуки
         </Button>
+      </div>
+      <div className={'courses-catalog__empty close'}>
+        <div className="courses-catalog__empty-text">
+          <p>Відгуки поки що відсутні...</p>
+        </div>
+        <svg className={'courses-catalog__empty-svg'}>
+          <use href="/img/sprite.svg#course-teacher__home-start"></use>
+        </svg>
       </div>
       <div className={'archive__reviews-content'}>
         {reviews?.map((review) => (

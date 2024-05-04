@@ -11,15 +11,16 @@ import { TBasketCourse } from '@http/profile/type'
 
 import type { BaseLayoutInnerProps } from './BaseLayoutInner.props'
 
-export function BaseLayoutInner({ about, basket, children }: BaseLayoutInnerProps) {
-  const { asideIsOpen, setProfile, setBasket } = useContext(appContext)
+export function BaseLayoutInner({ about, basket, wishlist, children }: BaseLayoutInnerProps) {
+  const { asideIsOpen, setProfile, setBasket, setWish } = useContext(appContext)
 
   const localBasket: TBasketCourse[] | null = useReadLocalStorage('basket', { deserializer: JSON.parse })
 
   useLayoutEffect(() => {
     setProfile(about)
     setBasket(basket || localBasket || [])
-  }, [about, basket])
+    setWish(wishlist?.courses?.map((v) => v.id) || [])
+  }, [about, basket, wishlist])
 
   return (
     <div className={classNames('main inner-layout', { 'main--active': asideIsOpen })}>

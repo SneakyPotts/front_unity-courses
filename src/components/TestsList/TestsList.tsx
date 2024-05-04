@@ -21,7 +21,7 @@ import { errorIcon, successIcon } from '_ui/ToastUtils'
 
 import type { ComplianceQuestionProps, FillInputProps, FillQuestionProps, FreeQuestionProps, SingleQuestionProps, TestsListProps } from './TestsList.props'
 
-export function TestsList({ questions, test_id, setNotEditing, extraHandler }: TestsListProps) {
+export function TestsList({ content, questions, test_id, setNotEditing, extraHandler }: TestsListProps) {
   const { sendTest: sendAnswers } = useQueryStudentLesson({})
 
   const { handleSubmit, setValue } = useForm<any>()
@@ -77,7 +77,14 @@ export function TestsList({ questions, test_id, setNotEditing, extraHandler }: T
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="tests__inner">
-        <h2 className="tests__title">Процеси життєдіяльності тварин</h2>
+        {content && (
+          <div
+            style={{ marginBottom: 40 }}
+            dangerouslySetInnerHTML={{
+              __html: content,
+            }}
+          />
+        )}
         {questions.map((v, i) => (
           <Fragment key={v.id}>
             {(v.answer_type === 1 || v.answer_type === 2) && (

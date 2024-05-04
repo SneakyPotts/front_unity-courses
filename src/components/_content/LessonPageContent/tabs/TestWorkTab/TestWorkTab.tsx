@@ -83,6 +83,7 @@ export function TestWorkTab({ testId }: TestWorkTabProps) {
           <TestsList
             {...test.quiz}
             test_id={testId!}
+            content={test?.content}
             setNotEditing={() => setIsEditing(false)}
           />
         ) : (

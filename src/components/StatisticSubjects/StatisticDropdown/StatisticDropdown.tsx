@@ -27,7 +27,7 @@ export function StatisticDropdown({ list, placeholder = '', onChange }: Statisti
 
   useEffect(() => {
     setTitle('По усім предметам')
-  }, [])
+  }, [list])
 
   return (
     <div

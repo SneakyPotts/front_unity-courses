@@ -101,6 +101,7 @@ export type TTestContent = {
   course_title: string
   course_color: string
   course_icon: string
+  content: string
   test_type: string
   external_link: string
   progress_type: number
@@ -190,4 +191,34 @@ export type TExamProgress = {
   teacher_reply_timestamp: string
   status: number
   mark: number
+}
+
+export type TWishList = {
+  courses: Course[]
+}
+
+export interface Course {
+  id: string
+  title: string
+  description: string
+  cover: string
+  categories_repr: string[]
+  color: string
+  price: number
+  discount: number
+  number_of_students: number
+  number_of_lectures: number
+  max_number_of_students: number
+  start_date: string
+  end_date: string
+  rating: number
+  lectors: Lector[]
+}
+
+export interface Lector {
+  id: string
+  first_name: string
+  last_name: string
+  patronymic: string
+  avatar: string
 }

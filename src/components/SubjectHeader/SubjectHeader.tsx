@@ -8,19 +8,22 @@ import Image from 'next/image'
 import { courseCaption, formatDateInGenitive, formattedPrice, imgBlur, subColor } from '@assets/utils'
 import { AddToBasketButton } from '@components/AddToBasketButton'
 import { appContext } from '@components/Context/context'
+import { addToWishlist, removeFromWishlist } from '@http/student/actions'
 
 import { Button } from '_ui/Button'
 
 import type { SubjectHeaderProps } from './SubjectHeader.props'
 
 export function SubjectHeader({ data }: SubjectHeaderProps) {
-  const { basket } = useContext(appContext)
+  const { basket, wish } = useContext(appContext)
 
   const [inBasket, setInBasket] = useState(false)
+  const [inWish, setInWish] = useState(false)
 
   useEffect(() => {
     setInBasket(!!basket?.find((v) => v.id === data?.id))
-  }, [basket])
+    setInWish(!!wish?.find((v) => v === data?.id))
+  }, [basket, wish])
 
   return (
     <div
@@ -53,6 +56,17 @@ export function SubjectHeader({ data }: SubjectHeaderProps) {
               {...imgBlur}
               alt="фото курса"
             />
+
+            {!(inBasket || data.purchased) && (
+              <button
+                className={'courses-catalog__like'}
+                onClick={() => (inWish ? removeFromWishlist : addToWishlist)(data.id)}
+              >
+                <svg>
+                  <use href={`/img/sprite.svg#${inWish ? 'course-catalog-like-fill' : 'course-catalog-like'}`}></use>
+                </svg>
+              </button>
+            )}
           </div>
         )}
       </div>

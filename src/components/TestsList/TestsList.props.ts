@@ -5,6 +5,7 @@ import type { UseMutateAsyncFunction } from '@tanstack/react-query'
 
 export interface TestsListProps extends IQuiz {
   test_id: string
+  content?: string
   setNotEditing: () => void
   extraHandler?: UseMutateAsyncFunction<any, Error, { test_id: string; body: TTestResult }, unknown>
 }

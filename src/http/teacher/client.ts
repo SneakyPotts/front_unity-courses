@@ -5,7 +5,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import type { TSimpleCourse, TTeacherProfileInfo } from './types'
 
 const getTeacherProfileInfo = (teacher_id?: string) => clientAuthFetch<TTeacherProfileInfo>(`/detail/teacher/${teacher_id}`)
-const getTeacherCoursesList = () => clientAuthFetch<TSimpleCourse[]>(`/courses/teacher/brief/`)
+const getTeacherCoursesBrief = () => clientAuthFetch<TSimpleCourse[]>(`/courses/teacher/brief/`)
 
 const sendReviewReply = ({ course_id, ...data }: { course_id: string; review_id: string | number; content: string }) =>
   clientAuthFetch<TReviewItem>(`/courses/${course_id}/reviews/reply/`, {
@@ -22,7 +22,7 @@ export function useQueryTeacher({ teacher_id, list = false }: { teacher_id?: str
 
   const courses = useQuery({
     queryKey: ['coursesList'],
-    queryFn: () => getTeacherCoursesList(),
+    queryFn: () => getTeacherCoursesBrief(),
     enabled: list,
   })
 

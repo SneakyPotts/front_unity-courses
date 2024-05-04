@@ -1,6 +1,6 @@
 import type { TBasketCourse } from '@http/profile/type'
 
 export interface AddToBasketButtonProps {
-  course: TBasketCourse
+  course: Omit<TBasketCourse, 'users'>
   callback: () => void
 }

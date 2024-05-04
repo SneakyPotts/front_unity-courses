@@ -27,7 +27,7 @@ export function TeachersSection({ lectors }: TeachersSectionProps) {
   )
 }
 
-function TeacherBox({ id, last_name, first_name, patronymic, avatar }: TeacherBoxProps) {
+function TeacherBox({ id, last_name, first_name, patronymic, qualification, about_me, avatar }: TeacherBoxProps) {
   return (
     <div className={'archive__teaher'}>
       <div className={'archive__teaher-photo'}>
@@ -41,23 +41,8 @@ function TeacherBox({ id, last_name, first_name, patronymic, avatar }: TeacherBo
       </div>
       <div className={'archive__person'}>
         <h3 className={'archive__person-name archive__subtitle'}>{`${last_name} ${first_name} ${patronymic}`}</h3>
-        <p className={'archive__person-text'}>
-          Вчителька ліцею № 2 м. Житомира, поетка і письменниця, організаторка щорічного Всеукраїнського Літературного фестивалю «Шодуарівська Альтанка» у м. Житомир
-        </p>
-        <ul className={'archive__person-list '}>
-          <li className={'archive__person-item'}>
-            <span className={'archive__person-span'}>Креативна Інтеграція Технологій:</span> Впровадження сучасних технологій у навчальний процес для створення вражаючих
-            мистецьких проектів.
-          </li>
-          <li className={'archive__person-item'}>
-            <span className={'archive__person-span'}>Ефективне Міжособистісне Спілкування:</span> Здатність вести діалог з учнями, стимулюючи висловлювання їхнього творчого
-            потенціалу.
-          </li>
-          <li className={'archive__person-item'}>
-            <span className={'archive__person-span'}>Громадська Активність:</span> Активна участь у заходах мистецької спільноти та організація мистецьких виставок та
-            конкурсів серед учнів.
-          </li>
-        </ul>
+        {!!qualification?.length && <p className={'archive__person-item archive__person-span'}>{qualification}</p>}
+        {!!about_me?.length && <p className={'archive__person-text'}>{about_me}</p>}
       </div>
     </div>
   )

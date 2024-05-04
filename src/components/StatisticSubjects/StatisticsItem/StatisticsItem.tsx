@@ -54,7 +54,7 @@ export function StatisticsItem({ type, value, max_value, percentage, progress }:
         <div className="rating-block__right">
           {progress === undefined ? (
             <>
-              <span className="rating-block__mark">{Math.round(value)}</span>/{max_value}
+              <span className="rating-block__mark">{Math.round(value)}</span>/{max_value ?? 0}
             </>
           ) : (
             <span className="rating-block__mark">{progress}%</span>

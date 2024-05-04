@@ -71,3 +71,16 @@ export function uploadRulesCheck(callback: (file: File) => void, files: File[], 
     callback(file)
   }
 }
+
+export const assemblyReqParams = (params: Record<string, string | undefined>) => {
+  const keys = Object.keys(params)
+  const values = Object.values(params)
+
+  return keys.reduce((acc, key, i) => {
+    if (values[i]) {
+      return `${acc}${key}=${values[i]}&`
+    }
+
+    return acc
+  }, '?')
+}

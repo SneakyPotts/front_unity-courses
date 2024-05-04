@@ -255,6 +255,7 @@ export function ExamTestTab({ ...exam }: ExamTestTabProps) {
           <TestsList
             {...exam.quiz}
             test_id={exam.id}
+            content={exam.content}
             setNotEditing={() => setIsEditing(false)}
             extraHandler={sendQuizExam}
           />

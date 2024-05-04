@@ -430,6 +430,7 @@
     @include flex-v-center;
 
     position: absolute;
+    z-index: 1;
     top: rem(12);
     left: rem(16);
     flex-wrap: wrap;
@@ -460,14 +461,7 @@
     svg {
       width: rem(20);
       height: rem(20);
-      fill: transparent;
-      stroke: var(--orange-300);
-    }
-
-    &--chosen {
-      svg {
-        fill: var(--orange-300);
-      }
+      fill: var(--orange-300);
     }
   }
 
