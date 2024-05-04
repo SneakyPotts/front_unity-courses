@@ -43,7 +43,10 @@ export default function StatisticsPage() {
   /* student */
   const [activeTab, setActiveTab] = useState(1)
 
-  const { active, archived } = useQueryStudentStats({ tab_id: !role.teacher ? (activeTab === 1 ? 'active' : 'archived') : '', student_id: childID })
+  const { active, archived } = useQueryStudentStats({
+    tab_id: profile && !role.teacher ? (activeTab === 1 ? 'active' : 'archived') : '',
+    student_id: childID,
+  })
 
   /*parent*/
 

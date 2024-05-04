@@ -242,6 +242,7 @@ export interface TTeacherCourseStats {
   last_name: string
   first_name: string
   patronymic: string
+  role: number
   avatar: string
   marks: TMark[]
   average_mark: number

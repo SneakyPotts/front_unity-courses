@@ -13,10 +13,10 @@ import { Modal } from '_ui/Modal'
 
 import type { ProfileInfoModalProps } from './ProfileInfoModal.props'
 
-export function ProfileInfoModal({ onClose, studentId, teacherId }: ProfileInfoModalProps) {
+export function ProfileInfoModal({ onClose, role, studentId, teacherId }: ProfileInfoModalProps) {
   const {
     profile: { data: student, isLoading: studentIsLoading, isError: studentIsError },
-  } = useQueryStudent({ student_id: studentId })
+  } = useQueryStudent({ student_id: studentId, role })
   const {
     profile: { data: teacher, isLoading: teacherIsLoading, isError: teacherIsError },
   } = useQueryTeacher({ teacher_id: teacherId })

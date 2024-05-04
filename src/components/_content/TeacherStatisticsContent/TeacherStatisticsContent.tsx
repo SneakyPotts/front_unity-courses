@@ -64,12 +64,13 @@ export function TeacherStatisticsContent({ data, isLoading, isError, courseId, i
                         />
                         <p>{('first_name' in i && `${i.first_name} ${i.last_name}`) || ('title' in i && `${i.title}`)}</p>
 
-                        {/*{profileModalId === i.id && (*/}
-                        {/*  <ProfileInfoModal*/}
-                        {/*    onClose={() => setProfileModalId('')}*/}
-                        {/*    studentId={i.id}*/}
-                        {/*  />*/}
-                        {/*)}*/}
+                        {profileModalId === i.id && (
+                          <ProfileInfoModal
+                            onClose={() => setProfileModalId('')}
+                            studentId={i.id}
+                            role={'role' in i ? i.role : undefined}
+                          />
+                        )}
                       </div>
 
                       <ul className="table__marks">
