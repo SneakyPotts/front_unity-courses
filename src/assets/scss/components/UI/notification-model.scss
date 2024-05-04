@@ -7,6 +7,7 @@
   background: var(--white);
   border: rem(1) solid var(--orange-400);
   border-radius: rem(10);
+  min-width: rem(550);
 
   &__head {
     @include flex-all-sb;
@@ -118,7 +119,7 @@
   }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .notification {
     &__result {
       flex-direction: column;
@@ -128,10 +129,11 @@
   }
 }
 
-@include mq('md') {
+@include mq("md") {
   .notification {
     left: rem(15);
     right: rem(15);
+    min-width: unset;
 
     &__list {
       grid-template-columns: rem(40) 1fr auto;

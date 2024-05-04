@@ -233,6 +233,8 @@
     border-radius: rem(10);
     border: rem(1) solid #eef4ff;
     background: #eef4ff;
+    height: 100%;
+    min-height: rem(225);
 
     &-name {
       margin-bottom: rem(10);
@@ -370,7 +372,7 @@
   }
 }
 
-@include mq('xxl') {
+@include mq("xxl") {
   .archive {
     &__reviews {
       &-content {
@@ -382,7 +384,7 @@
   }
 }
 
-@include mq('xl') {
+@include mq("xl") {
   .archive {
     &__inner {
       display: flex;
@@ -395,7 +397,7 @@
   }
 }
 
-@include mq('lg') {
+@include mq("lg") {
   .archive {
     &__head {
       grid-template-columns: 1fr;
@@ -471,7 +473,7 @@
   }
 }
 
-@include mq('md') {
+@include mq("md") {
   .archive {
     &__reviews {
       &-content {
@@ -485,7 +487,7 @@
   }
 }
 
-@include mq('sm') {
+@include mq("sm") {
   .archive {
     &__title {
       font-size: rem(18);
