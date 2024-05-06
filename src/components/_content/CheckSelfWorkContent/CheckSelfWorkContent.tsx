@@ -11,12 +11,16 @@ import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import { revalidateSelfWork } from '@http/teacher/actions'
 import { useQueryTeacherLesson } from '@http/teacher/client.lesson'
 
-import { AssemblyContent } from '_ui/AssemblyContent'
 import { Button } from '_ui/Button'
 import { Dropdown } from '_ui/Dropdown'
 import { toastPromise } from '_ui/ToastUtils'
 
 import type { CheckSelfWorkContentProps, TeacherHomeWorkListProps } from './CheckSelfWorkContent.props'
+
+const AssemblyContent = dynamic(() => import('_ui/AssemblyContent').then((mod) => mod.AssemblyContent), {
+  ...dynamicOptions,
+  ssr: false,
+})
 
 const TextEditor = dynamic(() => import('@components/TextEditor').then((mod) => mod.TextEditor), {
   ...dynamicOptions,

@@ -1,15 +1,22 @@
 import { format } from 'date-fns'
 import React from 'react'
 
+import dynamic from 'next/dynamic'
+
+import { dynamicOptions } from '@assets/constants'
 import { useQueryStudentLesson } from '@http/student/client.lesson'
 
-import { AssemblyContent } from '_ui/AssemblyContent'
 import { Loader } from '_ui/Loader'
 import { RequestError } from '_ui/RequestError'
 
 import { SelfWorkTabContent } from '_content/LessonPageContent/tabs/SelfWorkTabContent'
 
 import type { SelfWorkTabProps } from './SelfWorkTab.props'
+
+const AssemblyContent = dynamic(() => import('_ui/AssemblyContent').then((mod) => mod.AssemblyContent), {
+  ...dynamicOptions,
+  ssr: false,
+})
 
 export function SelfWorkTab({ selfId }: SelfWorkTabProps) {
   const {

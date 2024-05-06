@@ -13,7 +13,6 @@ import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import { revalidateExamCheckInfo } from '@http/teacher/actions'
 import { useQueryTeacherExam } from '@http/teacher/client.exam'
 
-import { AssemblyContent } from '_ui/AssemblyContent'
 import { Button } from '_ui/Button'
 import { Dropdown } from '_ui/Dropdown'
 import { toastPromise } from '_ui/ToastUtils'
@@ -21,6 +20,11 @@ import { toastPromise } from '_ui/ToastUtils'
 import { NotStrictComplianceAnswer, StrictComplianceAnswer, TextAnswer } from '_content/CheckTestWorkContent'
 
 import type { CheckExamContentProps } from './CheckExamContent.props'
+
+const AssemblyContent = dynamic(() => import('_ui/AssemblyContent').then((mod) => mod.AssemblyContent), {
+  ...dynamicOptions,
+  ssr: false,
+})
 
 const TextEditor = dynamic(() => import('@components/TextEditor').then((mod) => mod.TextEditor), {
   ...dynamicOptions,

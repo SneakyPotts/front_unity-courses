@@ -7,10 +7,14 @@ import { dynamicOptions } from '@assets/constants'
 import { UploadDocumentItem, UploadDocumentModal } from '@components/UploadDocument'
 import { useQueryStudentLesson } from '@http/student/client.lesson'
 
-import { AssemblyContent } from '_ui/AssemblyContent'
 import { Button } from '_ui/Button'
 
 import type { SelfWorkTabContentProps } from './SelfWorkTabContent.props'
+
+const AssemblyContent = dynamic(() => import('_ui/AssemblyContent').then((mod) => mod.AssemblyContent), {
+  ...dynamicOptions,
+  ssr: false,
+})
 
 const TextEditor = dynamic(() => import('@components/TextEditor').then((mod) => mod.TextEditor), {
   ...dynamicOptions,

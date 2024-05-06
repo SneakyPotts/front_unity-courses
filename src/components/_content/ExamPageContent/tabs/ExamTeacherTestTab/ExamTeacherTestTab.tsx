@@ -1,19 +1,25 @@
 import classNames from 'classnames'
 import React, { useMemo, useState } from 'react'
 
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 
+import { dynamicOptions } from '@assets/constants'
 import { DeadlinePicker } from '@components/DeadlinePicker'
 import { ExternalLinkEditor } from '@components/ExternalLinkEditor'
 import { MarkSelect } from '@components/MarkSelect'
 import { useQueryTeacherExam } from '@http/teacher/client.exam'
 import { useTeacherNotifications } from '@http/teacher/client.notifications'
 
-import { AssemblyContent } from '_ui/AssemblyContent'
 import { Button } from '_ui/Button'
 import { toastPromise } from '_ui/ToastUtils'
 
 import type { ExamTeacherTestTabProps } from './ExamTeacherTestTab.props'
+
+const AssemblyContent = dynamic(() => import('_ui/AssemblyContent').then((mod) => mod.AssemblyContent), {
+  ...dynamicOptions,
+  ssr: false,
+})
 
 const filterControls = ['Очікує на перевірку', 'Перевірено', 'Не здано']
 
