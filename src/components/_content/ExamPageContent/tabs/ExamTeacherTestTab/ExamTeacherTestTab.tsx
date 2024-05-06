@@ -1,4 +1,3 @@
-import { MathJax } from 'better-react-mathjax'
 import classNames from 'classnames'
 import React, { useMemo, useState } from 'react'
 
@@ -7,10 +6,10 @@ import Image from 'next/image'
 import { DeadlinePicker } from '@components/DeadlinePicker'
 import { ExternalLinkEditor } from '@components/ExternalLinkEditor'
 import { MarkSelect } from '@components/MarkSelect'
-import { useAssemblyContent } from '@hooks/useAssemblyContent'
 import { useQueryTeacherExam } from '@http/teacher/client.exam'
 import { useTeacherNotifications } from '@http/teacher/client.notifications'
 
+import { AssemblyContent } from '_ui/AssemblyContent'
 import { Button } from '_ui/Button'
 import { toastPromise } from '_ui/ToastUtils'
 
@@ -19,8 +18,6 @@ import type { ExamTeacherTestTabProps } from './ExamTeacherTestTab.props'
 const filterControls = ['Очікує на перевірку', 'Перевірено', 'Не здано']
 
 export function ExamTeacherTestTab({ progress, ...exam }: ExamTeacherTestTabProps) {
-  const formattedContent = useAssemblyContent(exam.content)
-
   const [activeTab, setActiveTab] = useState(1)
 
   const { patch, setMark, allowRetake } = useQueryTeacherExam()
@@ -77,7 +74,7 @@ export function ExamTeacherTestTab({ progress, ...exam }: ExamTeacherTestTabProp
       <div className="lesson-section__info">
         <div className="lesson-section__text">
           <div className="text-wrapp">
-            <MathJax>{formattedContent}</MathJax>
+            <AssemblyContent content={exam.content} />
           </div>
         </div>
       </div>

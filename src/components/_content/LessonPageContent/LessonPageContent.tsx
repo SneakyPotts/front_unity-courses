@@ -1,13 +1,11 @@
 'use client'
 
-import { MathJax } from 'better-react-mathjax'
 import { addMinutes, isAfter } from 'date-fns'
 import React, { useMemo, useState } from 'react'
 
 import dynamic from 'next/dynamic'
 
 import { dynamicOptions } from '@assets/constants'
-import { useAssemblyContent } from '@hooks/useAssemblyContent'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import { useQueryStudentLesson } from '@http/student/client.lesson'
 
@@ -16,6 +14,10 @@ import { Tabs } from '_ui/Tabs'
 
 import { LessonPageContentProps } from './LessonPageContent.props'
 
+const AssemblyContent = dynamic(() => import('_ui/AssemblyContent').then((mod) => mod.AssemblyContent), {
+  ...dynamicOptions,
+  ssr: false,
+})
 const LessonsNavigation = dynamic(() => import('@components/LessonsNavigation').then((mod) => mod.LessonsNavigation), {
   ssr: false,
 })
@@ -49,8 +51,6 @@ export function LessonPageContent({ data, role }: LessonPageContentProps) {
     }),
     [data],
   )
-
-  const formattedContent = useAssemblyContent(data?.content)
 
   const [activeTab, setActiveTab] = useState(1)
   const [isShowSubjectNav, setIsShowSubjectNav] = useState(false)
@@ -107,9 +107,10 @@ export function LessonPageContent({ data, role }: LessonPageContentProps) {
           className={'courses-lesson__body'}
           style={{ userSelect: 'none' }}
         >
-          <MathJax>
-            <div className="lesson-section__text">{formattedContent}</div>
-          </MathJax>
+          <AssemblyContent
+            className="lesson-section__text"
+            content={data?.content}
+          />
         </div>
       )}
 

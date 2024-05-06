@@ -1,4 +1,3 @@
-import { MathJax } from 'better-react-mathjax'
 import { addMinutes, differenceInSeconds, format, parseISO } from 'date-fns'
 import React, { useLayoutEffect, useState } from 'react'
 
@@ -7,9 +6,9 @@ import dynamic from 'next/dynamic'
 import { dynamicOptions } from '@assets/constants'
 import type { TDocument } from '@assets/types/globals'
 import { UploadDocumentItem, UploadDocumentModal } from '@components/UploadDocument'
-import { useAssemblyContent } from '@hooks/useAssemblyContent'
 import { useQueryStudentExam } from '@http/student/client.exam.api'
 
+import { AssemblyContent } from '_ui/AssemblyContent'
 import { Button } from '_ui/Button'
 
 import type { ExamTestTabProps } from './ExamTestTab.props'
@@ -31,7 +30,6 @@ export function ExamTestTab({ ...exam }: ExamTestTabProps) {
   const [error, setError] = useState<string>('')
 
   const isUpload = !exam.progress?.answer_timestamp || isEditing
-  const formattedContent = useAssemblyContent(exam.content)
 
   const { sendTextExam, sendQuizExam, addFile, removeFile, confirmExam } = useQueryStudentExam()
 
@@ -144,9 +142,10 @@ export function ExamTestTab({ ...exam }: ExamTestTabProps) {
       )}
       <div className="lesson-section__info">
         <div className="lesson-section__text">
-          <div className="text-wrapp">
-            <MathJax>{formattedContent}</MathJax>
-          </div>
+          <AssemblyContent
+            className="text-wrapp"
+            content={exam.content}
+          />
         </div>
 
         {/*{!!data?.files?.length && (*/}
@@ -182,9 +181,7 @@ export function ExamTestTab({ ...exam }: ExamTestTabProps) {
                   onChange={setText}
                 />
               ) : (
-                <MathJax>
-                  <div dangerouslySetInnerHTML={{ __html: exam.progress.answer || '' }} />
-                </MathJax>
+                <AssemblyContent content={exam.progress.answer} />
               )}
 
               {error && <p className="error">{error}</p>}
@@ -239,12 +236,10 @@ export function ExamTestTab({ ...exam }: ExamTestTabProps) {
                 )}
               </div>
               <p className="lesson-section__reply-title">Коментар до роботи:</p>
-              <MathJax>
-                <div
-                  className="lesson-section__reply-text"
-                  dangerouslySetInnerHTML={{ __html: exam.progress.teacher_reply }}
-                />
-              </MathJax>
+              <AssemblyContent
+                className="lesson-section__reply-text"
+                content={exam.progress.teacher_reply}
+              />
             </div>
           )}
         </div>

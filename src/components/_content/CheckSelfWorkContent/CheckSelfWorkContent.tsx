@@ -1,6 +1,5 @@
 'use client'
 
-import { MathJax } from 'better-react-mathjax'
 import { format } from 'date-fns'
 import React, { useState } from 'react'
 
@@ -12,6 +11,7 @@ import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import { revalidateSelfWork } from '@http/teacher/actions'
 import { useQueryTeacherLesson } from '@http/teacher/client.lesson'
 
+import { AssemblyContent } from '_ui/AssemblyContent'
 import { Button } from '_ui/Button'
 import { Dropdown } from '_ui/Dropdown'
 import { toastPromise } from '_ui/ToastUtils'
@@ -67,11 +67,7 @@ export function CheckSelfWorkContent({ data }: CheckSelfWorkContentProps) {
             <div className="lesson-section__text">
               <div className="text-wrapp">
                 <h2>{`${data.student.last_name} ${data.student.first_name}`}</h2>
-                {data.progress_type === 1 && (
-                  <MathJax>
-                    <div dangerouslySetInnerHTML={{ __html: data.student_answer || '' }} />
-                  </MathJax>
-                )}
+                {data.progress_type === 1 && <AssemblyContent content={data.student_answer} />}
 
                 {/*{data.progress_type === 2 && !!data.files?.length && <FilesList data={data.files} />}*/}
                 {data.progress_type === 2 && !!data.files?.length && (
@@ -115,9 +111,7 @@ export function CheckSelfWorkContent({ data }: CheckSelfWorkContentProps) {
                 onChange={setText}
               />
             ) : (
-              <MathJax>
-                <div dangerouslySetInnerHTML={{ __html: data.teacher_reply || '' }} />
-              </MathJax>
+              <AssemblyContent content={data.teacher_reply} />
             )}
 
             {isEditing ? (

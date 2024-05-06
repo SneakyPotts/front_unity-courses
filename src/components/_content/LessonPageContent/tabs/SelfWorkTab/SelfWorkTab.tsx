@@ -1,9 +1,9 @@
-import { MathJax } from 'better-react-mathjax'
 import { format } from 'date-fns'
 import React from 'react'
 
 import { useQueryStudentLesson } from '@http/student/client.lesson'
 
+import { AssemblyContent } from '_ui/AssemblyContent'
 import { Loader } from '_ui/Loader'
 import { RequestError } from '_ui/RequestError'
 
@@ -33,9 +33,7 @@ export function SelfWorkTab({ selfId }: SelfWorkTabProps) {
           <div className="lesson-section__text">
             <div className="text-wrapp">
               {!!data?.title?.length && <h2>{data?.title}</h2>}
-              <MathJax>
-                <div dangerouslySetInnerHTML={{ __html: data?.content || '' }} />
-              </MathJax>
+              <AssemblyContent content={data?.content} />
             </div>
           </div>
 

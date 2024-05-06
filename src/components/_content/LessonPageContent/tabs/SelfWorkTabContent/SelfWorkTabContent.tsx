@@ -1,4 +1,3 @@
-import { MathJax } from 'better-react-mathjax'
 import { differenceInSeconds, format, parseISO } from 'date-fns'
 import React, { useLayoutEffect, useState } from 'react'
 
@@ -8,6 +7,7 @@ import { dynamicOptions } from '@assets/constants'
 import { UploadDocumentItem, UploadDocumentModal } from '@components/UploadDocument'
 import { useQueryStudentLesson } from '@http/student/client.lesson'
 
+import { AssemblyContent } from '_ui/AssemblyContent'
 import { Button } from '_ui/Button'
 
 import type { SelfWorkTabContentProps } from './SelfWorkTabContent.props'
@@ -121,9 +121,7 @@ export function SelfWorkTabContent({ selfWork }: SelfWorkTabContentProps) {
               onChange={setText}
             />
           ) : (
-            <MathJax>
-              <div dangerouslySetInnerHTML={{ __html: selfWork.progress.student_answer || '' }} />
-            </MathJax>
+            <AssemblyContent content={selfWork.progress.student_answer} />
           )}
 
           {error && <p className="error">{error}</p>}
@@ -178,12 +176,10 @@ export function SelfWorkTabContent({ selfWork }: SelfWorkTabContentProps) {
             )}
           </div>
           <p className="lesson-section__reply-title">Коментар до роботи:</p>
-          <MathJax>
-            <div
-              className="lesson-section__reply-text"
-              dangerouslySetInnerHTML={{ __html: selfWork.progress.teacher_reply }}
-            />
-          </MathJax>
+          <AssemblyContent
+            className="lesson-section__reply-text"
+            content={selfWork.progress.teacher_reply}
+          />
         </div>
       )}
     </div>

@@ -1,6 +1,5 @@
 'use client'
 
-import { MathJax } from 'better-react-mathjax'
 import { format } from 'date-fns'
 import React, { Fragment, useState } from 'react'
 
@@ -14,6 +13,7 @@ import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import { revalidateExamCheckInfo } from '@http/teacher/actions'
 import { useQueryTeacherExam } from '@http/teacher/client.exam'
 
+import { AssemblyContent } from '_ui/AssemblyContent'
 import { Button } from '_ui/Button'
 import { Dropdown } from '_ui/Dropdown'
 import { toastPromise } from '_ui/ToastUtils'
@@ -175,11 +175,7 @@ export function CheckExamContent({ exam }: CheckExamContentProps) {
             <div className="lesson-section__text">
               <div className="text-wrapp">
                 <h2>{`${exam.student.last_name} ${exam.student.first_name}`}</h2>
-                {Number(exam.progress_type) === 1 && (
-                  <MathJax>
-                    <div dangerouslySetInnerHTML={{ __html: exam.student.test_progress.answer || '' }} />
-                  </MathJax>
-                )}
+                {Number(exam.progress_type) === 1 && <AssemblyContent content={exam.student.test_progress.answer} />}
 
                 {/*{exam.progress_type === 2 && !!exam.files?.length && <FilesList data={exam.files} />}*/}
                 {Number(exam.progress_type) === 2 && !!exam.student.test_progress?.files.length && (
@@ -223,9 +219,7 @@ export function CheckExamContent({ exam }: CheckExamContentProps) {
                 onChange={setText}
               />
             ) : (
-              <MathJax>
-                <div dangerouslySetInnerHTML={{ __html: exam.teacher_reply || '' }} />
-              </MathJax>
+              <AssemblyContent content={exam.teacher_reply} />
             )}
 
             {isEditing ? (
