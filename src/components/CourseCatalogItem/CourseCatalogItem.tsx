@@ -26,7 +26,7 @@ export function CourseCatalogItem({ isCertified, ...props }: CourseCatalogItemPr
   useEffect(() => {
     setInBasket(!!basket?.find((v) => v.id === props.id))
     setInWish(!!wish?.find((v) => v === props.id))
-  }, [wish, basket])
+  }, [basket, props.id, wish])
 
   const PriceBlock = () => (
     <div className={'courses-catalog__price'}>

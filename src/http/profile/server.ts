@@ -10,7 +10,7 @@ const aboutMeRequest = cache(
     await serverFetchAuth<TAboutMe>('/users/me/', {
       next: {
         tags: ['aboutMe'],
-        revalidate: 30,
+        revalidate: 0,
       },
     }),
 )
@@ -20,7 +20,7 @@ const myBasketRequest = cache(
     await serverFetchAuth<TBasket>('/courses/cart/me/', {
       next: {
         tags: ['basket'],
-        revalidate: 30,
+        revalidate: 0,
       },
     }),
 )
@@ -29,7 +29,7 @@ const getCertificateById = cache(
   async (id: string) =>
     await serverFetch<TCertificateById>(`/courses/certificate/${id}/`, {
       next: {
-        revalidate: 30,
+        revalidate: 0,
       },
     }),
 )
