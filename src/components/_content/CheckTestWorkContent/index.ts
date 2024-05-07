@@ -1,4 +1,4 @@
 export * as default from './CheckTestWorkContent'
-export * from './components/TextAnswer'
-export * from './components/NotStrictComplianceAnswer'
-export * from './components/StrictComplianceAnswer'
+export { TextAnswer } from './components/TextAnswer'
+export { NotStrictComplianceAnswer } from './components/NotStrictComplianceAnswer'
+export { StrictComplianceAnswer } from './components/StrictComplianceAnswer'
