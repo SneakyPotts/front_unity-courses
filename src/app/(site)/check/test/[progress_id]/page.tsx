@@ -9,14 +9,17 @@ import { getTeacherTestProgress } from '@http/teacher/server'
 
 import { AsideLesson } from '_ui/AsideLesson'
 import { PageWrapper } from '_ui/PageWrapper'
+import { RequestError } from '_ui/RequestError'
 
-const CheckTestWorkContent = dynamic(() => import('_content/CheckTestWorkContent').then((mod) => mod.CheckTestWorkContent), {
+const CheckTestWorkContent = dynamic(() => import('_content/CheckTestWorkContent').then((mod) => mod.default), {
   ...dynamicOptions,
   ssr: false,
 })
 
 export default async function CheckTestWorkPage({ params }: TPageProps) {
-  const { data } = await getTeacherTestProgress(params.progress_id as string)
+  const { data, error } = await getTeacherTestProgress(params.progress_id as string)
+
+  if (error) return <RequestError {...error} />
 
   if (data)
     return (

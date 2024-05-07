@@ -1,14 +1,10 @@
 'use client'
 
-import classNames from 'classnames'
 import { format } from 'date-fns'
 import React, { Fragment, useState } from 'react'
 
-import Image from 'next/image'
-
 import { MarkSelect } from '@components/MarkSelect'
-import { Single, TestWrapper, descMatcher } from '@components/Test'
-import { ComplianceGridMatrix } from '@components/Test/ComplianceGridMatrix'
+import { Single, descMatcher } from '@components/Test'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
 import { revalidateTestWork } from '@http/teacher/actions'
 import { useQueryTeacherLesson } from '@http/teacher/client.lesson'
@@ -16,9 +12,13 @@ import { useQueryTeacherLesson } from '@http/teacher/client.lesson'
 import { Button } from '_ui/Button'
 import { toastPromise } from '_ui/ToastUtils'
 
-import type { CheckTestWorkContentProps, NotStrictComplianceAnswerProps, StrictComplianceAnswerProps, TextAnswerProps } from './CheckTestWorkContent.props'
+import { NotStrictComplianceAnswer } from '_content/CheckTestWorkContent/components/NotStrictComplianceAnswer'
 
-export function CheckTestWorkContent({ data }: CheckTestWorkContentProps) {
+import type { CheckTestWorkContentProps } from './CheckTestWorkContent.props'
+import { StrictComplianceAnswer } from './components/StrictComplianceAnswer'
+import { TextAnswer } from './components/TextAnswer'
+
+export default function CheckTestWorkContent({ data }: CheckTestWorkContentProps) {
   const { testMark, retakeTest } = useQueryTeacherLesson({})
 
   const [mark, setMark] = useState(data.mark || data.quiz?.estimate_mark || 0)
@@ -144,166 +144,5 @@ export function CheckTestWorkContent({ data }: CheckTestWorkContentProps) {
         </div>
       )}
     </div>
-  )
-}
-
-export function TextAnswer({ answer_type, question, text, indexNumber }: TextAnswerProps) {
-  return (
-    <TestWrapper
-      indexNumber={indexNumber}
-      question={answer_type === 6 ? question : ''}
-    >
-      {text.map((v, i) => (
-        <div
-          key={`${v}${i}`}
-          className="tests__info"
-        >
-          <div
-            className={classNames('tests__info-text', { '--answer': !i })}
-            dangerouslySetInnerHTML={{ __html: v }}
-          />
-        </div>
-      ))}
-    </TestWrapper>
-  )
-}
-
-export function StrictComplianceAnswer({ answer_type, question_id, question, pairs, student_pairs, is_correct, indexNumber }: StrictComplianceAnswerProps) {
-  const imgLeft = pairs.every((v) => !!v.left_column.image_answer)
-  const imgRight = pairs.every((v) => !!v.right_column.image_answer)
-
-  const is = (i: number, j: number) => {
-    const studentPairs = student_pairs.split('), (').map((pair) => pair.replace(/[()']/g, ''))
-
-    const rightAnswer = pairs[i].right_column.id === pairs[j].right_column.id
-    const studentAnswer = studentPairs.includes(`${pairs[i].left_column.id}, ${pairs[j].right_column.id}`)
-
-    return { rightAnswer, studentAnswer, checked: rightAnswer || studentAnswer }
-  }
-
-  return (
-    <TestWrapper
-      indexNumber={indexNumber}
-      question={question}
-    >
-      <div className="tests__content">
-        <ol className={classNames('tests__scroll', { 'tests__alternative--element': imgLeft })}>
-          {pairs.map((v, i) => (
-            <li
-              key={`${v.left_column.text_answer}_${i}`}
-              className="tests__scroll-text"
-            >
-              {imgLeft ? (
-                <div className="tests__alternative-photo">
-                  <Image
-                    src={v.left_column.image_answer}
-                    fill
-                    sizes="10vw"
-                    alt={question}
-                  />
-                </div>
-              ) : (
-                v.left_column.text_answer
-              )}
-            </li>
-          ))}
-        </ol>
-        <ul className="tests__alternative">
-          {pairs.map((v, i) => (
-            <li
-              key={`${v.right_column.text_answer}_${i}`}
-              className="tests__alternative-text"
-            >
-              {imgRight ? (
-                <div className="tests__alternative-photo">
-                  <Image
-                    src={v.right_column.image_answer}
-                    fill
-                    sizes="10vw"
-                    alt={question}
-                  />
-                </div>
-              ) : (
-                v.right_column.text_answer
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <ComplianceGridMatrix
-        cells={pairs.length}
-        rows={pairs.length}
-        checkedGetter={(...args) => is(...args).checked}
-        answerCheckHandler={is}
-      />
-    </TestWrapper>
-  )
-}
-
-export function NotStrictComplianceAnswer({ answer_type, question_id, question, left_column, right_column, is_correct, indexNumber }: NotStrictComplianceAnswerProps) {
-  const imgLeft = left_column.every((v) => !!v.image_answer)
-  const imgRight = right_column.every((v) => !!v.image_answer)
-
-  const is = (i: number, j: number) => {
-    const rightAnswer = !!left_column[i].compliance_answers.find((v) => v.id === right_column[j].id)
-    const studentAnswer = left_column[i].student_answer?.includes(right_column[j].id)
-
-    return { rightAnswer, studentAnswer, checked: rightAnswer || studentAnswer }
-  }
-
-  return (
-    <TestWrapper
-      indexNumber={indexNumber}
-      question={question}
-    >
-      <div className="tests__content">
-        <ol className={classNames('tests__scroll', { 'tests__alternative--element': imgLeft })}>
-          {left_column.map((v, i) => (
-            <li
-              key={`${v.text_answer}_${i}`}
-              className="tests__scroll-text"
-            >
-              {imgLeft ? (
-                <div className="tests__alternative-photo">
-                  <img
-                    src={v.image_answer}
-                    alt={question}
-                  />
-                </div>
-              ) : (
-                v.text_answer
-              )}
-            </li>
-          ))}
-        </ol>
-        <ul className="tests__alternative">
-          {right_column.map((v, i) => (
-            <li
-              key={`${v.text_answer}_${i}`}
-              className="tests__alternative-text"
-            >
-              {imgRight ? (
-                <div className="tests__alternative-photo">
-                  <img
-                    src={v.image_answer}
-                    alt={question}
-                  />
-                </div>
-              ) : (
-                v.text_answer
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <ComplianceGridMatrix
-        rows={left_column.length}
-        cells={right_column.length}
-        checkedGetter={(...args) => is(...args).checked}
-        answerCheckHandler={is}
-      />
-    </TestWrapper>
   )
 }
