@@ -18,7 +18,7 @@ import type { CheckTestWorkContentProps } from './CheckTestWorkContent.props'
 import { StrictComplianceAnswer } from './components/StrictComplianceAnswer'
 import { TextAnswer } from './components/TextAnswer'
 
-export default function CheckTestWorkContent({ data }: CheckTestWorkContentProps) {
+export function CheckTestWorkContent({ data }: CheckTestWorkContentProps) {
   const { testMark, retakeTest } = useQueryTeacherLesson({})
 
   const [mark, setMark] = useState(data.mark || data.quiz?.estimate_mark || 0)
