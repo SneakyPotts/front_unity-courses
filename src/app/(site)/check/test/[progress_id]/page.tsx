@@ -10,11 +10,6 @@ import { RequestError } from '_ui/RequestError'
 
 import { CheckTestWorkContent } from '_content/CheckTestWorkContent'
 
-// const CheckTestWorkContent = dynamic(() => import('_content/CheckTestWorkContent').then((mod) => mod.default), {
-//   ...dynamicOptions,
-//   ssr: false,
-// })
-
 export default async function CheckTestWorkPage({ params }: TPageProps) {
   const { data, error } = await getTeacherTestProgress(params.progress_id as string)
 

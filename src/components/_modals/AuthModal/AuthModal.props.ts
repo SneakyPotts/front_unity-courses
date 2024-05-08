@@ -1,5 +1,6 @@
 export interface AuthModalProps {
   showRegister: () => void
+  showRecoveryPass: () => void
   onClose: () => void
 }
 

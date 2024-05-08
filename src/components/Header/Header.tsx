@@ -1,7 +1,7 @@
 'use client'
 
 import classNames from 'classnames'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { Suspense, useContext, useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import Skeleton from 'react-loading-skeleton'
 import { useOnClickOutside } from 'usehooks-ts'
@@ -9,7 +9,7 @@ import { useOnClickOutside } from 'usehooks-ts'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { imgBlur } from '@assets/utils'
 import { appContext } from '@components/Context/context'
@@ -18,12 +18,15 @@ import { useNotifications } from '@http/common/notifications.client'
 import { Loader } from '_ui/Loader'
 import { NotificationItem } from '_ui/NotificationItem'
 
-import { AuthModal } from '_modals/AuthModal'
-import { RegisterModal } from '_modals/RegisterModal'
+import { NewPasswordModal } from '_modals/NewPasswordModal'
 
 import type { HeaderProps } from './Header.props'
 
 const HeaderClock = dynamic(() => import('_ui/HeaderClock').then((m) => m.HeaderClock))
+
+const AuthModal = dynamic(() => import('_modals/AuthModal').then((m) => m.AuthModal))
+const RegisterModal = dynamic(() => import('_modals/RegisterModal').then((m) => m.RegisterModal))
+const RecoveryPasswordModal = dynamic(() => import('_modals/RecoveryPasswordModal').then((m) => m.RecoveryPasswordModal))
 
 const ProfilePopup = dynamic(() => import('_popups/ProfilePopup').then((m) => m.ProfilePopup))
 
@@ -46,6 +49,7 @@ export function Header({ profile, className }: HeaderProps) {
   const basketRef = useRef(null)
 
   const [isShowAuthModal, setIsShowAuthModal] = useState(false)
+  const [isShowRecoveryPassModal, setIsShowRecoveryPassModal] = useState(false)
   const [isShowRegisterModal, setIsShowRegisterModal] = useState(false)
 
   const [isShowProfilePopup, setIsShowProfilePopup] = useState(false)
@@ -71,6 +75,12 @@ export function Header({ profile, className }: HeaderProps) {
   const handleShowAuthModal = () => {
     setIsShowAuthModal(true)
     setIsShowRegisterModal(false)
+  }
+
+  const handleShowRecoveryPassModal = () => {
+    setIsShowAuthModal(false)
+    setIsShowBasketModal(false)
+    setIsShowRecoveryPassModal(true)
   }
 
   const handleShowRegisterModal = () => {
@@ -130,6 +140,7 @@ export function Header({ profile, className }: HeaderProps) {
                       onClose={() => setIsShowBasketModal(false)}
                       showChildBoughtModal={handleChildBought}
                       showRegisterBasket={handleShowRegisterBasketModal}
+                      showRecoveryPass={handleShowRecoveryPassModal}
                     />
                   )}
                   {isShowChildBought && <ChildBoughtModal onClose={() => setIsShowChildBought(false)} />}
@@ -171,8 +182,10 @@ export function Header({ profile, className }: HeaderProps) {
                 <AuthModal
                   onClose={() => setIsShowAuthModal(false)}
                   showRegister={handleShowRegisterModal}
+                  showRecoveryPass={handleShowRecoveryPassModal}
                 />
               )}
+              {isShowRecoveryPassModal && <RecoveryPasswordModal onClose={() => setIsShowRecoveryPassModal(false)} />}
               {isShowRegisterModal && (
                 <RegisterModal
                   onClose={() => setIsShowRegisterModal(false)}
@@ -190,6 +203,9 @@ export function Header({ profile, className }: HeaderProps) {
           </ul>
         </nav>
       </div>
+      <Suspense>
+        <NewPasswordModal />
+      </Suspense>
     </header>
   )
 }

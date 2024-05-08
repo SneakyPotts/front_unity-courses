@@ -22,7 +22,7 @@ import { AuthForm } from '_modals/AuthModal'
 
 import type { AuthInfoProps, BasketModalProps, NotAuthInfoProps } from './BasketModal.props'
 
-export function BasketModal({ onClose, showRegisterBasket, showChildBoughtModal }: BasketModalProps) {
+export function BasketModal({ onClose, showRecoveryPass, showRegisterBasket, showChildBoughtModal }: BasketModalProps) {
   const { profile, basket, setBasket } = useContext(appContext)
   const role = {
     teacher: profile?.role === 20,
@@ -137,7 +137,10 @@ export function BasketModal({ onClose, showRegisterBasket, showChildBoughtModal 
             onClose={onClose}
           />
         ) : (
-          <NotAuthInfo showRegisterBasket={showRegisterBasket} />
+          <NotAuthInfo
+            showRecoveryPass={showRecoveryPass}
+            showRegisterBasket={showRegisterBasket}
+          />
         )}
       </div>
     </Modal>
@@ -309,13 +312,14 @@ function AuthInfo({ profile, role, basket, showChildBoughtModal, onClose }: Auth
   )
 }
 
-function NotAuthInfo({ showRegisterBasket }: NotAuthInfoProps) {
+function NotAuthInfo({ showRecoveryPass, showRegisterBasket }: NotAuthInfoProps) {
   return (
     <div className="basket-model__card">
       <div className="basket-model__card-title">Оформлення замовлення</div>
       <p className={'basket-model__card-subtitle'}>Замовлення готове до оформлення! Будь ласка, увійдіть або зареєструйтеся щоб продовжити.</p>
 
       <AuthForm
+        showRecoveryPass={showRecoveryPass}
         showRegisterBasket={showRegisterBasket}
         isBasket
       />

@@ -1,4 +1,4 @@
-import { clientAuthFetch } from '@http/clientApi'
+import { clientAuthFetch, clientFetch } from '@http/clientApi'
 import { revalidateProfile } from '@http/profile/actions'
 import { useMutation } from '@tanstack/react-query'
 
@@ -29,6 +29,18 @@ const updateExternalProfile = ({ id, ...body }: { id: string } & Record<string, 
 
 const updatePassword = (body: { old_password: string; new_password: string }) =>
   clientAuthFetch<any>(`/users/change_password/`, {
+    method: 'POST',
+    body: JSON.stringify(body),
+  })
+
+const recoveryPassword = (body: { email: string; webhook_url: string }) =>
+  clientFetch<{ detail: string }>(`/users/send_recovery_link/`, {
+    method: 'POST',
+    body: JSON.stringify(body),
+  })
+
+const setNewPassword = (body: { new_password: string; token: string }) =>
+  clientFetch<{ detail: string }>(`/users/recovery_password/`, {
     method: 'POST',
     body: JSON.stringify(body),
   })
@@ -66,6 +78,14 @@ export function useQueryProfile() {
     mutationFn: updatePassword,
   })
 
+  const recoveryPass = useMutation({
+    mutationFn: recoveryPassword,
+  })
+
+  const setPassword = useMutation({
+    mutationFn: setNewPassword,
+  })
+
   return {
     // get,
     avatar,
@@ -73,5 +93,7 @@ export function useQueryProfile() {
     setTeacherProfile,
     setExternalProfile,
     changePassword,
+    recoveryPass,
+    setPassword,
   }
 }

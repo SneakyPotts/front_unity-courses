@@ -5,7 +5,6 @@ import { useLocalStorage } from 'usehooks-ts'
 import { z } from 'zod'
 
 import Image from 'next/image'
-import Link from 'next/link'
 
 import type { ErrorResponse } from '@assets/types/globals'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -38,7 +37,7 @@ export function AuthModal({ onClose, ...props }: AuthModalProps) {
   )
 }
 
-export function AuthForm({ onClose, showRegister, showRegisterBasket, isBasket }: AuthFormProps) {
+export function AuthForm({ onClose, showRegister, showRecoveryPass, showRegisterBasket, isBasket }: AuthFormProps) {
   const [_, setBasketLocal] = useLocalStorage<TBasketCourse[] | null>('basket', null, { serializer: JSON.stringify, deserializer: JSON.parse })
 
   const [saveMe, setSaveMe] = useState(false)
@@ -113,12 +112,13 @@ export function AuthForm({ onClose, showRegister, showRegisterBasket, isBasket }
             onChange={handleSaveMe}
             checked={saveMe}
           />
-          <Link
-            href={'/auth/forgot-password'}
-            className="login__form__bottom-text"
+          <button
+            type="button"
+            className="login__form-bottom__text"
+            onClick={showRecoveryPass}
           >
             Забули пароль?
-          </Link>
+          </button>
         </div>
 
         {reqError && <RequestError {...reqError} />}
