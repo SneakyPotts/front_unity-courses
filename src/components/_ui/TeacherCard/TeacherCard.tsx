@@ -60,6 +60,7 @@ export function TeacherCard({ data, className, isStudent, isMain }: TeacherCardP
           onClose={() => setShowProfileModal(false)}
           teacherId={!isStudent ? data.id : undefined}
           studentId={isStudent ? data.id : undefined}
+          role={data?.role}
         />
       )}
     </div>

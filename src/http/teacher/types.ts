@@ -337,7 +337,7 @@ export type TSelfProgress = {
   status: number
   mark: number
   deadline: string
-  student: TTeacher
+  student: TTeacher & { role: number }
   progress_type: number
   files: File[]
 }
@@ -371,7 +371,7 @@ export type TTestProgress = {
   mark: number
   status: number
   deadline: string
-  student: TTeacher
+  student: TTeacher & { role: number }
 }
 
 export type TExamTotal = {
@@ -455,6 +455,7 @@ export type TTeacherExamProgress = {
     id: string
     test_progress: ExamProgress
     mark: number
+    role: number
   }
 }
 
