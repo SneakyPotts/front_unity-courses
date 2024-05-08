@@ -38,8 +38,10 @@ export function CheckSelfWorkContent({ data }: CheckSelfWorkContentProps) {
   const [mark, setMark] = useState(data.mark || '0')
 
   const handleSendReply = () => {
+    const replyText = !text.trim().length ? {} : { reply: text }
+
     toastPromise({
-      handler: selfMark({ self_id: data.work_id, mark: Number(mark), reply: text, user_id: data.student.id }),
+      handler: selfMark({ self_id: data.work_id, mark: Number(mark), user_id: data.student.id, ...replyText }),
       successCallback: () => {
         setIsEditing(false)
         revalidateSelfWork().then()
@@ -114,8 +116,10 @@ export function CheckSelfWorkContent({ data }: CheckSelfWorkContentProps) {
                 initData={text}
                 onChange={setText}
               />
-            ) : (
+            ) : data.teacher_reply ? (
               <AssemblyContent content={data.teacher_reply} />
+            ) : (
+              <i style={{ color: '#bdbdbd' }}>Вчитель не залишив коментарів до роботи</i>
             )}
 
             {isEditing ? (
