@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic'
 
 import { dynamicOptions } from '@assets/constants'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
+import { revalidateCourse } from '@http/student/actions'
 import { useQueryStudentLesson } from '@http/student/client.lesson'
 
 import { Button } from '_ui/Button'
@@ -95,7 +96,9 @@ export function LessonPageContent({ data, role }: LessonPageContentProps) {
 
   useEffect(() => {
     if (!!data && 'is_visited' in data && !data.is_visited) {
-      visit({ lesson_id: data.id }).catch(console.error)
+      visit({ lesson_id: data.id })
+        .then(() => revalidateCourse())
+        .catch(console.error)
     }
   }, [data])
 

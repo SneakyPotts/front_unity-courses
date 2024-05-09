@@ -8,6 +8,10 @@ export async function revalidateExam() {
   revalidateTag('studentExam')
 }
 
+export async function revalidateCourse() {
+  revalidateTag('courseDetail')
+}
+
 export async function addToWishlist(id: string) {
   const response = await serverFetchAuth<any>(`/courses/favorites/add/`, {
     method: 'POST',
