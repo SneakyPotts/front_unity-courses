@@ -23,6 +23,7 @@ const studentCourseStats = cache(
     await serverFetchAuth<TCourseStats>(`/courses/student/statistics/courses/?course_id=${course_id}`, {
       next: {
         revalidate: 30,
+        tags: ['studentCourseStats'],
       },
     }),
 )
