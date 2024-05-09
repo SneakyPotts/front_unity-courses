@@ -57,7 +57,11 @@ export function LessonPageContent({ data, role }: LessonPageContentProps) {
   const [isShowSubjectNav, setIsShowSubjectNav] = useState(false)
 
   const handleVisitLesson = () => {
-    !role.teacher && data?.id && visit({ lesson_id: data.id })
+    !role.teacher &&
+      data?.id &&
+      visit({ lesson_id: data.id })
+        .then(() => revalidateCourseAfterVisiting)
+        .catch(console.error)
 
     window.open(data?.online_lesson_link, '_blank')?.focus()
   }
