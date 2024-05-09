@@ -58,7 +58,7 @@ const getCourseDetail = cache(async (id: string) => {
 
   return await (isAuth ? serverFetchAuth : serverFetch)<TCourseDetail>(`/courses/${id}/`, {
     next: {
-      revalidate: 30,
+      revalidate: 0,
       tags: ['courseDetail'],
     },
   })

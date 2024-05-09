@@ -1,7 +1,7 @@
 'use client'
 
 import { addMinutes, isAfter } from 'date-fns'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import dynamic from 'next/dynamic'
 
@@ -92,6 +92,12 @@ export function LessonPageContent({ data, role }: LessonPageContentProps) {
       })(),
     headerClassName: role.teacher ? 'header__container--lesson' : '',
   })
+
+  useEffect(() => {
+    if (!!data && 'is_visited' in data && !data.is_visited) {
+      visit({ lesson_id: data.id }).catch(console.error)
+    }
+  }, [data])
 
   return (
     <>
