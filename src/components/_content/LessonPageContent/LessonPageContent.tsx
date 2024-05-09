@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 
 import { dynamicOptions } from '@assets/constants'
 import { useSetHeaderParams } from '@hooks/useSetHeaderParams'
-import { revalidateCourse } from '@http/student/actions'
+import { revalidateCourseAfterVisiting } from '@http/student/actions'
 import { useQueryStudentLesson } from '@http/student/client.lesson'
 
 import { Button } from '_ui/Button'
@@ -95,10 +95,11 @@ export function LessonPageContent({ data, role }: LessonPageContentProps) {
   })
 
   useEffect(() => {
-    if (!!data && 'is_visited' in data && !data.is_visited) {
+    if (!!data && !data.online_lesson_link && 'is_visited' in data && !data.is_visited) {
       visit({ lesson_id: data.id })
-        .then(() => revalidateCourse())
+        .then(() => revalidateCourseAfterVisiting())
         .catch(console.error)
+      console.log('INSIDE')
     }
   }, [data])
 

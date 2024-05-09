@@ -1,5 +1,6 @@
 import type { TTestResult } from '@assets/types/globals'
 import { clientAuthFetch } from '@http/clientApi'
+import { revalidateCourseAfterVisiting } from '@http/student/actions'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type { TSelfWorkContent, TTestContent } from './types'

@@ -13,6 +13,7 @@ const getLessonContent = cache(async (lesson_id: string) => {
   return await (isAuth ? serverFetchAuth : serverFetch)<TLessonContent>(`/courses/student/lecture/${lesson_id}/`, {
     next: {
       revalidate: 30,
+      tags: ['lessonContent'],
     },
   })
 })

@@ -8,8 +8,9 @@ export async function revalidateExam() {
   revalidateTag('studentExam')
 }
 
-export async function revalidateCourse() {
+export async function revalidateCourseAfterVisiting() {
   revalidateTag('courseDetail')
+  revalidateTag('lessonContent')
 }
 
 export async function addToWishlist(id: string) {
